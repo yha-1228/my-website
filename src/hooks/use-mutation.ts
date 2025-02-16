@@ -11,43 +11,34 @@ interface UseMutationProps<TAction extends AnyAsyncFunction> {
   onError?: (error: unknown, ...args: Parameters<TAction>) => void;
 }
 
-type UseMutationState =
-  | {
-      pending: true;
-      loading: false;
-      isSuccess: false;
-      isError: false;
-      error: undefined;
-    }
-  | {
-      pending: false;
-      loading: true;
-      isSuccess: false;
-      error: undefined;
-      isError: false;
-    }
-  | {
-      pending: false;
-      loading: false;
-      isSuccess: true;
-      isError: false;
-      error: undefined;
-    }
-  | {
-      pending: false;
-      loading: false;
-      isSuccess: false;
-      isError: true;
-      error: unknown;
-    };
+interface UseMutationState<TError extends Error> {
+  pending: boolean;
+  loading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+  error: TError | undefined;
+}
 
-type Action =
+function getInitialState<TError extends Error>(): UseMutationState<TError> {
+  return {
+    pending: true,
+    loading: false,
+    isSuccess: false,
+    isError: false,
+    error: undefined,
+  };
+}
+
+type Action<TError extends Error> =
   | { type: "loading" }
   | { type: "success" }
-  | { type: "error"; error: unknown }
+  | { type: "error"; error: TError }
   | { type: "reset" };
 
-function reducer(_: UseMutationState, action: Action): UseMutationState {
+function reducer<TError extends Error>(
+  _: UseMutationState<TError>,
+  action: Action<TError>,
+): UseMutationState<TError> {
   switch (action.type) {
     case "loading": {
       return {
@@ -80,13 +71,7 @@ function reducer(_: UseMutationState, action: Action): UseMutationState {
     }
 
     case "reset": {
-      return {
-        pending: true,
-        loading: false,
-        isSuccess: false,
-        isError: false,
-        error: undefined,
-      };
+      return getInitialState<TError>();
     }
 
     default:
@@ -94,17 +79,24 @@ function reducer(_: UseMutationState, action: Action): UseMutationState {
   }
 }
 
-function useMutation<TAction extends AnyAsyncFunction>(
-  props: UseMutationProps<TAction>,
-) {
+type UseMutationReturn<
+  TAction extends AnyAsyncFunction,
+  TError extends Error,
+> = readonly [
+  UseMutationState<TError>,
+  (...args: Parameters<TAction>) => Promise<void>,
+  () => void,
+];
+
+function useMutation<
+  TAction extends AnyAsyncFunction,
+  TError extends Error = Error,
+>(props: UseMutationProps<TAction>): UseMutationReturn<TAction, TError> {
   const { fn, onSuccess, onError } = props;
-  const [state, dispatch] = useReducer<typeof reducer>(reducer, {
-    pending: true,
-    loading: false,
-    isSuccess: false,
-    isError: false,
-    error: undefined,
-  });
+  const [state, dispatch] = useReducer<typeof reducer<TError>>(
+    reducer,
+    getInitialState<TError>(),
+  );
 
   const handleAction = async (...args: Parameters<TAction>) => {
     dispatch({ type: "loading" });
@@ -114,8 +106,14 @@ function useMutation<TAction extends AnyAsyncFunction>(
       onSuccess?.(result, ...args);
       dispatch({ type: "success" });
     } catch (error) {
-      onError?.(error, ...args);
-      dispatch({ type: "error", error });
+      if (error instanceof Error) {
+        onError?.(error, ...args);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        dispatch({ type: "error", error });
+      } else {
+        throw error;
+      }
     }
   };
 
@@ -127,4 +125,4 @@ function useMutation<TAction extends AnyAsyncFunction>(
 }
 
 export { useMutation };
-export type { UseMutationProps, UseMutationState };
+export type { UseMutationProps, UseMutationState, UseMutationReturn };
