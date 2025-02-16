@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { errorMessages } from "@/form/error-messages";
 
+export const MESSAGE_MAX_LENGTH = 1000;
+
 export const contactFormSchema = z.object({
   /**
    * お名前
@@ -39,7 +41,9 @@ export const contactFormSchema = z.object({
     .string()
     .min(1, { message: errorMessages.required() })
     .min(10, { message: errorMessages.isLength({ min: 10 }) })
-    .max(10000, { message: errorMessages.isLength({ max: 10000 }) }),
+    .max(MESSAGE_MAX_LENGTH, {
+      message: errorMessages.isLength({ max: MESSAGE_MAX_LENGTH }),
+    }),
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
