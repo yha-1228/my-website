@@ -5,7 +5,6 @@ import {
   type FocusEvent,
   type FormEvent,
   useId,
-  useState,
 } from "react";
 import { sendNetlifyForm } from "@/api/clients/utils";
 import { isFetchNetworkError } from "@/api/misc";
@@ -31,36 +30,44 @@ import {
 import { CONTACT_FORM_NAME } from "@/constants";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
+import { useStateWithReset } from "@/hooks/use-state-with-reset";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
 import { clsx } from "@/utils/css/clsx";
 import { remToPx } from "@/utils/css/unit";
 import { scrollWithFocus } from "@/utils/dom/utils";
 import { entriesOf } from "@/utils/object/entries-of";
+import { fromEntries } from "@/utils/object/from-entries";
 import { mapObject } from "@/utils/object/map-object";
 import { FeedbackNotification } from "./feedback-notification";
-import { type FieldType, type ContactFormTouched } from "./types";
+import { type FieldType } from "./types";
 import {
+  contactFormKeys,
   contactFormSchema,
   MESSAGE_MAX_LENGTH,
   type ContactFormValues,
 } from "./validation";
 
-// initial state list
+// state definition
 // ----------------------------------------
 
-const initialValues: ContactFormValues = {
-  name: "",
-  email: "",
-  companyName: "",
-  message: "",
+interface FormState {
+  values: ContactFormValues;
+  touched: { [key in keyof ContactFormValues]: boolean };
+  bottomErrorVisible: boolean;
+}
+
+const initialFormState: FormState = {
+  values: { name: "", email: "", companyName: "", message: "" },
+  touched: fromEntries(contactFormKeys.map((key) => [key, false])),
+  bottomErrorVisible: false,
 };
 
-const initialTouched: ContactFormTouched = mapObject(
-  initialValues,
-  () => false,
-);
-
-const initialAllErrorVisible = false;
+function getErrors(formState: FormState) {
+  const errors = getKeyErrorMessageMap(
+    contactFormSchema.safeParse(formState.values),
+  );
+  return errors;
+}
 
 // constants, helpers
 // ----------------------------------------
@@ -78,21 +85,18 @@ const feedbackText = {
   fail: "送信中にエラーが発生しました。",
 };
 
-const createFieldId = (id: string, key: keyof ContactFormValues) => {
+function createFieldId(id: string, key: keyof ContactFormValues) {
   return `${id}-${key}-field`;
-};
+}
 
-const createLabelId = (id: string, key: keyof ContactFormValues) => {
+function createLabelId(id: string, key: keyof ContactFormValues) {
   return `${id}-${key}-label`;
-};
+}
 
-const showError = (
-  name: keyof ContactFormValues,
-  errors: ReturnType<typeof getKeyErrorMessageMap<ContactFormValues>>,
-  touched: ContactFormTouched,
-) => {
-  return !!(errors[name] && touched[name]);
-};
+function showError(name: keyof ContactFormValues, formState: FormState) {
+  const errors = getErrors(formState);
+  return !!(errors[name] && formState.touched[name]);
+}
 
 // export
 // ----------------------------------------
@@ -100,14 +104,9 @@ const showError = (
 export function ContactForm() {
   const id = useId();
 
-  const [values, setValues] = useState(initialValues);
-  const errors = getKeyErrorMessageMap(contactFormSchema.safeParse(values));
-
-  const [touched, setTouched] = useState(initialTouched);
-
-  const [allErrorVisible, setAllErrorVisible] = useState(
-    initialAllErrorVisible,
-  );
+  const [formState, setFormState, resetFormState] =
+    useStateWithReset<FormState>(initialFormState);
+  const errors = getErrors(formState);
 
   const [submitState, submitAction, resetSubmitAction] = useMutation({
     fn: (data: ContactFormValues) => {
@@ -118,18 +117,22 @@ export function ContactForm() {
       });
     },
     onSuccess: () => {
-      setValues(initialValues);
-      setTouched(initialTouched);
-      setAllErrorVisible(initialAllErrorVisible);
+      resetFormState();
     },
   });
 
   const handleChange = (e: ChangeEvent<FieldType>) => {
-    setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormState((prev) => ({
+      ...prev,
+      values: { ...prev.values, [e.target.name]: e.target.value },
+    }));
   };
 
   const handleBlur = (e: FocusEvent<FieldType>) => {
-    setTouched((prev) => ({ ...prev, [e.target.name]: true }));
+    setFormState((prev) => ({
+      ...prev,
+      touched: { ...prev.touched, [e.target.name]: true },
+    }));
   };
 
   const handleErrorListItemClick = (key: keyof ContactFormValues) => {
@@ -152,18 +155,23 @@ export function ContactForm() {
     e.preventDefault();
 
     if (Object.keys(errors).length > 0) {
-      setTouched(mapObject(initialTouched, () => true));
-      setAllErrorVisible(true);
+      setFormState((prev) => ({
+        ...prev,
+        touched: mapObject(prev.values, () => true),
+        bottomErrorVisible: true,
+      }));
 
       return;
     }
 
-    await submitAction(values);
+    await submitAction(formState.values);
   };
 
   useBeforeUnload({
-    enabled: Object.values(values).some((value) => value !== ""),
+    enabled: Object.values(formState.values).some((value) => value !== ""),
   });
+
+  const { values } = formState;
 
   return (
     <div className="py-14 lg:pb-20">
@@ -195,7 +203,7 @@ export function ContactForm() {
             <div className="space-y-5">
               <div className="space-y-5 md:flex md:space-x-4 md:space-y-0">
                 <FieldProvider
-                  whenError={showError("name", errors, touched)}
+                  whenError={showError("name", formState)}
                   fieldId={createFieldId(id, "name")}
                 >
                   <div className="md:w-1/3">
@@ -215,7 +223,7 @@ export function ContactForm() {
                         value={values.name}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        invalid={showError("name", errors, touched)}
+                        invalid={showError("name", formState)}
                       />
                     </div>
                     <FieldError as={FormErrorMessage} className="mt-2">
@@ -225,7 +233,7 @@ export function ContactForm() {
                 </FieldProvider>
 
                 <FieldProvider
-                  whenError={showError("email", errors, touched)}
+                  whenError={showError("email", formState)}
                   fieldId={createFieldId(id, "email")}
                 >
                   <div className="md:w-2/3">
@@ -245,7 +253,7 @@ export function ContactForm() {
                         value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        invalid={showError("email", errors, touched)}
+                        invalid={showError("email", formState)}
                       />
                     </div>
                     <FieldError as={FormErrorMessage} className="mt-2">
@@ -256,7 +264,7 @@ export function ContactForm() {
               </div>
 
               <FieldProvider
-                whenError={showError("companyName", errors, touched)}
+                whenError={showError("companyName", formState)}
                 fieldId={createFieldId(id, "companyName")}
               >
                 <div>
@@ -272,7 +280,7 @@ export function ContactForm() {
                       value={values.companyName}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      invalid={showError("companyName", errors, touched)}
+                      invalid={showError("companyName", formState)}
                     />
                   </div>
                   <FieldError as={FormErrorMessage} className="mt-2">
@@ -281,7 +289,7 @@ export function ContactForm() {
                 </div>
               </FieldProvider>
               <FieldProvider
-                whenError={showError("message", errors, touched)}
+                whenError={showError("message", formState)}
                 fieldId={createFieldId(id, "message")}
               >
                 <div>
@@ -300,7 +308,7 @@ export function ContactForm() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       rows={6}
-                      invalid={showError("message", errors, touched)}
+                      invalid={showError("message", formState)}
                     />
                   </div>
                   <div className="mt-2">
@@ -323,30 +331,31 @@ export function ContactForm() {
             </div>
 
             <div className="mt-10 lg:mt-14">
-              {Object.keys(errors).length > 0 && allErrorVisible && (
-                <div className="mb-5 border-t-4 border-solid border-t-danger-600 bg-danger-50 px-5 py-4 text-danger-600">
-                  <div className="font-bold">
-                    {Object.values(errors).length}件の項目に問題があります。
+              {Object.keys(errors).length > 0 &&
+                formState.bottomErrorVisible && (
+                  <div className="mb-5 border-t-4 border-solid border-t-danger-600 bg-danger-50 px-5 py-4 text-danger-600">
+                    <div className="font-bold">
+                      {Object.values(errors).length}件の項目に問題があります。
+                    </div>
+                    <ul className="mt-3 space-y-1.5 sm:space-y-0">
+                      {entriesOf(errors).map(([key, error]) => (
+                        <li key={key} className="text-sm sm:flex sm:space-x-1">
+                          <div className="font-bold">
+                            {keyLabelMap[key]}
+                            <span className="hidden sm:inline">: </span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleErrorListItemClick(key)}
+                            className="text-left underline underline-offset-4"
+                          >
+                            {error}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="mt-3 space-y-1.5 sm:space-y-0">
-                    {entriesOf(errors).map(([key, error]) => (
-                      <li key={key} className="text-sm sm:flex sm:space-x-1">
-                        <div className="font-bold">
-                          {keyLabelMap[key]}
-                          <span className="hidden sm:inline">: </span>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => handleErrorListItemClick(key)}
-                          className="text-left underline underline-offset-4"
-                        >
-                          {error}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+                )}
 
               <Button disabled={submitState.loading} className="w-full">
                 {submitState.loading ? "送信中..." : "送信する"}
