@@ -4,8 +4,7 @@ import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/layouts/footer";
 import { Header } from "@/components/layouts/header";
-import { SkipToMainContent } from "@/components/layouts/skip-to-main-content";
-import { MAIN_CONTENT_ID, SITE_TITLE } from "@/constants";
+import { SITE_TITLE } from "@/constants";
 import { clsx } from "@/utils/css/clsx";
 
 export const metadata: Metadata = {
@@ -24,9 +23,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ja" dir="ltr">
       <body className={clsx(inter.variable, "font-base text-gray-foreground")}>
         <div className="flex min-h-dvh flex-col">
-          <SkipToMainContent />
           <Header />
-          <main id={MAIN_CONTENT_ID}>{children}</main>
+          <main>{children}</main>
           <Footer className="mt-auto" />
         </div>
       </body>

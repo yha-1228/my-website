@@ -102,7 +102,7 @@ export function Skills() {
                             className={clsx(
                               "text-lg",
                               s.strong &&
-                                "font-bold text-gray-foreground underline decoration-accent-300 decoration-[1.5px] underline-offset-[6px]",
+                                "font-bold text-gray-foreground underline decoration-accent-300 decoration-[1.5px] underline-offset-4",
                             )}
                           >
                             {s.label}

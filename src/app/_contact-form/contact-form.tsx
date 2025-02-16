@@ -338,7 +338,7 @@ export function ContactForm() {
                         <button
                           type="button"
                           onClick={() => handleErrorListItemClick(key)}
-                          className="text-left underline underline-offset-2"
+                          className="text-left underline underline-offset-4"
                         >
                           {error}
                         </button>
