@@ -15,7 +15,11 @@ import { Container } from "@/components/ui/styled/container";
 import { FormErrorMessage } from "@/components/ui/styled/form-error-message";
 import { FormHelperText } from "@/components/ui/styled/form-helper-text";
 import { Heading1 } from "@/components/ui/styled/heading1";
-import { Input, Textarea } from "@/components/ui/styled/input";
+import {
+  Input,
+  InputLengthCounter,
+  Textarea,
+} from "@/components/ui/styled/input";
 import { Label } from "@/components/ui/styled/label";
 import {
   Field,
@@ -35,7 +39,11 @@ import { entriesOf } from "@/utils/object/entries-of";
 import { mapObject } from "@/utils/object/map-object";
 import { FeedbackNotification } from "./feedback-notification";
 import { type FieldType, type ContactFormTouched } from "./types";
-import { contactFormSchema, type ContactFormValues } from "./validation";
+import {
+  contactFormSchema,
+  MESSAGE_MAX_LENGTH,
+  type ContactFormValues,
+} from "./validation";
 
 // initial state list
 // ----------------------------------------
@@ -296,8 +304,15 @@ export function ContactForm() {
                     />
                   </div>
                   <div className="mt-2">
-                    <FieldDescription as={FormHelperText}>
-                      10文字以上
+                    <FieldDescription
+                      as={FormHelperText}
+                      className="flex justify-between"
+                    >
+                      <span>10文字以上</span>
+                      <InputLengthCounter
+                        currentLength={values.message.length}
+                        maxLength={MESSAGE_MAX_LENGTH}
+                      />
                     </FieldDescription>
                     <FieldError as={FormErrorMessage}>
                       {errors.message}

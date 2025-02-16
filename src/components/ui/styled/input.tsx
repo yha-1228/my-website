@@ -64,4 +64,41 @@ Textarea.displayName = "Textarea";
 
 // ----------------------------------------
 
-export { Input, type InputProps, Textarea, type TextareaProps };
+interface InputLengthCounterProps
+  extends Omit<ComponentPropsWithRef<"span">, "children"> {
+  currentLength: number;
+  maxLength: number;
+}
+
+const InputLengthCounter = forwardRef<HTMLSpanElement, InputLengthCounterProps>(
+  (props, ref) => {
+    const { currentLength, maxLength, className, ...restProps } = props;
+
+    const isError = currentLength > maxLength;
+
+    return (
+      <span
+        className={clsx(isError && "text-danger-500", className)}
+        {...restProps}
+        ref={ref}
+      >
+        {isError
+          ? `${maxLength - currentLength}`
+          : `${currentLength} / ${maxLength}`}
+      </span>
+    );
+  },
+);
+
+InputLengthCounter.displayName = "InputLengthCounter";
+
+// ----------------------------------------
+
+export {
+  Input,
+  type InputProps,
+  Textarea,
+  type TextareaProps,
+  InputLengthCounter,
+  type InputLengthCounterProps,
+};
