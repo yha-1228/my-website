@@ -34,11 +34,11 @@ export interface SkillDetail {
 
 export const skillDetails: SkillDetail[] = [
   {
-    category: "フロントエンド",
+    category: "技術的スキル",
     items: [
       {
         rank: "good",
-        text: "JSX・CSSを利用したUIのマークアップ",
+        text: "JSX・CSSを利用したマークアップ",
       },
       {
         rank: "good",
@@ -46,11 +46,11 @@ export const skillDetails: SkillDetail[] = [
       },
       {
         rank: "good",
-        text: "動的な変化の中でUXを担保した画面の実装",
+        text: "動的な変化・UXを両立させたUIの開発",
       },
       {
         rank: "good",
-        text: "Swiper・Chart.js・FullCalendar・jotai・Recoil等の発展的なライブラリの利用経験",
+        text: "様々なJavaScriptライブラリの利用経験",
       },
       {
         rank: "good",
@@ -62,52 +62,24 @@ export const skillDetails: SkillDetail[] = [
       },
       {
         rank: "good",
-        text: "BE・デザイン・アーキとの連携",
+        text: "バックエンド・デザインとの連携や提案",
+      },
+      {
+        rank: "normal",
+        text: "MVC・クリーンアーキテクチャを参考にしたバックエンドの設計",
       },
     ],
   },
   {
-    category: "バックエンド",
-    items: [
-      {
-        rank: "normal",
-        text: "Node.js, TypeScript, Express, SQLを利用した設計からの開発",
-      },
-      { rank: "normal", text: "REST APIの設計" },
-      {
-        rank: "normal",
-        text: "クリーンアーキテクチャやMVCを参考にしたフレームワークの設計",
-      },
-      {
-        rank: "normal",
-        text: "SQL・PHP等の知識",
-      },
-    ],
-  },
-  {
-    category: "デザイン",
-    items: [
-      {
-        rank: "normal",
-        text: "シンプルな管理ツールのUIデザイン",
-      },
-      {
-        rank: "normal",
-        text: "シンプルな静的サイトのUIデザイン",
-      },
-    ],
-  },
-  {
-    category: "チーム開発",
+    category: "チーム開発スキル",
     items: [
       { rank: "normal", text: "初級者メンバーの教育" },
-      { rank: "normal", text: "教育用のWikiの作成" },
+      { rank: "normal", text: "教育用Wikiの作成" },
       { rank: "normal", text: "勉強会の開催" },
       { rank: "normal", text: "継続的なコードレビュー" },
-      { rank: "normal", text: "BEのAPIに対するレビューや提案" },
       {
         rank: "normal",
-        text: "大規模プロジェクトにおけるFEリード内の提案や議論",
+        text: "中〜大規模チームにおけるFEリード内の提案や議論",
       },
     ],
   },
