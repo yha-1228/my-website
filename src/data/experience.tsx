@@ -20,12 +20,12 @@ export const experiencesOverviewItems: ExperiencesOverviewItem[] = [
     experiences: [
       {
         kikan: "2024年8月 - 現在",
-        title: "ポータルサイト (新規開発)",
-        projectCompanyName: "株式会社LIG",
+        title: "株取引サービス/ポータルサイト (新規開発)",
+        projectCompanyName: "受託開発会社",
         description: (
           <>
             <p>
-              記事投稿プラットフォーム・インフラ申し込み機能などを持つ新規Webサービスの立ち上げ。BtoC向け画面・管理画面の両者にてフロントエンドのレビュアーを主に担当している。
+              株取引サービスを中心に多様な機能を持つ新規Webサービスの立ち上げ。BtoC向け画面・管理画面の両者にてフロントエンドのレビュアーを主に担当している。
             </p>
             <p>
               <b>技術:</b> React 19, Next.js 15 (App Router), TypeScript,
