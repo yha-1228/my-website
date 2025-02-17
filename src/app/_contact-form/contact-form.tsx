@@ -5,6 +5,7 @@ import {
   type FocusEvent,
   type FormEvent,
   useId,
+  useState,
 } from "react";
 import { sendNetlifyForm } from "@/api/clients/utils";
 import { isFetchNetworkError } from "@/api/misc";
@@ -30,7 +31,6 @@ import {
 import { CONTACT_FORM_NAME } from "@/constants";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
-import { useStateWithReset } from "@/hooks/use-state-with-reset";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
 import { clsx } from "@/utils/css/clsx";
 import { remToPx } from "@/utils/css/unit";
@@ -104,8 +104,7 @@ function showError(name: keyof ContactFormValues, formState: FormState) {
 export function ContactForm() {
   const id = useId();
 
-  const [formState, setFormState, resetFormState] =
-    useStateWithReset<FormState>(initialFormState);
+  const [formState, setFormState] = useState<FormState>(initialFormState);
   const errors = getErrors(formState);
 
   const [submitState, submitAction, resetSubmitAction] = useMutation({
@@ -117,7 +116,7 @@ export function ContactForm() {
       });
     },
     onSuccess: () => {
-      resetFormState();
+      setFormState(initialFormState);
     },
   });
 
