@@ -8,11 +8,12 @@ export function HeroHeader() {
     <div className="pb-12 pt-10">
       <Container>
         <h1 className="text-2xl font-bold leading-[1.35] lg:text-4xl">
-          ユーザーフレンドリーで堅牢なWebを開発します。
+          Lorem, ipsum dolor.
         </h1>
         <div className="mt-3.5">
           <p className="text-gray-foreground-weak lg:text-lg">
-            新卒でシステム開発企業に入社し、主にWebアプリ開発のフロントエンドを担当してきました。マークアップ技術とReactを利用して、ストレス無く快適に閲覧や操作を行える体験を提供できるよう心掛けています。
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
+            quaerat
           </p>
         </div>
 
