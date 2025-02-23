@@ -28,6 +28,7 @@ import {
   FieldLabel,
   FieldProvider,
 } from "@/components/ui/unstyled/field";
+import { IsClient } from "@/components/ui/unstyled/is-client";
 import { CONTACT_FORM_NAME } from "@/constants";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
@@ -356,9 +357,16 @@ export function ContactForm() {
                   </div>
                 )}
 
-              <Button disabled={submitState.loading} className="w-full">
-                {submitState.loading ? "送信中..." : "送信する"}
-              </Button>
+              <IsClient>
+                {({ isClient }) => (
+                  <Button
+                    disabled={submitState.loading || !isClient}
+                    className="w-full"
+                  >
+                    {submitState.loading ? "送信中..." : "送信する"}
+                  </Button>
+                )}
+              </IsClient>
             </div>
           </form>
           {submitState.isSuccess && (

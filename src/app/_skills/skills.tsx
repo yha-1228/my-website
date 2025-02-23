@@ -4,12 +4,14 @@ import { Heading1 } from "@/components/ui/styled/heading1";
 import { Heading2 } from "@/components/ui/styled/heading2";
 import { splitNode } from "@/components/ui/unstyled/split-node";
 import {
+  CATEGORIES,
   skillDetails,
   skillWords,
   type Rank,
   type SkillDetail,
   type SkillWord,
 } from "@/data/skills";
+import { tailwindFullConfig } from "@/tailwind-config";
 import { clsx } from "@/utils/css/clsx";
 
 interface SkillDetailCardProps {
@@ -82,39 +84,43 @@ export function Skills() {
         <Container>
           <Heading1>言語/FW等</Heading1>
           <div className="mt-8 space-y-3 sm:flex sm:space-x-8 sm:space-y-0 sm:[&>*]:w-1/3">
-            {(["fe", "be", "tools"] as Array<SkillWord["category"]>).map(
-              (category) => {
-                const filteredSkillWordsByCategory = skillWords.filter(
-                  (s) => s.category === category,
-                );
+            {CATEGORIES.map((category) => {
+              const filteredSkillWordsByCategory = skillWords.filter(
+                (s) => s.category === category,
+              );
 
-                return (
-                  <section key={category} className="pt-2">
-                    <Heading2 className="mb-2 mt-1 text-2xl sm:mb-3">
-                      {skillWordCategoryHeadingMap[category]}
-                    </Heading2>
+              return (
+                <section key={category} className="pt-2">
+                  <Heading2 className="mb-2 mt-1 text-2xl sm:mb-3">
+                    {skillWordCategoryHeadingMap[category]}
+                  </Heading2>
 
-                    <div className="leading-loose">
-                      {splitNode(
-                        filteredSkillWordsByCategory.map((s) => (
-                          <span
-                            key={s.label}
-                            className={clsx(
-                              "text-lg",
-                              s.strong &&
-                                "font-bold text-gray-foreground underline decoration-accent-300 decoration-[1.5px] underline-offset-4",
-                            )}
-                          >
-                            {s.label}
-                          </span>
-                        )),
-                        ", ",
-                      )}
-                    </div>
-                  </section>
-                );
-              },
-            )}
+                  <div className="leading-loose">
+                    {splitNode(
+                      filteredSkillWordsByCategory.map((s) => (
+                        <span
+                          key={s.label}
+                          lang="en"
+                          style={{
+                            background: s.strong
+                              ? // @ts-expect-error 拡張したtailwind config
+                                `linear-gradient(transparent 75%, ${tailwindFullConfig.theme.colors.accent[300]} 75%)`
+                              : undefined,
+                          }}
+                          className={clsx(
+                            "text-lg",
+                            s.strong && "font-extrabold",
+                          )}
+                        >
+                          {s.label}
+                        </span>
+                      )),
+                      " / ",
+                    )}
+                  </div>
+                </section>
+              );
+            })}
           </div>
         </Container>
       </div>
