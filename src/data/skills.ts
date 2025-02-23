@@ -1,14 +1,17 @@
+export const CATEGORIES = ["fe", "be", "tools"] as const;
+
 export interface SkillWord {
   label: string;
   strong?: boolean;
-  category: "fe" | "be" | "tools";
+  category: (typeof CATEGORIES)[number];
 }
 
 export const skillWords: SkillWord[] = [
   { category: "fe", label: "React", strong: true },
-  { category: "fe", label: "Next.js" },
+  { category: "fe", label: "Next.js", strong: true },
   { category: "fe", label: "TypeScript", strong: true },
-  { category: "fe", label: "CSS, Sass", strong: true },
+  { category: "fe", label: "CSS", strong: true },
+  { category: "fe", label: "Sass", strong: true },
   { category: "fe", label: "Tailwind CSS", strong: true },
   { category: "fe", label: "jQuery" },
   { category: "fe", label: "jotai", strong: true },
@@ -18,9 +21,10 @@ export const skillWords: SkillWord[] = [
   { category: "be", label: "PHP" },
   { category: "be", label: "SQL" },
   { category: "tools", label: "Visual Studio Code", strong: true },
-  { category: "tools", label: "GitHub" },
-  { category: "tools", label: "Notion" },
-  { category: "tools", label: "Jira" },
+  { category: "tools", label: "GitHub", strong: true },
+  { category: "tools", label: "Bitbucket", strong: true },
+  { category: "tools", label: "Notion", strong: true },
+  { category: "tools", label: "Jira", strong: true },
   { category: "tools", label: "Redmine" },
   { category: "tools", label: "Figma" },
 ];
