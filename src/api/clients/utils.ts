@@ -10,11 +10,8 @@ export interface SendNetlifyFormParams {
 /**
  * @see https://docs.netlify.com/frameworks/next-js/overview/#netlify-forms-compatibility
  */
-export async function sendNetlifyForm({
-  htmlFilepath,
-  formName,
-  data,
-}: SendNetlifyFormParams) {
+export async function sendNetlifyForm(params: SendNetlifyFormParams) {
+  const { htmlFilepath, formName, data } = params;
   const res = await fetch(htmlFilepath, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
