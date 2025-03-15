@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer className="mt-auto" />
         </div>
       </body>
-      <GoogleAnalytics gaId="G-94BTGEFT2V" />
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
     </html>
   );
 }
