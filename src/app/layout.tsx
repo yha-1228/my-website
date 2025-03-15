@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { Footer } from "@/components/layouts/footer";
 import { Header } from "@/components/layouts/header";
 import { SITE_TITLE } from "@/constants";
+import { env } from "@/env";
 import { clsx } from "@/utils/css/clsx";
 
 export const metadata: Metadata = {
@@ -25,11 +26,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={clsx(inter.variable, "font-base text-gray-foreground")}>
         <div className="flex min-h-dvh flex-col">
           <Header />
+          <pre
+            style={{
+              padding: 8,
+              backgroundColor: "#555",
+              color: "white",
+              fontSize: 12,
+            }}
+          >
+            {JSON.stringify({ env }, null, 2)}
+          </pre>
           <main>{children}</main>
           <Footer className="mt-auto" />
         </div>
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
+      <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_ID} />
     </html>
   );
 }
