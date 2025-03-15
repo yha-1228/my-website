@@ -11,7 +11,7 @@ interface UseMutationProps<TAction extends AnyAsyncFunction> {
   onError?: (error: unknown, ...args: Parameters<TAction>) => void;
 }
 
-interface UseMutationState<TError extends Error> {
+interface UseMutationState<TError extends Error = Error> {
   pending: boolean;
   loading: boolean;
   isSuccess: boolean;
@@ -19,15 +19,13 @@ interface UseMutationState<TError extends Error> {
   error: TError | undefined;
 }
 
-function getInitialState<TError extends Error>(): UseMutationState<TError> {
-  return {
-    pending: true,
-    loading: false,
-    isSuccess: false,
-    isError: false,
-    error: undefined,
-  };
-}
+const initialState: UseMutationState = {
+  pending: true,
+  loading: false,
+  isSuccess: false,
+  isError: false,
+  error: undefined,
+};
 
 type Action<TError extends Error> =
   | { type: "loading" }
@@ -71,7 +69,7 @@ function reducer<TError extends Error>(
     }
 
     case "reset": {
-      return getInitialState<TError>();
+      return initialState as UseMutationState<TError>;
     }
 
     default:
@@ -95,7 +93,7 @@ function useMutation<
   const { fn, onSuccess, onError } = props;
   const [state, dispatch] = useReducer<typeof reducer<TError>>(
     reducer,
-    getInitialState<TError>(),
+    initialState as UseMutationState<TError>,
   );
 
   const handleAction = async (...args: Parameters<TAction>) => {

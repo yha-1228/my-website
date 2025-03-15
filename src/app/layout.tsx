@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { type ReactNode } from "react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/layouts/footer";
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer className="mt-auto" />
         </div>
       </body>
+      <GoogleAnalytics gaId="G-94BTGEFT2V" />
     </html>
   );
 }
