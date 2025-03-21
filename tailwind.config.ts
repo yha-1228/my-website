@@ -68,7 +68,6 @@ export default {
       primary: myColors.myBlue,
       danger: colors.red,
       accent: colors.yellow,
-      eyecatch: colors.fuchsia,
       gray: {
         foreground: colors.gray[800],
         "foreground-weak": colors.gray[500],
