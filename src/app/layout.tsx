@@ -23,7 +23,7 @@ const inter = Inter({
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja" dir="ltr">
-      <body className={clsx(inter.variable, "font-base text-gray-foreground")}>
+      <body className={clsx(inter.variable, "font-base text-base-foreground")}>
         <div className="flex min-h-dvh flex-col">
           <Header />
           <main>{children}</main>

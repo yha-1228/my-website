@@ -28,7 +28,7 @@ export default async function Page() {
                 <Link
                   href={routes.blog.routes[":id"].href(content.id)}
                   className={clsx(
-                    "group block rounded-md border border-solid border-gray-light-300 px-5 py-4 transition-colors duration-200 ease-out",
+                    "group block rounded-md border border-solid border-base-light-300 px-5 py-4 transition-colors duration-200 ease-out",
                     "active:outline active:outline-2 active:outline-offset-0 active:outline-primary-600",
                     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-primary-600",
                   )}
@@ -36,7 +36,7 @@ export default async function Page() {
                   <div className="text-xl font-bold underline-offset-4 group-hover:underline">
                     {content.title}
                   </div>
-                  <p className="text-sm text-gray-foreground-weak">
+                  <p className="text-sm text-base-foreground-weak">
                     {formatISODate(content.publishedAt)}に投稿
                   </p>
                   <Tag className="mt-5">{content.tag.tagName}</Tag>

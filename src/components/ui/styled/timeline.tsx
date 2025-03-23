@@ -29,12 +29,12 @@ export function Timeline({ items }: TimelineProps) {
               {item.point}
             </div>
 
-            <div className="mt-4 border-t border-solid border-t-gray-light-300 pt-2">
+            <div className="mt-4 border-t border-solid border-t-base-light-300 pt-2">
               <div className="py-1 text-xl font-bold leading-snug">
                 {item.heading}
               </div>
               {!!item.content && (
-                <div className="mt-3 space-y-2.5 text-sm leading-[1.65] text-gray-foreground-weak">
+                <div className="mt-3 space-y-2.5 text-sm leading-[1.65] text-base-foreground-weak">
                   {item.content}
                 </div>
               )}

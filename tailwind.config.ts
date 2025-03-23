@@ -67,8 +67,8 @@ export default {
     colors: {
       primary: myColors.myBlue,
       danger: colors.red,
-      accent: colors.yellow,
-      gray: {
+      accent: "#fde047",
+      base: {
         foreground: colors.gray[800],
         "foreground-weak": colors.gray[500],
         "light-400": colors.gray[400],

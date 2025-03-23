@@ -178,7 +178,7 @@ export function ContactForm() {
       <Container>
         <Heading1>お問い合わせ</Heading1>
 
-        <p className="mt-8 text-gray-foreground-weak">
+        <p className="mt-8 text-base-foreground-weak">
           お気軽にお問い合わせください。
           <br />
           <span aria-hidden="true" className="text-danger-500">
@@ -189,7 +189,7 @@ export function ContactForm() {
         <div
           className={clsx(
             "mt-10",
-            "lg:rounded-xl lg:border lg:border-solid lg:border-gray-light-200 lg:bg-white lg:px-10 lg:pb-11 lg:pt-8 lg:shadow-wide",
+            "lg:rounded-xl lg:border lg:border-solid lg:border-base-light-200 lg:bg-white lg:px-10 lg:pb-11 lg:pt-8 lg:shadow-wide",
           )}
         >
           <form

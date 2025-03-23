@@ -93,14 +93,14 @@ export function Header() {
             "--header-border-bottom-width": hederBorderBottomWidth,
           } as CSSProperties
         }
-        className="relative h-[var(--header-height)] border-b-[length:var(--header-border-bottom-width)] border-solid border-b-gray-light-300 bg-white"
+        className="relative h-[var(--header-height)] border-b-[length:var(--header-border-bottom-width)] border-solid border-b-base-light-300 bg-white"
       >
         <Container>
           <div className="relative flex h-[calc(var(--header-height)-var(--header-border-bottom-width))] items-center justify-between">
             <Link
               href="/"
               className={clsx(
-                "text-2xl font-bold transition-colors duration-200 ease-out hover:text-gray-foreground-weak",
+                "text-2xl font-bold transition-colors duration-200 ease-out hover:text-base-foreground-weak",
                 "focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-300",
               )}
               onClick={handleHomeLinkClick}
@@ -139,10 +139,10 @@ export function Header() {
                       href={route.href}
                       className={clsx(
                         "relative inline-flex h-[calc(var(--header-height)-var(--header-border-bottom-width))] items-center px-3",
-                        "font-bold text-gray-foreground/70",
+                        "font-bold text-base-foreground/70",
                         "transition-colors duration-200 ease-out",
                         "hover:text-primary-600 hover:before:absolute hover:before:bottom-0 hover:before:left-0 hover:before:h-0.5 hover:before:w-full hover:before:bg-transparent hover:before:content-['']",
-                        "active:bg-gray-light-100",
+                        "active:bg-base-light-100",
                         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-300",
                         "data-[active]:font-bold data-[active]:text-primary-600",
                         "data-[active]:before:absolute data-[active]:before:bottom-0 data-[active]:before:left-0 data-[active]:before:h-[3px] data-[active]:before:w-full data-[active]:before:bg-primary-600 data-[active]:before:content-['']",
@@ -176,8 +176,8 @@ export function Header() {
               <ActiveNavLink
                 href={route.href}
                 className={clsx(
-                  "flex items-center justify-between py-2.5 text-gray-foreground-weak",
-                  "hover:bg-gray-light-100",
+                  "flex items-center justify-between py-2.5 text-base-foreground-weak",
+                  "hover:bg-base-light-100",
                   "data-[active]:relative data-[active]:font-bold data-[active]:text-primary-600",
                 )}
               >

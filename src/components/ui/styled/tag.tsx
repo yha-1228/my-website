@@ -8,7 +8,7 @@ const Tag = forwardRef<HTMLDivElement, ComponentPropsWithRef<"div">>(
     return (
       <div
         className={clsx(
-          "inline-block rounded-full bg-gray-light-100 px-3.5 py-0.5 text-sm text-gray-foreground-weak",
+          "inline-block rounded-full bg-base-light-100 px-3.5 py-0.5 text-sm text-base-foreground-weak",
           className,
         )}
         {...restProps}

@@ -17,7 +17,7 @@ function experienceToTimelineItem(experience: Experience): TimelineItem {
   const heading = projectCompanyName ? (
     <>
       {title} <br />
-      <div className="mt-2 text-lg font-normal text-gray-foreground">
+      <div className="mt-2 text-lg font-normal text-base-foreground">
         {projectCompanyName}
       </div>
     </>
@@ -50,7 +50,7 @@ export default function Page() {
                   <Heading2>{experiencesOverviewItem.company}</Heading2>
                   <AvoidTelLink
                     as="div"
-                    className="mt-6 text-sm text-gray-foreground-weak"
+                    className="mt-6 text-sm text-base-foreground-weak"
                   >
                     {experiencesOverviewItem.kikan}
                   </AvoidTelLink>
