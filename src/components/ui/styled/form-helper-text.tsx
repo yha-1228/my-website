@@ -9,7 +9,7 @@ const FormHelperText = forwardRef<
 
   return (
     <p
-      className={clsx("text-sm text-gray-foreground-weak", className)}
+      className={clsx("text-sm text-base-foreground-weak", className)}
       {...restProps}
       ref={ref}
     />

@@ -34,7 +34,7 @@ export function Footer({ className }: FooterProps) {
   return (
     <footer
       className={clsx(
-        "border-t border-solid border-t-transparent bg-gray-light-100 pb-14 pt-10",
+        "border-t border-solid border-t-transparent bg-base-light-100 pb-14 pt-10",
         className,
       )}
     >
@@ -59,8 +59,8 @@ export function Footer({ className }: FooterProps) {
             ))}
           </ul>
         </div>
-        <div className="mt-5 border-t border-solid border-gray-foreground/20">
-          <p className="pt-5 text-gray-foreground/70">{COPYRIGHT_TEXT}</p>
+        <div className="mt-5 border-t border-solid border-base-foreground/20">
+          <p className="pt-5 text-base-foreground/70">{COPYRIGHT_TEXT}</p>
         </div>
       </Container>
     </footer>

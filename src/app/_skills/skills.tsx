@@ -46,11 +46,11 @@ function SkillDetailCard(props: SkillDetailCardProps) {
       <div
         className={clsx(
           "space-y-5 pb-8 pt-5",
-          "text-gray-foreground",
-          "border-t border-solid border-t-gray-light-300",
+          "text-base-foreground",
+          "border-t border-solid border-t-base-light-300",
         )}
       >
-        <ul className="mt-2 space-y-2.5 text-sm text-gray-foreground-weak">
+        <ul className="mt-2 space-y-2.5 text-sm text-base-foreground-weak">
           {items.map((item) => (
             <li
               key={item.text}
@@ -80,7 +80,7 @@ const skillWordCategoryHeadingMap: { [key in SkillWord["category"]]: string } =
 export function Skills() {
   return (
     <>
-      <div className="bg-gray-light-100 py-14">
+      <div className="bg-base-light-100 py-14">
         <Container>
           <Heading1>言語/FW等</Heading1>
           <div className="mt-8 space-y-3 sm:flex sm:space-x-8 sm:space-y-0 sm:[&>*]:w-1/3">
@@ -104,7 +104,7 @@ export function Skills() {
                           style={{
                             background: s.strong
                               ? // @ts-expect-error 拡張したtailwind config
-                                `linear-gradient(transparent 75%, ${tailwindFullConfig.theme.colors.accent[300]} 75%)`
+                                `linear-gradient(transparent 75%, ${tailwindFullConfig.theme.colors.accent} 75%)`
                               : undefined,
                           }}
                           className={clsx(
@@ -125,13 +125,13 @@ export function Skills() {
         </Container>
       </div>
 
-      <div className="bg-gray-light-100 pt-3">
+      <div className="bg-base-light-100 pt-3">
         <Container>
-          <hr className="h-px w-full border-0 bg-gray-light-400" />
+          <hr className="h-px w-full border-0 bg-base-light-400" />
         </Container>
       </div>
 
-      <div className="bg-gray-light-100 py-14">
+      <div className="bg-base-light-100 py-14">
         <Container>
           <Heading1>提供可能な業務</Heading1>
           <ul className="mt-8 space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:gap-x-[16px] lg:gap-y-[20px] lg:space-y-0">

@@ -45,11 +45,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         <article className="mt-8">
           <header>
             <Heading1>{blogDetail.title}</Heading1>
-            <p className="mt-4 text-sm font-normal text-gray-foreground-weak">
+            <p className="mt-4 text-sm font-normal text-base-foreground-weak">
               {formatISODate(blogDetail.publishedAt)} に投稿
             </p>
           </header>
-          <div className="mt-8 border-t border-solid border-t-gray-light-300 py-5 md:py-6">
+          <div className="mt-8 border-t border-solid border-t-base-light-300 py-5 md:py-6">
             <Tag>{blogDetail.tag.tagName}</Tag>
             <div
               className={clsx(
@@ -58,7 +58,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 "[&>p]:my-5",
                 "[&>ul]:pl-9",
                 "[&>ul>li]:list-disc",
-                "[&>hr]:my-6 [&>hr]:border-y-2 [&>hr]:text-gray-light-200",
+                "[&>hr]:my-6 [&>hr]:border-y-2 [&>hr]:text-base-light-200",
               )}
               dangerouslySetInnerHTML={{
                 __html: blogDetail.body,
