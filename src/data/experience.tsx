@@ -55,7 +55,7 @@ export const experiencesOverviewItems: ExperiencesOverviewItem[] = [
     ],
   },
   {
-    company: "株式会社アイキューブ",
+    company: "システム開発会社",
     kikan: "2019年4月 - 2023年8月",
     experiences: [
       {
