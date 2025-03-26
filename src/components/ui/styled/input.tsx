@@ -74,7 +74,8 @@ const InputLengthCounter = forwardRef<HTMLSpanElement, InputLengthCounterProps>(
 
     return (
       <span
-        className={clsx(isError && "text-danger-500", className)}
+        data-error={isError ? "true" : undefined}
+        className={clsx("data-[error='true']:text-danger-500", className)}
         {...restProps}
         ref={ref}
       >

@@ -57,26 +57,25 @@ Button.displayName = "Button";
 
 // ----------------------------------------
 
-interface ButtonLinkProps extends LinkComponentProps, ButtonBaseProps {}
+interface ButtonLinkProps
+  extends Omit<LinkComponentProps, "aria-disabled" | "role" | "tabIndex">,
+    ButtonBaseProps {}
 
 const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
   (props, ref) => {
     const { rightIcon, disabled, className, children, ...restProps } = props;
 
-    const ariaProps: Pick<
-      LinkComponentProps,
-      "aria-disabled" | "role" | "tabIndex"
-    > = {
+    const ariaProps = {
       "aria-disabled": disabled,
       role: "button",
       ...(disabled ? { tabIndex: -1 } : {}),
-    };
+    } as const satisfies Partial<LinkComponentProps>;
 
     return (
       <Link
         className={clsx(
           baseClassName,
-          disabled && "pointer-events-none bg-base-light-400",
+          "aria-disabled:pointer-events-none aria-disabled:bg-base-light-400",
           className,
         )}
         {...ariaProps}
