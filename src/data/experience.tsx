@@ -19,13 +19,13 @@ export const experiencesOverviewItems: ExperiencesOverviewItem[] = [
     kikan: "2023年9月 - 現在",
     experiences: [
       {
-        kikan: "2024年8月 - 現在",
+        kikan: "2024年8月 - 2025年3月",
         title: "株取引サービス/ポータルサイト (新規開発)",
         projectCompanyName: "受託開発会社",
         description: (
           <>
             <p>
-              株取引サービスを中心に多様な機能を持つ新規Webサービスの立ち上げ。BtoC向け画面・管理画面の両者にてフロントエンドのレビュアーを主に担当している。
+              株取引サービスを中心に多様な機能を持つ新規Webサービスの立ち上げ。エンドユーザー向け画面・社内向け画面の両者にてレビュアーを中心に従事し、その他一部機能の開発を担当。
             </p>
             <p>
               <b>技術:</b> React 19, Next.js 15 (App Router), TypeScript,
@@ -37,7 +37,7 @@ export const experiencesOverviewItems: ExperiencesOverviewItem[] = [
       {
         kikan: "2023年9月中旬 - 2024年6月",
         title: "求人掲載システム (リニューアル)",
-        projectCompanyName: "大手デジタルコンテンツ制作会社",
+        projectCompanyName: "大手受託開発会社",
         description: (
           <>
             <p>
