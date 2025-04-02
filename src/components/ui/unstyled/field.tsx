@@ -11,7 +11,6 @@ import {
   type CommonHTMLProps,
   type ForwardedElementRef,
 } from "@/types/react";
-import { join } from "@/utils/object/join";
 import { fixedForwardRef, generateContext } from "@/utils/react";
 
 // internal
@@ -69,8 +68,9 @@ function FieldProvider(props: FieldProviderProps) {
     id: fieldId,
     "aria-invalid": whenError || undefined,
     "aria-describedby":
-      join([hasDescription && descriptionId, whenError && errorId], " ") ||
-      undefined,
+      [hasDescription && descriptionId, whenError && errorId]
+        .filter(Boolean)
+        .join(" ") || undefined,
   } as const satisfies CommonHTMLProps;
 
   const descriptionProps = {
