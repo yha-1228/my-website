@@ -1,3 +1,3 @@
-export function remToPx(rem: string) {
+export function remToPx(rem: string): number {
   return parseFloat(rem) * 16;
 }
