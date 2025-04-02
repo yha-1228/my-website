@@ -1,6 +1,6 @@
 import React from "react";
 import { routes } from "@/routes";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 import { Container } from "../ui/styled/container";
 import { ExternalTextLink, TextLink } from "../ui/styled/text-link";
 
@@ -33,7 +33,7 @@ export interface FooterProps {
 export function Footer({ className }: FooterProps) {
   return (
     <footer
-      className={clsx(
+      className={cn(
         "border-t border-solid border-t-transparent bg-base-light-100 pb-14 pt-10",
         className,
       )}

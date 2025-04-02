@@ -1,5 +1,5 @@
 import { type ComponentPropsWithRef, forwardRef } from "react";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 
 interface LabelProps extends ComponentPropsWithRef<"label"> {
   /**
@@ -15,7 +15,7 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
 
   return (
     <label
-      className={clsx("block font-bold", className)}
+      className={cn("block font-bold", className)}
       {...restProps}
       ref={ref}
     >

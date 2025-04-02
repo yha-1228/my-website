@@ -16,7 +16,7 @@ import { useOnRouteChange } from "@/hooks/use-on-route-change";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { routes } from "@/routes";
 import { tailwindFullConfig } from "@/tailwind-config";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 import { Container } from "../ui/styled/container";
 import { LoopFocusContainer } from "../ui/unstyled/loop-focus-container";
 
@@ -99,7 +99,7 @@ export function Header() {
           <div className="relative flex h-[calc(var(--header-height)-var(--header-border-bottom-width))] items-center justify-between">
             <Link
               href="/"
-              className={clsx(
+              className={cn(
                 "text-2xl font-bold transition-colors duration-200 ease-out hover:text-base-foreground-weak",
                 "focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-300",
               )}
@@ -112,7 +112,7 @@ export function Header() {
             <button
               type="button"
               ref={mobileMenuButtonRef}
-              className={clsx(
+              className={cn(
                 "flex size-9 items-center justify-center sm:hidden",
                 "absolute -right-1.5 top-1/2 -translate-y-1/2",
               )}
@@ -137,7 +137,7 @@ export function Header() {
                   <li key={route.href}>
                     <ActiveNavLink
                       href={route.href}
-                      className={clsx(
+                      className={cn(
                         "relative inline-flex h-[calc(var(--header-height)-var(--header-border-bottom-width))] items-center px-3",
                         "font-bold text-base-foreground/70",
                         "transition-colors duration-200 ease-out",
@@ -161,7 +161,7 @@ export function Header() {
         {/* mobile only */}
         <ul
           id={MOBILE_MENU_ID}
-          className={clsx(
+          className={cn(
             "sm:hidden",
             // height, visibilityを同時にtransitionで切り替えることで
             // 高さのアニメーションを適用しつつ、閉じているときにフォーカスも無効にする
@@ -175,7 +175,7 @@ export function Header() {
             <li key={route.href}>
               <ActiveNavLink
                 href={route.href}
-                className={clsx(
+                className={cn(
                   "flex items-center justify-between py-2.5 text-base-foreground-weak",
                   "hover:bg-base-light-100",
                   "data-[active]:relative data-[active]:font-bold data-[active]:text-primary-600",

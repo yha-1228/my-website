@@ -1,5 +1,5 @@
 import { forwardRef, type ComponentPropsWithRef } from "react";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 
 const FormHelperText = forwardRef<
   HTMLParagraphElement,
@@ -9,7 +9,7 @@ const FormHelperText = forwardRef<
 
   return (
     <p
-      className={clsx("text-sm text-base-foreground-weak", className)}
+      className={cn("text-sm text-base-foreground-weak", className)}
       {...restProps}
       ref={ref}
     />

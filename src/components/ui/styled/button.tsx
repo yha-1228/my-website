@@ -1,7 +1,7 @@
 import { type ComponentPropsWithRef, forwardRef, type ReactNode } from "react";
 import Link from "next/link";
 import { type LinkComponentProps } from "@/lib/next/types";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 
 // common
 // ----------------------------------------
@@ -11,7 +11,7 @@ interface ButtonBaseProps {
   rightIcon?: ReactNode;
 }
 
-const baseClassName = clsx(
+const baseClassName = cn(
   "inline-flex items-center justify-center rounded-md px-5 py-2 font-bold",
   "transition-colors duration-200 ease-out",
   "bg-primary-600 text-white",
@@ -31,7 +31,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   return (
     <button
-      className={clsx(
+      className={cn(
         baseClassName,
         "disabled:cursor-not-allowed disabled:bg-base-light-400",
         className,
@@ -73,7 +73,7 @@ const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
 
     return (
       <Link
-        className={clsx(
+        className={cn(
           baseClassName,
           "aria-disabled:pointer-events-none aria-disabled:bg-base-light-400",
           className,

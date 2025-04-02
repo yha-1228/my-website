@@ -1,5 +1,5 @@
 import { type ComponentPropsWithRef, forwardRef } from "react";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 
 const Container = forwardRef<HTMLDivElement, ComponentPropsWithRef<"div">>(
   (props, ref) => {
@@ -7,7 +7,7 @@ const Container = forwardRef<HTMLDivElement, ComponentPropsWithRef<"div">>(
 
     return (
       <div
-        className={clsx("container mx-auto px-5", className)}
+        className={cn("container mx-auto px-5", className)}
         {...restProps}
         ref={ref}
       />

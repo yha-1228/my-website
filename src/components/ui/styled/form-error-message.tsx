@@ -1,6 +1,6 @@
 import { forwardRef, type ComponentPropsWithRef } from "react";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 
 const FormErrorMessage = forwardRef<
   HTMLParagraphElement,
@@ -10,7 +10,7 @@ const FormErrorMessage = forwardRef<
 
   return (
     <p
-      className={clsx("flex items-center text-sm text-danger-500", className)}
+      className={cn("flex items-center text-sm text-danger-500", className)}
       {...restProps}
       ref={ref}
     >

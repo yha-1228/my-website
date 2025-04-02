@@ -4,7 +4,7 @@ import {
   BsFillExclamationCircleFill,
   BsX,
 } from "react-icons/bs";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 
 type Variant = "primary" | "danger";
 
@@ -35,7 +35,7 @@ export function FeedbackNotification(props: FeedbackNotificationProps) {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         "flex items-center justify-between rounded-lg px-4 py-3 text-white",
         variantRootClassMap[variant],
         className,
@@ -48,7 +48,7 @@ export function FeedbackNotification(props: FeedbackNotificationProps) {
       <button
         type="button"
         aria-label="閉じる"
-        className={clsx(
+        className={cn(
           "inline-flex items-center rounded-full",
           variantButtonClassMap[variant],
         )}

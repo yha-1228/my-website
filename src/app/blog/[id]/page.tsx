@@ -6,7 +6,7 @@ import { Heading1 } from "@/components/ui/styled/heading1";
 import { Tag } from "@/components/ui/styled/tag";
 import { TextLink } from "@/components/ui/styled/text-link";
 import { routes } from "@/routes";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 import { formatISODate } from "@/utils/date/formatter";
 
 type Props = {
@@ -52,7 +52,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <div className="mt-8 border-t border-solid border-t-base-light-300 py-5 md:py-6">
             <Tag>{blogDetail.tag.tagName}</Tag>
             <div
-              className={clsx(
+              className={cn(
                 "pt-4",
                 "[&>h2]:mb-6 [&>h2]:mt-12 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:leading-tight",
                 "[&>p]:my-5",

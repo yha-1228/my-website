@@ -6,7 +6,7 @@ import { SITE_TITLE } from "@/constants";
 import { useTitle } from "@/hooks/use-title";
 import { isPageError404 } from "@/lib/next/helpers";
 import { type NextErrorProps } from "@/lib/next/types";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 import { Container } from "./container";
 
 interface ErrorBoardViewProps {
@@ -20,7 +20,7 @@ function ErrorBoardView(props: ErrorBoardViewProps) {
   const { className, heading, detail, action } = props;
 
   return (
-    <div className={clsx("pb-14 pt-8", className)}>
+    <div className={cn("pb-14 pt-8", className)}>
       <Container>
         <div className="space-y-10 text-center">
           <section className="space-y-3">

@@ -1,5 +1,5 @@
 import React, { type ComponentPropsWithRef, forwardRef } from "react";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 
 const Heading1 = forwardRef<HTMLHeadingElement, ComponentPropsWithRef<"h1">>(
   (props, ref) => {
@@ -7,7 +7,7 @@ const Heading1 = forwardRef<HTMLHeadingElement, ComponentPropsWithRef<"h1">>(
 
     return (
       <h1
-        className={clsx(
+        className={cn(
           "text-3xl font-bold leading-tight sm:text-4xl",
           className,
         )}

@@ -12,7 +12,7 @@ import {
   type SkillWord,
 } from "@/data/skills";
 import { tailwindFullConfig } from "@/tailwind-config";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 
 interface SkillDetailCardProps {
   heading: ReactNode;
@@ -32,7 +32,7 @@ function SkillDetailCard(props: SkillDetailCardProps) {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         "w-full rounded-lg px-5 lg:px-6",
         "bg-white shadow-card",
         "border-2 border-solid",
@@ -44,7 +44,7 @@ function SkillDetailCard(props: SkillDetailCardProps) {
         <h4 className="font-bold">{heading}</h4>
       </div>
       <div
-        className={clsx(
+        className={cn(
           "space-y-5 pb-8 pt-5",
           "text-base-foreground",
           "border-t border-solid border-t-base-light-300",
@@ -54,7 +54,7 @@ function SkillDetailCard(props: SkillDetailCardProps) {
           {items.map((item) => (
             <li
               key={item.text}
-              className={clsx(
+              className={cn(
                 "bg-[length:18px_18px] bg-[0_0.12rem] bg-no-repeat ps-[1.75rem] leading-[1.6]",
                 rankIconClassNameMap[item.rank],
               )}
@@ -107,7 +107,7 @@ export function Skills() {
                                 `linear-gradient(transparent 75%, ${tailwindFullConfig.theme.colors.accent} 75%)`
                               : undefined,
                           }}
-                          className={clsx(
+                          className={cn(
                             "text-lg",
                             s.strong && "font-extrabold",
                           )}

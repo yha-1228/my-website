@@ -33,7 +33,7 @@ import { CONTACT_FORM_NAME } from "@/constants";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 import { remToPx } from "@/utils/css/unit";
 import { scrollWithFocus } from "@/utils/dom/utils";
 import { entriesOf } from "@/utils/object/entries-of";
@@ -187,7 +187,7 @@ export function ContactForm() {
         </p>
 
         <div
-          className={clsx(
+          className={cn(
             "mt-10",
             "lg:rounded-xl lg:border lg:border-solid lg:border-base-light-200 lg:bg-white lg:px-10 lg:pb-11 lg:pt-8 lg:shadow-wide",
           )}

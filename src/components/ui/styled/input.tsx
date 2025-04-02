@@ -1,5 +1,5 @@
 import { forwardRef, type ComponentPropsWithRef } from "react";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 
 // common
 // ----------------------------------------
@@ -11,7 +11,7 @@ interface InputBaseProps {
   invalid?: boolean;
 }
 
-const baseClassName = clsx(
+const baseClassName = cn(
   "block w-full appearance-none rounded-md px-3 ring-1 ring-inset ring-base-light-300 placeholder:text-base-light-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-600",
   "data-[invalid='true']:ring-2 data-[invalid='true']:ring-danger-500 data-[invalid='true']:focus:ring-danger-500",
 );
@@ -26,7 +26,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <input
       data-invalid={invalid ? "true" : undefined}
-      className={clsx("h-10", baseClassName, className)}
+      className={cn("h-10", baseClassName, className)}
       {...restProps}
       ref={ref}
     />
@@ -48,7 +48,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <textarea
         data-invalid={invalid ? "true" : undefined}
-        className={clsx(baseClassName, "py-3 leading-normal", className)}
+        className={cn(baseClassName, "py-3 leading-normal", className)}
         {...restProps}
         ref={ref}
       />
@@ -75,7 +75,7 @@ const InputLengthCounter = forwardRef<HTMLSpanElement, InputLengthCounterProps>(
     return (
       <span
         data-error={isError ? "true" : undefined}
-        className={clsx("data-[error='true']:text-danger-500", className)}
+        className={cn("data-[error='true']:text-danger-500", className)}
         {...restProps}
         ref={ref}
       >

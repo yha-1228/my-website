@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { Tag } from "@/components/ui/styled/tag";
 import { routes } from "@/routes";
-import { clsx } from "@/utils/css/clsx";
+import { cn } from "@/utils/css/cn";
 import { formatISODate } from "@/utils/date/formatter";
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default async function Page() {
               <li key={content.id}>
                 <Link
                   href={routes.blog.routes[":id"].href(content.id)}
-                  className={clsx(
+                  className={cn(
                     "group block rounded-md border border-solid border-base-light-300 px-5 py-4 transition-colors duration-200 ease-out",
                     "active:outline active:outline-2 active:outline-offset-0 active:outline-primary-600",
                     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-primary-600",
