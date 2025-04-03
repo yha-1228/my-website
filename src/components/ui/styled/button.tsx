@@ -1,10 +1,13 @@
 import { type ComponentPropsWithRef, forwardRef, type ReactNode } from "react";
 import Link from "next/link";
 import { type LinkComponentProps } from "@/lib/next/types";
+import { assertNever } from "@/utils/assert-never";
 import { cn } from "@/utils/css/cn";
 
 // common
 // ----------------------------------------
+
+type ButtonVariant = "fill" | "outline";
 
 interface ButtonBaseProps {
   disabled?: boolean;
@@ -12,24 +15,30 @@ interface ButtonBaseProps {
   /**
    * @default "fill"
    */
-  variant?: "fill" | "outline";
+  variant?: ButtonVariant;
 }
 
-function createBaseClassName(variant: ButtonBaseProps["variant"]) {
-  const variantClass =
-    variant === "fill"
-      ? cn(
-          "bg-primary-600 text-white",
-          "hover:bg-primary-800",
-          "active:bg-primary-800",
-        )
-      : variant === "outline"
-        ? cn(
-            "border border-[currentColor] text-primary-600 bg-white",
-            "hover:text-primary-800 hover:bg-primary-50",
-            "active:text-primary-800 active:bg-primary-50",
-          )
-        : "";
+function createBaseClassName(variant: ButtonVariant) {
+  let variantClass: string = "";
+
+  switch (variant) {
+    case "fill":
+      variantClass = cn(
+        "bg-primary-600 text-white",
+        "hover:bg-primary-800",
+        "active:bg-primary-800",
+      );
+      break;
+    case "outline":
+      variantClass = cn(
+        "border border-[currentColor] text-primary-600 bg-white",
+        "hover:text-primary-800 hover:bg-primary-50",
+        "active:text-primary-800 active:bg-primary-50",
+      );
+      break;
+    default:
+      assertNever(variant);
+  }
 
   return cn(
     "inline-flex items-center justify-center rounded-md px-5 py-2 font-bold",
