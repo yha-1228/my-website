@@ -91,7 +91,7 @@ export function Header() {
             "--header-border-bottom-width": hederBorderBottomWidth,
           } as CSSProperties
         }
-        className="relative h-header border-b-[length:var(--header-border-bottom-width)] border-solid border-b-base-light-300 bg-white/80"
+        className="relative h-header border-b-[length:var(--header-border-bottom-width)] border-solid border-b-base-light-300 bg-white"
       >
         <Container>
           <div className="relative flex h-[calc(theme(height.header)-var(--header-border-bottom-width))] items-center justify-between">
