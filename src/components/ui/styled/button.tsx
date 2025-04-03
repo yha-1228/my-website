@@ -9,16 +9,35 @@ import { cn } from "@/utils/css/cn";
 interface ButtonBaseProps {
   disabled?: boolean;
   rightIcon?: ReactNode;
+  /**
+   * @default "fill"
+   */
+  variant?: "fill" | "outline";
 }
 
-const baseClassName = cn(
-  "inline-flex items-center justify-center rounded-md px-5 py-2 font-bold",
-  "transition-colors duration-200 ease-out",
-  "bg-primary-600 text-white",
-  "hover:bg-primary-800",
-  "active:bg-primary-800",
-  "focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary-300",
-);
+function createBaseClassName(variant: ButtonBaseProps["variant"]) {
+  const variantClass =
+    variant === "fill"
+      ? cn(
+          "bg-primary-600 text-white",
+          "hover:bg-primary-800",
+          "active:bg-primary-800",
+        )
+      : variant === "outline"
+        ? cn(
+            "border border-[currentColor] text-primary-600 bg-white",
+            "hover:text-primary-800 hover:bg-primary-50",
+            "active:text-primary-800 active:bg-primary-50",
+          )
+        : "";
+
+  return cn(
+    "inline-flex items-center justify-center rounded-md px-5 py-2 font-bold",
+    "transition-colors duration-200 ease-out",
+    variantClass,
+    "focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary-300",
+  );
+}
 
 // ----------------------------------------
 
@@ -27,12 +46,18 @@ interface ButtonProps
     ButtonBaseProps {}
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { rightIcon, className, children, ...restProps } = props;
+  const {
+    rightIcon,
+    variant = "fill",
+    className,
+    children,
+    ...restProps
+  } = props;
 
   return (
     <button
       className={cn(
-        baseClassName,
+        createBaseClassName(variant),
         "disabled:cursor-not-allowed disabled:bg-base-light-400",
         className,
       )}
@@ -63,7 +88,14 @@ interface ButtonLinkProps
 
 const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
   (props, ref) => {
-    const { rightIcon, disabled, className, children, ...restProps } = props;
+    const {
+      rightIcon,
+      variant = "fill",
+      disabled,
+      className,
+      children,
+      ...restProps
+    } = props;
 
     const ariaProps = {
       "aria-disabled": disabled,
@@ -74,7 +106,7 @@ const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
     return (
       <Link
         className={cn(
-          baseClassName,
+          createBaseClassName(variant),
           "aria-disabled:pointer-events-none aria-disabled:bg-base-light-400",
           className,
         )}

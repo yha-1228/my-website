@@ -112,6 +112,7 @@ export default {
         wide: "0 30px 60px rgba(0,0,0,.12)",
       },
       zIndex: {
+        hide: "-9999",
         header: "9999",
       },
       height: {

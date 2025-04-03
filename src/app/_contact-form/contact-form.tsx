@@ -32,6 +32,7 @@ import { CONTACT_FORM_NAME } from "@/constants";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
+import { tailwindFullConfig } from "@/tailwind-config";
 import { cn } from "@/utils/css/cn";
 import { remToPx } from "@/utils/css/unit";
 import { scrollWithFocus } from "@/utils/dom/utils";
@@ -47,7 +48,6 @@ import {
   MESSAGE_MAX_LENGTH,
   type ContactFormValues,
 } from "./validation";
-import { tailwindFullConfig } from "@/tailwind-config";
 
 // state definition
 // ----------------------------------------
@@ -146,7 +146,7 @@ export function ContactForm() {
     const scrollToTop =
       window.scrollY +
       labelY -
-      remToPx(tailwindFullConfig.theme.height["header"]) -
+      remToPx(tailwindFullConfig.theme.height.header) -
       bufferMargin;
 
     scrollWithFocus({

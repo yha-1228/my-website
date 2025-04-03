@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/layouts/footer";
 import { Header } from "@/components/layouts/header";
+import { MainArea } from "@/components/layouts/main-area";
 import { SITE_TITLE } from "@/constants";
 import { env } from "@/env";
 import { cn } from "@/utils/css/cn";
@@ -26,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={cn(inter.variable, "font-base text-base-foreground")}>
         <div className="flex min-h-dvh flex-col">
           <Header />
-          <main>{children}</main>
+          <MainArea>{children}</MainArea>
           <Footer className="mt-auto" />
         </div>
       </body>
