@@ -21,11 +21,11 @@ interface SkillDetailCardProps {
   className?: string;
 }
 
-const rankIconClassNameMap: { [key in Rank]: string } = {
-  good: "bg-[url('/assets/check-circle-fill-color-foreground.svg')]",
-  normal: "bg-[url('/assets/check-circle-color-foreground.svg')]",
-  bad: "bg-[url('/assets/dash-circle-color-foreground.svg')]",
-};
+const rankIconClassNameMap = {
+  good: cn("bg-[url('/assets/check-circle-fill-color-foreground.svg')]"),
+  normal: cn("bg-[url('/assets/check-circle-color-foreground.svg')]"),
+  bad: cn("bg-[url('/assets/dash-circle-color-foreground.svg')]"),
+} as const satisfies { [key in Rank]: string };
 
 function SkillDetailCard(props: SkillDetailCardProps) {
   const { heading, items, className, accent } = props;
@@ -70,12 +70,11 @@ function SkillDetailCard(props: SkillDetailCardProps) {
 
 // ----------------------------------------
 
-const skillWordCategoryHeadingMap: { [key in SkillWord["category"]]: string } =
-  {
-    fe: "フロントエンド",
-    be: "バックエンド",
-    tools: "ツール等",
-  };
+const skillWordCategoryHeadingMap = {
+  fe: "フロントエンド",
+  be: "バックエンド",
+  tools: "ツール等",
+} as const satisfies { [key in SkillWord["category"]]: string };
 
 export function Skills() {
   return (

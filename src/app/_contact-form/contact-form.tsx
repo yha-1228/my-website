@@ -74,18 +74,18 @@ function getErrors(formState: FormState) {
 // constants, helpers
 // ----------------------------------------
 
-const keyLabelMap: { [key in keyof ContactFormValues]: string } = {
+const keyLabelMap = {
   name: "お名前",
   email: "メールアドレス",
   companyName: "会社名",
   message: "お問い合わせ内容",
-};
+} as const satisfies { [key in keyof ContactFormValues]: string };
 
 const feedbackText = {
   done: "お問い合わせありがとうございます。",
   networkError: "ネットワークに接続されていません。",
   fail: "送信中にエラーが発生しました。",
-};
+} as const;
 
 function createFieldId(id: string, key: keyof ContactFormValues) {
   return `${id}-${key}-field`;

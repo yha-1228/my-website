@@ -8,20 +8,20 @@ import { cn } from "@/utils/css/cn";
 
 type Variant = "primary" | "danger";
 
-const variantRootClassMap: Record<Variant, string> = {
-  primary: "bg-primary-500",
-  danger: "bg-danger-500",
-};
+const variantRootClassMap = {
+  primary: cn("bg-primary-500"),
+  danger: cn("bg-danger-500"),
+} as const satisfies Record<Variant, string>;
 
-const variantButtonClassMap: Record<Variant, string> = {
-  primary: "hover:bg-primary-600 active:bg-primary-700",
-  danger: "hover:bg-danger-600 active:bg-danger-700",
-};
+const variantButtonClassMap = {
+  primary: cn("hover:bg-primary-600 active:bg-primary-700"),
+  danger: cn("hover:bg-danger-600 active:bg-danger-700"),
+} as const satisfies Record<Variant, string>;
 
-const variantIconMap: Record<Variant, ReactNode> = {
+const variantIconMap = {
   primary: <BsFillCheckCircleFill className="size-6" />,
   danger: <BsFillExclamationCircleFill className="size-6" />,
-};
+} as const satisfies Record<Variant, ReactNode>;
 
 export interface FeedbackNotificationProps {
   variant: Variant;
