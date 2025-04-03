@@ -8,11 +8,14 @@ import { headerHeight } from "@/components/layouts/header";
 import { Button, ButtonLink } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
+import { useIsClient } from "@/hooks/use-is-client";
 import { routes } from "@/routes";
 import { cn } from "@/utils/css/cn";
 import { remToPx } from "@/utils/css/unit";
 
 export function HeroHeader() {
+  const isClient = useIsClient();
+
   const [scrollToTopButtonVisible, setScrollToTopButtonVisible] =
     useState(false);
 
@@ -56,20 +59,22 @@ export function HeroHeader() {
           </ButtonLink>
         </Container>
       </div>
-      {createPortal(
-        <Button
-          type="button"
-          onClick={handleScrollToTopClick}
-          aria-label="トップに戻る"
-          className={cn(
-            "!size-14 fixed bottom-5 md:bottom-9 text-3xl w-11 right-6 rounded-full p-0 [transition:opacity_200ms,background-color_200ms,transform_200ms] disabled:bg-primary-600 disabled:opacity-0 disabled:cursor-default hidden md:inline-flex hover:-translate-y-1",
-          )}
-          disabled={!scrollToTopButtonVisible}
-        >
-          <BsArrowUpShort aria-hidden="true" />
-        </Button>,
-        document.body,
-      )}
+
+      {isClient &&
+        createPortal(
+          <Button
+            type="button"
+            onClick={handleScrollToTopClick}
+            aria-label="トップに戻る"
+            className={cn(
+              "!size-14 fixed bottom-5 md:bottom-9 text-3xl w-11 right-6 rounded-full p-0 [transition:opacity_200ms,background-color_200ms,transform_200ms] disabled:bg-primary-600 disabled:opacity-0 disabled:cursor-default hidden md:inline-flex hover:-translate-y-1",
+            )}
+            disabled={!scrollToTopButtonVisible}
+          >
+            <BsArrowUpShort aria-hidden="true" />
+          </Button>,
+          document.body,
+        )}
     </>
   );
 }
