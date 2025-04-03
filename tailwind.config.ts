@@ -114,6 +114,9 @@ export default {
       zIndex: {
         header: "9999",
       },
+      height: {
+        header: "4rem",
+      },
     },
   },
   plugins: [],

@@ -9,7 +9,6 @@ import {
 } from "react";
 import { sendNetlifyForm } from "@/api/clients/utils";
 import { isFetchNetworkError } from "@/api/misc";
-import { headerHeight } from "@/components/layouts/header";
 import { Button } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
 import { FormErrorMessage } from "@/components/ui/styled/form-error-message";
@@ -48,6 +47,7 @@ import {
   MESSAGE_MAX_LENGTH,
   type ContactFormValues,
 } from "./validation";
+import { tailwindFullConfig } from "@/tailwind-config";
 
 // state definition
 // ----------------------------------------
@@ -144,7 +144,10 @@ export function ContactForm() {
 
     const bufferMargin = 12;
     const scrollToTop =
-      window.scrollY + labelY - remToPx(headerHeight) - bufferMargin;
+      window.scrollY +
+      labelY -
+      remToPx(tailwindFullConfig.theme.height["header"]) -
+      bufferMargin;
 
     scrollWithFocus({
       idToFocus: createFieldId(id, key),

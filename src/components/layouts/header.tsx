@@ -41,8 +41,7 @@ const routesWithoutHome = Object.values(routes).filter(
   (route) => route.href !== "/",
 );
 
-export const headerHeight = tailwindFullConfig.theme.spacing["16"];
-export const hederBorderBottomWidth = tailwindFullConfig.theme.spacing.px;
+const hederBorderBottomWidth = tailwindFullConfig.theme.spacing.px;
 
 export function Header() {
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -89,14 +88,13 @@ export function Header() {
       <div
         style={
           {
-            "--header-height": headerHeight,
             "--header-border-bottom-width": hederBorderBottomWidth,
           } as CSSProperties
         }
-        className="relative h-[var(--header-height)] border-b-[length:var(--header-border-bottom-width)] border-solid border-b-base-light-300 bg-white"
+        className="relative h-header border-b-[length:var(--header-border-bottom-width)] border-solid border-b-base-light-300 bg-white/80"
       >
         <Container>
-          <div className="relative flex h-[calc(var(--header-height)-var(--header-border-bottom-width))] items-center justify-between">
+          <div className="relative flex h-[calc(theme(height.header)-var(--header-border-bottom-width))] items-center justify-between">
             <Link
               href="/"
               className={cn(
@@ -138,7 +136,7 @@ export function Header() {
                     <ActiveNavLink
                       href={route.href}
                       className={cn(
-                        "relative inline-flex h-[calc(var(--header-height)-var(--header-border-bottom-width))] items-center px-3",
+                        "relative inline-flex h-[calc(theme(height.header)-var(--header-border-bottom-width))] items-center px-3",
                         "font-bold text-base-foreground/70",
                         "transition-colors duration-200 ease-out",
                         "hover:text-primary-600 hover:before:absolute hover:before:bottom-0 hover:before:left-0 hover:before:h-0.5 hover:before:w-full hover:before:bg-transparent hover:before:content-['']",
@@ -165,9 +163,9 @@ export function Header() {
             "sm:hidden",
             // height, visibilityを同時にtransitionで切り替えることで
             // 高さのアニメーションを適用しつつ、閉じているときにフォーカスも無効にする
-            "absolute left-0 top-[var(--header-height)] w-full overflow-y-hidden bg-white pt-2.5 transition-[height,visibility] duration-200 ease-out",
+            "absolute left-0 top-[theme(height.header)] w-full overflow-y-hidden bg-white pt-2.5 transition-[height,visibility] duration-200 ease-out",
             isMobileMenuOpen
-              ? "visible h-[calc(100dvh-var(--header-height))]"
+              ? "visible h-[calc(100dvh-theme(height.header))]"
               : "invisible block h-0",
           )}
         >
