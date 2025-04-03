@@ -39,6 +39,7 @@ import { scrollWithFocus } from "@/utils/dom/utils";
 import { entriesOf } from "@/utils/object/entries-of";
 import { fromEntries } from "@/utils/object/from-entries";
 import { mapObject } from "@/utils/object/map-object";
+import { Alert } from "./alert";
 import { FeedbackNotification } from "./feedback-notification";
 import { type FieldType } from "./types";
 import {
@@ -331,31 +332,37 @@ export function ContactForm() {
             </div>
 
             <div className="mt-10 lg:mt-14">
-              {Object.keys(errors).length > 0 &&
-                formState.bottomErrorVisible && (
-                  <div className="mb-5 border-t-4 border-solid border-t-danger-600 bg-danger-50 px-5 py-4 text-danger-600">
-                    <div className="font-bold">
-                      {Object.values(errors).length}件の項目に問題があります。
-                    </div>
-                    <ul className="mt-3 space-y-1.5 sm:space-y-0">
-                      {entriesOf(errors).map(([key, error]) => (
-                        <li key={key} className="text-sm sm:flex sm:space-x-1">
-                          <div className="font-bold">
-                            {keyLabelMap[key]}
-                            <span className="hidden sm:inline">: </span>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => handleErrorListItemClick(key)}
-                            className="text-left underline underline-offset-4"
-                          >
-                            {error}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+              <Alert
+                className={cn(
+                  "mb-5",
+                  Object.keys(errors).length > 0 && formState.bottomErrorVisible
+                    ? "block"
+                    : "hidden",
                 )}
+              >
+                <div className="font-bold">
+                  {Object.values(errors).length}件の項目に問題があります。
+                </div>
+                <ul className="mt-3 space-y-1.5 sm:list-disc sm:space-y-0.5 sm:pl-5">
+                  {entriesOf(errors).map(([key, error]) => (
+                    <li key={key} className="text-sm">
+                      <div className="sm:flex sm:space-x-1">
+                        <div className="font-bold">
+                          {keyLabelMap[key]}
+                          <span className="hidden sm:inline">: </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleErrorListItemClick(key)}
+                          className="text-left underline underline-offset-4"
+                        >
+                          {error}
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </Alert>
 
               <IsClient>
                 {({ isClient }) => (
