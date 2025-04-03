@@ -373,7 +373,13 @@ export function ContactForm() {
                     disabled={submitState.loading || !isClient}
                     className="w-full"
                   >
-                    {submitState.loading ? "送信中..." : "送信する"}
+                    {!isClient ? (
+                      <>&nbsp;</>
+                    ) : submitState.loading ? (
+                      "送信中..."
+                    ) : (
+                      "送信する"
+                    )}
                   </Button>
                 )}
               </IsClient>
