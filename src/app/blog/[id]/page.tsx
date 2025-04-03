@@ -7,7 +7,7 @@ import { Tag } from "@/components/ui/styled/tag";
 import { TextLink } from "@/components/ui/styled/text-link";
 import { routes } from "@/routes";
 import { cn } from "@/utils/css/cn";
-import { formatISODate } from "@/utils/date/formatter";
+import { dateFormat } from "@/utils/date/formatter";
 
 type Props = {
   params: { id: string };
@@ -46,7 +46,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <header>
             <Heading1>{blogDetail.title}</Heading1>
             <p className="mt-4 text-sm font-normal text-base-foreground-weak">
-              {formatISODate(blogDetail.publishedAt)} に投稿
+              {dateFormat("yyyy/MM/dd HH:mm:ss", blogDetail.publishedAt)} に投稿
             </p>
           </header>
           <div className="mt-8 border-t border-solid border-t-base-light-300 py-5 md:py-6">

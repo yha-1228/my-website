@@ -6,7 +6,7 @@ import { Heading1 } from "@/components/ui/styled/heading1";
 import { Tag } from "@/components/ui/styled/tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/css/cn";
-import { formatISODate } from "@/utils/date/formatter";
+import { dateFormat } from "@/utils/date/formatter";
 
 export const metadata: Metadata = {
   title: "ブログ",
@@ -37,7 +37,8 @@ export default async function Page() {
                     {content.title}
                   </div>
                   <p className="text-sm text-base-foreground-weak">
-                    {formatISODate(content.publishedAt)}に投稿
+                    {dateFormat("yyyy/MM/dd HH:mm:ss", content.publishedAt)}
+                    に投稿
                   </p>
                   <Tag className="mt-5">{content.tag.tagName}</Tag>
                 </Link>

@@ -1,8 +1,8 @@
 import { format, parseISO } from "date-fns";
 
-export function formatISODate(dateStr: string | undefined) {
-  if (!dateStr) return null;
+export type DateTemplate = "yyyy/MM/dd HH:mm:ss";
 
-  const dateObj = parseISO(dateStr);
-  return format(dateObj, "yyyy/MM/dd HH:mm:ss");
+export function dateFormat(template: DateTemplate, dateInput: string) {
+  const dateObj = parseISO(dateInput);
+  return format(dateObj, template);
 }
