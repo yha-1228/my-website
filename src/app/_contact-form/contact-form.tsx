@@ -185,10 +185,6 @@ export function ContactForm() {
 
         <p className="mt-8 text-base-foreground-weak">
           お気軽にお問い合わせください。
-          <br />
-          <span aria-hidden="true" className="text-danger-500">
-            * は必須項目です。
-          </span>
         </p>
 
         <div
