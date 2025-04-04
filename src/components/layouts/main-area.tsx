@@ -4,10 +4,10 @@ import { type ReactNode, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BsArrowUpShort } from "react-icons/bs";
 import { Button } from "@/components/ui/styled/button";
+import { TOP_LOGO_ID } from "@/constants";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useIsClient } from "@/hooks/use-is-client";
 import { cn } from "@/utils/css/cn";
-import { TOP_LOGO_ID } from "@/constants";
 
 function useScrollToTopButton() {
   const refToIntersect = useRef<HTMLDivElement | null>(null);
