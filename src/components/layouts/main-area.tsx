@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BsArrowUpShort } from "react-icons/bs";
 import { Button } from "@/components/ui/styled/button";
@@ -8,21 +8,37 @@ import { TOP_LOGO_ID } from "@/constants";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useIsClient } from "@/hooks/use-is-client";
 import { cn } from "@/utils/css/cn";
+import { sleep } from "@/utils/sleep";
 
 function useScrollToTopButton() {
   const refToIntersect = useRef<HTMLDivElement | null>(null);
+  const [notInView, setNotInView] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [isClickedTiming, setIsClickedTiming] = useState(false);
 
   useIntersectionObserver(refToIntersect, (entries) => {
     for (const entry of entries) {
-      setVisible(!entry.isIntersecting);
+      setNotInView(!entry.isIntersecting);
     }
   });
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    setIsClickedTiming(true);
+
     window.scrollTo({ top: 0 });
     document.getElementById(TOP_LOGO_ID)?.focus();
+
+    await sleep(200);
+    setIsClickedTiming(false);
   };
+
+  useEffect(() => {
+    if (isClickedTiming) {
+      // 何もしない
+    } else {
+      setVisible(notInView);
+    }
+  }, [isClickedTiming, notInView]);
 
   return { refToIntersect, visible, handleClick };
 }
