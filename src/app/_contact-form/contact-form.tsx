@@ -20,6 +20,7 @@ import {
   Textarea,
 } from "@/components/ui/styled/input";
 import { Label } from "@/components/ui/styled/label";
+import { TextLink } from "@/components/ui/styled/text-link";
 import {
   Field,
   FieldDescription,
@@ -354,13 +355,16 @@ export function ContactForm() {
                           {keyLabelMap[key]}
                           <span className="hidden sm:inline">: </span>
                         </div>
-                        <button
-                          type="button"
-                          onClick={() => handleErrorListItemClick(key)}
-                          className="text-left underline underline-offset-4"
+                        <TextLink
+                          href="/"
+                          className="underline"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            handleErrorListItemClick(key);
+                          }}
                         >
                           {error}
-                        </button>
+                        </TextLink>
                       </div>
                     </li>
                   ))}
