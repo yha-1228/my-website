@@ -25,17 +25,15 @@ function useScrollToTopButton() {
   const handleClick = async () => {
     setIsClickedTiming(true);
 
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     document.getElementById(TOP_LOGO_ID)?.focus();
 
-    await sleep(200);
+    await sleep(100);
     setIsClickedTiming(false);
   };
 
   useEffect(() => {
-    if (isClickedTiming) {
-      // 何もしない
-    } else {
+    if (!isClickedTiming) {
       setVisible(notInView);
     }
   }, [isClickedTiming, notInView]);
@@ -56,7 +54,7 @@ export function MainArea({ children }: { children: ReactNode }) {
         {/* 以下はメインエリアの15%を計測するための要素 ※非表示 */}
         <div
           ref={scrollToTopButton.refToIntersect}
-          className="absolute left-0 top-0 z-hide h-[calc(calc(100svh-theme(height.header))*0.15)] w-full"
+          className="absolute top-0 z-hide h-[calc(calc(100svh-theme(height.header))*0.15)] w-full"
           // デバッグのとき: 下記を有効にする
           // style={{ backgroundColor: "rgb(0,0,0,0.1)" }}
         />
