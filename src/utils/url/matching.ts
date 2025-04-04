@@ -8,7 +8,9 @@
  * // ("/hoge", "/hage/fuga") --> false
  * ```
  */
-export const isMatchFirstPath = (base: string, target: string | null) => {
+const isMatchFirstPath = (base: string, target: string | null) => {
   if (target == null) target = "";
   return base.split("/")[1] === target.split("/")[1];
 };
+
+export { isMatchFirstPath };

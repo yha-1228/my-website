@@ -1,4 +1,4 @@
-export function omit<T extends object, K extends string>(
+function omit<T extends object, K extends string>(
   object: T,
   keys: K[],
 ): Omit<T, K> {
@@ -14,3 +14,5 @@ export function omit<T extends object, K extends string>(
 
   return result as Omit<T, K>;
 }
+
+export { omit };

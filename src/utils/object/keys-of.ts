@@ -1,4 +1,4 @@
-export function keysOf<T extends object>(object: T): Array<keyof T> {
+function keysOf<T extends object>(object: T): Array<keyof T> {
   const keys: Array<keyof T> = [];
 
   for (const key in object) {
@@ -9,3 +9,5 @@ export function keysOf<T extends object>(object: T): Array<keyof T> {
 
   return keys;
 }
+
+export { keysOf };

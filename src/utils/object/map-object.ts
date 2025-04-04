@@ -13,7 +13,7 @@
  *
  * ```
  */
-export function mapObject<T extends object, U>(
+function mapObject<T extends object, U>(
   object: T,
   condition: (value: T[keyof T], key: keyof T) => U,
 ) {
@@ -28,3 +28,5 @@ export function mapObject<T extends object, U>(
 
   return newObject as { [k in keyof T]: U };
 }
+
+export { mapObject };

@@ -1,7 +1,7 @@
 /**
  * 指定した要素の配下にある`button`, `a`の配列を検索する。
  */
-export function findFocusableElements(parentElement: HTMLElement) {
+function findFocusableElements(parentElement: HTMLElement) {
   return Array.from(
     parentElement.querySelectorAll<HTMLAnchorElement | HTMLButtonElement>(
       "a, button",
@@ -12,7 +12,7 @@ export function findFocusableElements(parentElement: HTMLElement) {
 /**
  * `Tab`または`Shift + Tab`によるフォーカスを、指定した要素の配下に限定する。
  */
-export function loopFocus(event: KeyboardEvent, parentElement: HTMLElement) {
+function loopFocus(event: KeyboardEvent, parentElement: HTMLElement) {
   if (event.key === "Tab") {
     const focusableElements = findFocusableElements(parentElement);
     if (focusableElements.length === 0) return;
@@ -41,7 +41,7 @@ export function loopFocus(event: KeyboardEvent, parentElement: HTMLElement) {
   }
 }
 
-export interface ScrollWithFocusParams {
+interface ScrollWithFocusParams {
   scrollToOptions?: Omit<ScrollToOptions, "behavior">;
   idToFocus: string;
 }
@@ -49,7 +49,7 @@ export interface ScrollWithFocusParams {
 /**
  * 所定の位置にスクロールしたあと、所定の要素にフォーカスする。
  */
-export function scrollWithFocus(params: ScrollWithFocusParams) {
+function scrollWithFocus(params: ScrollWithFocusParams) {
   const { scrollToOptions, idToFocus } = params;
 
   const motionReduced = window.matchMedia(
@@ -64,3 +64,10 @@ export function scrollWithFocus(params: ScrollWithFocusParams) {
   const fieldElem = document.getElementById(idToFocus);
   fieldElem?.focus({ preventScroll: !motionReduced });
 }
+
+export {
+  findFocusableElements,
+  loopFocus,
+  type ScrollWithFocusParams,
+  scrollWithFocus,
+};

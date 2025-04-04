@@ -1,7 +1,7 @@
 import { createContext, forwardRef, useContext } from "react";
 import { type FixedForwardRef } from "@/types/react";
 
-export interface GenerateContextOptions {
+interface GenerateContextOptions {
   /**
    * @default "useContext"
    */
@@ -12,7 +12,7 @@ export interface GenerateContextOptions {
   providerName?: string;
 }
 
-export function generateContext<T>(options: GenerateContextOptions = {}) {
+function generateContext<T>(options: GenerateContextOptions = {}) {
   const { hookName = "useContext", providerName = "Context.Provider" } =
     options;
   const Context = createContext<T | null>(null);
@@ -65,4 +65,6 @@ export function generateContext<T>(options: GenerateContextOptions = {}) {
  * }
  * ```
  */
-export const fixedForwardRef = forwardRef as FixedForwardRef;
+const fixedForwardRef = forwardRef as FixedForwardRef;
+
+export { type GenerateContextOptions, generateContext, fixedForwardRef };
