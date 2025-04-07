@@ -1,6 +1,5 @@
 import {
   useId,
-  type ReactNode,
   type ElementType,
   type ComponentProps,
   useEffect,
@@ -11,41 +10,18 @@ import {
   type CommonHTMLProps,
   type ForwardedElementRef,
 } from "@/types/react";
-import { fixedForwardRef, generateContext } from "@/utils/react";
+import { createContextState, fixedForwardRef } from "@/utils/react";
 
 // internal
 // ----------------------------------------
 
-interface UseFieldReturn {
+interface UseProvideFieldProps {
   whenError?: boolean;
-  labelProps: {
-    readonly htmlFor: string;
-  };
-  fieldProps: {
-    readonly id: string;
-    readonly "aria-invalid": true | undefined;
-    readonly "aria-describedby": string | undefined;
-  };
-  descriptionProps: {
-    readonly id: string;
-  };
-  errorProps: {
-    readonly id: string;
-  };
-}
-
-const [FieldContext, useField] = generateContext<UseFieldReturn>();
-
-// main
-// ----------------------------------------
-
-interface FieldProviderProps extends Pick<UseFieldReturn, "whenError"> {
-  children: ReactNode;
   fieldId?: string;
 }
 
-function FieldProvider(props: FieldProviderProps) {
-  const { whenError, children, fieldId: fieldIdProp } = props;
+function useProvideField(props: UseProvideFieldProps) {
+  const { whenError, fieldId: fieldIdProp } = props;
 
   const id = useId();
 
@@ -81,20 +57,10 @@ function FieldProvider(props: FieldProviderProps) {
     id: errorId,
   } as const satisfies CommonHTMLProps;
 
-  return (
-    <FieldContext.Provider
-      value={{
-        whenError,
-        labelProps,
-        fieldProps,
-        descriptionProps,
-        errorProps,
-      }}
-    >
-      {children}
-    </FieldContext.Provider>
-  );
+  return { whenError, labelProps, fieldProps, descriptionProps, errorProps };
 }
+
+const [useField, FieldProvider] = createContextState(useProvideField);
 
 // ---
 
@@ -176,7 +142,6 @@ const FieldError = fixedForwardRef(
 
 export { FieldProvider, FieldLabel, Field, FieldDescription, FieldError };
 export type {
-  FieldProviderProps,
   FieldLabelProps,
   FieldProps,
   FieldDescriptionProps,
