@@ -1,30 +1,30 @@
-import { createContext, forwardRef, useContext } from "react";
+import { createContext, forwardRef, type ReactNode, useContext } from "react";
 import { type FixedForwardRef } from "@/types/react";
 
-interface GenerateContextOptions {
-  /**
-   * @default "useContext"
-   */
-  hookName?: string;
-  /**
-   * @default "Context.Provider"
-   */
-  providerName?: string;
-}
+type RequiredChildren<T> = T & { children: ReactNode };
 
-function generateContext<T>(options: GenerateContextOptions = {}) {
-  const { hookName = "useContext", providerName = "Context.Provider" } =
-    options;
-  const Context = createContext<T | null>(null);
+function createContextState<P, T>(useValue: (props: P) => T) {
+  const createdContext = createContext<T | null>(null);
 
-  function useContextValue() {
-    const value = useContext(Context);
+  function useValueContext(): T {
+    const value = useContext(createdContext);
     if (!value)
-      throw new Error(`${hookName} must be inside <${providerName} />`);
+      throw new Error(`useContext must be inside <Context.Provider />`);
     return value as T;
   }
 
-  return [Context, useContextValue] as const;
+  function ValueProvider(props: RequiredChildren<P>) {
+    const { children, ...restProps } = props;
+    const value = useValue(restProps as P);
+
+    return (
+      <createdContext.Provider value={value}>
+        {children}
+      </createdContext.Provider>
+    );
+  }
+
+  return [useValueContext, ValueProvider] as const;
 }
 
 /**
@@ -67,4 +67,4 @@ function generateContext<T>(options: GenerateContextOptions = {}) {
  */
 const fixedForwardRef = forwardRef as FixedForwardRef;
 
-export { type GenerateContextOptions, generateContext, fixedForwardRef };
+export { createContextState, fixedForwardRef };
