@@ -24,12 +24,13 @@ function ActiveNavLink(props: ComponentProps<typeof Link>) {
   const { href, ...restProps } = props;
   const pathname = usePathname();
   const active = href === pathname;
+  const firstPathActive = href === `/${pathname.split("/")[1]}`;
 
   return (
     <Link
       href={href}
       aria-current={active ? "page" : undefined}
-      data-active={active ? "true" : undefined}
+      data-active={firstPathActive ? "true" : undefined}
       {...restProps}
     />
   );
