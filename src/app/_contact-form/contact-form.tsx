@@ -354,10 +354,8 @@ export function ContactForm() {
                         <TextLink
                           href="/"
                           className="underline"
-                          onClick={(event) => {
-                            event.preventDefault();
-                            handleErrorListItemClick(key);
-                          }}
+                          preventLink
+                          onClick={() => handleErrorListItemClick(key)}
                         >
                           {error}
                         </TextLink>

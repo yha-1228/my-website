@@ -1,3 +1,5 @@
+"use client";
+
 import React, { forwardRef } from "react";
 import Link from "next/link";
 import { FiExternalLink } from "react-icons/fi";
@@ -12,23 +14,39 @@ const baseClassName = cn("rounded-sm underline-offset-4 hover:underline");
 
 // ----------------------------------------
 
-const TextLink = forwardRef<HTMLAnchorElement, LinkComponentProps>(
-  (props, ref) => {
-    const { className, ...restProps } = props;
+interface TextLinkProps extends LinkComponentProps {
+  preventLink?: boolean;
+}
 
-    return (
-      <Link className={cn(baseClassName, className)} {...restProps} ref={ref} />
-    );
-  },
-);
+const TextLink = forwardRef<HTMLAnchorElement, TextLinkProps>((props, ref) => {
+  const { preventLink, onClick, className, ...restProps } = props;
+
+  return (
+    <Link
+      className={cn(baseClassName, className)}
+      onClick={(event) => {
+        if (preventLink) {
+          event.preventDefault();
+        }
+        onClick?.(event);
+      }}
+      {...restProps}
+      ref={ref}
+    />
+  );
+});
 
 TextLink.displayName = "TextLink";
 
 // ----------------------------------------
 
-const ExternalTextLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
+interface ExternalTextLinkProps extends ExternalLinkProps {
+  preventLink?: boolean;
+}
+
+const ExternalTextLink = forwardRef<HTMLAnchorElement, ExternalTextLinkProps>(
   (props, ref) => {
-    const { className, children, ...restProps } = props;
+    const { preventLink, onClick, className, children, ...restProps } = props;
 
     return (
       <ExternalLink
@@ -37,6 +55,12 @@ const ExternalTextLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
           "inline-flex items-center space-x-1",
           className,
         )}
+        onClick={(event) => {
+          if (preventLink) {
+            event.preventDefault();
+          }
+          onClick?.(event);
+        }}
         {...restProps}
         ref={ref}
       >
