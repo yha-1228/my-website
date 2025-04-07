@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/styled/button";
 import { TOP_LOGO_ID } from "@/constants";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useIsClient } from "@/hooks/use-is-client";
+import { tailwindFullConfig } from "@/tailwind-config";
 import { cn } from "@/utils/css/cn";
+import { remToPx } from "@/utils/css/unit";
 import { sleep } from "@/utils/sleep";
 
 function useScrollToTopButton() {
@@ -16,11 +18,15 @@ function useScrollToTopButton() {
   const [visible, setVisible] = useState(false);
   const [isClickedTiming, setIsClickedTiming] = useState(false);
 
-  useIntersectionObserver(refToIntersect, (entries) => {
-    for (const entry of entries) {
-      setNotInView(!entry.isIntersecting);
-    }
-  });
+  useIntersectionObserver(
+    refToIntersect,
+    (entries) => {
+      for (const entry of entries) {
+        setNotInView(!entry.isIntersecting);
+      }
+    },
+    { rootMargin: `-${remToPx(tailwindFullConfig.theme.height.header, true)}` },
+  );
 
   const handleClick = async () => {
     setIsClickedTiming(true);
