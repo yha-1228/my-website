@@ -10,12 +10,16 @@ export function ContactForm() {
         name={CONTACT_FORM_NAME}
         encType="multipart/form-data"
         data-netlify="true"
-        onSubmit={(event) => {
+        onSubmit={async (event) => {
           event.preventDefault();
 
-          fetch("/", {
-            body: new FormData(event.target as HTMLFormElement),
+          const formData = new FormData(event.target as HTMLFormElement);
+
+          await fetch("/__forms.html", {
             method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            // @ts-expect-error err
+            body: new URLSearchParams(formData).toString(),
           })
             .then(() => {
               alert("Done!");
