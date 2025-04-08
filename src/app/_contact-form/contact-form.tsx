@@ -31,6 +31,13 @@ export function ContactForm() {
       >
         <p>
           <label>
+            <span>Name:</span>
+            <input name="name" type="text" />
+          </label>
+        </p>
+
+        <p>
+          <label>
             <span>Add file:</span>
             <input name="fileAttachment" type="file" />
           </label>
