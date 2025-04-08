@@ -45,6 +45,11 @@ export const contactFormSchema = z.object({
     .max(MESSAGE_MAX_LENGTH, {
       message: errorMessages.isLength({ max: MESSAGE_MAX_LENGTH }),
     }),
+
+  /**
+   * 添付ファイル
+   */
+  fileAttachment: z.any(),
 });
 
 export const contactFormKeys = keysOf(contactFormSchema.shape);

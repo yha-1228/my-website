@@ -80,6 +80,7 @@ const keyLabelMap = {
   email: "メールアドレス",
   companyName: "会社名",
   message: "お問い合わせ内容",
+  fileAttachment: "添付ファイル",
 } as const satisfies { [key in keyof ContactFormValues]: string };
 
 const feedbackText = {
@@ -123,11 +124,22 @@ export function ContactForm() {
     },
   });
 
-  const handleChange = (e: ChangeEvent<FieldType>) => {
+  const _updateFormValue = (name: string, nextValue: unknown) => {
     setFormState((prev) => ({
       ...prev,
-      values: { ...prev.values, [e.target.name]: e.target.value },
+      values: { ...prev.values, [name]: nextValue },
     }));
+  };
+
+  const handleChange = (e: ChangeEvent<FieldType>) => {
+    _updateFormValue(e.target.name, e.target.value);
+  };
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      _updateFormValue(e.target.name, selectedFile);
+    }
   };
 
   const handleBlur = (e: FocusEvent<FieldType>) => {
@@ -327,6 +339,32 @@ export function ContactForm() {
                       {errors.message}
                     </FieldError>
                   </div>
+                </div>
+              </FieldProvider>
+              <FieldProvider
+                whenError={showError("fileAttachment", formState)}
+                fieldId={createFieldId(id, "fileAttachment")}
+              >
+                <div>
+                  <FieldLabel
+                    as={Label}
+                    id={createLabelId(id, "fileAttachment")}
+                  >
+                    {keyLabelMap.fileAttachment}
+                  </FieldLabel>
+                  <div className="mt-2">
+                    <Field
+                      as={Input}
+                      type="file"
+                      name="fileAttachment"
+                      onChange={handleFileChange}
+                      onBlur={handleBlur}
+                      invalid={showError("fileAttachment", formState)}
+                    />
+                  </div>
+                  <FieldDescription as={FormHelperText} className="mt-2">
+                    Excel, CSVのみ
+                  </FieldDescription>
                 </div>
               </FieldProvider>
             </div>
