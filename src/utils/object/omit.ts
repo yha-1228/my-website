@@ -1,4 +1,4 @@
-function omit<T extends object, K extends string>(
+function omit<T extends object, K extends keyof T>(
   object: T,
   keys: Array<keyof T>,
 ): Omit<T, K> {

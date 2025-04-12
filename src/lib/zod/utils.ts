@@ -9,7 +9,8 @@ export function getKeyErrorMessagesMap<Input>(
   if (!formattedError) return {};
 
   const errors = mapObject(omit(formattedError, ["_errors"]), (value) => {
-    if (typeof value === "object" && !!value && "_errors" in value) {
+    if ("_errors" in value) {
+      // @ts-expect-error TODO: fix
       return value._errors as string[];
     } else {
       return undefined;
