@@ -4,23 +4,27 @@ import {
   type ComponentProps,
   useEffect,
   useState,
+  createContext,
+  useContext,
+  type PropsWithChildren,
 } from "react";
 import {
   type ComponentPropsWithAs,
   type CommonHTMLProps,
   type ForwardedElementRef,
+  type NonNullableContextType,
 } from "@/types/react";
-import { createContextState, fixedForwardRef } from "@/utils/react";
+import { fixedForwardRef } from "@/utils/react";
 
 // internal
 // ----------------------------------------
 
-interface UseProvideFieldProps {
+interface UseFieldProps {
   whenError?: boolean;
   fieldId?: string;
 }
 
-function useProvideField(props: UseProvideFieldProps) {
+function useField(props: UseFieldProps) {
   const { whenError, fieldId: fieldIdProp } = props;
 
   const id = useId();
@@ -60,7 +64,22 @@ function useProvideField(props: UseProvideFieldProps) {
   return { whenError, labelProps, fieldProps, descriptionProps, errorProps };
 }
 
-const [useField, FieldProvider] = createContextState(useProvideField);
+const FieldContext = createContext<ReturnType<typeof useField> | null>(null);
+
+function useFieldContext(): NonNullableContextType<typeof FieldContext> {
+  const value = useContext(FieldContext);
+  if (!value) throw new Error(`useContext must be inside <Context.Provider />`);
+  return value;
+}
+
+function FieldProvider(props: PropsWithChildren<UseFieldProps>) {
+  const { children, ...restProps } = props;
+  const value = useField(restProps);
+
+  return (
+    <FieldContext.Provider value={value}>{children}</FieldContext.Provider>
+  );
+}
 
 // ---
 
@@ -75,7 +94,7 @@ const FieldLabel = fixedForwardRef(
     ref: ForwardedElementRef<TAs>,
   ) => {
     const { as: Comp = "label", ...restProps } = props;
-    const { labelProps } = useField();
+    const { labelProps } = useFieldContext();
 
     return <Comp {...labelProps} {...restProps} ref={ref} />;
   },
@@ -91,7 +110,7 @@ const Field = fixedForwardRef(
     ref: ForwardedElementRef<TAs>,
   ) => {
     const { as: Comp = "input", ...restProps } = props;
-    const { fieldProps } = useField();
+    const { fieldProps } = useFieldContext();
 
     return <Comp {...fieldProps} {...restProps} ref={ref} />;
   },
@@ -110,7 +129,7 @@ const FieldDescription = fixedForwardRef(
     ref: ForwardedElementRef<TAs>,
   ) => {
     const { as: Comp = "p", ...restProps } = props;
-    const { descriptionProps } = useField();
+    const { descriptionProps } = useFieldContext();
 
     return <Comp {...descriptionProps} {...restProps} ref={ref} />;
   },
@@ -129,7 +148,7 @@ const FieldError = fixedForwardRef(
     ref: ForwardedElementRef<TAs>,
   ) => {
     const { as: Comp = "p", ...restProps } = props;
-    const { whenError, errorProps } = useField();
+    const { whenError, errorProps } = useFieldContext();
 
     if (!whenError) return null;
 
