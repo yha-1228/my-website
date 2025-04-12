@@ -1,31 +1,5 @@
-import { createContext, forwardRef, type ReactNode, useContext } from "react";
+import { forwardRef } from "react";
 import { type FixedForwardRef } from "@/types/react";
-
-type RequiredChildren<T> = T & { children: ReactNode };
-
-function createContextState<P, T>(useValue: (props: P) => T) {
-  const createdContext = createContext<T | null>(null);
-
-  function useValueContext(): T {
-    const value = useContext(createdContext);
-    if (!value)
-      throw new Error(`useContext must be inside <Context.Provider />`);
-    return value as T;
-  }
-
-  function ValueProvider(props: RequiredChildren<P>) {
-    const { children, ...restProps } = props;
-    const value = useValue(restProps as P);
-
-    return (
-      <createdContext.Provider value={value}>
-        {children}
-      </createdContext.Provider>
-    );
-  }
-
-  return [useValueContext, ValueProvider] as const;
-}
 
 /**
  * @example
@@ -67,4 +41,4 @@ function createContextState<P, T>(useValue: (props: P) => T) {
  */
 const fixedForwardRef = forwardRef as FixedForwardRef;
 
-export { createContextState, fixedForwardRef };
+export { fixedForwardRef };
