@@ -67,6 +67,14 @@ export function Header() {
     }
   });
 
+  const handleMobileNavLinkClick = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    if (event.currentTarget.getAttribute("aria-current") === "page") {
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   useKeydown((event) => {
     if (isMobileMenuOpen) {
       if (event.key === "Escape") {
@@ -170,6 +178,7 @@ export function Header() {
                   "hover:relative hover:bg-white hover:before:absolute hover:before:h-full hover:before:w-1 hover:before:bg-primary-600/20 hover:before:content-['']",
                   "data-[active]:relative data-[active]:bg-white data-[active]:before:absolute data-[active]:before:h-full data-[active]:before:w-1 data-[active]:before:bg-primary-600 data-[active]:before:content-['']",
                 )}
+                onClick={handleMobileNavLinkClick}
               >
                 <div>
                   <Container>{route.label}</Container>
