@@ -9,7 +9,7 @@ import React, {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BsList, BsX } from "react-icons/bs";
-import { MOBILE_MENU_ID, TOP_LOGO_ID } from "@/constants";
+import { MOBILE_MENU_ID } from "@/constants";
 import { useKeydown } from "@/hooks/use-keydown";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useOnRouteChange } from "@/hooks/use-on-route-change";
@@ -105,7 +105,6 @@ export function Header() {
         <Container>
           <div className="relative flex h-[calc(theme(height.header)-var(--header-border-bottom-width))] items-center justify-between">
             <Link
-              id={TOP_LOGO_ID}
               href="/"
               className="text-2xl font-bold transition-colors duration-200 ease-out hover:text-base-foreground-weak"
               onClick={handleHomeLinkClick}
