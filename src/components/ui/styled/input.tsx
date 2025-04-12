@@ -12,8 +12,9 @@ interface InputBaseProps {
 }
 
 const baseClassName = cn(
-  "block w-full appearance-none rounded-md px-3 ring-1 ring-inset ring-base-light-300 placeholder:text-base-light-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-600",
-  "data-[invalid='true']:ring-2 data-[invalid='true']:ring-danger-500 data-[invalid='true']:focus:ring-danger-500",
+  "w-full appearance-none rounded-md px-3 placeholder:text-base-light-400",
+  "ring-1 ring-inset ring-base-light-300 data-[invalid]:ring-danger-500",
+  "focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-600 data-[invalid]:focus:ring-danger-500",
 );
 
 // ----------------------------------------
@@ -48,7 +49,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <textarea
         data-invalid={invalid ? "true" : undefined}
-        className={cn(baseClassName, "py-3 leading-normal", className)}
+        className={cn(baseClassName, "py-2.5 leading-normal", className)}
         {...restProps}
         ref={ref}
       />
