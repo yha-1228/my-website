@@ -11,14 +11,14 @@ import { sendNetlifyForm } from "@/api/clients/utils";
 import { isFetchNetworkError } from "@/api/misc";
 import { Button } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
-import { FormErrorMessage } from "@/components/ui/styled/form-error-message";
-import { FormHelperText } from "@/components/ui/styled/form-helper-text";
-import { Heading1 } from "@/components/ui/styled/heading1";
 import {
   Input,
   InputLengthCounter,
   Textarea,
-} from "@/components/ui/styled/input";
+} from "@/components/ui/styled/field";
+import { FormErrorMessage } from "@/components/ui/styled/form-error-message";
+import { FormHelperText } from "@/components/ui/styled/form-helper-text";
+import { Heading1 } from "@/components/ui/styled/heading1";
 import { Label } from "@/components/ui/styled/label";
 import { TextLink } from "@/components/ui/styled/text-link";
 import {

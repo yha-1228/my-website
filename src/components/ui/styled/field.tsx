@@ -4,7 +4,7 @@ import { cn } from "@/utils/css/cn";
 // common
 // ----------------------------------------
 
-interface InputBaseProps {
+interface BaseProps {
   /**
    * エラー時のスタイルを指定する
    */
@@ -19,7 +19,7 @@ const baseClassName = cn(
 
 // ----------------------------------------
 
-interface InputProps extends ComponentPropsWithRef<"input">, InputBaseProps {}
+interface InputProps extends ComponentPropsWithRef<"input">, BaseProps {}
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { invalid, className, ...restProps } = props;
@@ -38,9 +38,7 @@ Input.displayName = "Input";
 
 // ----------------------------------------
 
-interface TextareaProps
-  extends ComponentPropsWithRef<"textarea">,
-    InputBaseProps {}
+interface TextareaProps extends ComponentPropsWithRef<"textarea">, BaseProps {}
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
