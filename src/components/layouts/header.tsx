@@ -180,9 +180,7 @@ export function Header() {
                 )}
                 onClick={handleMobileNavLinkClick}
               >
-                <div>
-                  <Container>{route.label}</Container>
-                </div>
+                <Container>{route.label}</Container>
               </ActiveNavLink>
             </li>
           ))}
