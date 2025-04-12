@@ -8,10 +8,7 @@ export function Alert({
   return (
     <div
       role="alert"
-      className={cn(
-        "rounded-lg border border-danger-600 px-5 py-4 text-danger-600 bg-danger-50",
-        className,
-      )}
+      className={cn("rounded-lg px-5 sm:px-7 py-5 bg-danger-50", className)}
       {...props}
     />
   );

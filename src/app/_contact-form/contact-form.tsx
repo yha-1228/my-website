@@ -201,8 +201,8 @@ export function ContactForm() {
             noValidate
           >
             <input type="hidden" name="form-name" value="contact" />
-            <div className="space-y-5">
-              <div className="space-y-5 md:flex md:space-x-4 md:space-y-0">
+            <div className="space-y-6">
+              <div className="space-y-6 md:flex md:space-x-4 md:space-y-0">
                 <FieldProvider
                   whenError={showError("name", formState)}
                   fieldId={createFieldId(id, "name")}
@@ -215,18 +215,17 @@ export function ContactForm() {
                     >
                       {keyLabelMap.name}
                     </FieldLabel>
-                    <div className="mt-2">
-                      <Field
-                        as={Input}
-                        type="text"
-                        name="name"
-                        placeholder="田中 太郎"
-                        value={values.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        invalid={showError("name", formState)}
-                      />
-                    </div>
+                    <Field
+                      as={Input}
+                      className="mt-2"
+                      type="text"
+                      name="name"
+                      placeholder="田中 太郎"
+                      value={values.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      invalid={showError("name", formState)}
+                    />
                     <FieldError as={FormErrorMessage} className="mt-2">
                       {errors.name}
                     </FieldError>
@@ -245,18 +244,17 @@ export function ContactForm() {
                     >
                       {keyLabelMap.email}
                     </FieldLabel>
-                    <div className="mt-2">
-                      <Field
-                        as={Input}
-                        type="email"
-                        name="email"
-                        placeholder="email@example.com"
-                        value={values.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        invalid={showError("email", formState)}
-                      />
-                    </div>
+                    <Field
+                      as={Input}
+                      className="mt-2"
+                      type="email"
+                      name="email"
+                      placeholder="email@example.com"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      invalid={showError("email", formState)}
+                    />
                     <FieldError as={FormErrorMessage} className="mt-2">
                       {errors.email}
                     </FieldError>
@@ -272,46 +270,17 @@ export function ContactForm() {
                   <FieldLabel as={Label} id={createLabelId(id, "companyName")}>
                     {keyLabelMap.companyName}
                   </FieldLabel>
-                  <div className="mt-2">
-                    <Field
-                      as={Input}
-                      type="text"
-                      name="companyName"
-                      placeholder="株式会社ABC / 自営業"
-                      value={values.companyName}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      invalid={showError("companyName", formState)}
-                    />
-                  </div>
-                  <FieldError as={FormErrorMessage} className="mt-2">
-                    {errors.companyName}
-                  </FieldError>
-                </div>
-              </FieldProvider>
-              <FieldProvider
-                whenError={showError("message", formState)}
-                fieldId={createFieldId(id, "message")}
-              >
-                <div>
-                  <FieldLabel
-                    as={Label}
-                    id={createLabelId(id, "message")}
-                    required
-                  >
-                    {keyLabelMap.message}
-                  </FieldLabel>
-                  <div className="mt-2">
-                    <Field
-                      as={Textarea}
-                      name="message"
-                      value={values.message}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      rows={6}
-                      invalid={showError("message", formState)}
-                    />
-                  </div>
+                  <Field
+                    as={Input}
+                    className="mt-2"
+                    type="text"
+                    name="companyName"
+                    placeholder="株式会社ABC / 自営業"
+                    value={values.companyName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    invalid={showError("companyName", formState)}
+                  />
                   <div className="mt-2">
                     <FieldDescription
                       as={FormHelperText}
@@ -327,61 +296,95 @@ export function ContactForm() {
                       {errors.message}
                     </FieldError>
                   </div>
+                  <FieldError as={FormErrorMessage} className="mt-2">
+                    {errors.companyName}
+                  </FieldError>
+                </div>
+              </FieldProvider>
+
+              <FieldProvider
+                whenError={showError("message", formState)}
+                fieldId={createFieldId(id, "message")}
+              >
+                <div>
+                  <FieldLabel
+                    as={Label}
+                    id={createLabelId(id, "message")}
+                    required
+                  >
+                    {keyLabelMap.message}
+                  </FieldLabel>
+                  <Field
+                    as={Textarea}
+                    className="mt-2"
+                    name="message"
+                    value={values.message}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    rows={6}
+                    invalid={showError("message", formState)}
+                  />
+                  <FieldDescription
+                    as={FormHelperText}
+                    className="flex mt-2 justify-between"
+                  >
+                    <span>10文字以上</span>
+                    <InputLengthCounter
+                      currentLength={values.message.length}
+                      maxLength={MESSAGE_MAX_LENGTH}
+                    />
+                  </FieldDescription>
+                  <FieldError as={FormErrorMessage}>
+                    {errors.message}
+                  </FieldError>
                 </div>
               </FieldProvider>
             </div>
 
-            <div className="mt-10 lg:mt-14">
-              <Alert
-                className={cn(
-                  "mb-5",
-                  Object.keys(errors).length > 0 && formState.bottomErrorVisible
-                    ? "block"
-                    : "hidden",
-                )}
-              >
-                <div className="font-bold">
-                  {Object.values(errors).length}件の項目に問題があります。
-                </div>
-                <ul className="mt-3 space-y-1.5 sm:list-disc sm:space-y-0.5 sm:pl-5">
-                  {entriesOf(errors).map(([key, error]) => (
-                    <li key={key} className="text-sm">
-                      <div className="sm:flex sm:space-x-1">
-                        <div className="font-bold">
-                          {keyLabelMap[key]}
-                          <span className="hidden sm:inline">: </span>
-                        </div>
-                        <TextLink
-                          href="/"
-                          className="underline"
-                          preventLink
-                          onClick={() => handleErrorListItemClick(key)}
-                        >
-                          {error}
-                        </TextLink>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </Alert>
+            <Alert
+              className={cn(
+                "mt-9 mb-3",
+                Object.keys(errors).length > 0 && formState.bottomErrorVisible
+                  ? "block"
+                  : "hidden",
+              )}
+            >
+              <div className="text-lg font-bold">
+                {Object.values(errors).length}件の項目に問題があります。
+              </div>
+              <ul className="mt-2.5 space-y-0.5 sm:list-disc sm:space-y-0.5 sm:pl-4">
+                {entriesOf(errors).map(([key, error]) => (
+                  <li key={key} className="text-sm text-danger-600">
+                    <TextLink
+                      href="/"
+                      className="font-bold"
+                      withUnderline
+                      preventLink
+                      onClick={() => handleErrorListItemClick(key)}
+                    >
+                      {keyLabelMap[key]}の項目を{error}
+                    </TextLink>
+                  </li>
+                ))}
+              </ul>
+            </Alert>
 
-              <IsClient>
-                {({ isClient }) => (
-                  <Button
-                    disabled={submitState.loading || !isClient}
-                    className="w-full"
-                  >
-                    {!isClient ? (
-                      <>&nbsp;</>
-                    ) : submitState.loading ? (
-                      "送信中..."
-                    ) : (
-                      "送信する"
-                    )}
-                  </Button>
-                )}
-              </IsClient>
-            </div>
+            <IsClient>
+              {({ isClient }) => (
+                <Button
+                  disabled={submitState.loading || !isClient}
+                  className="mt-6 w-full"
+                >
+                  {!isClient ? (
+                    <>&nbsp;</>
+                  ) : submitState.loading ? (
+                    "送信中..."
+                  ) : (
+                    "送信する"
+                  )}
+                </Button>
+              )}
+            </IsClient>
           </form>
           {submitState.isSuccess && (
             <FeedbackNotification

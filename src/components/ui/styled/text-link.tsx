@@ -10,20 +10,29 @@ import {
   type ExternalLinkProps,
 } from "../unstyled/external-link";
 
-const baseClassName = cn("rounded-sm underline-offset-4 hover:underline");
+function createBaseClassName(withUnderline?: boolean) {
+  const common = cn("rounded-sm underline-offset-4");
+  const withUnderlineClass = withUnderline
+    ? cn("underline hover:decoration-2")
+    : cn("hover:underline hover:decoration-2");
+
+  return cn(common, withUnderlineClass);
+}
 
 // ----------------------------------------
 
 interface TextLinkProps extends LinkComponentProps {
+  withUnderline?: boolean;
   preventLink?: boolean;
 }
 
 const TextLink = forwardRef<HTMLAnchorElement, TextLinkProps>((props, ref) => {
-  const { preventLink, onClick, className, ...restProps } = props;
+  const { withUnderline, preventLink, onClick, className, ...restProps } =
+    props;
 
   return (
     <Link
-      className={cn(baseClassName, className)}
+      className={cn(createBaseClassName(withUnderline), className)}
       onClick={(event) => {
         if (preventLink) {
           event.preventDefault();
@@ -41,17 +50,25 @@ TextLink.displayName = "TextLink";
 // ----------------------------------------
 
 interface ExternalTextLinkProps extends ExternalLinkProps {
+  withUnderline?: boolean;
   preventLink?: boolean;
 }
 
 const ExternalTextLink = forwardRef<HTMLAnchorElement, ExternalTextLinkProps>(
   (props, ref) => {
-    const { preventLink, onClick, className, children, ...restProps } = props;
+    const {
+      withUnderline,
+      preventLink,
+      onClick,
+      className,
+      children,
+      ...restProps
+    } = props;
 
     return (
       <ExternalLink
         className={cn(
-          baseClassName,
+          createBaseClassName(withUnderline),
           "inline-flex items-center space-x-1",
           className,
         )}
