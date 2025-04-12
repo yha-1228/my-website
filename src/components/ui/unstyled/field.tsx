@@ -12,7 +12,6 @@ import {
   type ComponentPropsWithAs,
   type CommonHTMLProps,
   type ForwardedElementRef,
-  type NonNullableContextType,
 } from "@/types/react";
 import { fixedForwardRef } from "@/utils/react";
 
@@ -66,7 +65,7 @@ function useField(props: UseFieldProps) {
 
 const FieldContext = createContext<ReturnType<typeof useField> | null>(null);
 
-function useFieldContext(): NonNullableContextType<typeof FieldContext> {
+function useFieldContext() {
   const value = useContext(FieldContext);
   if (!value) throw new Error(`useContext must be inside <Context.Provider />`);
   return value;

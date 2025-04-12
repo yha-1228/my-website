@@ -1,10 +1,15 @@
 "use client";
 
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import {
+  type MouseEventHandler,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 import { BsArrowUpShort } from "react-icons/bs";
 import { Button } from "@/components/ui/styled/button";
-import { TOP_LOGO_ID } from "@/constants";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useIsClient } from "@/hooks/use-is-client";
 import { tailwindFullConfig } from "@/tailwind-config";
@@ -28,11 +33,11 @@ function useScrollToTopButton() {
     { rootMargin: `-${remToPx(tailwindFullConfig.theme.height.header, true)}` },
   );
 
-  const handleClick = async () => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = async (event) => {
+    event.currentTarget.blur();
     setIsClickedTiming(true);
 
     window.scrollTo({ top: 0, behavior: "smooth" });
-    document.getElementById(TOP_LOGO_ID)?.focus();
 
     await sleep(100);
     setIsClickedTiming(false);

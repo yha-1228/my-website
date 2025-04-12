@@ -7,7 +7,6 @@ import {
   type ReactNode,
   type RefAttributes,
   type ElementRef,
-  type Context,
 } from "react";
 import { type DistributiveOmit } from "./utils";
 
@@ -38,6 +37,3 @@ export type ForwardedElementRef<T extends ElementType> = ForwardedRef<
 export type FixedForwardRef = <T, P = {}>(
   render: (props: P, ref: ForwardedRef<T>) => ReactNode,
 ) => (props: P & RefAttributes<T>) => ReactNode;
-
-export type NonNullableContextType<T> =
-  T extends Context<infer U> ? Exclude<U, null | undefined> : never;
