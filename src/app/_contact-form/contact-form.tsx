@@ -113,7 +113,7 @@ export function ContactForm() {
   const [submitState, submitAction, resetSubmitAction] = useMutation({
     fn: (data: ContactFormValues) => {
       return sendNetlifyForm({
-        htmlFilepath: "/contact-form-netlify.html",
+        htmlFilepath: "/__forms.html",
         formName: CONTACT_FORM_NAME,
         data,
       });
