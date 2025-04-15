@@ -326,7 +326,7 @@ export function ContactForm() {
                   />
                   <FieldDescription
                     as={FormHelperText}
-                    className="flex mt-2 justify-between"
+                    className="mt-2 flex justify-between"
                   >
                     <span>10文字以上</span>
                     <InputLengthCounter
