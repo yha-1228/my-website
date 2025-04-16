@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-import { sendNetlifyForm } from "@/api/clients/utils";
+import { sendNetlifyForm } from "@/api/clients/netlify";
 import { isFetchNetworkError } from "@/api/misc";
 import { Button } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
