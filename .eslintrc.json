@@ -36,6 +36,7 @@
     "react/self-closing-comp": "error",
     "react/jsx-fragments": "error",
     "react/hook-use-state": "error",
+    "react/function-component-definition": "error",
 
     // Import
     "simple-import-sort/imports": "error"
