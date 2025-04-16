@@ -7,7 +7,7 @@
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "import", "tailwindcss", "unused-imports"],
+  "plugins": ["@typescript-eslint", "tailwindcss", "simple-import-sort"],
   "rules": {
     // JavaScript
     "dot-notation": "warn",
@@ -37,50 +37,7 @@
     "react/jsx-fragments": "warn",
     "react/hook-use-state": "warn",
 
-    // Import plugin
-    "import/no-duplicates": "warn",
-    "import/newline-after-import": ["error", { "count": 1 }],
-    "import/no-cycle": "error",
-    "import/order": [
-      "warn",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "unknown",
-          "parent",
-          "sibling",
-          "index",
-          "object",
-          "type"
-        ],
-        "pathGroups": [
-          {
-            "pattern": "react",
-            "group": "builtin",
-            "position": "before"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": ["react"],
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ],
-
-    // - unused-imports
-    "@typescript-eslint/no-unused-vars": "off",
-    "unused-imports/no-unused-imports": "warn",
-    "unused-imports/no-unused-vars": [
-      "warn",
-      {
-        "vars": "all",
-        "varsIgnorePattern": "^_",
-        "args": "after-used",
-        "argsIgnorePattern": "^_"
-      }
-    ]
+    // Import
+    "simple-import-sort/imports": "error"
   }
 }

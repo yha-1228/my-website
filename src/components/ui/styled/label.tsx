@@ -1,4 +1,5 @@
 import { type ComponentPropsWithRef, forwardRef } from "react";
+
 import { cn } from "@/utils/css/cn";
 
 interface LabelProps extends ComponentPropsWithRef<"label"> {

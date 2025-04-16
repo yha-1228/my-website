@@ -1,13 +1,14 @@
 import {
   type ComponentPropsWithRef,
-  type ElementType,
   type DetailedHTMLProps,
-  type HTMLAttributes,
+  type ElementRef,
+  type ElementType,
   type ForwardedRef,
+  type HTMLAttributes,
   type ReactNode,
   type RefAttributes,
-  type ElementRef,
 } from "react";
+
 import { type DistributiveOmit } from "./utils";
 
 export type CommonHTMLProps = DetailedHTMLProps<

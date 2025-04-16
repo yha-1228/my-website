@@ -1,8 +1,10 @@
 import "@/styles/globals.css";
-import { type ReactNode } from "react";
+
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
+import { type ReactNode } from "react";
+
 import { Footer } from "@/components/layouts/footer";
 import { Header } from "@/components/layouts/header";
 import { MainArea } from "@/components/layouts/main-area";

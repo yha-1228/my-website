@@ -1,15 +1,16 @@
 import { type ReactNode } from "react";
+
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { Heading2 } from "@/components/ui/styled/heading2";
 import { splitNode } from "@/components/ui/unstyled/split-node";
 import {
   CATEGORIES,
-  skillDetails,
-  skillWords,
   type Rank,
   type SkillDetail,
+  skillDetails,
   type SkillWord,
+  skillWords,
 } from "@/data/skills";
 import { tailwindFullConfig } from "@/tailwind-config";
 import { cn } from "@/utils/css/cn";

@@ -1,5 +1,6 @@
-import { type ComponentPropsWithRef, forwardRef, type ReactNode } from "react";
 import Link from "next/link";
+import { type ComponentPropsWithRef, forwardRef, type ReactNode } from "react";
+
 import { type LinkComponentProps } from "@/lib/next/types";
 import { cn } from "@/utils/css/cn";
 

@@ -7,8 +7,10 @@ import {
   useEffect,
   useState,
 } from "react";
+
 import { type Replace } from "@/types/utils";
 import { isTouchDevice } from "@/utils/device/is-touch-device";
+
 import { splitNode } from "./split-node";
 
 interface AvoidTelLinkProps

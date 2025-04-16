@@ -1,10 +1,12 @@
 "use client";
 
-import React, { forwardRef } from "react";
 import Link from "next/link";
+import React, { forwardRef } from "react";
 import { FiExternalLink } from "react-icons/fi";
+
 import { type LinkComponentProps } from "@/lib/next/types";
 import { cn } from "@/utils/css/cn";
+
 import {
   ExternalLink,
   type ExternalLinkProps,

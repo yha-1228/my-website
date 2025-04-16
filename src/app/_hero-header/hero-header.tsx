@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import { ButtonLink } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";

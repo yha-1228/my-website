@@ -1,5 +1,5 @@
-import { useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect,useRef } from "react";
 
 export function useOnRouteChange(callback: () => void) {
   const savedCallback = useRef(callback);

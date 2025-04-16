@@ -7,6 +7,7 @@ import {
   useId,
   useState,
 } from "react";
+
 import { sendNetlifyForm } from "@/api/clients/utils";
 import { isFetchNetworkError } from "@/api/misc";
 import { Button } from "@/components/ui/styled/button";
@@ -41,13 +42,14 @@ import { scrollWithFocus } from "@/utils/dom/utils";
 import { entriesOf } from "@/utils/object/entries-of";
 import { fromEntries } from "@/utils/object/from-entries";
 import { mapObject } from "@/utils/object/map-object";
+
 import { Alert } from "./alert";
 import { FeedbackNotification } from "./feedback-notification";
 import {
   contactFormKeys,
   contactFormSchema,
-  MESSAGE_MAX_LENGTH,
   type ContactFormValues,
+  MESSAGE_MAX_LENGTH,
 } from "./validation";
 
 // state definition
