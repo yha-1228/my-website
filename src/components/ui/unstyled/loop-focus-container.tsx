@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef,type ElementType, useRef } from "react";
+import { type ComponentPropsWithoutRef, type ElementType, useRef } from "react";
 
 import { useKeydown } from "@/hooks/use-keydown";
 import { loopFocus } from "@/utils/dom/utils";
