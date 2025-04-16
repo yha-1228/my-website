@@ -34,6 +34,7 @@ import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
 import { tailwindFullConfig } from "@/tailwind-config";
+import { type HTMLElementHasNameAndValue } from "@/types/react";
 import { cn } from "@/utils/css/cn";
 import { remToPx } from "@/utils/css/unit";
 import { scrollWithFocus } from "@/utils/dom/utils";
@@ -42,7 +43,6 @@ import { fromEntries } from "@/utils/object/from-entries";
 import { mapObject } from "@/utils/object/map-object";
 import { Alert } from "./alert";
 import { FeedbackNotification } from "./feedback-notification";
-import { type FieldType } from "./types";
 import {
   contactFormKeys,
   contactFormSchema,
@@ -123,14 +123,14 @@ export function ContactForm() {
     },
   });
 
-  const handleChange = (e: ChangeEvent<FieldType>) => {
+  const handleChange = (e: ChangeEvent<HTMLElementHasNameAndValue>) => {
     setFormState((prev) => ({
       ...prev,
       values: { ...prev.values, [e.target.name]: e.target.value },
     }));
   };
 
-  const handleBlur = (e: FocusEvent<FieldType>) => {
+  const handleBlur = (e: FocusEvent<HTMLElementHasNameAndValue>) => {
     setFormState((prev) => ({
       ...prev,
       touched: { ...prev.touched, [e.target.name]: true },
@@ -326,7 +326,7 @@ export function ContactForm() {
                   />
                   <FieldDescription
                     as={FormHelperText}
-                    className="flex mt-2 justify-between"
+                    className="mt-2 flex justify-between"
                   >
                     <span>10文字以上</span>
                     <InputLengthCounter

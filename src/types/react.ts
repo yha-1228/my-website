@@ -37,3 +37,10 @@ export type ForwardedElementRef<T extends ElementType> = ForwardedRef<
 export type FixedForwardRef = <T, P = {}>(
   render: (props: P, ref: ForwardedRef<T>) => ReactNode,
 ) => (props: P & RefAttributes<T>) => ReactNode;
+
+export type HTMLElementHasNameAndValue =
+  | HTMLButtonElement
+  | HTMLFormElement
+  | HTMLInputElement
+  | HTMLSelectElement
+  | HTMLTextAreaElement;
