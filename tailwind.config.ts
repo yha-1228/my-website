@@ -1,6 +1,6 @@
+import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
 import defaultTheme from "tailwindcss/defaultTheme";
-import type { Config } from "tailwindcss";
 
 // @see https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/config.full.js
 
