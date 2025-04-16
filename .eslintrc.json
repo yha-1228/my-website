@@ -7,7 +7,7 @@
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "import", "tailwindcss"],
+  "plugins": ["@typescript-eslint", "tailwindcss"],
   "rules": {
     // JavaScript
     "dot-notation": "warn",
@@ -35,39 +35,6 @@
     "react/prop-types": "off",
     "react/self-closing-comp": "warn",
     "react/jsx-fragments": "warn",
-    "react/hook-use-state": "warn",
-
-    // Import plugin
-    "import/no-duplicates": "warn",
-    "import/newline-after-import": ["error", { "count": 1 }],
-    "import/no-cycle": "error",
-    "import/order": [
-      "warn",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "unknown",
-          "parent",
-          "sibling",
-          "index",
-          "object",
-          "type"
-        ],
-        "pathGroups": [
-          {
-            "pattern": "react",
-            "group": "builtin",
-            "position": "before"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": ["react"],
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ]
+    "react/hook-use-state": "warn"
   }
 }
