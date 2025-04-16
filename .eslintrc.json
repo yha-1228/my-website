@@ -10,8 +10,8 @@
   "plugins": ["@typescript-eslint", "tailwindcss", "simple-import-sort"],
   "rules": {
     // JavaScript
-    "dot-notation": "warn",
-    "no-useless-rename": "warn",
+    "dot-notation": "error",
+    "no-useless-rename": "error",
 
     // TypeScript
     "@typescript-eslint/naming-convention": [
@@ -23,19 +23,19 @@
     ],
     "@typescript-eslint/array-type": ["error", { "default": "array-simple" }],
     "@typescript-eslint/consistent-type-imports": [
-      "warn",
+      "error",
       { "fixStyle": "inline-type-imports" }
     ],
 
     // React
     "react/react-in-jsx-scope": "off",
-    "react/jsx-no-useless-fragment": ["warn", { "allowExpressions": true }],
-    "react/jsx-curly-brace-presence": "warn",
-    "react/jsx-boolean-value": "warn",
+    "react/jsx-no-useless-fragment": ["error", { "allowExpressions": true }],
+    "react/jsx-curly-brace-presence": "error",
+    "react/jsx-boolean-value": "error",
     "react/prop-types": "off",
-    "react/self-closing-comp": "warn",
-    "react/jsx-fragments": "warn",
-    "react/hook-use-state": "warn",
+    "react/self-closing-comp": "error",
+    "react/jsx-fragments": "error",
+    "react/hook-use-state": "error",
 
     // Import
     "simple-import-sort/imports": "error"
