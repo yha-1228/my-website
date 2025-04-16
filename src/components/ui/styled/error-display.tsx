@@ -1,12 +1,14 @@
 "use client";
 
 import { type ReactNode } from "react";
+
 import { Button, ButtonLink } from "@/components/ui/styled/button";
 import { SITE_TITLE } from "@/constants";
 import { useTitle } from "@/hooks/use-title";
 import { isPageError404 } from "@/lib/next/helpers";
 import { type NextErrorProps } from "@/lib/next/types";
 import { cn } from "@/utils/css/cn";
+
 import { Container } from "./container";
 
 interface ErrorBoardViewProps {

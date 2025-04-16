@@ -1,5 +1,6 @@
 import { type Metadata } from "next";
 import { BsChevronLeft } from "react-icons/bs";
+
 import { getBlogDetail, getBlogList } from "@/api/clients/blog";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";

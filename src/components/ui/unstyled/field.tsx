@@ -1,16 +1,17 @@
 import {
-  useId,
-  type ElementType,
   type ComponentProps,
-  useEffect,
-  useState,
   createContext,
-  useContext,
+  type ElementType,
   type PropsWithChildren,
+  useContext,
+  useEffect,
+  useId,
+  useState,
 } from "react";
+
 import {
-  type ComponentPropsWithAs,
   type CommonHTMLProps,
+  type ComponentPropsWithAs,
   type ForwardedElementRef,
 } from "@/types/react";
 import { fixedForwardRef } from "@/utils/react";

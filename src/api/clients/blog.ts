@@ -1,8 +1,8 @@
 import {
-  getBlogDetailResponseSchema,
-  getBlogListResponseSchema,
   type GetBlogDetailResponse,
+  getBlogDetailResponseSchema,
   type GetBlogListResponse,
+  getBlogListResponseSchema,
 } from "../validation/blog";
 import { client } from "./common";
 

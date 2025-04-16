@@ -7,7 +7,7 @@
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "tailwindcss"],
+  "plugins": ["@typescript-eslint", "tailwindcss", "simple-import-sort"],
   "rules": {
     // JavaScript
     "dot-notation": "warn",
@@ -35,6 +35,9 @@
     "react/prop-types": "off",
     "react/self-closing-comp": "warn",
     "react/jsx-fragments": "warn",
-    "react/hook-use-state": "warn"
+    "react/hook-use-state": "warn",
+
+    // Import
+    "simple-import-sort/imports": "error"
   }
 }

@@ -1,14 +1,15 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, {
   type ComponentProps,
   type CSSProperties,
   useRef,
   useState,
 } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { BsList, BsX } from "react-icons/bs";
+
 import { MOBILE_MENU_ID } from "@/constants";
 import { useKeydown } from "@/hooks/use-keydown";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -17,6 +18,7 @@ import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { routes } from "@/routes";
 import { tailwindFullConfig } from "@/tailwind-config";
 import { cn } from "@/utils/css/cn";
+
 import { Container } from "../ui/styled/container";
 import { LoopFocusContainer } from "../ui/unstyled/loop-focus-container";
 

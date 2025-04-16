@@ -1,4 +1,5 @@
 import React, { type ComponentPropsWithRef, forwardRef } from "react";
+
 import { cn } from "@/utils/css/cn";
 
 const Heading1 = forwardRef<HTMLHeadingElement, ComponentPropsWithRef<"h1">>(
