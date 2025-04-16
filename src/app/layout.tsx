@@ -9,7 +9,6 @@ import { Footer } from "@/components/layouts/footer";
 import { Header } from "@/components/layouts/header";
 import { MainArea } from "@/components/layouts/main-area";
 import { SITE_TITLE } from "@/constants";
-import { cn } from "@/utils/css/cn";
 
 export const metadata: Metadata = {
   title: { template: `${SITE_TITLE} | %s`, default: SITE_TITLE },
@@ -25,7 +24,7 @@ const inter = Inter({
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja" dir="ltr">
-      <body className={cn(inter.variable, "font-base text-base-foreground")}>
+      <body className={inter.variable}>
         <div className="flex min-h-dvh flex-col">
           <Header />
           <MainArea>{children}</MainArea>
