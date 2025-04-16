@@ -7,7 +7,6 @@ import { Footer } from "@/components/layouts/footer";
 import { Header } from "@/components/layouts/header";
 import { MainArea } from "@/components/layouts/main-area";
 import { SITE_TITLE } from "@/constants";
-import { env } from "@/env";
 import { cn } from "@/utils/css/cn";
 
 export const metadata: Metadata = {
@@ -31,7 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer className="mt-auto" />
         </div>
       </body>
-      <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_ID} />
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
     </html>
   );
 }
