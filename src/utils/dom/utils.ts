@@ -12,7 +12,9 @@ function findFocusableElements(parentElement: HTMLElement) {
 /**
  * `Tab`または`Shift + Tab`によるフォーカスを、指定した要素の配下に限定する。
  */
-function loopFocus(event: KeyboardEvent, parentElement: HTMLElement) {
+function loopFocus(event: KeyboardEvent, parentElement: HTMLElement | null) {
+  if (!parentElement) return;
+
   if (event.key === "Tab") {
     const focusableElements = findFocusableElements(parentElement);
     if (focusableElements.length === 0) return;
