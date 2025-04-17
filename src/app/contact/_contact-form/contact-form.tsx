@@ -110,7 +110,7 @@ export function ContactForm() {
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const errors = getErrors(formState);
 
-  const [submitState, submitAction, resetSubmitAction] = useMutation({
+  const submitMutation = useMutation({
     fn: (data: ContactFormValues) => {
       return sendNetlifyForm({
         htmlFilepath: "/__forms.html",
@@ -169,7 +169,7 @@ export function ContactForm() {
       return;
     }
 
-    await submitAction(formState.values);
+    await submitMutation.mutate(formState.values);
   };
 
   useBeforeUnload({
@@ -348,12 +348,12 @@ export function ContactForm() {
         <IsClient>
           {({ isClient }) => (
             <Button
-              disabled={submitState.loading || !isClient}
+              disabled={submitMutation.loading || !isClient}
               className="mt-6 w-full"
             >
               {!isClient ? (
                 <>&nbsp;</>
-              ) : submitState.loading ? (
+              ) : submitMutation.loading ? (
                 "送信中..."
               ) : (
                 "送信する"
@@ -362,22 +362,22 @@ export function ContactForm() {
           )}
         </IsClient>
       </form>
-      {submitState.isSuccess && (
+      {submitMutation.isSuccess && (
         <FeedbackNotification
           className="mt-10"
           variant="primary"
-          onClose={resetSubmitAction}
+          onClose={submitMutation.reset}
         >
           {feedbackText.done}
         </FeedbackNotification>
       )}
-      {submitState.isError && (
+      {submitMutation.isError && (
         <FeedbackNotification
           className="mt-10"
           variant="danger"
-          onClose={resetSubmitAction}
+          onClose={submitMutation.reset}
         >
-          {isFetchNetworkError(submitState.error)
+          {isFetchNetworkError(submitMutation.error)
             ? feedbackText.networkError
             : feedbackText.fail}
         </FeedbackNotification>

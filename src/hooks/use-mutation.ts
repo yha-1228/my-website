@@ -81,11 +81,15 @@ function reducer<TError extends Error>(
 type UseMutationReturn<
   TAction extends AnyAsyncFunction,
   TError extends Error,
-> = readonly [
-  UseMutationState<TError>,
-  (...args: Parameters<TAction>) => Promise<void>,
-  () => void,
-];
+> = {
+  mutate: (...args: Parameters<TAction>) => Promise<void>;
+  reset: () => void;
+  pending: boolean;
+  loading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+  error: TError | undefined;
+};
 
 function useMutation<
   TAction extends AnyAsyncFunction,
@@ -97,7 +101,7 @@ function useMutation<
     initialState as UseMutationState<TError>,
   );
 
-  const handleAction = async (...args: Parameters<TAction>) => {
+  const mutate = async (...args: Parameters<TAction>) => {
     dispatch({ type: "loading" });
 
     try {
@@ -116,11 +120,11 @@ function useMutation<
     }
   };
 
-  const handleReset = () => {
+  const reset = () => {
     dispatch({ type: "reset" });
   };
 
-  return [state, handleAction, handleReset] as const;
+  return { ...state, mutate, reset };
 }
 
 export { useMutation };
