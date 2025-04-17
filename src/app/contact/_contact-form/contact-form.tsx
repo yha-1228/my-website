@@ -267,19 +267,6 @@ export function ContactForm() {
                 onBlur={handleBlur}
                 invalid={showError("companyName", formState)}
               />
-              <div className="mt-2">
-                <FieldDescription
-                  as={FormHelperText}
-                  className="flex justify-between"
-                >
-                  <span>10文字以上</span>
-                  <InputLengthCounter
-                    currentLength={values.message.length}
-                    maxLength={MESSAGE_MAX_LENGTH}
-                  />
-                </FieldDescription>
-                <FieldError as={FormErrorMessage}>{errors.message}</FieldError>
-              </div>
               <FieldError as={FormErrorMessage} className="mt-2">
                 {errors.companyName}
               </FieldError>
