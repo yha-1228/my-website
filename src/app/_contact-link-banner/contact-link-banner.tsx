@@ -1,9 +1,8 @@
 import Link from "next/link";
 
+import { ArrowRight } from "@/assets/arrow-right";
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";
-
-import { ArrowRight } from "../../../public/assets/arrow-right";
 
 export function ContactLinkBanner() {
   return (
