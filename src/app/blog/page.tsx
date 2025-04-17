@@ -10,7 +10,7 @@ import { cn } from "@/utils/css/cn";
 import { dateFormat } from "@/utils/date/formatter";
 
 export const metadata: Metadata = {
-  title: "ブログ",
+  title: routes.blog.label,
 };
 
 export default async function Page() {
@@ -21,7 +21,7 @@ export default async function Page() {
       <Container>
         <section>
           <div className="pb-10 text-center">
-            <Heading1>ブログ</Heading1>
+            <Heading1>{routes.blog.label}</Heading1>
           </div>
           <ul className="space-y-4">
             {contents.map((content) => (

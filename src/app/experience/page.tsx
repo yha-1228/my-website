@@ -7,9 +7,10 @@ import { Heading2 } from "@/components/ui/styled/heading2";
 import { Timeline, type TimelineItem } from "@/components/ui/styled/timeline";
 import { AvoidTelLink } from "@/components/ui/unstyled/avoid-tel-link";
 import { type Experience, experiencesOverviewItems } from "@/data/experience";
+import { routes } from "@/routes";
 
 export const metadata: Metadata = {
-  title: "職務経歴",
+  title: routes.experience.label,
 };
 
 function experienceToTimelineItem(experience: Experience): TimelineItem {
@@ -39,7 +40,7 @@ export default function Page() {
       <Container className="md:max-w-screen-md">
         <section>
           <div className="pb-10 text-center">
-            <Heading1>職務経歴</Heading1>
+            <Heading1>{routes.experience.label}</Heading1>
           </div>
           <div className="space-y-12">
             {experiencesOverviewItems.map((experiencesOverviewItem) => (
