@@ -39,12 +39,12 @@ import { remToPx } from "@/utils/css/unit";
 import { scrollWithFocus } from "@/utils/dom/utils";
 import { entriesOf } from "@/utils/object/entries-of";
 import { fromEntries } from "@/utils/object/from-entries";
+import { keysOf } from "@/utils/object/keys-of";
 import { mapObject } from "@/utils/object/map-object";
 
 import { Alert } from "./alert";
 import { FeedbackNotification } from "./feedback-notification";
 import {
-  contactFormKeys,
   contactFormSchema,
   type ContactFormValues,
   MESSAGE_MAX_LENGTH,
@@ -61,7 +61,9 @@ interface FormState {
 
 const initialFormState: FormState = {
   values: { name: "", email: "", companyName: "", message: "" },
-  touched: fromEntries(contactFormKeys.map((key) => [key, false])),
+  touched: fromEntries(
+    keysOf(contactFormSchema.shape).map((key) => [key, false]),
+  ),
   bottomErrorVisible: false,
 };
 
