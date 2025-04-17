@@ -28,7 +28,7 @@ export async function generateStaticParams() {
   return contents.map((content) => ({ id: content.id }));
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: Props) {
   const { id } = params;
   const blogDetail = await getBlogDetail(id);
 
