@@ -5,7 +5,6 @@ import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { Heading2 } from "@/components/ui/styled/heading2";
 import { Timeline, type TimelineItem } from "@/components/ui/styled/timeline";
-import { AvoidTelLink } from "@/components/ui/unstyled/avoid-tel-link";
 import { type Experience, experiencesOverviewItems } from "@/data/experience";
 import { routes } from "@/routes";
 
@@ -50,12 +49,9 @@ export default function Page() {
               >
                 <div>
                   <Heading2>{experiencesOverviewItem.company}</Heading2>
-                  <AvoidTelLink
-                    as="div"
-                    className="mt-6 text-sm text-base-foreground-weak"
-                  >
+                  <div className="mt-6 text-sm text-base-foreground-weak">
                     {experiencesOverviewItem.kikan}
-                  </AvoidTelLink>
+                  </div>
                 </div>
                 <Timeline
                   items={experiencesOverviewItem.experiences.map((experience) =>
