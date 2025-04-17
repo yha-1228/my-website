@@ -1,6 +1,7 @@
+import { type AnyFunction } from "./types/utils";
+
 export interface Route {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  href: string | ((...args: any[]) => string);
+  href: string | AnyFunction<string>;
   label?: string;
   routes?: Record<string, Route>;
 }
