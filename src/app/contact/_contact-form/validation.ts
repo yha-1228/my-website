@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 import { errorMessages } from "@/form/error-messages";
-import { keysOf } from "@/utils/object/keys-of";
 
 export const MESSAGE_MAX_LENGTH = 1000;
 
@@ -47,7 +46,5 @@ export const contactFormSchema = z.object({
       message: errorMessages.isLength({ max: MESSAGE_MAX_LENGTH }),
     }),
 });
-
-export const contactFormKeys = keysOf(contactFormSchema.shape);
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;

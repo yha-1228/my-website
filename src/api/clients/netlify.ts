@@ -1,10 +1,9 @@
 import { encode } from "@/lib/netlify/encode";
-import { type Dict } from "@/types/utils";
 
 export interface SendNetlifyFormParams {
   htmlFilepath: string;
   formName: string;
-  data: Dict<string>;
+  data: Record<string, string>;
 }
 
 /**

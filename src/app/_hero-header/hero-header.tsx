@@ -1,10 +1,9 @@
 "use client";
 
+import { ArrowRight } from "@/assets/arrow-right";
 import { ButtonLink } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";
-
-import { ArrowRight } from "../../../public/assets/arrow-right";
 
 export function HeroHeader() {
   return (

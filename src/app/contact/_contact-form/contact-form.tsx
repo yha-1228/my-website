@@ -39,12 +39,12 @@ import { remToPx } from "@/utils/css/unit";
 import { scrollWithFocus } from "@/utils/dom/utils";
 import { entriesOf } from "@/utils/object/entries-of";
 import { fromEntries } from "@/utils/object/from-entries";
+import { keysOf } from "@/utils/object/keys-of";
 import { mapObject } from "@/utils/object/map-object";
 
 import { Alert } from "./alert";
 import { FeedbackNotification } from "./feedback-notification";
 import {
-  contactFormKeys,
   contactFormSchema,
   type ContactFormValues,
   MESSAGE_MAX_LENGTH,
@@ -61,7 +61,9 @@ interface FormState {
 
 const initialFormState: FormState = {
   values: { name: "", email: "", companyName: "", message: "" },
-  touched: fromEntries(contactFormKeys.map((key) => [key, false])),
+  touched: fromEntries(
+    keysOf(contactFormSchema.shape).map((key) => [key, false]),
+  ),
   bottomErrorVisible: false,
 };
 
@@ -110,7 +112,7 @@ export function ContactForm() {
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const errors = getErrors(formState);
 
-  const [submitState, submitAction, resetSubmitAction] = useMutation({
+  const submitMutation = useMutation({
     fn: (data: ContactFormValues) => {
       return sendNetlifyForm({
         htmlFilepath: "/__forms.html",
@@ -169,7 +171,7 @@ export function ContactForm() {
       return;
     }
 
-    await submitAction(formState.values);
+    await submitMutation.mutate(formState.values);
   };
 
   useBeforeUnload({
@@ -192,7 +194,7 @@ export function ContactForm() {
         netlify-honeypot="bot-field"
         noValidate
       >
-        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="form-name" value={CONTACT_FORM_NAME} />
         <div className="space-y-6">
           <div className="space-y-6 md:flex md:space-x-4 md:space-y-0">
             <FieldProvider
@@ -348,12 +350,12 @@ export function ContactForm() {
         <IsClient>
           {({ isClient }) => (
             <Button
-              disabled={submitState.loading || !isClient}
+              disabled={submitMutation.loading || !isClient}
               className="mt-6 w-full"
             >
               {!isClient ? (
                 <>&nbsp;</>
-              ) : submitState.loading ? (
+              ) : submitMutation.loading ? (
                 "送信中..."
               ) : (
                 "送信する"
@@ -362,22 +364,22 @@ export function ContactForm() {
           )}
         </IsClient>
       </form>
-      {submitState.isSuccess && (
+      {submitMutation.isSuccess && (
         <FeedbackNotification
           className="mt-10"
           variant="primary"
-          onClose={resetSubmitAction}
+          onClose={submitMutation.reset}
         >
           {feedbackText.done}
         </FeedbackNotification>
       )}
-      {submitState.isError && (
+      {submitMutation.isError && (
         <FeedbackNotification
           className="mt-10"
           variant="danger"
-          onClose={resetSubmitAction}
+          onClose={submitMutation.reset}
         >
-          {isFetchNetworkError(submitState.error)
+          {isFetchNetworkError(submitMutation.error)
             ? feedbackText.networkError
             : feedbackText.fail}
         </FeedbackNotification>
