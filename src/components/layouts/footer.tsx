@@ -11,7 +11,7 @@ interface LinkInterface {
   label: string;
 }
 
-const myExternalLinks: LinkInterface[] = [
+const myExternalLinks = [
   {
     href: "https://github.com/yha-1228",
     label: "GitHub",
@@ -24,7 +24,7 @@ const myExternalLinks: LinkInterface[] = [
     href: "https://codepen.io/yh10050846",
     label: "Codepen",
   },
-];
+] as const satisfies LinkInterface[];
 
 const COPYRIGHT_TEXT = `Yuta Hasegawa © ${new Date().getFullYear()}`;
 
@@ -34,12 +34,7 @@ export interface FooterProps {
 
 export function Footer({ className }: FooterProps) {
   return (
-    <footer
-      className={cn(
-        "border-t border-solid border-t-transparent bg-base-light-100 pb-14 pt-10",
-        className,
-      )}
-    >
+    <footer className={cn("bg-base-light-100 pb-14 pt-10", className)}>
       <Container>
         <div className="flex justify-between">
           <ul className="w-1/2 space-y-3 md:flex md:w-auto md:space-x-4 md:space-y-0">
