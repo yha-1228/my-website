@@ -26,6 +26,9 @@
       "error",
       { "fixStyle": "inline-type-imports" }
     ],
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "error",
+    "@typescript-eslint/no-inferrable-types": "error",
 
     // React
     "react/react-in-jsx-scope": "off",
