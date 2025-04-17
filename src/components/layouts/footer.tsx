@@ -34,10 +34,10 @@ export interface FooterProps {
 
 export function Footer({ className }: FooterProps) {
   return (
-    <footer className={cn("bg-base-light-100 pb-14 pt-10", className)}>
+    <footer className={cn("pb-14 pt-10", className)}>
       <Container>
         <div className="flex justify-between">
-          <ul className="w-1/2 space-y-3 md:flex md:w-auto md:space-x-4 md:space-y-0">
+          <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-x-4 md:space-y-0">
             {myExternalLinks.map((link) => (
               <li key={link.href}>
                 <ExternalTextLink className="font-bold" href={link.href}>
@@ -46,7 +46,7 @@ export function Footer({ className }: FooterProps) {
               </li>
             ))}
           </ul>
-          <ul className="w-1/2 space-y-3 md:flex md:w-auto md:space-x-4 md:space-y-0">
+          <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-x-4 md:space-y-0">
             {Object.values(routes).map((route) => (
               <li key={route.href}>
                 <TextLink className="font-bold" href={route.href}>

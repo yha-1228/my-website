@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
-
 import { ButtonLink } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";
+
+import { ArrowRight } from "../../../public/assets/arrow-right";
 
 export function HeroHeader() {
   return (
@@ -25,12 +25,7 @@ export function HeroHeader() {
         >
           <span>職務経歴を見る</span>
           <span className="ml-1 inline-block lg:ml-1.5 lg:transition-transform lg:duration-300 lg:group-hover:translate-x-1 lg:motion-reduce:transform-none">
-            <Image
-              src="/assets/arrow-right-white.svg"
-              alt=""
-              width={16}
-              height={16}
-            />
+            <ArrowRight aria-hidden="true" className="size-4" />
           </span>
         </ButtonLink>
       </Container>
