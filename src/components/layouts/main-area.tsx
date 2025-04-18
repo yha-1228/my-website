@@ -67,7 +67,7 @@ export function MainArea({ children }: { children: ReactNode }) {
           ref={scrollToTopButton.refToIntersect}
           className="absolute top-0 z-hide h-[calc(calc(100svh-theme(height.header))*0.15)] w-full"
           // デバッグのとき: 下記を有効にする
-          style={{ backgroundColor: "rgb(0,0,0,0.1)" }}
+          // style={{ backgroundColor: "rgb(0,0,0,0.1)" }}
         />
         {children}
       </main>
