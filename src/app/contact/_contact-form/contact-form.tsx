@@ -125,17 +125,17 @@ export function ContactForm() {
     },
   });
 
-  const handleChange = (e: ChangeEvent<HTMLElementHasNameAndValue>) => {
+  const handleChange = (event: ChangeEvent<HTMLElementHasNameAndValue>) => {
     setFormState((prev) => ({
       ...prev,
-      values: { ...prev.values, [e.target.name]: e.target.value },
+      values: { ...prev.values, [event.target.name]: event.target.value },
     }));
   };
 
-  const handleBlur = (e: FocusEvent<HTMLElementHasNameAndValue>) => {
+  const handleBlur = (event: FocusEvent<HTMLElementHasNameAndValue>) => {
     setFormState((prev) => ({
       ...prev,
-      touched: { ...prev.touched, [e.target.name]: true },
+      touched: { ...prev.touched, [event.target.name]: true },
     }));
   };
 
@@ -158,8 +158,8 @@ export function ContactForm() {
     });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     if (Object.keys(errors).length > 0) {
       setFormState((prev) => ({
