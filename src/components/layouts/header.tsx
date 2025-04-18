@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, {
+import {
   type ComponentProps,
   type CSSProperties,
+  type MouseEvent,
   useRef,
   useState,
 } from "react";
@@ -76,9 +77,7 @@ export function Header() {
     }
   });
 
-  const handleMobileNavLinkClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  ) => {
+  const handleMobileNavLinkClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (event.currentTarget.getAttribute("aria-current") === "page") {
       setIsMobileMenuOpen(false);
     }

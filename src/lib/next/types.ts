@@ -1,10 +1,11 @@
 import type Link from "next/link";
+import { type ComponentPropsWithRef } from "react";
 
 /**
  * Type of `<Link />` props
  * (alias)
  */
-export type LinkComponentProps = React.ComponentPropsWithRef<typeof Link>;
+export type LinkComponentProps = ComponentPropsWithRef<typeof Link>;
 
 /**
  * Type of `error.tsx` props
