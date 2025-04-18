@@ -1,5 +1,3 @@
-import React from "react";
-
 import { routes } from "@/routes";
 import { cn } from "@/utils/css/cn";
 
