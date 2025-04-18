@@ -18,9 +18,9 @@ import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { routes } from "@/routes";
 import { tailwindFullConfig } from "@/tailwind-config";
 import { cn } from "@/utils/css/cn";
+import { loopFocus } from "@/utils/dom/utils";
 
 import { Container } from "../ui/styled/container";
-import { LoopFocusContainer } from "../ui/unstyled/loop-focus-container";
 
 function ActiveNavLink(props: ComponentProps<typeof Link>) {
   const { href, ...restProps } = props;
@@ -47,8 +47,15 @@ const routesWithoutHome = Object.values(routes).filter(
 const hederBorderBottomWidth = tailwindFullConfig.theme.spacing.px;
 
 export function Header() {
+  const headerRef = useRef<HTMLDivElement>(null);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useKeydown((event) => {
+    if (isMobileMenuOpen) {
+      loopFocus(event, headerRef.current);
+    }
+  });
 
   useMediaQuery(
     `(min-width: ${tailwindFullConfig.theme.screens.sm})`,
@@ -95,7 +102,7 @@ export function Header() {
   };
 
   return (
-    <LoopFocusContainer as="header" className="sticky top-0 z-header">
+    <header ref={headerRef} className="sticky top-0 z-header">
       <div
         style={
           {
@@ -187,6 +194,6 @@ export function Header() {
           ))}
         </ul>
       </div>
-    </LoopFocusContainer>
+    </header>
   );
 }

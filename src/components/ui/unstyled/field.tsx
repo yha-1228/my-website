@@ -1,9 +1,7 @@
 import {
   type ComponentProps,
-  createContext,
   type ElementType,
   type PropsWithChildren,
-  useContext,
   useEffect,
   useId,
   useState,
@@ -14,7 +12,7 @@ import {
   type ComponentPropsWithAs,
   type ForwardedElementRef,
 } from "@/types/react";
-import { fixedForwardRef } from "@/utils/react";
+import { fixedForwardRef, getContextAndProvider } from "@/utils/react";
 
 // internal
 // ----------------------------------------
@@ -64,21 +62,14 @@ function useField(props: UseFieldProps) {
   return { whenError, labelProps, fieldProps, descriptionProps, errorProps };
 }
 
-const FieldContext = createContext<ReturnType<typeof useField> | null>(null);
-
-function useFieldContext() {
-  const value = useContext(FieldContext);
-  if (!value) throw new Error(`useContext must be inside <Context.Provider />`);
-  return value;
-}
+const [useFieldContext, FieldContextProvider] =
+  getContextAndProvider<ReturnType<typeof useField>>();
 
 function FieldProvider(props: PropsWithChildren<UseFieldProps>) {
   const { children, ...restProps } = props;
   const value = useField(restProps);
 
-  return (
-    <FieldContext.Provider value={value}>{children}</FieldContext.Provider>
-  );
+  return <FieldContextProvider value={value}>{children}</FieldContextProvider>;
 }
 
 // ---
