@@ -32,10 +32,10 @@ export interface FooterProps {
 
 export function Footer({ className }: FooterProps) {
   return (
-    <footer className={cn("pb-14 pt-10", className)}>
+    <footer className={cn("pt-10 pb-14", className)}>
       <Container>
         <div className="flex justify-between">
-          <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-x-4 md:space-y-0">
+          <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-y-0 md:space-x-4">
             {myExternalLinks.map((link) => (
               <li key={link.href}>
                 <ExternalTextLink className="font-bold" href={link.href}>
@@ -44,7 +44,7 @@ export function Footer({ className }: FooterProps) {
               </li>
             ))}
           </ul>
-          <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-x-4 md:space-y-0">
+          <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-y-0 md:space-x-4">
             {Object.values(routes).map((route) => (
               <li key={route.href}>
                 <TextLink className="font-bold" href={route.href}>
@@ -54,8 +54,8 @@ export function Footer({ className }: FooterProps) {
             ))}
           </ul>
         </div>
-        <div className="mt-5 border-t border-solid border-base-foreground/20">
-          <p className="pt-5 text-base-foreground/70">{COPYRIGHT_TEXT}</p>
+        <div className="border-base-foreground/20 mt-5 border-t border-solid">
+          <p className="text-base-foreground/70 pt-5">{COPYRIGHT_TEXT}</p>
         </div>
       </Container>
     </footer>

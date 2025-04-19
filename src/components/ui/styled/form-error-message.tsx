@@ -11,7 +11,7 @@ const FormErrorMessage = forwardRef<
 
   return (
     <p
-      className={cn("flex items-center text-sm text-danger-500", className)}
+      className={cn("text-danger-500 flex items-center text-sm", className)}
       {...restProps}
       ref={ref}
     >

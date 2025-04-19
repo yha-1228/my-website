@@ -12,7 +12,6 @@ import {
   type SkillWord,
   skillWords,
 } from "@/data/skills";
-import { tailwindFullConfig } from "@/tailwind-config";
 import { cn } from "@/utils/css/cn";
 
 interface SkillDetailCardProps {
@@ -35,28 +34,28 @@ function SkillDetailCard(props: SkillDetailCardProps) {
     <div
       className={cn(
         "w-full rounded-lg px-5 lg:px-6",
-        "bg-white shadow-card",
+        "shadow-card bg-white",
         "border-2 border-solid",
         accent ? "border-primary-600" : "border-white",
         className,
       )}
     >
-      <div className="pb-3 pt-4">
+      <div className="pt-4 pb-3">
         <h4 className="font-bold">{heading}</h4>
       </div>
       <div
         className={cn(
-          "space-y-5 pb-8 pt-5",
+          "space-y-5 pt-5 pb-8",
           "text-base-foreground",
-          "border-t border-solid border-t-base-light-300",
+          "border-t-base-light-300 border-t border-solid",
         )}
       >
-        <ul className="mt-2 space-y-2.5 text-sm text-base-foreground-weak">
+        <ul className="text-base-foreground-weak mt-2 space-y-2.5 text-sm">
           {items.map((item) => (
             <li
               key={item.text}
               className={cn(
-                "bg-[length:18px_18px] bg-[0_0.12rem] bg-no-repeat ps-[1.75rem] leading-[1.6]",
+                "bg-[0_0.12rem] bg-[length:18px_18px] bg-no-repeat ps-[1.75rem] leading-[1.6]",
                 rankIconClassNameMap[item.rank],
               )}
             >
@@ -83,7 +82,7 @@ export function Skills() {
       <div className="bg-base-light-100 py-14">
         <Container>
           <Heading1>言語/FW等</Heading1>
-          <div className="mt-8 space-y-3 sm:flex sm:space-x-8 sm:space-y-0 sm:[&>*]:w-1/3">
+          <div className="mt-8 space-y-3 sm:flex sm:space-y-0 sm:space-x-8 sm:*:w-1/3">
             {CATEGORIES.map((category) => {
               const filteredSkillWordsByCategory = skillWords.filter(
                 (s) => s.category === category,
@@ -91,7 +90,7 @@ export function Skills() {
 
               return (
                 <section key={category} className="pt-2">
-                  <Heading2 className="mb-2 mt-1 text-2xl sm:mb-3">
+                  <Heading2 className="mt-1 mb-2 text-2xl sm:mb-3">
                     {skillWordCategoryHeadingMap[category]}
                   </Heading2>
 
@@ -103,7 +102,7 @@ export function Skills() {
                           lang="en"
                           style={{
                             background: s.strong
-                              ? `linear-gradient(transparent 75%, ${tailwindFullConfig.theme.colors.accent} 75%)`
+                              ? `linear-gradient(transparent 75%, var(--color-accent) 75%)`
                               : undefined,
                           }}
                           className={cn(
@@ -126,14 +125,14 @@ export function Skills() {
 
       <div className="bg-base-light-100 pt-3">
         <Container>
-          <hr className="h-px w-full border-0 bg-base-light-400" />
+          <hr className="bg-base-light-400 h-px w-full border-0" />
         </Container>
       </div>
 
       <div className="bg-base-light-100 py-14">
         <Container>
           <Heading1>提供可能な業務</Heading1>
-          <ul className="mt-8 space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:gap-x-[16px] lg:gap-y-[20px] lg:space-y-0">
+          <ul className="mt-8 space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:space-y-0 lg:gap-x-[16px] lg:gap-y-[20px]">
             {skillDetails.map((skillDetail, idx) => (
               <li
                 key={skillDetail.category}

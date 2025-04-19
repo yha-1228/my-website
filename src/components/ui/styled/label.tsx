@@ -22,7 +22,7 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
       {required ? (
         <>
           <span>{children}</span>
-          <span className="ml-1.5 rounded-sm bg-danger-600 px-[0.35rem] py-[0.05rem] text-xs text-white">
+          <span className="bg-danger-600 ml-1.5 rounded-xs px-[0.35rem] py-[0.05rem] text-xs text-white">
             必須
           </span>
         </>

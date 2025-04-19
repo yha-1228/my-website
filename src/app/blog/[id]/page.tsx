@@ -34,7 +34,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <div className="py-14">
-      <Container className="md:max-w-screen-md">
+      <Container className="md:max-w-(--breakpoint-md)">
         <TextLink
           href={routes.blog.href}
           className="inline-flex items-center space-x-1"
@@ -46,20 +46,20 @@ export default async function Page({ params }: Props) {
         <article className="mt-8">
           <header>
             <Heading1>{blogDetail.title}</Heading1>
-            <p className="mt-4 text-sm font-normal text-base-foreground-weak">
+            <p className="text-base-foreground-weak mt-4 text-sm font-normal">
               {dateFormat("yyyy/MM/dd HH:mm:ss", blogDetail.publishedAt)} に投稿
             </p>
           </header>
-          <div className="mt-8 border-t border-solid border-t-base-light-300 py-5 md:py-6">
+          <div className="border-t-base-light-300 mt-8 border-t border-solid py-5 md:py-6">
             <Tag>{blogDetail.tag.tagName}</Tag>
             <div
               className={cn(
                 "pt-4",
-                "[&>h2]:mb-6 [&>h2]:mt-12 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:leading-tight",
+                "[&>h2]:mt-12 [&>h2]:mb-6 [&>h2]:text-2xl [&>h2]:leading-tight [&>h2]:font-bold",
                 "[&>p]:my-5",
                 "[&>ul]:pl-9",
                 "[&>ul>li]:list-disc",
-                "[&>hr]:my-6 [&>hr]:border-y-2 [&>hr]:text-base-light-200",
+                "[&>hr]:text-base-light-200 [&>hr]:my-6 [&>hr]:border-y-2",
               )}
               dangerouslySetInnerHTML={{
                 __html: blogDetail.body,

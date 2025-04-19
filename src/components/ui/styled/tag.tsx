@@ -9,7 +9,7 @@ const Tag = forwardRef<HTMLDivElement, ComponentPropsWithRef<"div">>(
     return (
       <div
         className={cn(
-          "inline-block rounded-full bg-base-light-100 px-3.5 py-0.5 text-sm text-base-foreground-weak",
+          "bg-base-light-100 text-base-foreground-weak inline-block rounded-full px-3.5 py-0.5 text-sm",
           className,
         )}
         {...restProps}

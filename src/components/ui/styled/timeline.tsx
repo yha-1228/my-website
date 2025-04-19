@@ -18,23 +18,23 @@ export function Timeline({ items }: TimelineProps) {
           {/* Dot + Axis */}
           <div className="flex shrink-0 flex-col items-center">
             {/* Dot */}
-            <div className="size-4 rounded-full border-4 border-solid border-primary-600 bg-white" />
+            <div className="border-primary-600 size-4 rounded-full border-4 border-solid bg-white" />
             {/* Axis */}
-            <div className="h-full w-0.5 bg-primary-600" />
+            <div className="bg-primary-600 h-full w-0.5" />
           </div>
 
           {/* Body */}
           <div className="ml-5 w-full pb-10">
-            <div className="font-semibold leading-none text-primary-600">
+            <div className="text-primary-600 leading-none font-semibold">
               {item.point}
             </div>
 
-            <div className="mt-4 border-t border-solid border-t-base-light-300 pt-2">
-              <div className="py-1 text-xl font-bold leading-snug">
+            <div className="border-t-base-light-300 mt-4 border-t border-solid pt-2">
+              <div className="py-1 text-xl leading-snug font-bold">
                 {item.heading}
               </div>
               {!!item.content && (
-                <div className="mt-3 space-y-2.5 text-sm leading-[1.65] text-base-foreground-weak">
+                <div className="text-base-foreground-weak mt-3 space-y-2.5 text-sm leading-[1.65]">
                   {item.content}
                 </div>
               )}

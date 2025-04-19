@@ -7,9 +7,9 @@ import { routes } from "@/routes";
 
 export function HeroHeader() {
   return (
-    <div className="pb-12 pt-10">
+    <div className="pt-10 pb-12">
       <Container>
-        <h1 className="text-2xl font-bold leading-[1.35] lg:text-4xl">
+        <h1 className="text-2xl leading-[1.35] font-bold lg:text-4xl">
           ユーザーフレンドリーで堅牢なWebを開発します。
         </h1>
         <div className="mt-3.5">

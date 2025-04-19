@@ -11,8 +11,8 @@ import { BsArrowUpShort } from "react-icons/bs";
 
 import { Button } from "@/components/ui/styled/button";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { tailwindFullConfig } from "@/tailwind-config";
 import { cn } from "@/utils/css/cn";
+import { getCSSVar } from "@/utils/css/get-css-var";
 import { remToPx } from "@/utils/css/unit";
 import { sleep } from "@/utils/sleep";
 
@@ -31,7 +31,7 @@ function useScrollToTopButton() {
         setNotInView(!entry.isIntersecting);
       }
     },
-    { rootMargin: `-${remToPx(tailwindFullConfig.theme.height.header, true)}` },
+    { rootMargin: `-${remToPx(getCSSVar("--height-header"), true)}` },
   );
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = async (event) => {
@@ -65,7 +65,7 @@ export function MainArea({ children }: { children: ReactNode }) {
         {/* 以下はメインエリアの15%を計測するための要素 ※非表示 */}
         <div
           ref={scrollToTopButton.refToIntersect}
-          className="absolute top-0 z-hide h-[calc(calc(100svh-theme(height.header))*0.15)] w-full"
+          className="z-hide absolute top-0 h-[calc(calc(100svh-(var(--height-header)))*0.15)] w-full"
           // デバッグのとき: 下記を有効にする
           // style={{ backgroundColor: "rgb(0,0,0,0.1)" }}
         />
@@ -80,7 +80,7 @@ export function MainArea({ children }: { children: ReactNode }) {
           aria-label="トップに戻る"
           data-hidden={scrollToTopButton.visible ? undefined : "true"}
           className={cn(
-            "fixed bottom-5 right-6 !size-14 rounded-full p-0 text-3xl shadow-lg md:bottom-9",
+            "fixed right-6 bottom-5 size-14! rounded-full p-0 text-3xl shadow-lg md:bottom-9",
             "[transition:opacity_200ms,background-color_200ms,transform_200ms]",
             "data-[hidden='true']:pointer-events-none data-[hidden='true']:opacity-0",
             "hover:-translate-y-1",

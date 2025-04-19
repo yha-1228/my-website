@@ -1,14 +1,99 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --root-base-line-height: 1.75;
 }
 
+@theme inline {
+  --breakpoint-*: initial;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+
+  --color-*: initial;
+  --color-primary-50: #eaf6ff;
+  --color-primary-100: #d8eeff;
+  --color-primary-200: #b9dcff;
+  --color-primary-300: #8ec4ff;
+  --color-primary-400: #629eff;
+  --color-primary-500: #3e77ff;
+  --color-primary-600: #1c4cff;
+  --color-primary-700: #1e48f1;
+  --color-primary-800: #1237c1;
+  --color-primary-900: #183697;
+  --color-primary-950: #0e1d58;
+  --color-danger-50: #fef2f2;
+  --color-danger-100: #fee2e2;
+  --color-danger-200: #fecaca;
+  --color-danger-300: #fca5a5;
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #dc2626;
+  --color-danger-700: #b91c1c;
+  --color-danger-800: #991b1b;
+  --color-danger-900: #7f1d1d;
+  --color-danger-950: #450a0a;
+  --color-accent: #fde047;
+  --color-base-foreground: #1f2937;
+  --color-base-foreground-weak: #6b7280;
+  --color-base-light-400: #9ca3af;
+  --color-base-light-300: #d1d5db;
+  --color-base-light-200: #e5e7eb;
+  --color-base-light-100: #f3f4f6;
+  --color-base-light-50: #f9fafb;
+  --color-white: #fff;
+
+  --font-base:
+    var(--font-inter), -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: var(--root-base-line-height);
+  --text-sm: 0.875rem;
+  --text-sm--line-height: var(--root-base-line-height);
+  --text-base: 1rem;
+  --text-base--line-height: var(--root-base-line-height);
+  --text-lg: 1.125rem;
+  --text-lg--line-height: var(--root-base-line-height);
+  --text-xl: 1.25rem;
+  --text-xl--line-height: var(--root-base-line-height);
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: var(--root-base-line-height);
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: var(--root-base-line-height);
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: var(--root-base-line-height);
+  --text-5xl: 3rem;
+  --text-5xl--line-height: var(--root-base-line-height);
+  --text-6xl: 3.75rem;
+  --text-6xl--line-height: var(--root-base-line-height);
+  --text-7xl: 4.5rem;
+  --text-7xl--line-height: var(--root-base-line-height);
+  --text-8xl: 6rem;
+  --text-8xl--line-height: var(--root-base-line-height);
+  --text-9xl: 8rem;
+  --text-9xl--line-height: var(--root-base-line-height);
+
+  --shadow-card: 0px 2px 25px -15px rgba(0, 0, 0, 0.2);
+  --shadow-wide: 0 30px 60px rgba(0, 0, 0, 0.12);
+
+  --z-index-hide: -9999;
+  --z-index-header: 9999;
+
+  --height-header: 4rem;
+}
+
+/* https://tailwindcss.com/docs/upgrade-guide#buttons-use-the-default-cursor */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 body {
-  background-color: theme(colors.white);
-  font-family: theme(fontFamily.base);
-  color: theme(colors.base.foreground);
+  background-color: var(--color-white);
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-base-foreground);
   line-height: var(--root-base-line-height);
 }
