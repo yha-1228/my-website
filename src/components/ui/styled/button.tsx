@@ -34,7 +34,6 @@ function createBaseClassName(variant: ButtonVariant) {
     outline: cn(
       "border border-[currentColor] text-primary-600 bg-white",
       "hover:bg-primary-50",
-      "active:bg-primary-50/50",
     ),
   } as const satisfies Record<ButtonVariant, string>;
 
