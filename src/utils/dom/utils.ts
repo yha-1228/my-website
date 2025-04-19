@@ -1,11 +1,14 @@
 /**
- * 指定した要素の配下にある`button`, `a`の配列を検索する。
+ * 指定した要素の配下にあるフォーカス可能な要素の配列を取得する。
  */
 function findFocusableElements(parentElement: HTMLElement) {
   return Array.from(
-    parentElement.querySelectorAll<HTMLAnchorElement | HTMLButtonElement>(
-      "a, button",
-    ),
+    parentElement.querySelectorAll<
+      | HTMLAnchorElement
+      | HTMLButtonElement
+      | HTMLInputElement
+      | HTMLTextAreaElement
+    >("a, button, input, textarea"),
   );
 }
 
@@ -19,12 +22,12 @@ function loopFocus(event: KeyboardEvent, parentElement: HTMLElement | null) {
     const focusableElements = findFocusableElements(parentElement);
     if (focusableElements.length === 0) return;
 
-    const nextFocusIndex = focusableElements.findIndex(
+    const activeFocusIndex = focusableElements.findIndex(
       (element) => element === document.activeElement,
     );
 
     // 最後から進もうとしたら、最初に飛ばす
-    if (!event.shiftKey && nextFocusIndex === focusableElements.length - 1) {
+    if (!event.shiftKey && activeFocusIndex === focusableElements.length - 1) {
       event.preventDefault();
 
       const nextFocusElement = focusableElements[0];
@@ -33,7 +36,7 @@ function loopFocus(event: KeyboardEvent, parentElement: HTMLElement | null) {
     }
 
     // 最初から戻ろうとしたら、最後に飛ばす
-    if (event.shiftKey && nextFocusIndex === 0) {
+    if (event.shiftKey && activeFocusIndex === 0) {
       event.preventDefault();
 
       const nextFocusElement = focusableElements.at(-1);
