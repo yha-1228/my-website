@@ -18,7 +18,6 @@ import { useOnRouteChange } from "@/hooks/use-on-route-change";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { routes } from "@/routes";
 import { cn } from "@/utils/css/cn";
-import { getCSSVar } from "@/utils/css/get-css-var";
 import { loopFocus } from "@/utils/dom/utils";
 
 import { Container } from "../ui/styled/container";
@@ -58,7 +57,7 @@ export function Header() {
     }
   });
 
-  useMediaQuery(`(min-width: ${getCSSVar("--breakpoint-sm")})`, (event) => {
+  useMediaQuery(`(min-width: var(--breakpoint-sm))`, (event) => {
     if (isMobileMenuOpen) {
       if (event.matches) {
         setIsMobileMenuOpen(false);

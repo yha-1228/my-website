@@ -11,6 +11,7 @@ import { BsArrowUpShort } from "react-icons/bs";
 
 import { Button } from "@/components/ui/styled/button";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
+import { clientOnly } from "@/lib/next/helpers";
 import { cn } from "@/utils/css/cn";
 import { getCSSVar } from "@/utils/css/get-css-var";
 import { remToPx } from "@/utils/css/unit";
@@ -31,7 +32,9 @@ function useScrollToTopButton() {
         setNotInView(!entry.isIntersecting);
       }
     },
-    { rootMargin: `-${remToPx(getCSSVar("--height-header"), true)}` },
+    {
+      rootMargin: `-${remToPx(clientOnly(getCSSVar, "", "--height-header"), true)}`,
+    },
   );
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = async (event) => {
