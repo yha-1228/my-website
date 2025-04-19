@@ -1,4 +1,4 @@
-import { type ComponentPropsWithRef, forwardRef } from "react";
+import { type ComponentPropsWithRef } from "react";
 
 import { cn } from "@/utils/css/cn";
 
@@ -22,7 +22,7 @@ const baseClassName = cn(
 
 interface InputProps extends ComponentPropsWithRef<"input">, BaseProps {}
 
-const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+function Input(props: InputProps) {
   const { invalid, className, ...restProps } = props;
 
   return (
@@ -30,33 +30,25 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       data-invalid={invalid ? "true" : undefined}
       className={cn("h-10", baseClassName, className)}
       {...restProps}
-      ref={ref}
     />
   );
-});
-
-Input.displayName = "Input";
+}
 
 // ----------------------------------------
 
 interface TextareaProps extends ComponentPropsWithRef<"textarea">, BaseProps {}
 
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  (props, ref) => {
-    const { invalid, className, ...restProps } = props;
+function Textarea(props: TextareaProps) {
+  const { invalid, className, ...restProps } = props;
 
-    return (
-      <textarea
-        data-invalid={invalid ? "true" : undefined}
-        className={cn(baseClassName, "block py-2.5 leading-normal", className)}
-        {...restProps}
-        ref={ref}
-      />
-    );
-  },
-);
-
-Textarea.displayName = "Textarea";
+  return (
+    <textarea
+      data-invalid={invalid ? "true" : undefined}
+      className={cn(baseClassName, "block py-2.5 leading-normal", className)}
+      {...restProps}
+    />
+  );
+}
 
 // ----------------------------------------
 
@@ -66,28 +58,23 @@ interface InputLengthCounterProps
   maxLength: number;
 }
 
-const InputLengthCounter = forwardRef<HTMLSpanElement, InputLengthCounterProps>(
-  (props, ref) => {
-    const { currentLength, maxLength, className, ...restProps } = props;
+function InputLengthCounter(props: InputLengthCounterProps) {
+  const { currentLength, maxLength, className, ...restProps } = props;
 
-    const isError = currentLength > maxLength;
+  const isError = currentLength > maxLength;
 
-    return (
-      <span
-        data-error={isError ? "true" : undefined}
-        className={cn("data-[error='true']:text-danger-500", className)}
-        {...restProps}
-        ref={ref}
-      >
-        {isError
-          ? `${maxLength - currentLength}`
-          : `${currentLength} / ${maxLength}`}
-      </span>
-    );
-  },
-);
-
-InputLengthCounter.displayName = "InputLengthCounter";
+  return (
+    <span
+      data-error={isError ? "true" : undefined}
+      className={cn("data-[error='true']:text-danger-500", className)}
+      {...restProps}
+    >
+      {isError
+        ? `${maxLength - currentLength}`
+        : `${currentLength} / ${maxLength}`}
+    </span>
+  );
+}
 
 // ----------------------------------------
 

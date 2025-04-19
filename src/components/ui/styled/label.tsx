@@ -1,4 +1,4 @@
-import { type ComponentPropsWithRef, forwardRef } from "react";
+import { type ComponentPropsWithRef } from "react";
 
 import { cn } from "@/utils/css/cn";
 
@@ -6,7 +6,7 @@ interface LabelProps extends ComponentPropsWithRef<"label"> {
   required?: boolean;
 }
 
-const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
+function Label(props: LabelProps) {
   const { className, children, required, ...restProps } = props;
 
   return (
@@ -17,7 +17,6 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
         className,
       )}
       {...restProps}
-      ref={ref}
     >
       {required ? (
         <>
@@ -31,8 +30,6 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
       )}
     </label>
   );
-});
-
-Label.displayName = "LabelProps";
+}
 
 export { Label, type LabelProps };

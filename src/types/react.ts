@@ -1,12 +1,8 @@
 import {
   type ComponentPropsWithRef,
   type DetailedHTMLProps,
-  type ElementRef,
   type ElementType,
-  type ForwardedRef,
   type HTMLAttributes,
-  type ReactNode,
-  type RefAttributes,
 } from "react";
 
 import { type DistributiveOmit } from "./utils";
@@ -29,15 +25,6 @@ export type ComponentPropsWithAs<
   ComponentPropsWithRef<ElementType extends TAs ? TDefaultAs : TAs>,
   "as"
 >;
-
-export type ForwardedElementRef<T extends ElementType> = ForwardedRef<
-  ElementRef<T>
->;
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type FixedForwardRef = <T, P = {}>(
-  render: (props: P, ref: ForwardedRef<T>) => ReactNode,
-) => (props: P & RefAttributes<T>) => ReactNode;
 
 export type HTMLElementHasNameAndValue =
   | HTMLButtonElement
