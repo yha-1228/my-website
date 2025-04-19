@@ -2,20 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* TailwindのリセットCSSを上書きする */
-/* https://unpkg.com/tailwindcss@3.3.3/src/css/preflight.css */
-
 :root {
-  --base-line-height: 1.75;
-}
-
-html {
-  line-height: var(--base-line-height);
+  --root-base-line-height: 1.75;
 }
 
 body {
-  background-color: white;
+  background-color: theme(colors.white);
   font-family: theme(fontFamily.base);
   color: theme(colors.base.foreground);
-  line-height: inherit;
+  line-height: var(--root-base-line-height);
 }

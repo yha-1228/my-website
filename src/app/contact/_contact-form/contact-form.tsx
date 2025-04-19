@@ -308,7 +308,7 @@ export function ContactForm() {
 
         <Alert
           className={cn(
-            "mt-9 mb-3",
+            "mb-3 mt-9",
             Object.keys(errors).length > 0 && formState.bottomErrorVisible
               ? "block"
               : "hidden",

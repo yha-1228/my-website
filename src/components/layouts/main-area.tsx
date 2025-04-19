@@ -80,9 +80,9 @@ export function MainArea({ children }: { children: ReactNode }) {
           aria-label="トップに戻る"
           data-hidden={scrollToTopButton.visible ? undefined : "true"}
           className={cn(
-            "shadow-lg !size-14 fixed bottom-5 md:bottom-9 text-3xl right-6 rounded-full p-0",
+            "fixed bottom-5 right-6 !size-14 rounded-full p-0 text-3xl shadow-lg md:bottom-9",
             "[transition:opacity_200ms,background-color_200ms,transform_200ms]",
-            "data-[hidden='true']:opacity-0 data-[hidden='true']:pointer-events-none",
+            "data-[hidden='true']:pointer-events-none data-[hidden='true']:opacity-0",
             "hover:-translate-y-1",
           )}
         >

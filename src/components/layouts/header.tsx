@@ -181,7 +181,7 @@ export function Header() {
               <ActiveNavLink
                 href={route.href}
                 className={cn(
-                  "flex items-center font-bold justify-between py-3",
+                  "flex items-center justify-between py-3 font-bold",
                   "hover:relative hover:bg-white hover:before:absolute hover:before:h-full hover:before:w-1 hover:before:bg-primary-600/20 hover:before:content-['']",
                   "data-[active]:relative data-[active]:bg-white data-[active]:before:absolute data-[active]:before:h-full data-[active]:before:w-1 data-[active]:before:bg-primary-600 data-[active]:before:content-['']",
                 )}
