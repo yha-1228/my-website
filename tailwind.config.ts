@@ -59,22 +59,44 @@ export default {
           "sans-serif",
         ],
       },
-      // line-heightだけ共通の値で上書きする
-      // 注: 1.75 = var(--base-line-height)
       fontSize: {
-        xs: [defaultTheme.fontSize.xs[0], "1.75"],
-        sm: [defaultTheme.fontSize.sm[0], "1.75"],
-        base: [defaultTheme.fontSize.base[0], "1.75"],
-        lg: [defaultTheme.fontSize.lg[0], "1.75"],
-        xl: [defaultTheme.fontSize.xl[0], "1.75"],
-        "2xl": [defaultTheme.fontSize["2xl"][0], "1.75"],
-        "3xl": [defaultTheme.fontSize["3xl"][0], "1.75"],
-        "4xl": [defaultTheme.fontSize["4xl"][0], "1.75"],
-        "5xl": [defaultTheme.fontSize["5xl"][0], "1.75"],
-        "6xl": [defaultTheme.fontSize["6xl"][0], "1.75"],
-        "7xl": [defaultTheme.fontSize["7xl"][0], "1.75"],
-        "8xl": [defaultTheme.fontSize["8xl"][0], "1.75"],
-        "9xl": [defaultTheme.fontSize["9xl"][0], "1.75"],
+        xs: [defaultTheme.fontSize.xs[0], "var(--root-base-line-height)"],
+        sm: [defaultTheme.fontSize.sm[0], "var(--root-base-line-height)"],
+        base: [defaultTheme.fontSize.base[0], "var(--root-base-line-height)"],
+        lg: [defaultTheme.fontSize.lg[0], "var(--root-base-line-height)"],
+        xl: [defaultTheme.fontSize.xl[0], "var(--root-base-line-height)"],
+        "2xl": [
+          defaultTheme.fontSize["2xl"][0],
+          "var(--root-base-line-height)",
+        ],
+        "3xl": [
+          defaultTheme.fontSize["3xl"][0],
+          "var(--root-base-line-height)",
+        ],
+        "4xl": [
+          defaultTheme.fontSize["4xl"][0],
+          "var(--root-base-line-height)",
+        ],
+        "5xl": [
+          defaultTheme.fontSize["5xl"][0],
+          "var(--root-base-line-height)",
+        ],
+        "6xl": [
+          defaultTheme.fontSize["6xl"][0],
+          "var(--root-base-line-height)",
+        ],
+        "7xl": [
+          defaultTheme.fontSize["7xl"][0],
+          "var(--root-base-line-height)",
+        ],
+        "8xl": [
+          defaultTheme.fontSize["8xl"][0],
+          "var(--root-base-line-height)",
+        ],
+        "9xl": [
+          defaultTheme.fontSize["9xl"][0],
+          "var(--root-base-line-height)",
+        ],
       },
       boxShadow: {
         card: "0px 2px 25px -15px rgba(0, 0, 0, 0.2)",
