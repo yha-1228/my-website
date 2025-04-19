@@ -103,8 +103,7 @@ export function Skills() {
                           lang="en"
                           style={{
                             background: s.strong
-                              ? // @ts-expect-error 拡張したtailwind config
-                                `linear-gradient(transparent 75%, ${tailwindFullConfig.theme.colors.accent} 75%)`
+                              ? `linear-gradient(transparent 75%, ${tailwindFullConfig.theme.colors.accent} 75%)`
                               : undefined,
                           }}
                           className={cn(
