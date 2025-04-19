@@ -45,7 +45,7 @@ const routesWithoutHome = Object.values(routes).filter(
   (route) => route.href !== "/",
 );
 
-const hederBorderBottomWidth = tailwindFullConfig.theme.spacing.px;
+const hederBorderBottomWidth = "1px";
 
 export function Header() {
   const headerRef = useRef<HTMLDivElement>(null);
