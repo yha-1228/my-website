@@ -2,55 +2,6 @@ import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
 import defaultTheme from "tailwindcss/defaultTheme";
 
-// @see https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/config.full.js
-
-// --------------------------------------------------
-
-/**
- * `Array.map`のオブジェクト版
- *
- * @see `src/utils/object/map-object.ts` (コピー)
- */
-function mapObject<T extends object, U>(
-  object: T,
-  condition: (value: T[keyof T], key: keyof T) => U,
-) {
-  const newObject: { [k in keyof T]?: U } = {};
-
-  for (const key in object) {
-    if (Object.prototype.hasOwnProperty.call(object, key)) {
-      const value = object[key];
-      newObject[key] = condition(value, key);
-    }
-  }
-
-  return newObject as { [k in keyof T]: U };
-}
-
-// --------------------------------------------------
-
-/**
- * var(--base-line-height)の値と合わせる
- */
-const baseLineHeight = 1.75;
-
-const myColors = {
-  myBlue: {
-    50: "#eaf6ff",
-    100: "#d8eeff",
-    200: "#b9dcff",
-    300: "#8ec4ff",
-    400: "#629eff",
-    500: "#3e77ff",
-    600: "#1c4cff",
-    700: "#1e48f1",
-    800: "#1237c1",
-    900: "#183697",
-    950: "#0e1d58",
-  },
-};
-
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -59,13 +10,24 @@ export default {
   ],
   theme: {
     screens: {
-      // https://tailwindcss.com/docs/screens
       sm: "640px",
       md: "768px",
       lg: "1024px",
     },
     colors: {
-      primary: myColors.myBlue,
+      primary: {
+        50: "#eaf6ff",
+        100: "#d8eeff",
+        200: "#b9dcff",
+        300: "#8ec4ff",
+        400: "#629eff",
+        500: "#3e77ff",
+        600: "#1c4cff",
+        700: "#1e48f1",
+        800: "#1237c1",
+        900: "#183697",
+        950: "#0e1d58",
+      },
       danger: colors.red,
       accent: "#fde047",
       base: {
@@ -77,8 +39,7 @@ export default {
         "light-100": colors.gray[100],
         "light-50": colors.gray[50],
       },
-      white: colors.white,
-      transparent: colors.transparent,
+      white: "#fff",
     },
 
     extend: {
@@ -99,13 +60,21 @@ export default {
         ],
       },
       // line-heightだけ共通の値で上書きする
-      // @ts-expect-error TODO: あとで直す
-      fontSize: mapObject(defaultTheme.fontSize, (fontSizeConfig) => {
-        return [fontSizeConfig[0], { lineHeight: baseLineHeight.toString() }];
-      }),
-      // @see https://tailwindcss.com/docs/line-height
-      lineHeight: {
-        base: baseLineHeight.toString(),
+      // 注: 1.75 = var(--base-line-height)
+      fontSize: {
+        xs: [defaultTheme.fontSize.xs[0], "1.75"],
+        sm: [defaultTheme.fontSize.sm[0], "1.75"],
+        base: [defaultTheme.fontSize.base[0], "1.75"],
+        lg: [defaultTheme.fontSize.lg[0], "1.75"],
+        xl: [defaultTheme.fontSize.xl[0], "1.75"],
+        "2xl": [defaultTheme.fontSize["2xl"][0], "1.75"],
+        "3xl": [defaultTheme.fontSize["3xl"][0], "1.75"],
+        "4xl": [defaultTheme.fontSize["4xl"][0], "1.75"],
+        "5xl": [defaultTheme.fontSize["5xl"][0], "1.75"],
+        "6xl": [defaultTheme.fontSize["6xl"][0], "1.75"],
+        "7xl": [defaultTheme.fontSize["7xl"][0], "1.75"],
+        "8xl": [defaultTheme.fontSize["8xl"][0], "1.75"],
+        "9xl": [defaultTheme.fontSize["9xl"][0], "1.75"],
       },
       boxShadow: {
         card: "0px 2px 25px -15px rgba(0, 0, 0, 0.2)",
