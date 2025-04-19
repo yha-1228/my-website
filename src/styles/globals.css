@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: white;
+  background-color: theme(colors.white);
   font-family: theme(fontFamily.base);
   color: theme(colors.base.foreground);
   line-height: var(--root-base-line-height);
