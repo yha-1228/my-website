@@ -32,9 +32,9 @@ import { CONTACT_FORM_NAME } from "@/constants";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
-import { tailwindFullConfig } from "@/tailwind-config";
 import { type HTMLElementHasNameAndValue } from "@/types/react";
 import { cn } from "@/utils/css/cn";
+import { getCSSVar } from "@/utils/css/get-css-var";
 import { remToPx } from "@/utils/css/unit";
 import { scrollWithFocus } from "@/utils/dom/utils";
 import { entriesOf } from "@/utils/object/entries-of";
@@ -149,7 +149,7 @@ export function ContactForm() {
     const scrollToTop =
       window.scrollY +
       labelY -
-      remToPx(tailwindFullConfig.theme.height.header) -
+      remToPx(getCSSVar("--height-header")) -
       bufferMargin;
 
     scrollWithFocus({
@@ -184,7 +184,7 @@ export function ContactForm() {
     <div
       className={cn(
         // "mt-10",
-        "lg:rounded-xl lg:border lg:border-solid lg:border-base-light-200 lg:bg-white lg:px-10 lg:pb-11 lg:pt-8 lg:shadow-wide",
+        "lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11",
       )}
     >
       <form
@@ -196,7 +196,7 @@ export function ContactForm() {
       >
         <input type="hidden" name="form-name" value={CONTACT_FORM_NAME} />
         <div className="space-y-6">
-          <div className="space-y-6 md:flex md:space-x-4 md:space-y-0">
+          <div className="space-y-6 md:flex md:space-y-0 md:space-x-4">
             <FieldProvider
               whenError={showError("name", formState)}
               fieldId={createFieldId(id, "name")}
@@ -308,7 +308,7 @@ export function ContactForm() {
 
         <Alert
           className={cn(
-            "mb-3 mt-9",
+            "mt-9 mb-3",
             Object.keys(errors).length > 0 && formState.bottomErrorVisible
               ? "block"
               : "hidden",
@@ -319,7 +319,7 @@ export function ContactForm() {
           </div>
           <ul className="mt-2.5 space-y-0.5 sm:list-disc sm:space-y-0.5 sm:pl-4">
             {entriesOf(errors).map(([key, error]) => (
-              <li key={key} className="text-sm text-danger-600">
+              <li key={key} className="text-danger-600 text-sm">
                 <TextLink
                   href="/"
                   className="font-bold"

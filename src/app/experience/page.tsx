@@ -17,7 +17,7 @@ function experienceToTimelineItem(experience: Experience): TimelineItem {
   const heading = projectCompanyName ? (
     <>
       {title} <br />
-      <div className="mt-2 text-lg font-normal text-base-foreground">
+      <div className="text-base-foreground mt-2 text-lg font-normal">
         {projectCompanyName}
       </div>
     </>
@@ -35,7 +35,7 @@ function experienceToTimelineItem(experience: Experience): TimelineItem {
 export default function Page() {
   return (
     <div className="py-14">
-      <Container className="md:max-w-screen-md">
+      <Container className="md:max-w-(--breakpoint-md)">
         <section>
           <div className="pb-10 text-center">
             <Heading1>{routes.experience.label}</Heading1>
@@ -48,7 +48,7 @@ export default function Page() {
               >
                 <div>
                   <Heading2>{experiencesOverviewItem.company}</Heading2>
-                  <div className="mt-6 text-sm text-base-foreground-weak">
+                  <div className="text-base-foreground-weak mt-6 text-sm">
                     {experiencesOverviewItem.kikan}
                   </div>
                 </div>

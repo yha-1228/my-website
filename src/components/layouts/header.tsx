@@ -17,8 +17,8 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { useOnRouteChange } from "@/hooks/use-on-route-change";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { routes } from "@/routes";
-import { tailwindFullConfig } from "@/tailwind-config";
 import { cn } from "@/utils/css/cn";
+import { getCSSVar } from "@/utils/css/get-css-var";
 import { loopFocus } from "@/utils/dom/utils";
 
 import { Container } from "../ui/styled/container";
@@ -45,7 +45,7 @@ const routesWithoutHome = Object.values(routes).filter(
   (route) => route.href !== "/",
 );
 
-const hederBorderBottomWidth = tailwindFullConfig.theme.spacing.px;
+const hederBorderBottomWidth = "1px";
 
 export function Header() {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -58,16 +58,13 @@ export function Header() {
     }
   });
 
-  useMediaQuery(
-    `(min-width: ${tailwindFullConfig.theme.screens.sm})`,
-    (event) => {
-      if (isMobileMenuOpen) {
-        if (event.matches) {
-          setIsMobileMenuOpen(false);
-        }
+  useMediaQuery(`(min-width: ${getCSSVar("--breakpoint-sm")})`, (event) => {
+    if (isMobileMenuOpen) {
+      if (event.matches) {
+        setIsMobileMenuOpen(false);
       }
-    },
-  );
+    }
+  });
 
   useScrollLock({ enabled: isMobileMenuOpen });
 
@@ -101,20 +98,20 @@ export function Header() {
   };
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-header">
+    <header ref={headerRef} className="z-header sticky top-0">
       <div
         style={
           {
             "--header-border-bottom-width": hederBorderBottomWidth,
           } as CSSProperties
         }
-        className="relative h-header border-b-[length:var(--header-border-bottom-width)] border-solid border-b-base-light-300 bg-white"
+        className="border-b-base-light-300 relative h-(--height-header) border-b-[length:var(--header-border-bottom-width)] border-solid bg-white"
       >
         <Container>
-          <div className="relative flex h-[calc(theme(height.header)-var(--header-border-bottom-width))] items-center justify-between">
+          <div className="relative flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center justify-between">
             <Link
               href="/"
-              className="text-2xl font-bold transition-colors duration-200 ease-out hover:text-base-foreground-weak"
+              className="hover:text-base-foreground-weak text-2xl font-bold transition-colors duration-200 ease-out"
               onClick={handleHomeLinkClick}
             >
               Yuta Hasegawa
@@ -126,7 +123,7 @@ export function Header() {
               ref={mobileMenuButtonRef}
               className={cn(
                 "flex size-9 items-center justify-center sm:hidden",
-                "absolute -right-1.5 top-1/2 -translate-y-1/2",
+                "absolute top-1/2 -right-1.5 -translate-y-1/2",
               )}
               onClick={handleMobileMenuToggle}
               aria-label={
@@ -150,9 +147,9 @@ export function Header() {
                     <ActiveNavLink
                       href={route.href}
                       className={cn(
-                        "relative inline-flex h-[calc(theme(height.header)-var(--header-border-bottom-width))] items-center px-2.5 font-bold transition-colors duration-200 ease-out",
-                        "hover:before:absolute hover:before:bottom-0 hover:before:left-0 hover:before:h-1 hover:before:w-full hover:before:bg-primary-600/20 hover:before:content-['']",
-                        "data-[active]:before:absolute data-[active]:before:bottom-0 data-[active]:before:left-0 data-[active]:before:h-1 data-[active]:before:w-full data-[active]:before:bg-primary-600 data-[active]:before:content-['']",
+                        "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-2.5 font-bold transition-colors duration-200 ease-out",
+                        "hover:before:bg-primary-600/20 hover:before:absolute hover:before:bottom-0 hover:before:left-0 hover:before:h-1 hover:before:w-full hover:before:content-['']",
+                        "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-1 data-active:before:w-full data-active:before:content-['']",
                       )}
                     >
                       {route.label}
@@ -172,8 +169,8 @@ export function Header() {
             "sm:hidden",
             // height, visibilityを同時にtransitionで切り替えることで
             // 高さのアニメーションを適用しつつ、閉じているときにフォーカスも無効にする
-            "absolute left-0 top-[theme(height.header)] w-full overflow-y-hidden bg-base-light-100 transition-[height,visibility] duration-200 ease-out",
-            "invisible block h-0 data-[is-open]:visible data-[is-open]:h-[calc(100dvh-theme(height.header))]",
+            "bg-base-light-100 absolute top-(--height-header) left-0 w-full overflow-y-hidden transition-[height,visibility] duration-200 ease-out",
+            "invisible block h-0 data-is-open:visible data-is-open:h-[calc(100dvh-(var(--height-header)))]",
           )}
         >
           {routesWithoutHome.map((route) => (
@@ -182,8 +179,8 @@ export function Header() {
                 href={route.href}
                 className={cn(
                   "flex items-center justify-between py-3 font-bold",
-                  "hover:relative hover:bg-white hover:before:absolute hover:before:h-full hover:before:w-1 hover:before:bg-primary-600/20 hover:before:content-['']",
-                  "data-[active]:relative data-[active]:bg-white data-[active]:before:absolute data-[active]:before:h-full data-[active]:before:w-1 data-[active]:before:bg-primary-600 data-[active]:before:content-['']",
+                  "hover:before:bg-primary-600/20 hover:relative hover:bg-white hover:before:absolute hover:before:h-full hover:before:w-1 hover:before:content-['']",
+                  "data-active:before:bg-primary-600 data-active:relative data-active:bg-white data-active:before:absolute data-active:before:h-full data-active:before:w-1 data-active:before:content-['']",
                 )}
                 onClick={handleMobileNavLinkClick}
               >

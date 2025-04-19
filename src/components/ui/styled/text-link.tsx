@@ -13,7 +13,7 @@ import {
 } from "../unstyled/external-link";
 
 function createBaseClassName(withUnderline?: boolean) {
-  const common = cn("rounded-sm underline-offset-4");
+  const common = cn("rounded-xs underline-offset-4");
   const withUnderlineClass = withUnderline
     ? cn("underline hover:decoration-2")
     : cn("hover:underline hover:decoration-2");

@@ -22,7 +22,7 @@ function ErrorBoardView(props: ErrorBoardViewProps) {
   const { className, heading, detail, action } = props;
 
   return (
-    <div className={cn("pb-14 pt-8", className)}>
+    <div className={cn("pt-8 pb-14", className)}>
       <Container>
         <div className="space-y-10 text-center">
           <section className="space-y-3">

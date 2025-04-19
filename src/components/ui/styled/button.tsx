@@ -22,7 +22,7 @@ function createBaseClassName(variant: ButtonVariant) {
   const common = cn(
     "inline-flex items-center justify-center rounded-md px-5 py-2 font-bold",
     "transition-colors duration-200 ease-out",
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600/30",
+    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600/30",
   );
 
   const variantClassMap = {
@@ -60,7 +60,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     <button
       className={cn(
         createBaseClassName(variant),
-        "disabled:cursor-not-allowed disabled:bg-base-light-400",
+        "disabled:bg-base-light-400 disabled:cursor-not-allowed",
         className,
       )}
       {...restProps}
@@ -109,7 +109,7 @@ const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
       <Link
         className={cn(
           createBaseClassName(variant),
-          "aria-disabled:pointer-events-none aria-disabled:bg-base-light-400",
+          "aria-disabled:bg-base-light-400 aria-disabled:pointer-events-none",
           className,
         )}
         {...ariaProps}

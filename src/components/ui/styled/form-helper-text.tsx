@@ -10,7 +10,7 @@ const FormHelperText = forwardRef<
 
   return (
     <p
-      className={cn("text-sm text-base-foreground-weak", className)}
+      className={cn("text-base-foreground-weak text-sm", className)}
       {...restProps}
       ref={ref}
     />
