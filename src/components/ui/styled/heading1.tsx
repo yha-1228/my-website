@@ -1,24 +1,16 @@
-import React, { type ComponentPropsWithRef, forwardRef } from "react";
+import { type ComponentPropsWithRef } from "react";
 
 import { cn } from "@/utils/css/cn";
 
-const Heading1 = forwardRef<HTMLHeadingElement, ComponentPropsWithRef<"h1">>(
-  (props, ref) => {
-    const { className, ...restProps } = props;
+function Heading1(props: ComponentPropsWithRef<"h1">) {
+  const { className, ...restProps } = props;
 
-    return (
-      <h1
-        className={cn(
-          "text-3xl leading-tight font-bold sm:text-4xl",
-          className,
-        )}
-        {...restProps}
-        ref={ref}
-      />
-    );
-  },
-);
-
-Heading1.displayName = "Heading1";
+  return (
+    <h1
+      className={cn("text-3xl leading-tight font-bold sm:text-4xl", className)}
+      {...restProps}
+    />
+  );
+}
 
 export { Heading1 };

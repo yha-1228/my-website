@@ -96,7 +96,7 @@ function useMutation<
   TError extends Error = Error,
 >(props: UseMutationProps<TAction>): UseMutationReturn<TAction, TError> {
   const { fn, onSuccess, onError } = props;
-  const [state, dispatch] = useReducer<typeof reducer<TError>>(
+  const [state, dispatch] = useReducer(
     reducer,
     initialState as UseMutationState<TError>,
   );

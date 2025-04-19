@@ -7,12 +7,8 @@ import {
   useState,
 } from "react";
 
-import {
-  type CommonHTMLProps,
-  type ComponentPropsWithAs,
-  type ForwardedElementRef,
-} from "@/types/react";
-import { fixedForwardRef, getContextAndProvider } from "@/utils/react";
+import { type CommonHTMLProps, type ComponentPropsWithAs } from "@/types/react";
+import { getContextAndProvider } from "@/utils/react";
 
 // internal
 // ----------------------------------------
@@ -79,33 +75,23 @@ type FieldLabelProps<TAs extends ElementType> = Omit<
   "htmlFor"
 >;
 
-const FieldLabel = fixedForwardRef(
-  <TAs extends ElementType>(
-    props: FieldLabelProps<TAs>,
-    ref: ForwardedElementRef<TAs>,
-  ) => {
-    const { as: Comp = "label", ...restProps } = props;
-    const { labelProps } = useFieldContext();
+function FieldLabel<TAs extends ElementType>(props: FieldLabelProps<TAs>) {
+  const { as: Comp = "label", ...restProps } = props;
+  const { labelProps } = useFieldContext();
 
-    return <Comp {...labelProps} {...restProps} ref={ref} />;
-  },
-);
+  return <Comp {...labelProps} {...restProps} />;
+}
 
 // ---
 
 type FieldProps<TAs extends ElementType> = ComponentPropsWithAs<TAs, "input">;
 
-const Field = fixedForwardRef(
-  <TAs extends ElementType>(
-    props: FieldProps<TAs>,
-    ref: ForwardedElementRef<TAs>,
-  ) => {
-    const { as: Comp = "input", ...restProps } = props;
-    const { fieldProps } = useFieldContext();
+function Field<TAs extends ElementType>(props: FieldProps<TAs>) {
+  const { as: Comp = "input", ...restProps } = props;
+  const { fieldProps } = useFieldContext();
 
-    return <Comp {...fieldProps} {...restProps} ref={ref} />;
-  },
-);
+  return <Comp {...fieldProps} {...restProps} />;
+}
 
 // ---
 
@@ -114,17 +100,14 @@ type FieldDescriptionProps<TAs extends ElementType> = Omit<
   "id"
 >;
 
-const FieldDescription = fixedForwardRef(
-  <TAs extends ElementType>(
-    props: FieldDescriptionProps<TAs>,
-    ref: ForwardedElementRef<TAs>,
-  ) => {
-    const { as: Comp = "p", ...restProps } = props;
-    const { descriptionProps } = useFieldContext();
+function FieldDescription<TAs extends ElementType>(
+  props: FieldDescriptionProps<TAs>,
+) {
+  const { as: Comp = "p", ...restProps } = props;
+  const { descriptionProps } = useFieldContext();
 
-    return <Comp {...descriptionProps} {...restProps} ref={ref} />;
-  },
-);
+  return <Comp {...descriptionProps} {...restProps} />;
+}
 
 // ---
 
@@ -133,19 +116,14 @@ type FieldErrorProps<TAs extends ElementType> = Omit<
   "id"
 >;
 
-const FieldError = fixedForwardRef(
-  <TAs extends ElementType>(
-    props: FieldErrorProps<TAs>,
-    ref: ForwardedElementRef<TAs>,
-  ) => {
-    const { as: Comp = "p", ...restProps } = props;
-    const { whenError, errorProps } = useFieldContext();
+function FieldError<TAs extends ElementType>(props: FieldErrorProps<TAs>) {
+  const { as: Comp = "p", ...restProps } = props;
+  const { whenError, errorProps } = useFieldContext();
 
-    if (!whenError) return null;
+  if (!whenError) return null;
 
-    return <Comp {...errorProps} {...restProps} ref={ref} />;
-  },
-);
+  return <Comp {...errorProps} {...restProps} />;
+}
 
 // exports
 // ----------------------------------------

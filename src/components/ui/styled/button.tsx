@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { type ComponentPropsWithRef, forwardRef, type ReactNode } from "react";
+import { type ComponentPropsWithRef, type ReactNode } from "react";
 
 import { type LinkComponentProps } from "@/lib/next/types";
 import { cn } from "@/utils/css/cn";
@@ -46,7 +46,7 @@ interface ButtonProps
   extends ComponentPropsWithRef<"button">,
     ButtonBaseProps {}
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+function Button(props: ButtonProps) {
   const {
     rightIcon,
     variant = "fill",
@@ -63,7 +63,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         className,
       )}
       {...restProps}
-      ref={ref}
     >
       {rightIcon ? (
         <>
@@ -77,9 +76,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       )}
     </button>
   );
-});
-
-Button.displayName = "Button";
+}
 
 // ----------------------------------------
 
@@ -87,50 +84,45 @@ interface ButtonLinkProps
   extends Omit<LinkComponentProps, "aria-disabled" | "role" | "tabIndex">,
     ButtonBaseProps {}
 
-const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
-  (props, ref) => {
-    const {
-      rightIcon,
-      variant = "fill",
-      disabled,
-      className,
-      children,
-      ...restProps
-    } = props;
+function ButtonLink(props: ButtonLinkProps) {
+  const {
+    rightIcon,
+    variant = "fill",
+    disabled,
+    className,
+    children,
+    ...restProps
+  } = props;
 
-    const ariaProps = {
-      "aria-disabled": disabled,
-      role: "button",
-      ...(disabled ? { tabIndex: -1 } : {}),
-    } as const satisfies Partial<LinkComponentProps>;
+  const ariaProps = {
+    "aria-disabled": disabled,
+    role: "button",
+    ...(disabled ? { tabIndex: -1 } : {}),
+  } as const satisfies Partial<LinkComponentProps>;
 
-    return (
-      <Link
-        className={cn(
-          createBaseClassName(variant),
-          "aria-disabled:bg-base-light-400 aria-disabled:pointer-events-none",
-          className,
-        )}
-        {...ariaProps}
-        {...restProps}
-        ref={ref}
-      >
-        {rightIcon ? (
-          <>
-            <span>{children}</span>
-            <span className="ml-2 inline-flex items-center" aria-hidden="true">
-              {rightIcon}
-            </span>
-          </>
-        ) : (
-          children
-        )}
-      </Link>
-    );
-  },
-);
-
-ButtonLink.displayName = "ButtonLink";
+  return (
+    <Link
+      className={cn(
+        createBaseClassName(variant),
+        "aria-disabled:bg-base-light-400 aria-disabled:pointer-events-none",
+        className,
+      )}
+      {...ariaProps}
+      {...restProps}
+    >
+      {rightIcon ? (
+        <>
+          <span>{children}</span>
+          <span className="ml-2 inline-flex items-center" aria-hidden="true">
+            {rightIcon}
+          </span>
+        </>
+      ) : (
+        children
+      )}
+    </Link>
+  );
+}
 
 // ----------------------------------------
 

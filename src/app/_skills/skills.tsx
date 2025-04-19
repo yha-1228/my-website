@@ -25,7 +25,7 @@ const rankIconClassNameMap = {
   good: cn("bg-[url('/assets/check-circle-fill-color-foreground.svg')]"),
   normal: cn("bg-[url('/assets/check-circle-color-foreground.svg')]"),
   bad: cn("bg-[url('/assets/dash-circle-color-foreground.svg')]"),
-} as const satisfies { [key in Rank]: string };
+} as const satisfies Record<Rank, string>;
 
 function SkillDetailCard(props: SkillDetailCardProps) {
   const { heading, items, className, accent } = props;
@@ -74,7 +74,7 @@ const skillWordCategoryHeadingMap = {
   fe: "フロントエンド",
   be: "バックエンド",
   tools: "ツール等",
-} as const satisfies { [key in SkillWord["category"]]: string };
+} as const satisfies Record<SkillWord["category"], string>;
 
 export function Skills() {
   return (

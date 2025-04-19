@@ -1,26 +1,20 @@
-import { type ComponentPropsWithRef, forwardRef } from "react";
+import { type ComponentPropsWithRef } from "react";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
 
 import { cn } from "@/utils/css/cn";
 
-const FormErrorMessage = forwardRef<
-  HTMLParagraphElement,
-  ComponentPropsWithRef<"p">
->((props, ref) => {
+function FormErrorMessage(props: ComponentPropsWithRef<"p">) {
   const { className, children, ...restProps } = props;
 
   return (
     <p
       className={cn("text-danger-500 flex items-center text-sm", className)}
       {...restProps}
-      ref={ref}
     >
       <BsFillExclamationCircleFill aria-hidden="true" />
       <span className="ml-1.5">{children}</span>
     </p>
   );
-});
-
-FormErrorMessage.displayName = "FormErrorMessage";
+}
 
 export { FormErrorMessage };

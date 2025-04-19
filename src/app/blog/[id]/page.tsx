@@ -11,11 +11,11 @@ import { cn } from "@/utils/css/cn";
 import { dateFormat } from "@/utils/date/formatter";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = params;
+  const { id } = await params;
   const blogDetail = await getBlogDetail(id);
 
   return {
@@ -29,7 +29,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: Props) {
-  const { id } = params;
+  const { id } = await params;
   const blogDetail = await getBlogDetail(id);
 
   return (

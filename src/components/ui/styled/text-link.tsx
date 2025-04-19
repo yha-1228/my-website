@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import React, { forwardRef } from "react";
 import { FiExternalLink } from "react-icons/fi";
 
 import { type LinkComponentProps } from "@/lib/next/types";
@@ -28,7 +27,7 @@ interface TextLinkProps extends LinkComponentProps {
   preventLink?: boolean;
 }
 
-const TextLink = forwardRef<HTMLAnchorElement, TextLinkProps>((props, ref) => {
+function TextLink(props: TextLinkProps) {
   const { withUnderline, preventLink, onClick, className, ...restProps } =
     props;
 
@@ -42,12 +41,9 @@ const TextLink = forwardRef<HTMLAnchorElement, TextLinkProps>((props, ref) => {
         onClick?.(event);
       }}
       {...restProps}
-      ref={ref}
     />
   );
-});
-
-TextLink.displayName = "TextLink";
+}
 
 // ----------------------------------------
 
@@ -56,41 +52,36 @@ interface ExternalTextLinkProps extends ExternalLinkProps {
   preventLink?: boolean;
 }
 
-const ExternalTextLink = forwardRef<HTMLAnchorElement, ExternalTextLinkProps>(
-  (props, ref) => {
-    const {
-      withUnderline,
-      preventLink,
-      onClick,
-      className,
-      children,
-      ...restProps
-    } = props;
+function ExternalTextLink(props: ExternalTextLinkProps) {
+  const {
+    withUnderline,
+    preventLink,
+    onClick,
+    className,
+    children,
+    ...restProps
+  } = props;
 
-    return (
-      <ExternalLink
-        className={cn(
-          createBaseClassName(withUnderline),
-          "inline-flex items-center space-x-1",
-          className,
-        )}
-        onClick={(event) => {
-          if (preventLink) {
-            event.preventDefault();
-          }
-          onClick?.(event);
-        }}
-        {...restProps}
-        ref={ref}
-      >
-        <span>{children}</span>
-        <FiExternalLink />
-      </ExternalLink>
-    );
-  },
-);
-
-ExternalTextLink.displayName = "ExternalTextLink";
+  return (
+    <ExternalLink
+      className={cn(
+        createBaseClassName(withUnderline),
+        "inline-flex items-center space-x-1",
+        className,
+      )}
+      onClick={(event) => {
+        if (preventLink) {
+          event.preventDefault();
+        }
+        onClick?.(event);
+      }}
+      {...restProps}
+    >
+      <span>{children}</span>
+      <FiExternalLink />
+    </ExternalLink>
+  );
+}
 
 // ----------------------------------------
 
