@@ -78,10 +78,10 @@ function reducer<TError extends Error>(
   }
 }
 
-type UseMutationReturn<
+interface UseMutationReturn<
   TAction extends AnyAsyncFunction,
   TError extends Error,
-> = {
+> {
   mutate: (...args: Parameters<TAction>) => Promise<void>;
   reset: () => void;
   pending: boolean;
@@ -89,7 +89,7 @@ type UseMutationReturn<
   isSuccess: boolean;
   isError: boolean;
   error: TError | undefined;
-};
+}
 
 function useMutation<
   TAction extends AnyAsyncFunction,

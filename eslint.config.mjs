@@ -76,6 +76,8 @@ const reactConfig = {
     "react/hook-use-state": "error",
     // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/function-component-definition.md
     "react/function-component-definition": "error",
+    // https://typescript-eslint.io/rules/consistent-type-definitions/
+    "@typescript-eslint/consistent-type-definitions": "error",
   },
 };
 

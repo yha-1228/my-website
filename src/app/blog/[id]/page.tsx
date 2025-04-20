@@ -10,9 +10,9 @@ import { routes } from "@/routes";
 import { cn } from "@/utils/css/cn";
 import { dateFormat } from "@/utils/date/formatter";
 
-type Props = {
+interface Props {
   params: Promise<{ id: string }>;
-};
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
