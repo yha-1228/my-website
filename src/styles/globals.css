@@ -91,6 +91,10 @@
   }
 }
 
+/* 暫定対応 詳細: https://tailwindcss.com/docs/upgrade-guide#hover-styles-on-mobile */
+/* TODO: v4のhoverに治す */
+@custom-variant hover (&:hover);
+
 body {
   background-color: var(--color-white);
   font-family: Arial, Helvetica, sans-serif;
