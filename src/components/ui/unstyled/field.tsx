@@ -7,7 +7,11 @@ import {
   useState,
 } from "react";
 
-import { type CommonHTMLProps, type ComponentPropsWithAs } from "@/types/react";
+import {
+  type CommonHTMLProps,
+  type ElementTypeOf,
+  type PropsWithAs,
+} from "@/types/react";
 import { getContextAndProvider } from "@/utils/react";
 
 // internal
@@ -70,12 +74,14 @@ function FieldProvider(props: PropsWithChildren<UseFieldProps>) {
 
 // ---
 
-type FieldLabelProps<TAs extends ElementType> = Omit<
-  ComponentPropsWithAs<TAs, "label">,
+type FieldLabelProps<TAs extends ElementTypeOf<"label">> = Omit<
+  PropsWithAs<TAs, "label">,
   "htmlFor"
 >;
 
-function FieldLabel<TAs extends ElementType>(props: FieldLabelProps<TAs>) {
+function FieldLabel<TAs extends ElementTypeOf<"label">>(
+  props: FieldLabelProps<TAs>,
+) {
   const { as: Comp = "label", ...restProps } = props;
   const { labelProps } = useFieldContext();
 
@@ -84,7 +90,7 @@ function FieldLabel<TAs extends ElementType>(props: FieldLabelProps<TAs>) {
 
 // ---
 
-type FieldProps<TAs extends ElementType> = ComponentPropsWithAs<TAs, "input">;
+type FieldProps<TAs extends ElementType> = PropsWithAs<TAs, "input">;
 
 function Field<TAs extends ElementType>(props: FieldProps<TAs>) {
   const { as: Comp = "input", ...restProps } = props;
@@ -95,12 +101,12 @@ function Field<TAs extends ElementType>(props: FieldProps<TAs>) {
 
 // ---
 
-type FieldDescriptionProps<TAs extends ElementType> = Omit<
-  ComponentPropsWithAs<TAs, "p">,
+type FieldDescriptionProps<TAs extends ElementTypeOf<"p">> = Omit<
+  PropsWithAs<TAs, "p">,
   "id"
 >;
 
-function FieldDescription<TAs extends ElementType>(
+function FieldDescription<TAs extends ElementTypeOf<"p">>(
   props: FieldDescriptionProps<TAs>,
 ) {
   const { as: Comp = "p", ...restProps } = props;
@@ -111,12 +117,14 @@ function FieldDescription<TAs extends ElementType>(
 
 // ---
 
-type FieldErrorProps<TAs extends ElementType> = Omit<
-  ComponentPropsWithAs<TAs, "p">,
+type FieldErrorProps<TAs extends ElementTypeOf<"p">> = Omit<
+  PropsWithAs<TAs, "p">,
   "id"
 >;
 
-function FieldError<TAs extends ElementType>(props: FieldErrorProps<TAs>) {
+function FieldError<TAs extends ElementTypeOf<"p">>(
+  props: FieldErrorProps<TAs>,
+) {
   const { as: Comp = "p", ...restProps } = props;
   const { whenError, errorProps } = useFieldContext();
 
