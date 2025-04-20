@@ -181,12 +181,7 @@ export function ContactForm() {
   const { values } = formState;
 
   return (
-    <div
-      className={cn(
-        // "mt-10",
-        "lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11",
-      )}
-    >
+    <div className="lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11">
       <form
         onSubmit={handleSubmit}
         name={CONTACT_FORM_NAME}
