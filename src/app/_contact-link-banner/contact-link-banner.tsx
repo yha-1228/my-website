@@ -3,26 +3,32 @@ import Link from "next/link";
 import { ArrowRight } from "@/assets/arrow-right";
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";
+import { cn } from "@/utils/css/cn";
 
 export function ContactLinkBanner() {
   return (
     <div className="py-8 sm:pt-12">
       <Container>
-        <div className="bg-primary-800 rounded-xl p-6 text-center text-white sm:flex sm:items-center sm:justify-between sm:px-10 sm:py-8 sm:text-left">
-          <div className="">
+        <Link
+          href={routes.contact.href}
+          className="bg-primary-800 group hover:bg-primary-700 focus-visible:outline-primary-600/30 block rounded-xl p-6 text-center text-white transition-colors sm:flex sm:items-center sm:justify-between sm:px-10 sm:py-8 sm:text-left"
+        >
+          <div>
             <h1 className="text-2xl font-bold sm:text-3xl">お問い合わせ</h1>
             <p className="mt-0.5">お気軽にお問い合わせください。</p>
           </div>
-          <Link
-            className="group text-primary-800 focus-visible:outline-primary-100/70 mt-6 inline-block w-full rounded-md bg-white py-2 text-lg font-bold hover:underline hover:decoration-2 hover:underline-offset-8 focus-visible:outline-2 focus-visible:outline-offset-2 sm:flex sm:w-auto sm:px-8 sm:py-4"
-            href={routes.contact.href}
+          <div
+            className={cn(
+              "mt-6 inline-block w-full rounded-md border border-white py-2 text-lg font-bold text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 sm:flex sm:w-auto sm:px-8 sm:py-4",
+              "group-hover:text-primary-700 group-hover:bg-white",
+            )}
           >
             <span>フォームを開く</span>
-            <span className="hidden sm:ml-1.5 sm:flex sm:items-center sm:transition-transform sm:duration-300 sm:group-hover:translate-x-1 sm:motion-reduce:transform-none">
+            <span className="hidden sm:ml-1.5 sm:flex sm:items-center sm:transition-transform sm:duration-300 sm:group-hover:translate-x-1.5 sm:motion-reduce:transform-none">
               <ArrowRight className="stroke-[currentColor]" />
             </span>
-          </Link>
-        </div>
+          </div>
+        </Link>
       </Container>
     </div>
   );

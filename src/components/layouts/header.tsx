@@ -1,14 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import {
-  type ComponentProps,
-  type CSSProperties,
-  type MouseEvent,
-  useRef,
-  useState,
-} from "react";
+import { type CSSProperties, type MouseEvent, useRef, useState } from "react";
 import { BsList, BsX } from "react-icons/bs";
 
 import { MOBILE_MENU_ID } from "@/constants";
@@ -21,24 +14,7 @@ import { cn } from "@/utils/css/cn";
 import { loopFocus } from "@/utils/dom/utils";
 
 import { Container } from "../ui/styled/container";
-
-function ActiveNavLink(props: ComponentProps<typeof Link>) {
-  const { href, ...restProps } = props;
-  const pathname = usePathname();
-  const active = href === pathname;
-  const firstPathActive = href === `/${pathname.split("/")[1]}`;
-
-  return (
-    <Link
-      href={href}
-      aria-current={active ? "page" : undefined}
-      data-active={firstPathActive ? "true" : undefined}
-      {...restProps}
-    />
-  );
-}
-
-// ----------------------------------------
+import { ActiveLink } from "../ui/unstyled/active-link";
 
 const routesWithoutHome = Object.values(routes).filter(
   (route) => route.href !== "/",
@@ -140,19 +116,19 @@ export function Header() {
 
             {/* desktop only */}
             <nav>
-              <ul className="hidden sm:flex sm:space-x-3.5">
+              <ul className="hidden sm:flex">
                 {routesWithoutHome.map((route) => (
                   <li key={route.href}>
-                    <ActiveNavLink
+                    <ActiveLink
                       href={route.href}
                       className={cn(
-                        "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-2.5 font-bold transition-colors duration-200 ease-out",
-                        "hover:before:bg-primary-600/20 hover:before:absolute hover:before:bottom-0 hover:before:left-0 hover:before:h-1 hover:before:w-full hover:before:content-['']",
+                        "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-4 font-bold transition-colors duration-200 ease-out",
+                        "hover:bg-base-light-100 active:bg-base-light-200",
                         "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-1 data-active:before:w-full data-active:before:content-['']",
                       )}
                     >
                       {route.label}
-                    </ActiveNavLink>
+                    </ActiveLink>
                   </li>
                 ))}
               </ul>
@@ -168,23 +144,24 @@ export function Header() {
             "sm:hidden",
             // height, visibilityを同時にtransitionで切り替えることで
             // 高さのアニメーションを適用しつつ、閉じているときにフォーカスも無効にする
-            "bg-base-light-100 absolute top-(--height-header) left-0 w-full overflow-y-hidden transition-[height,visibility] duration-200 ease-out",
+            "absolute top-(--height-header) left-0 w-full overflow-y-hidden bg-white transition-[height,visibility] duration-200 ease-out",
             "invisible block h-0 data-is-open:visible data-is-open:h-[calc(100dvh-(var(--height-header)))]",
           )}
         >
           {routesWithoutHome.map((route) => (
             <li key={route.href}>
-              <ActiveNavLink
+              <ActiveLink
                 href={route.href}
                 className={cn(
                   "flex items-center justify-between py-3 font-bold",
-                  "hover:before:bg-primary-600/20 hover:relative hover:bg-white hover:before:absolute hover:before:h-full hover:before:w-1 hover:before:content-['']",
-                  "data-active:before:bg-primary-600 data-active:relative data-active:bg-white data-active:before:absolute data-active:before:h-full data-active:before:w-1 data-active:before:content-['']",
+                  "hover:bg-base-light-100",
+                  "data-active:relative",
+                  "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:h-full data-active:before:w-1.5 data-active:before:content-['']",
                 )}
                 onClick={handleMobileNavLinkClick}
               >
-                <Container>{route.label}</Container>
-              </ActiveNavLink>
+                <div className="px-6">{route.label}</div>
+              </ActiveLink>
             </li>
           ))}
         </ul>
