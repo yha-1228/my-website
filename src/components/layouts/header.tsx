@@ -1,14 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import {
-  type ComponentProps,
-  type CSSProperties,
-  type MouseEvent,
-  useRef,
-  useState,
-} from "react";
+import { type CSSProperties, type MouseEvent, useRef, useState } from "react";
 import { BsList, BsX } from "react-icons/bs";
 
 import { MOBILE_MENU_ID } from "@/constants";
@@ -21,24 +14,7 @@ import { cn } from "@/utils/css/cn";
 import { loopFocus } from "@/utils/dom/utils";
 
 import { Container } from "../ui/styled/container";
-
-function ActiveNavLink(props: ComponentProps<typeof Link>) {
-  const { href, ...restProps } = props;
-  const pathname = usePathname();
-  const active = href === pathname;
-  const firstPathActive = href === `/${pathname.split("/")[1]}`;
-
-  return (
-    <Link
-      href={href}
-      aria-current={active ? "page" : undefined}
-      data-active={firstPathActive ? "true" : undefined}
-      {...restProps}
-    />
-  );
-}
-
-// ----------------------------------------
+import { ActiveLink } from "../ui/unstyled/active-link";
 
 const routesWithoutHome = Object.values(routes).filter(
   (route) => route.href !== "/",
@@ -143,7 +119,7 @@ export function Header() {
               <ul className="hidden sm:flex sm:space-x-3.5">
                 {routesWithoutHome.map((route) => (
                   <li key={route.href}>
-                    <ActiveNavLink
+                    <ActiveLink
                       href={route.href}
                       className={cn(
                         "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-2.5 font-bold transition-colors duration-200 ease-out",
@@ -152,7 +128,7 @@ export function Header() {
                       )}
                     >
                       {route.label}
-                    </ActiveNavLink>
+                    </ActiveLink>
                   </li>
                 ))}
               </ul>
@@ -174,7 +150,7 @@ export function Header() {
         >
           {routesWithoutHome.map((route) => (
             <li key={route.href}>
-              <ActiveNavLink
+              <ActiveLink
                 href={route.href}
                 className={cn(
                   "flex items-center justify-between py-3 font-bold",
@@ -184,7 +160,7 @@ export function Header() {
                 onClick={handleMobileNavLinkClick}
               >
                 <Container>{route.label}</Container>
-              </ActiveNavLink>
+              </ActiveLink>
             </li>
           ))}
         </ul>
