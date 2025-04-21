@@ -19,7 +19,7 @@ export function ContactLinkBanner() {
           </div>
           <div
             className={cn(
-              "mt-6 inline-block w-full rounded-md border border-white py-2 text-lg font-bold text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 sm:flex sm:w-auto sm:px-8 sm:py-4",
+              "mt-6 inline-block w-full rounded-md border border-white py-2 text-lg font-bold text-white transition-colors sm:flex sm:w-auto sm:px-8 sm:py-4",
               "group-hover:text-primary-700 group-hover:bg-white",
             )}
           >
