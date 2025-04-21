@@ -20,7 +20,7 @@ const routesWithoutHome = Object.values(routes).filter(
   (route) => route.href !== "/",
 );
 
-const hederBorderBottomWidth = "1px";
+const headerBorderBottomWidth = "1px";
 
 export function Header() {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -77,7 +77,7 @@ export function Header() {
       ref={headerRef}
       style={
         {
-          "--header-border-bottom-width": hederBorderBottomWidth,
+          "--header-border-bottom-width": headerBorderBottomWidth,
         } as CSSProperties
       }
       className={cn(
