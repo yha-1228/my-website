@@ -7,6 +7,7 @@ import {
   useId,
   useState,
 } from "react";
+import { BsExclamationCircle } from "react-icons/bs";
 
 import { sendNetlifyForm } from "@/api/clients/netlify";
 import { isFetchNetworkError } from "@/api/misc";
@@ -305,28 +306,35 @@ export function ContactForm() {
           className={cn(
             "mt-9 mb-3",
             Object.keys(errors).length > 0 && formState.bottomErrorVisible
-              ? "block"
+              ? "block sm:flex"
               : "hidden",
           )}
         >
-          <div className="text-lg font-bold">
-            {Object.values(errors).length}件の項目に問題があります。
+          <div className="hidden sm:block">
+            <BsExclamationCircle className="fill-danger-600 mt-1 size-5" />
           </div>
-          <ul className="mt-2.5 space-y-0.5 sm:list-disc sm:space-y-0.5 sm:pl-4">
-            {entriesOf(errors).map(([key, error]) => (
-              <li key={key} className="text-danger-600 text-sm">
-                <TextLink
-                  href="/"
-                  className="font-bold"
-                  withUnderline
-                  preventLink
-                  onClick={() => handleErrorListItemClick(key)}
-                >
-                  {keyLabelMap[key]}の項目を{error}
-                </TextLink>
-              </li>
-            ))}
-          </ul>
+          <div className="sm:ml-3">
+            <div className="text-lg font-bold">
+              {Object.values(errors).length}件の項目に問題があります。
+            </div>
+            <ul className="mt-2.5 space-y-1 sm:list-disc sm:space-y-0.5 sm:pl-4">
+              {entriesOf(errors).map(([key, error]) => (
+                <li key={key} className="text-sm">
+                  <span className="">{keyLabelMap[key]}:</span>
+                  <br className="sm:hidden" />
+                  <TextLink
+                    href="/"
+                    className="font-bold sm:ml-1"
+                    withUnderline
+                    preventLink
+                    onClick={() => handleErrorListItemClick(key)}
+                  >
+                    {error}
+                  </TextLink>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Alert>
 
         <IsClient>

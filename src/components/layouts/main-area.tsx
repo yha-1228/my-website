@@ -84,9 +84,9 @@ export function MainArea({ children }: { children: ReactNode }) {
           data-hidden={scrollToTopButton.visible ? undefined : "true"}
           className={cn(
             "fixed right-6 bottom-5 size-14! rounded-full p-0 text-3xl shadow-lg md:bottom-9",
-            "[transition:opacity_200ms,background-color_200ms,translate_200ms]",
+            "[transition:opacity_200ms,background-color_200ms,scale_200ms]",
             "data-[hidden='true']:pointer-events-none data-[hidden='true']:opacity-0",
-            "hover:-translate-y-1",
+            "active:scale-[0.95]",
           )}
         >
           <BsArrowUpShort aria-hidden="true" />
