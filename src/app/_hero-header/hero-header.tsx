@@ -20,7 +20,7 @@ export function HeroHeader() {
 
         <ButtonLink
           href={routes.experience.href}
-          className="group mt-8 flex items-center lg:inline-flex lg:items-center lg:px-6 lg:py-2 lg:text-lg"
+          className="group mt-8 flex items-center lg:inline-flex lg:items-center lg:px-6 lg:text-lg"
         >
           <span>職務経歴を見る</span>
           <span className="ml-1 inline-block lg:ml-1.5 lg:transition-transform lg:duration-300 lg:group-hover:translate-x-1 lg:motion-reduce:transform-none">
