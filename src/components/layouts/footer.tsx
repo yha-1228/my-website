@@ -38,7 +38,10 @@ export function Footer({ className }: FooterProps) {
           <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-y-0 md:space-x-4">
             {myExternalLinks.map((link) => (
               <li key={link.href}>
-                <ExternalTextLink className="font-bold" href={link.href}>
+                <ExternalTextLink
+                  className="leading-normal font-bold"
+                  href={link.href}
+                >
                   {link.label}
                 </ExternalTextLink>
               </li>
@@ -47,7 +50,10 @@ export function Footer({ className }: FooterProps) {
           <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-y-0 md:space-x-4">
             {Object.values(routes).map((route) => (
               <li key={route.href}>
-                <TextLink className="font-bold" href={route.href}>
+                <TextLink
+                  className="inline-block leading-normal font-bold"
+                  href={route.href}
+                >
                   {route.label}
                 </TextLink>
               </li>

@@ -101,3 +101,18 @@ body {
   color: var(--color-base-foreground);
   line-height: var(--root-base-line-height);
 }
+
+button,
+[role="button"],
+a,
+input,
+textarea {
+  outline-color: transparent;
+
+  &:focus-visible {
+    outline-color: var(--color-primary-400);
+    outline-offset: 2px;
+    outline-style: solid;
+    outline-width: 2px;
+  }
+}

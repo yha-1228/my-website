@@ -22,7 +22,6 @@ function createBaseClassName(variant: ButtonVariant) {
   const common = cn(
     "inline-flex items-center justify-center rounded-md px-5 py-2 font-bold",
     "transition-colors duration-200 ease-out",
-    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600/30",
   );
 
   const variantClassMap = {

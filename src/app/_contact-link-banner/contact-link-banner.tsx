@@ -11,7 +11,7 @@ export function ContactLinkBanner() {
       <Container>
         <Link
           href={routes.contact.href}
-          className="bg-primary-800 group hover:bg-primary-700 focus-visible:outline-primary-600/30 block rounded-xl p-6 text-center text-white transition-colors sm:flex sm:items-center sm:justify-between sm:px-10 sm:py-8 sm:text-left"
+          className="bg-primary-800 group hover:bg-primary-700 block rounded-xl p-6 text-center text-white transition-colors sm:flex sm:items-center sm:justify-between sm:px-10 sm:py-8 sm:text-left"
         >
           <div>
             <h1 className="text-2xl font-bold sm:text-3xl">お問い合わせ</h1>
