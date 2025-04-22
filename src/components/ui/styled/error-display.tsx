@@ -7,7 +7,7 @@ import { SITE_TITLE } from "@/constants";
 import { useTitle } from "@/hooks/use-title";
 import { isPageError404 } from "@/lib/next/helpers";
 import { type NextErrorProps } from "@/lib/next/types";
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 import { Container } from "./container";
 

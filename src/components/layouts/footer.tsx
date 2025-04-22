@@ -1,5 +1,5 @@
 import { routes } from "@/routes";
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 import { Container } from "../ui/styled/container";
 import { ExternalTextLink, TextLink } from "../ui/styled/text-link";

@@ -2,7 +2,7 @@
 
 import { type ComponentProps, useEffect, useRef } from "react";
 
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 export function Alert({
   className,

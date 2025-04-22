@@ -5,7 +5,7 @@ import {
   BsX,
 } from "react-icons/bs";
 
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 type Variant = "primary" | "danger";
 

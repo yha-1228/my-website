@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "@/assets/arrow-right";
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 export function ContactLinkBanner() {
   return (

@@ -1,6 +1,6 @@
 import { type ComponentPropsWithRef } from "react";
 
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 export function ArrowRight({
   className,

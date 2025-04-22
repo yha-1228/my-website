@@ -2,8 +2,7 @@ import Link from "next/link";
 import { type ComponentPropsWithRef, type ReactNode } from "react";
 
 import { type LinkComponentProps } from "@/lib/next/types";
-import { classVariants } from "@/utils/css/class-variants";
-import { cn } from "@/utils/css/cn";
+import { classVariants, cn } from "@/utils/styling";
 
 // common
 // ----------------------------------------

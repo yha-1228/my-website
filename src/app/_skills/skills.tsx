@@ -12,7 +12,7 @@ import {
   type SkillWord,
   skillWords,
 } from "@/data/skills";
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 interface SkillDetailCardProps {
   heading: ReactNode;

@@ -10,8 +10,8 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { useOnRouteChange } from "@/hooks/use-on-route-change";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { routes } from "@/routes";
-import { cn } from "@/utils/css/cn";
-import { loopFocus } from "@/utils/dom/utils";
+import { loopFocus } from "@/utils/dom";
+import { cn } from "@/utils/styling";
 
 import { Container } from "../ui/styled/container";
 import { ActiveLink } from "../ui/unstyled/active-link";

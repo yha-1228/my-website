@@ -1,7 +1,7 @@
 import { type ComponentPropsWithRef } from "react";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
 
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 function FormErrorMessage(props: ComponentPropsWithRef<"p">) {
   const { className, children, ...restProps } = props;

@@ -1,7 +1,6 @@
 import { type SafeParseReturnType } from "zod";
 
-import { mapObject } from "@/utils/object/map-object";
-import { omit } from "@/utils/object/omit";
+import { mapObject, omit } from "@/utils/object";
 
 export function getKeyErrorMessagesMap<Input>(
   safeParseReturn: SafeParseReturnType<Input, Input>,
