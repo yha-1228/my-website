@@ -1,9 +1,14 @@
 import { Children, type ReactNode } from "react";
 
-export function splitNode(node: ReactNode, separator: ReactNode) {
+interface SplitNodeProps {
+  children: ReactNode;
+  separator: ReactNode;
+}
+
+function SplitNode({ children, separator }: SplitNodeProps) {
   return (
     <>
-      {Children.map(node, (child, index) => {
+      {Children.map(children, (child, index) => {
         if (index === 0) return child;
         return (
           <>
@@ -15,3 +20,6 @@ export function splitNode(node: ReactNode, separator: ReactNode) {
     </>
   );
 }
+
+export { SplitNode };
+export type { SplitNodeProps };

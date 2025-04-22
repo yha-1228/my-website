@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FiExternalLink } from "react-icons/fi";
+import { BsArrowUpRight } from "react-icons/bs";
 
 import { type LinkComponentProps } from "@/lib/next/types";
 import { cn } from "@/utils/css/cn";
@@ -78,7 +78,7 @@ function ExternalTextLink(props: ExternalTextLinkProps) {
       {...restProps}
     >
       <span>{children}</span>
-      <FiExternalLink />
+      <BsArrowUpRight />
     </ExternalLink>
   );
 }

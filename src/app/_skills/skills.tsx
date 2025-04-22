@@ -3,7 +3,7 @@ import { type ReactNode } from "react";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { Heading2 } from "@/components/ui/styled/heading2";
-import { splitNode } from "@/components/ui/unstyled/split-node";
+import { SplitNode } from "@/components/ui/unstyled/split-node";
 import {
   CATEGORIES,
   type Rank,
@@ -95,26 +95,31 @@ export function Skills() {
                   </Heading2>
 
                   <div className="leading-loose">
-                    {splitNode(
-                      filteredSkillWordsByCategory.map((s) => (
+                    <SplitNode
+                      separator={
+                        <span
+                          aria-hidden="true"
+                          aria-label=","
+                          className="text-base-light-400"
+                        >
+                          {` / `}
+                        </span>
+                      }
+                    >
+                      {filteredSkillWordsByCategory.map((s) => (
                         <span
                           key={s.label}
                           lang="en"
-                          style={{
-                            background: s.strong
-                              ? `linear-gradient(transparent 75%, var(--color-accent) 75%)`
-                              : undefined,
-                          }}
                           className={cn(
                             "text-lg",
-                            s.strong && "font-extrabold",
+                            s.strong &&
+                              "font-extrabold [background:linear-gradient(transparent_75%,var(--color-accent)_75%)]",
                           )}
                         >
                           {s.label}
                         </span>
-                      )),
-                      " / ",
-                    )}
+                      ))}
+                    </SplitNode>
                   </div>
                 </section>
               );
