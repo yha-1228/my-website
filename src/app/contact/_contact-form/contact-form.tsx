@@ -34,7 +34,6 @@ import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
 import { type HTMLElementHasNameAndValue } from "@/types/react";
-import { cn } from "@/utils/css/cn";
 import { getCSSVar } from "@/utils/css/get-css-var";
 import { remToPx } from "@/utils/css/unit";
 import { scrollWithFocus } from "@/utils/dom/utils";
@@ -302,40 +301,35 @@ export function ContactForm() {
           </FieldProvider>
         </div>
 
-        <Alert
-          className={cn(
-            "mt-9 mb-3",
-            Object.keys(errors).length > 0 && formState.bottomErrorVisible
-              ? "block sm:flex"
-              : "hidden",
-          )}
-        >
-          <div className="hidden sm:block">
-            <BsExclamationCircle className="fill-danger-600 mt-1 size-5" />
-          </div>
-          <div className="sm:ml-3">
-            <div className="text-lg font-bold">
-              {Object.values(errors).length}件の項目に問題があります。
+        {Object.keys(errors).length > 0 && formState.bottomErrorVisible && (
+          <Alert className="mt-9 mb-3 block sm:flex">
+            <div className="hidden sm:block">
+              <BsExclamationCircle className="fill-danger-600 mt-1 size-5" />
             </div>
-            <ul className="mt-2.5 space-y-1 sm:list-disc sm:space-y-0.5 sm:pl-4">
-              {entriesOf(errors).map(([key, error]) => (
-                <li key={key} className="text-sm">
-                  <span className="">{keyLabelMap[key]}:</span>
-                  <br className="sm:hidden" />
-                  <TextLink
-                    href="/"
-                    className="font-bold sm:ml-1"
-                    withUnderline
-                    preventLink
-                    onClick={() => handleErrorListItemClick(key)}
-                  >
-                    {error}
-                  </TextLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Alert>
+            <div className="sm:ml-3">
+              <div className="text-lg font-bold">
+                {Object.values(errors).length}件の項目に問題があります。
+              </div>
+              <ul className="mt-2.5 space-y-1 sm:list-disc sm:space-y-0.5 sm:pl-4">
+                {entriesOf(errors).map(([key, error]) => (
+                  <li key={key} className="text-sm">
+                    <span className="">{keyLabelMap[key]}:</span>
+                    <br className="sm:hidden" />
+                    <TextLink
+                      href="/"
+                      className="font-bold sm:ml-1"
+                      withUnderline
+                      preventLink
+                      onClick={() => handleErrorListItemClick(key)}
+                    >
+                      {error}
+                    </TextLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Alert>
+        )}
 
         <IsClient>
           {({ isClient }) => (
