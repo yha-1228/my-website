@@ -2,41 +2,38 @@ import Link from "next/link";
 import { type ComponentPropsWithRef, type ReactNode } from "react";
 
 import { type LinkComponentProps } from "@/lib/next/types";
+import { classVariants } from "@/utils/css/class-variants";
 import { cn } from "@/utils/css/cn";
 
 // common
 // ----------------------------------------
 
-type ButtonVariant = "fill" | "outline";
-
-interface ButtonBaseProps {
-  disabled?: boolean;
-  rightIcon?: ReactNode;
+interface ButtonVariantsProps {
   /**
    * @default "fill"
    */
-  variant?: ButtonVariant;
+  variant?: "fill" | "outline";
 }
 
-function createBaseClassName(variant: ButtonVariant) {
-  const common = cn(
-    "inline-flex items-center justify-center rounded-md px-5 py-2 font-bold",
-    "transition-colors duration-200 ease-out",
-  );
+const getVariantClasses = classVariants<ButtonVariantsProps>(
+  cn(
+    "inline-flex items-center justify-center rounded-md px-5 py-2 font-bold transition-colors duration-200 ease-out",
+  ),
+  {
+    variant: {
+      fill: cn(
+        "bg-primary-600 text-white hover:bg-primary-800 active:bg-primary-700",
+      ),
+      outline: cn(
+        "border border-[currentColor] text-primary-600 bg-white hover:bg-primary-50",
+      ),
+    },
+  },
+);
 
-  const variantClassMap = {
-    fill: cn(
-      "bg-primary-600 text-white",
-      "hover:bg-primary-800",
-      "active:bg-primary-700",
-    ),
-    outline: cn(
-      "border border-[currentColor] text-primary-600 bg-white",
-      "hover:bg-primary-50",
-    ),
-  } as const satisfies Record<ButtonVariant, string>;
-
-  return cn(common, variantClassMap[variant]);
+interface ButtonBaseProps extends ButtonVariantsProps {
+  disabled?: boolean;
+  rightIcon?: ReactNode;
 }
 
 // ----------------------------------------
@@ -57,7 +54,7 @@ function Button(props: ButtonProps) {
   return (
     <button
       className={cn(
-        createBaseClassName(variant),
+        getVariantClasses({ variant }),
         "disabled:bg-base-light-400 disabled:cursor-not-allowed",
         className,
       )}
@@ -102,7 +99,7 @@ function ButtonLink(props: ButtonLinkProps) {
   return (
     <Link
       className={cn(
-        createBaseClassName(variant),
+        getVariantClasses({ variant }),
         "aria-disabled:bg-base-light-400 aria-disabled:pointer-events-none",
         className,
       )}
