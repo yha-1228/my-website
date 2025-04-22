@@ -1,6 +1,6 @@
 import { type ComponentPropsWithRef } from "react";
 
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 function Heading1(props: ComponentPropsWithRef<"h1">) {
   const { className, ...restProps } = props;

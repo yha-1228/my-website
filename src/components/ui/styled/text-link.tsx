@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BsArrowUpRight } from "react-icons/bs";
 
 import { type LinkComponentProps } from "@/lib/next/types";
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 import {
   ExternalLink,

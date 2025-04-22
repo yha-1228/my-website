@@ -12,10 +12,8 @@ import { BsArrowUpShort } from "react-icons/bs";
 import { Button } from "@/components/ui/styled/button";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { clientOnly } from "@/lib/next/helpers";
-import { cn } from "@/utils/css/cn";
-import { getCSSVar } from "@/utils/css/get-css-var";
-import { remToPx } from "@/utils/css/unit";
-import { sleep } from "@/utils/sleep";
+import { sleep } from "@/utils/misc";
+import { cn, getCSSVar, remToPx } from "@/utils/styling";
 
 import { SafetyPortal } from "../ui/unstyled/safety-portal";
 

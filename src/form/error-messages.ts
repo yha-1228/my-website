@@ -1,4 +1,4 @@
-import { assertNever } from "@/utils/assert-never";
+import { assertNever } from "@/utils/misc";
 
 export type IsLengthCheckOptions =
   | { min: number; max: number }

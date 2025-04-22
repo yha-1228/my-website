@@ -7,8 +7,8 @@ import { Heading1 } from "@/components/ui/styled/heading1";
 import { Tag } from "@/components/ui/styled/tag";
 import { TextLink } from "@/components/ui/styled/text-link";
 import { routes } from "@/routes";
-import { cn } from "@/utils/css/cn";
-import { dateFormat } from "@/utils/date/formatter";
+import { dateFormat } from "@/utils/date";
+import { cn } from "@/utils/styling";
 
 interface Props {
   params: Promise<{ id: string }>;

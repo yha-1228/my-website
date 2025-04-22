@@ -1,6 +1,6 @@
 import { type ComponentPropsWithRef } from "react";
 
-import { cn } from "@/utils/css/cn";
+import { cn } from "@/utils/styling";
 
 function Container(props: ComponentPropsWithRef<"div">) {
   const { className, ...restProps } = props;

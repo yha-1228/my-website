@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 
 import { type AnyAsyncFunction } from "@/types/utils";
-import { assertNever } from "@/utils/assert-never";
+import { assertNever } from "@/utils/misc";
 
 interface UseMutationProps<TAction extends AnyAsyncFunction> {
   fn: TAction;

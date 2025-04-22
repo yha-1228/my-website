@@ -34,13 +34,9 @@ import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
 import { type HTMLElementHasNameAndValue } from "@/types/react";
-import { getCSSVar } from "@/utils/css/get-css-var";
-import { remToPx } from "@/utils/css/unit";
-import { scrollWithFocus } from "@/utils/dom/utils";
-import { entriesOf } from "@/utils/object/entries-of";
-import { fromEntries } from "@/utils/object/from-entries";
-import { keysOf } from "@/utils/object/keys-of";
-import { mapObject } from "@/utils/object/map-object";
+import { scrollWithFocus } from "@/utils/dom";
+import { entriesOf, fromEntries, keysOf, mapObject } from "@/utils/object";
+import { getCSSVar, remToPx } from "@/utils/styling";
 
 import { Alert } from "./alert";
 import { FeedbackNotification } from "./feedback-notification";

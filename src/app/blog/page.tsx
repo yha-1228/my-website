@@ -6,8 +6,8 @@ import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { Tag } from "@/components/ui/styled/tag";
 import { routes } from "@/routes";
-import { cn } from "@/utils/css/cn";
-import { dateFormat } from "@/utils/date/formatter";
+import { dateFormat } from "@/utils/date";
+import { cn } from "@/utils/styling";
 
 export const metadata: Metadata = {
   title: routes.blog.label,

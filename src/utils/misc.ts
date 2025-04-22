@@ -17,8 +17,10 @@
  * }
  * ```
  */
-function assertNever(value: never): never {
+export function assertNever(value: never): never {
   throw new Error(`Unexpected value: ${JSON.stringify(value)}`);
 }
 
-export { assertNever };
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
