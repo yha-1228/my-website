@@ -27,6 +27,7 @@ import {
   FieldLabel,
   FieldProvider,
 } from "@/components/ui/unstyled/field";
+import { Form } from "@/components/ui/unstyled/form";
 import { IsClient } from "@/components/ui/unstyled/is-client";
 import { CONTACT_FORM_NAME } from "@/constants";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
@@ -169,12 +170,13 @@ export function ContactForm() {
 
   return (
     <div className="lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11">
-      <form
+      <Form
         onSubmit={handleSubmit}
         name={CONTACT_FORM_NAME}
         data-netlify="true"
         netlify-honeypot="bot-field"
         noValidate
+        allDisabled={submitMutation.loading}
       >
         <input type="hidden" name="form-name" value={CONTACT_FORM_NAME} />
         <div className="space-y-6">
@@ -330,7 +332,7 @@ export function ContactForm() {
             </Button>
           )}
         </IsClient>
-      </form>
+      </Form>
       {submitMutation.isSuccess && (
         <Alert
           className="mt-10"

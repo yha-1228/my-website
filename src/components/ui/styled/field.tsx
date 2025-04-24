@@ -14,6 +14,8 @@ interface BaseProps {
 
 const baseClassName = cn(
   "w-full appearance-none rounded-md px-3 placeholder:text-base-light-400",
+  "disabled:bg-base-light-100 disabled:text-base-foreground/70 disabled:cursor-not-allowed disabled:placeholder:text-base-light-400",
+  "transition-[background-color] duration-200 ease-out",
   "border border-base-light-300 data-invalid:border-danger-500",
 );
 
