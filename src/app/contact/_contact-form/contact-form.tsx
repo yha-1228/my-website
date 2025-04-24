@@ -7,10 +7,9 @@ import {
   useId,
   useState,
 } from "react";
-import { BsExclamationCircle } from "react-icons/bs";
 
 import { sendNetlifyForm } from "@/api/clients/netlify";
-import { isFetchNetworkError } from "@/api/misc";
+import { Alert } from "@/components/ui/styled/alert";
 import { Button } from "@/components/ui/styled/button";
 import {
   Input,
@@ -38,8 +37,6 @@ import { scrollWithFocus } from "@/utils/dom";
 import { entriesOf, fromEntries, keysOf, mapObject } from "@/utils/object";
 import { getCSSVar, remToPx } from "@/utils/styling";
 
-import { Alert } from "./alert";
-import { FeedbackNotification } from "./feedback-notification";
 import {
   contactFormSchema,
   type ContactFormValues,
@@ -79,12 +76,6 @@ const keyLabelMap = {
   companyName: "会社名",
   message: "お問い合わせ内容",
 } as const satisfies { [key in keyof ContactFormValues]: string };
-
-const feedbackText = {
-  done: "お問い合わせありがとうございます。",
-  networkError: "ネットワークに接続されていません。",
-  fail: "送信中にエラーが発生しました。",
-} as const;
 
 function createFieldId(id: string, key: keyof ContactFormValues) {
   return `${id}-${key}-field`;
@@ -298,33 +289,29 @@ export function ContactForm() {
         </div>
 
         {Object.keys(errors).length > 0 && formState.bottomErrorVisible && (
-          <Alert className="mt-9 mb-3 block sm:flex">
-            <div className="hidden sm:block">
-              <BsExclamationCircle className="fill-danger-600 mt-1 size-5" />
+          <div className="bg-danger-600 border-l-danger-400 mt-9 mb-3 rounded-md border-l-[6px] py-4 pl-6">
+            <div className="text-lg font-bold text-white">
+              {`${Object.values(errors).length}件の項目に問題があります。`}
             </div>
-            <div className="sm:ml-3">
-              <div className="text-lg font-bold">
-                {Object.values(errors).length}件の項目に問題があります。
-              </div>
-              <ul className="mt-2.5 space-y-1 sm:list-disc sm:space-y-0.5 sm:pl-4">
-                {entriesOf(errors).map(([key, error]) => (
-                  <li key={key} className="text-sm">
-                    <span className="">{keyLabelMap[key]}:</span>
-                    <br className="sm:hidden" />
-                    <TextLink
-                      href="/"
-                      className="font-bold sm:ml-1"
-                      withUnderline
-                      preventLink
-                      onClick={() => handleErrorListItemClick(key)}
-                    >
-                      {error}
-                    </TextLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Alert>
+
+            <ul className="mt-2 space-y-1 text-white/90 sm:list-disc sm:space-y-0.5 sm:pl-4">
+              {entriesOf(errors).map(([key, error]) => (
+                <li key={key} className="text-sm">
+                  <span className="">{keyLabelMap[key]}:</span>
+                  <br className="sm:hidden" />
+                  <TextLink
+                    href="/"
+                    className="font-bold sm:ml-1"
+                    withUnderline
+                    preventLink
+                    onClick={() => handleErrorListItemClick(key)}
+                  >
+                    {error}
+                  </TextLink>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
 
         <IsClient>
@@ -345,24 +332,23 @@ export function ContactForm() {
         </IsClient>
       </form>
       {submitMutation.isSuccess && (
-        <FeedbackNotification
+        <Alert
           className="mt-10"
-          variant="primary"
-          onClose={submitMutation.reset}
+          variant="success"
+          alertTitle="お問い合わせを送信しました"
         >
-          {feedbackText.done}
-        </FeedbackNotification>
+          <p>お返事まで今しばらくお待ちください。</p>
+          <p>
+            <TextLink href="/" withUnderline className="font-bold">
+              ホームに戻る
+            </TextLink>
+          </p>
+        </Alert>
       )}
       {submitMutation.isError && (
-        <FeedbackNotification
-          className="mt-10"
-          variant="danger"
-          onClose={submitMutation.reset}
-        >
-          {isFetchNetworkError(submitMutation.error)
-            ? feedbackText.networkError
-            : feedbackText.fail}
-        </FeedbackNotification>
+        <Alert className="mt-10" variant="error" alertTitle="エラー">
+          <p>お問い合わせの送信中にエラーが発生しました。</p>
+        </Alert>
       )}
     </div>
   );

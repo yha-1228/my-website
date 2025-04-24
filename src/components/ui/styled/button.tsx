@@ -14,7 +14,7 @@ interface ButtonVariantsProps {
   variant?: "fill" | "outline";
 }
 
-const getVariantClasses = classVariants<ButtonVariantsProps>(
+const getVariantClass = classVariants<ButtonVariantsProps>(
   cn(
     "inline-flex items-center justify-center rounded-md px-5 py-2 font-bold transition-colors duration-200 ease-out",
   ),
@@ -53,7 +53,7 @@ function Button(props: ButtonProps) {
   return (
     <button
       className={cn(
-        getVariantClasses({ variant }),
+        getVariantClass({ variant }),
         "disabled:bg-base-light-400 disabled:cursor-not-allowed",
         className,
       )}
@@ -98,7 +98,7 @@ function ButtonLink(props: ButtonLinkProps) {
   return (
     <Link
       className={cn(
-        getVariantClasses({ variant }),
+        getVariantClass({ variant }),
         "aria-disabled:bg-base-light-400 aria-disabled:pointer-events-none",
         className,
       )}
