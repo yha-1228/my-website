@@ -102,16 +102,23 @@ body {
   line-height: var(--root-base-line-height);
 }
 
+.body-vars {
+  --base-outline-color: var(--color-primary-600);
+  --base-outline-offset: 1.5px;
+  --base-outline-style: solid;
+  --base-outline-width: 2px;
+}
+
 button,
 [role="button"],
 a {
   outline-color: transparent;
 
   &:focus-visible {
-    outline-color: var(--color-primary-400);
-    outline-offset: 2px;
-    outline-style: solid;
-    outline-width: 2px;
+    outline-color: var(--base-outline-color);
+    outline-offset: var(--base-outline-offset);
+    outline-style: var(--base-outline-style);
+    outline-width: var(--base-outline-width);
   }
 }
 
@@ -119,9 +126,9 @@ input,
 textarea,
 select {
   &:focus-visible {
-    outline-color: var(--color-primary-400);
-    outline-offset: 2px;
-    outline-style: solid;
-    outline-width: 2px;
+    outline-color: var(--base-outline-color);
+    outline-offset: var(--base-outline-offset);
+    outline-style: var(--base-outline-style);
+    outline-width: var(--base-outline-width);
   }
 }
