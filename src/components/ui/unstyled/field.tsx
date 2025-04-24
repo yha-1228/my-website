@@ -12,7 +12,7 @@ import {
   type ElementTypeOf,
   type PropsWithAs,
 } from "@/types/react";
-import { getContextAndProvider } from "@/utils/react";
+import { getContextAndHook } from "@/utils/react";
 
 // internal
 // ----------------------------------------
@@ -62,14 +62,18 @@ function useField(props: UseFieldProps) {
   return { whenError, labelProps, fieldProps, descriptionProps, errorProps };
 }
 
-const [useFieldContext, FieldContextProvider] =
-  getContextAndProvider<ReturnType<typeof useField>>();
+type UseFieldReturn = ReturnType<typeof useField>;
+
+const [useFieldContext, FieldContext] = getContextAndHook<UseFieldReturn>(
+  "useFieldContext",
+  "FieldProvider",
+);
 
 function FieldProvider(props: PropsWithChildren<UseFieldProps>) {
   const { children, ...restProps } = props;
   const value = useField(restProps);
 
-  return <FieldContextProvider value={value}>{children}</FieldContextProvider>;
+  return <FieldContext value={value}>{children}</FieldContext>;
 }
 
 // ---
