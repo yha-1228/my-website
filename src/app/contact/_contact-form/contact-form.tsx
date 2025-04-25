@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-import { sendHubspotForm } from "@/api/clients/hubspot";
+import { submitHubspotForm } from "@/api/clients/hubspot";
 import { Alert } from "@/components/ui/styled/alert";
 import { Button } from "@/components/ui/styled/button";
 import {
@@ -101,7 +101,7 @@ export function ContactForm() {
 
   const submitMutation = useMutation({
     fn: (data: ContactFormValues) => {
-      return sendHubspotForm({
+      return submitHubspotForm({
         fields: [
           { objectTypeId: "0-1", name: "fullname", value: data.name },
           { objectTypeId: "0-1", name: "email", value: data.email },
