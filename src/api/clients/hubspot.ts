@@ -31,7 +31,7 @@ export async function submitHubspotForm(
   const parsedResponse = submitHubspotFormResponseSchema.safeParse(json);
 
   if (!parsedResponse.success) {
-    throw new Error(`Parse error: ${parsedResponse.error.toString}`);
+    throw new Error(`Parse error: ${parsedResponse.error.toString()}`);
   }
 
   return parsedResponse.data;

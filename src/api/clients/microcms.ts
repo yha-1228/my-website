@@ -5,7 +5,7 @@ import {
   getBlogDetailResponseSchema,
   type GetBlogListResponse,
   getBlogListResponseSchema,
-} from "../validation/blog";
+} from "../validation/microcms";
 
 /**
  * @see https://document.microcms.io/tutorial/next/next-getting-started
@@ -23,7 +23,7 @@ export async function getBlogList(): Promise<GetBlogListResponse> {
   const parsedResponse = getBlogListResponseSchema.safeParse(response);
 
   if (!parsedResponse.success) {
-    throw new Error(`Parse error: ${parsedResponse.error.toString}`);
+    throw new Error(`Parse error: ${parsedResponse.error.toString()}`);
   }
 
   return parsedResponse.data;
@@ -40,7 +40,7 @@ export async function getBlogDetail(
   const parsedResponse = getBlogDetailResponseSchema.safeParse(response);
 
   if (!parsedResponse.success) {
-    throw new Error(`Parse error: ${parsedResponse.error.toString}`);
+    throw new Error(`Parse error: ${parsedResponse.error.toString()}`);
   }
 
   return parsedResponse.data;
