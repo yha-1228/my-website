@@ -291,12 +291,12 @@ export function ContactForm() {
         </div>
 
         {Object.keys(errors).length > 0 && formState.bottomErrorVisible && (
-          <div className="bg-danger-600 border-l-danger-400 mt-9 mb-3 rounded-md border-l-[6px] py-4 pl-6">
-            <div className="text-lg font-bold text-white">
+          <div className="bg-danger-100 border-l-danger-600 text-danger-900 mt-9 mb-3 rounded-md border-l-[6px] py-4 pl-6">
+            <div className="text-lg font-bold">
               {`${Object.values(errors).length}件の項目に問題があります。`}
             </div>
 
-            <ul className="mt-2 space-y-1 text-white/90 sm:list-disc sm:space-y-0.5 sm:pl-4">
+            <ul className="mt-2 space-y-1 sm:list-disc sm:space-y-0.5 sm:pl-4">
               {entriesOf(errors).map(([key, error]) => (
                 <li key={key} className="text-sm">
                   <span className="">{keyLabelMap[key]}:</span>

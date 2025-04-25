@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { type ComponentPropsWithRef, type ReactNode } from "react";
 
-import { type LinkComponentProps } from "@/lib/next/types";
+import { type CommonHTMLProps } from "@/types/react";
 import { classVariants, cn } from "@/utils/styling";
 
 // common
@@ -12,11 +12,15 @@ interface ButtonVariantsProps {
    * @default "fill"
    */
   variant?: "fill" | "outline";
+  /**
+   * @default "md"
+   */
+  size?: "md" | "lg";
 }
 
 const getVariantClass = classVariants<ButtonVariantsProps>(
   cn(
-    "inline-flex items-center justify-center rounded-md px-5 py-2 font-bold transition-colors duration-200 ease-out",
+    "inline-flex items-center justify-center rounded-md font-bold transition-colors duration-200 ease-out",
   ),
   {
     variant: {
@@ -26,6 +30,10 @@ const getVariantClass = classVariants<ButtonVariantsProps>(
       outline: cn(
         "border border-[currentColor] text-primary-600 bg-white hover:bg-primary-50",
       ),
+    },
+    size: {
+      md: cn("h-10 px-5"),
+      lg: cn("h-12 px-8"),
     },
   },
 );
@@ -45,6 +53,7 @@ function Button(props: ButtonProps) {
   const {
     rightIcon,
     variant = "fill",
+    size = "md",
     className,
     children,
     ...restProps
@@ -53,7 +62,7 @@ function Button(props: ButtonProps) {
   return (
     <button
       className={cn(
-        getVariantClass({ variant }),
+        getVariantClass({ variant, size }),
         "disabled:bg-base-light-400 disabled:cursor-not-allowed",
         className,
       )}
@@ -76,13 +85,17 @@ function Button(props: ButtonProps) {
 // ----------------------------------------
 
 interface ButtonLinkProps
-  extends Omit<LinkComponentProps, "aria-disabled" | "role" | "tabIndex">,
+  extends Omit<
+      ComponentPropsWithRef<typeof Link>,
+      "aria-disabled" | "role" | "tabIndex"
+    >,
     ButtonBaseProps {}
 
 function ButtonLink(props: ButtonLinkProps) {
   const {
     rightIcon,
     variant = "fill",
+    size = "md",
     disabled,
     className,
     children,
@@ -90,15 +103,15 @@ function ButtonLink(props: ButtonLinkProps) {
   } = props;
 
   const ariaProps = {
-    "aria-disabled": disabled,
     role: "button",
-    ...(disabled ? { tabIndex: -1 } : {}),
-  } as const satisfies Partial<LinkComponentProps>;
+    "aria-disabled": disabled ? "true" : undefined,
+    tabIndex: disabled ? -1 : undefined,
+  } as const satisfies CommonHTMLProps;
 
   return (
     <Link
       className={cn(
-        getVariantClass({ variant }),
+        getVariantClass({ variant, size }),
         "aria-disabled:bg-base-light-400 aria-disabled:pointer-events-none",
         className,
       )}

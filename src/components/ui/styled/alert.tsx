@@ -9,6 +9,7 @@ import {
 } from "react";
 import { BsCheck2Circle, BsExclamationCircle } from "react-icons/bs";
 
+import { findFocusableElements } from "@/utils/dom";
 import { classVariants, cn } from "@/utils/styling";
 
 interface AlertVariantsProps {
@@ -16,11 +17,11 @@ interface AlertVariantsProps {
 }
 
 const getVariantClass = classVariants<AlertVariantsProps>(
-  cn("px-5 pt-4 pb-5 block sm:flex"),
+  cn("px-5 pt-4 pb-5 block rounded-lg sm:flex"),
   {
     variant: {
-      success: cn("bg-primary-50 text-primary-900 rounded-lg"),
-      error: cn("bg-danger-50 text-danger-900 rounded-lg"),
+      success: cn("bg-primary-50 text-primary-900 "),
+      error: cn("bg-danger-50 text-danger-900"),
     },
   },
 );
@@ -31,7 +32,7 @@ const variantIconMap = {
 } as const satisfies Record<AlertVariantsProps["variant"], ReactNode>;
 
 interface AlertProps
-  extends Omit<ComponentPropsWithoutRef<"div">, "role" | "tabIndex">,
+  extends Omit<ComponentPropsWithoutRef<"div">, "role">,
     AlertVariantsProps {
   alertTitle: ReactNode;
   closeAction?: { onClick?: (event: MouseEvent<HTMLButtonElement>) => void };
@@ -42,13 +43,14 @@ function Alert(props: AlertProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    ref.current?.focus();
+    if (!ref.current) return;
+    const focusableElements = findFocusableElements(ref.current);
+    focusableElements[0]?.focus();
   }, []);
 
   return (
     <div
       role="alert"
-      tabIndex={-1}
       className={cn(getVariantClass({ variant }), className)}
       ref={ref}
       {...restProps}

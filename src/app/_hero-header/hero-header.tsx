@@ -19,6 +19,7 @@ export function HeroHeader() {
         </div>
 
         <ButtonLink
+          size="lg"
           href={routes.experience.href}
           className="group mt-8 flex items-center lg:inline-flex lg:items-center lg:px-6 lg:text-lg"
         >
