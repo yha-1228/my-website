@@ -1,35 +1,43 @@
 import { type ComponentPropsWithRef } from "react";
 
-import { cn } from "@/utils/styling";
+import { classVariants, cn } from "@/utils/styling";
 
 // common
 // ----------------------------------------
 
-interface BaseProps {
+interface FieldVariantsProps {
   /**
-   * エラー時のスタイルを指定する
+   * @default false
    */
   invalid?: boolean;
 }
 
-const baseClassName = cn(
-  "w-full appearance-none rounded-md px-3 placeholder:text-base-light-400",
-  "disabled:bg-base-light-100 disabled:text-base-foreground/70 disabled:cursor-not-allowed disabled:placeholder:text-base-light-400",
-  "transition-[background-color] duration-200 ease-out",
-  "border border-base-light-300 data-invalid:border-danger-500",
+const getVariantClass = classVariants<FieldVariantsProps>(
+  cn(
+    "w-full appearance-none rounded-md px-3 placeholder:text-base-light-400",
+    "disabled:bg-base-light-100 disabled:text-base-foreground/70 disabled:cursor-not-allowed disabled:placeholder:text-base-light-400",
+    "transition-[background-color] duration-200 ease-out",
+  ),
+  {
+    invalid: {
+      false: cn("border border-base-light-300"),
+      true: cn("border border-danger-500"),
+    },
+  },
 );
 
 // ----------------------------------------
 
-interface InputProps extends ComponentPropsWithRef<"input">, BaseProps {}
+interface InputProps
+  extends ComponentPropsWithRef<"input">,
+    FieldVariantsProps {}
 
 function Input(props: InputProps) {
-  const { invalid, className, ...restProps } = props;
+  const { invalid = false, className, ...restProps } = props;
 
   return (
     <input
-      data-invalid={invalid ? "true" : undefined}
-      className={cn("h-10", baseClassName, className)}
+      className={cn("h-10", getVariantClass({ invalid }), className)}
       {...restProps}
     />
   );
@@ -37,15 +45,20 @@ function Input(props: InputProps) {
 
 // ----------------------------------------
 
-interface TextareaProps extends ComponentPropsWithRef<"textarea">, BaseProps {}
+interface TextareaProps
+  extends ComponentPropsWithRef<"textarea">,
+    FieldVariantsProps {}
 
 function Textarea(props: TextareaProps) {
-  const { invalid, className, ...restProps } = props;
+  const { invalid = false, className, ...restProps } = props;
 
   return (
     <textarea
-      data-invalid={invalid ? "true" : undefined}
-      className={cn(baseClassName, "block py-2.5 leading-normal", className)}
+      className={cn(
+        getVariantClass({ invalid }),
+        "block py-2.5 leading-normal",
+        className,
+      )}
       {...restProps}
     />
   );
@@ -66,8 +79,7 @@ function InputLengthCounter(props: InputLengthCounterProps) {
 
   return (
     <span
-      data-error={isError ? "true" : undefined}
-      className={cn("data-[error='true']:text-danger-500", className)}
+      className={cn(isError && "text-danger-500", className)}
       {...restProps}
     >
       {isError

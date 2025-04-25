@@ -1,39 +1,53 @@
 "use client";
 
 import Link from "next/link";
+import { type ComponentPropsWithRef } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
 
-import { type LinkComponentProps } from "@/lib/next/types";
-import { cn } from "@/utils/styling";
+import { classVariants, cn } from "@/utils/styling";
 
 import {
   ExternalLink,
   type ExternalLinkProps,
 } from "../unstyled/external-link";
 
-function createBaseClassName(withUnderline?: boolean) {
-  const common = cn("rounded-xs underline-offset-4");
-  const withUnderlineClass = withUnderline
-    ? cn("underline hover:decoration-2")
-    : cn("hover:underline hover:decoration-2");
-
-  return cn(common, withUnderlineClass);
+interface TextLinkVariantsProps {
+  /**
+   * @default false
+   */
+  withUnderline?: boolean;
 }
+
+const getVariantClass = classVariants<TextLinkVariantsProps>(
+  cn("rounded-xs underline-offset-4"),
+  {
+    withUnderline: {
+      true: cn("underline hover:decoration-2"),
+      false: cn("hover:underline hover:decoration-2"),
+    },
+  },
+);
 
 // ----------------------------------------
 
-interface TextLinkProps extends LinkComponentProps {
-  withUnderline?: boolean;
+interface TextLinkProps
+  extends ComponentPropsWithRef<typeof Link>,
+    TextLinkVariantsProps {
   preventLink?: boolean;
 }
 
 function TextLink(props: TextLinkProps) {
-  const { withUnderline, preventLink, onClick, className, ...restProps } =
-    props;
+  const {
+    withUnderline = false,
+    preventLink,
+    onClick,
+    className,
+    ...restProps
+  } = props;
 
   return (
     <Link
-      className={cn(createBaseClassName(withUnderline), className)}
+      className={cn(getVariantClass({ withUnderline }), className)}
       onClick={(event) => {
         if (preventLink) {
           event.preventDefault();
@@ -47,14 +61,15 @@ function TextLink(props: TextLinkProps) {
 
 // ----------------------------------------
 
-interface ExternalTextLinkProps extends ExternalLinkProps {
-  withUnderline?: boolean;
+interface ExternalTextLinkProps
+  extends ExternalLinkProps,
+    TextLinkVariantsProps {
   preventLink?: boolean;
 }
 
 function ExternalTextLink(props: ExternalTextLinkProps) {
   const {
-    withUnderline,
+    withUnderline = false,
     preventLink,
     onClick,
     className,
@@ -65,7 +80,7 @@ function ExternalTextLink(props: ExternalTextLinkProps) {
   return (
     <ExternalLink
       className={cn(
-        createBaseClassName(withUnderline),
+        getVariantClass({ withUnderline }),
         "inline-flex items-center space-x-1",
         className,
       )}
