@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { type ComponentPropsWithRef, type ReactNode } from "react";
+import { CgSpinner } from "react-icons/cg";
 
 import { type CommonHTMLProps } from "@/types/react";
 import { classVariants, cn } from "@/utils/styling";
@@ -39,8 +40,20 @@ const getVariantClass = classVariants<ButtonVariantsProps>(
 );
 
 interface ButtonBaseProps extends ButtonVariantsProps {
+  /**
+   * @default false
+   */
+  loading?: boolean;
+  /**
+   * `loading: true`のとき有効
+   *
+   * @default undefined
+   */
+  loadingLabel?: ReactNode;
+  /**
+   * @default false
+   */
   disabled?: boolean;
-  rightIcon?: ReactNode;
 }
 
 // ----------------------------------------
@@ -51,9 +64,11 @@ interface ButtonProps
 
 function Button(props: ButtonProps) {
   const {
-    rightIcon,
     variant = "fill",
     size = "md",
+    loading = false,
+    loadingLabel = undefined,
+    disabled = false,
     className,
     children,
     ...restProps
@@ -66,14 +81,13 @@ function Button(props: ButtonProps) {
         "disabled:bg-base-light-400 disabled:cursor-not-allowed",
         className,
       )}
+      disabled={disabled || loading}
       {...restProps}
     >
-      {rightIcon ? (
+      {loading ? (
         <>
-          <span>{children}</span>
-          <span className="ml-2 inline-flex items-center" aria-hidden="true">
-            {rightIcon}
-          </span>
+          <CgSpinner className="mr-3 size-5 animate-spin" aria-hidden="true" />
+          {loadingLabel || children}
         </>
       ) : (
         children
@@ -84,6 +98,13 @@ function Button(props: ButtonProps) {
 
 // ----------------------------------------
 
+function getDisabledLinkAriaProps(disabled: boolean) {
+  return {
+    "aria-disabled": disabled ? "true" : undefined,
+    tabIndex: disabled ? -1 : undefined,
+  } as const satisfies CommonHTMLProps;
+}
+
 interface ButtonLinkProps
   extends Omit<
       ComponentPropsWithRef<typeof Link>,
@@ -93,37 +114,31 @@ interface ButtonLinkProps
 
 function ButtonLink(props: ButtonLinkProps) {
   const {
-    rightIcon,
     variant = "fill",
     size = "md",
-    disabled,
+    loading = false,
+    loadingLabel = undefined,
+    disabled = false,
     className,
     children,
     ...restProps
   } = props;
 
-  const ariaProps = {
-    role: "button",
-    "aria-disabled": disabled ? "true" : undefined,
-    tabIndex: disabled ? -1 : undefined,
-  } as const satisfies CommonHTMLProps;
-
   return (
     <Link
+      role="button"
       className={cn(
         getVariantClass({ variant, size }),
         "aria-disabled:bg-base-light-400 aria-disabled:pointer-events-none",
         className,
       )}
-      {...ariaProps}
+      {...getDisabledLinkAriaProps(disabled || loading)}
       {...restProps}
     >
-      {rightIcon ? (
+      {loading ? (
         <>
-          <span>{children}</span>
-          <span className="ml-2 inline-flex items-center" aria-hidden="true">
-            {rightIcon}
-          </span>
+          <CgSpinner className="mr-3 size-5 animate-spin" aria-hidden="true" />
+          {loadingLabel || children}
         </>
       ) : (
         children
