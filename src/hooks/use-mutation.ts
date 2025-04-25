@@ -111,9 +111,7 @@ function useMutation<
     } catch (error) {
       if (error instanceof Error) {
         onError?.(error, ...args);
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        dispatch({ type: "error", error });
+        dispatch({ type: "error", error: error as TError });
       } else {
         throw error;
       }
