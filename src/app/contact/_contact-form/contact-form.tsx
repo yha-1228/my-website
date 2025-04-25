@@ -313,16 +313,12 @@ export function ContactForm() {
         <IsClient>
           {({ isClient }) => (
             <Button
-              disabled={submitMutation.loading || !isClient}
+              disabled={!isClient}
               className="mt-6 w-full"
+              loading={submitMutation.loading}
+              loadingLabel="送信中..."
             >
-              {!isClient ? (
-                <>&nbsp;</>
-              ) : submitMutation.loading ? (
-                "送信中..."
-              ) : (
-                "送信する"
-              )}
+              {!isClient ? <>&nbsp;</> : "送信する"}
             </Button>
           )}
         </IsClient>
