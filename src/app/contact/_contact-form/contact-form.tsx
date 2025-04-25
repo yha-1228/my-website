@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-import { sendNetlifyForm } from "@/api/clients/netlify";
+import { sendHubspotForm } from "@/api/clients/hubspot";
 import { Alert } from "@/components/ui/styled/alert";
 import { Button } from "@/components/ui/styled/button";
 import {
@@ -29,7 +29,6 @@ import {
 } from "@/components/ui/unstyled/field";
 import { Form } from "@/components/ui/unstyled/form";
 import { IsClient } from "@/components/ui/unstyled/is-client";
-import { CONTACT_FORM_NAME } from "@/constants";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
@@ -102,10 +101,13 @@ export function ContactForm() {
 
   const submitMutation = useMutation({
     fn: (data: ContactFormValues) => {
-      return sendNetlifyForm({
-        htmlFilepath: "/__forms.html",
-        formName: CONTACT_FORM_NAME,
-        data,
+      return sendHubspotForm({
+        fields: [
+          { objectTypeId: "0-1", name: "fullname", value: data.name },
+          { objectTypeId: "0-1", name: "email", value: data.email },
+          { objectTypeId: "0-1", name: "company", value: data.companyName },
+          { objectTypeId: "0-1", name: "message", value: data.message },
+        ],
       });
     },
     onSuccess: () => {
@@ -170,15 +172,7 @@ export function ContactForm() {
 
   return (
     <div className="lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11">
-      <Form
-        onSubmit={handleSubmit}
-        name={CONTACT_FORM_NAME}
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        noValidate
-        allDisabled={submitMutation.loading}
-      >
-        <input type="hidden" name="form-name" value={CONTACT_FORM_NAME} />
+      <Form onSubmit={handleSubmit} allDisabled={submitMutation.loading}>
         <div className="space-y-6">
           <div className="space-y-6 md:flex md:space-y-0 md:space-x-4">
             <FieldProvider
