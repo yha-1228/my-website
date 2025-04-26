@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-import { submitHubspotForm } from "@/api/clients/hubspot";
+import { submitHubspotForm } from "@/actions/hubspot";
 import { type SubmitHubspotFormRequest } from "@/api/validation/hubspot";
 import { Alert } from "@/components/ui/styled/alert";
 import { Button } from "@/components/ui/styled/button";
@@ -95,19 +95,13 @@ export function ContactForm() {
 
   const submitMutation = useMutation({
     fn: (data: ContactFormValues) => {
-      const request: SubmitHubspotFormRequest = {
-        path: {
-          hubspotPortalId: process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID,
-          hubspotFormId: process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID,
-        },
-        body: {
-          fields: [
-            { objectTypeId: "0-1", name: "fullname", value: data.name },
-            { objectTypeId: "0-1", name: "email", value: data.email },
-            { objectTypeId: "0-1", name: "company", value: data.companyName },
-            { objectTypeId: "0-1", name: "message", value: data.message },
-          ],
-        },
+      const request: SubmitHubspotFormRequest["body"] = {
+        fields: [
+          { objectTypeId: "0-1", name: "fullname", value: data.name },
+          { objectTypeId: "0-1", name: "email", value: data.email },
+          { objectTypeId: "0-1", name: "company", value: data.companyName },
+          { objectTypeId: "0-1", name: "message", value: data.message },
+        ],
       };
 
       return submitHubspotForm(request);

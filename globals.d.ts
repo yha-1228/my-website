@@ -3,7 +3,7 @@ namespace NodeJS {
     API_KEY: string;
     SERVICE_DOMAIN: string;
     NEXT_PUBLIC_GA_ID: string;
-    NEXT_PUBLIC_HUBSPOT_PORTAL_ID: string;
-    NEXT_PUBLIC_HUBSPOT_FORM_ID: string;
+    HUBSPOT_PORTAL_ID: string;
+    HUBSPOT_FORM_ID: string;
   }
 }
