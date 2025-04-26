@@ -98,7 +98,10 @@ function FieldLabel<TAs extends ElementTypeOf<"label">>(
 
 // ---
 
-type FieldProps<TAs extends ElementType> = PropsWithAs<TAs, "input">;
+type FieldProps<TAs extends ElementType> = Omit<
+  PropsWithAs<TAs, "input">,
+  "id"
+>;
 
 function Field<TAs extends ElementType>(props: FieldProps<TAs>) {
   const { as: Comp = "input", ...restProps } = props;
