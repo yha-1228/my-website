@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-import { submitHubspotForm } from "@/api/clients/hubspot";
+import { submitHubspotForm } from "@/actions/hubspot";
 import { type SubmitHubspotFormRequest } from "@/api/validation/hubspot";
 import { Alert } from "@/components/ui/styled/alert";
 import { Button } from "@/components/ui/styled/button";
@@ -53,7 +53,7 @@ import {
 interface FormState {
   values: ContactFormValues;
   touched: { [key in keyof ContactFormValues]: boolean };
-  bottomErrorVisible: boolean;
+  errorSummaryVisible: boolean;
 }
 
 const initialFormState: FormState = {
@@ -61,7 +61,7 @@ const initialFormState: FormState = {
   touched: fromEntries(
     keysOf(contactFormSchema.shape).map((key) => [key, false]),
   ),
-  bottomErrorVisible: false,
+  errorSummaryVisible: false,
 };
 
 function getErrors(formState: FormState) {
@@ -95,19 +95,13 @@ export function ContactForm() {
 
   const submitMutation = useMutation({
     fn: (data: ContactFormValues) => {
-      const request: SubmitHubspotFormRequest = {
-        path: {
-          hubspotPortalId: process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID,
-          hubspotFormId: process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID,
-        },
-        body: {
-          fields: [
-            { objectTypeId: "0-1", name: "fullname", value: data.name },
-            { objectTypeId: "0-1", name: "email", value: data.email },
-            { objectTypeId: "0-1", name: "company", value: data.companyName },
-            { objectTypeId: "0-1", name: "message", value: data.message },
-          ],
-        },
+      const request: SubmitHubspotFormRequest["body"] = {
+        fields: [
+          { objectTypeId: "0-1", name: "fullname", value: data.name },
+          { objectTypeId: "0-1", name: "email", value: data.email },
+          { objectTypeId: "0-1", name: "company", value: data.companyName },
+          { objectTypeId: "0-1", name: "message", value: data.message },
+        ],
       };
 
       return submitHubspotForm(request);
@@ -154,7 +148,7 @@ export function ContactForm() {
       setFormState((prev) => ({
         ...prev,
         touched: mapObject(prev.values, () => true),
-        bottomErrorVisible: true,
+        errorSummaryVisible: true,
       }));
 
       return;
@@ -275,7 +269,7 @@ export function ContactForm() {
           </FieldProvider>
         </div>
 
-        {Object.keys(errors).length > 0 && formState.bottomErrorVisible && (
+        {Object.keys(errors).length > 0 && formState.errorSummaryVisible && (
           <FormErrorSummaryList
             className="mt-9 mb-3"
             heading={`${Object.values(errors).length}件の項目に問題があります。`}
