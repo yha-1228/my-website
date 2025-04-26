@@ -1,13 +1,13 @@
 import {
   type ComponentProps,
   type ElementType,
-  type PropsWithChildren,
   useEffect,
   useId,
   useState,
 } from "react";
 
 import {
+  type ChildAsFunction,
   type CommonHTMLProps,
   type ElementTypeOf,
   type PropsWithAs,
@@ -64,13 +64,22 @@ const [useFieldContext, FieldContext] = getContextAndHook<UseFieldReturn>(
   "FieldProvider",
 );
 
-function FieldProvider(props: PropsWithChildren<UseFieldProps>) {
+// ---
+
+interface FieldProviderProps extends UseFieldProps {
+  children?: ChildAsFunction<UseFieldProps>;
+}
+
+function FieldProvider(props: FieldProviderProps) {
   const { children, ...restProps } = props;
   const value = useField(restProps);
 
-  return <FieldContext value={value}>{children}</FieldContext>;
+  return (
+    <FieldContext value={value}>
+      {children instanceof Function ? children(value) : children}
+    </FieldContext>
+  );
 }
-
 // ---
 
 type FieldLabelProps<TAs extends ElementTypeOf<"label">> = Omit<
@@ -137,6 +146,7 @@ function FieldError<TAs extends ElementTypeOf<"p">>(
 
 export { FieldProvider, FieldLabel, Field, FieldDescription, FieldError };
 export type {
+  FieldProviderProps,
   FieldLabelProps,
   FieldProps,
   FieldDescriptionProps,

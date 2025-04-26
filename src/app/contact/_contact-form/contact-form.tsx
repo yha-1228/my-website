@@ -175,93 +175,103 @@ export function ContactForm() {
         <div className="space-y-6">
           <div className="space-y-6 md:flex md:space-y-0 md:space-x-4">
             <FieldProvider isError={showError("name", formState)}>
-              <div className="space-y-2 md:w-1/3">
-                <FieldLabel as={Label} data-key="name" required>
-                  {keyLabelMap.name}
-                </FieldLabel>
-                <Field
-                  as={Input}
-                  type="text"
-                  name="name"
-                  placeholder="田中 太郎"
-                  value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  invalid={showError("name", formState)}
-                />
-                <FieldError as={FormErrorMessage}>{errors.name}</FieldError>
-              </div>
+              {({ isError }) => (
+                <div className="space-y-2 md:w-1/3">
+                  <FieldLabel as={Label} data-key="name" required>
+                    {keyLabelMap.name}
+                  </FieldLabel>
+                  <Field
+                    as={Input}
+                    type="text"
+                    name="name"
+                    placeholder="田中 太郎"
+                    value={values.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    invalid={isError}
+                  />
+                  <FieldError as={FormErrorMessage}>{errors.name}</FieldError>
+                </div>
+              )}
             </FieldProvider>
 
             <FieldProvider isError={showError("email", formState)}>
-              <div className="space-y-2 md:w-2/3">
-                <FieldLabel as={Label} data-key="email" required>
-                  {keyLabelMap.email}
-                </FieldLabel>
-                <Field
-                  as={Input}
-                  type="email"
-                  name="email"
-                  placeholder="email@example.com"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  invalid={showError("email", formState)}
-                />
-                <FieldError as={FormErrorMessage}>{errors.email}</FieldError>
-              </div>
+              {({ isError }) => (
+                <div className="space-y-2 md:w-2/3">
+                  <FieldLabel as={Label} data-key="email" required>
+                    {keyLabelMap.email}
+                  </FieldLabel>
+                  <Field
+                    as={Input}
+                    type="email"
+                    name="email"
+                    placeholder="email@example.com"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    invalid={isError}
+                  />
+                  <FieldError as={FormErrorMessage}>{errors.email}</FieldError>
+                </div>
+              )}
             </FieldProvider>
           </div>
 
           <FieldProvider isError={showError("companyName", formState)}>
-            <div className="space-y-2">
-              <FieldLabel as={Label} data-key="companyName">
-                {keyLabelMap.companyName}
-              </FieldLabel>
-              <Field
-                as={Input}
-                type="text"
-                name="companyName"
-                placeholder="株式会社ABC / 自営業"
-                value={values.companyName}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                invalid={showError("companyName", formState)}
-              />
-              <FieldError as={FormErrorMessage}>
-                {errors.companyName}
-              </FieldError>
-            </div>
+            {({ isError }) => (
+              <div className="space-y-2">
+                <FieldLabel as={Label} data-key="companyName">
+                  {keyLabelMap.companyName}
+                </FieldLabel>
+                <Field
+                  as={Input}
+                  type="text"
+                  name="companyName"
+                  placeholder="株式会社ABC / 自営業"
+                  value={values.companyName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  invalid={isError}
+                />
+                <FieldError as={FormErrorMessage}>
+                  {errors.companyName}
+                </FieldError>
+              </div>
+            )}
           </FieldProvider>
 
           <FieldProvider isError={showError("message", formState)}>
-            <div className="space-y-2">
-              <FieldLabel as={Label} data-key="message" required>
-                {keyLabelMap.message}
-              </FieldLabel>
-              <Field
-                as={Textarea}
-                name="message"
-                value={values.message}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                rows={6}
-                invalid={showError("message", formState)}
-              />
-              <div>
-                <FieldDescription
-                  as={FormHelperText}
-                  className="flex justify-between"
-                >
-                  <span>10文字以上</span>
-                  <InputLengthCounter
-                    currentLength={values.message.length}
-                    maxLength={MESSAGE_MAX_LENGTH}
-                  />
-                </FieldDescription>
-                <FieldError as={FormErrorMessage}>{errors.message}</FieldError>
+            {({ isError }) => (
+              <div className="space-y-2">
+                <FieldLabel as={Label} data-key="message" required>
+                  {keyLabelMap.message}
+                </FieldLabel>
+                <Field
+                  as={Textarea}
+                  name="message"
+                  value={values.message}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  rows={6}
+                  invalid={isError}
+                />
+                <div>
+                  <FieldDescription
+                    as={FormHelperText}
+                    className="flex justify-between"
+                  >
+                    <span>10文字以上</span>
+                    <InputLengthCounter
+                      currentLength={values.message.length}
+                      maxLength={MESSAGE_MAX_LENGTH}
+                    />
+                  </FieldDescription>
+                  <FieldError as={FormErrorMessage}>
+                    {errors.message}
+                  </FieldError>
+                </div>
               </div>
-            </div>
+            )}
           </FieldProvider>
         </div>
 
