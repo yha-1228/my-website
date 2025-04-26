@@ -5,6 +5,7 @@ import {
   type ElementType,
   type HTMLAttributes,
   type JSX,
+  type ReactNode,
 } from "react";
 
 import { type DistributiveOmit } from "./utils";
@@ -39,3 +40,5 @@ export type HTMLElementHasNameAndValue =
   | HTMLInputElement
   | HTMLSelectElement
   | HTMLTextAreaElement;
+
+export type ChildAsFunction<P> = ReactNode | ((props: P) => ReactNode);
