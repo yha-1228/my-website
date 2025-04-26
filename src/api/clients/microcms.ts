@@ -31,11 +31,17 @@ export async function getBlogList(): Promise<GetBlogListResponse> {
 
 export async function getBlogDetail(
   id: string,
-): Promise<GetBlogDetailResponse> {
-  const response = await client.getListDetail({
-    endpoint: "blog",
-    contentId: id,
-  });
+): Promise<GetBlogDetailResponse | undefined> {
+  let response;
+
+  try {
+    response = await client.getListDetail({
+      endpoint: "blog",
+      contentId: id,
+    });
+  } catch {
+    return undefined;
+  }
 
   const parsedResponse = getBlogDetailResponseSchema.safeParse(response);
 
