@@ -99,5 +99,5 @@ function ExternalTextLink(props: ExternalTextLinkProps) {
 }
 
 // ----------------------------------------
-
 export { TextLink, ExternalTextLink };
+export type { TextLinkProps, ExternalTextLinkProps };

@@ -12,12 +12,12 @@ export async function submitHubspotForm(
   request: SubmitHubspotFormRequest,
 ): Promise<SubmitHubspotFormResponse> {
   const method = "POST";
-  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID}/${process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID}`;
+  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${request.path.hubspotPortalId}/${request.path.hubspotFormId}`;
 
   const response = await fetch(url, {
     method,
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(request),
+    body: JSON.stringify(request.body),
   });
 
   const json = await response.json();
