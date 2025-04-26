@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import { notFound } from "next/navigation";
 import { BsChevronLeft } from "react-icons/bs";
 
 import { getBlogDetail, getBlogList } from "@/api/clients/microcms";
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const blogDetail = await getBlogDetail(id);
 
   return {
-    title: blogDetail.title,
+    title: blogDetail?.title,
   };
 }
 
@@ -31,6 +32,10 @@ export async function generateStaticParams() {
 export default async function Page({ params }: Props) {
   const { id } = await params;
   const blogDetail = await getBlogDetail(id);
+
+  if (!blogDetail) {
+    notFound();
+  }
 
   return (
     <div className="py-14">
