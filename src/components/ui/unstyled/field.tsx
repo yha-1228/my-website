@@ -18,18 +18,13 @@ import { getContextAndHook } from "@/utils/react";
 // ----------------------------------------
 
 interface UseFieldProps {
-  whenError?: boolean;
-  fieldId?: string;
+  isError?: boolean;
 }
 
-function useField(props: UseFieldProps) {
-  const { whenError, fieldId: fieldIdProp } = props;
-
-  const id = useId();
-
-  const fieldId = fieldIdProp || `${id}-field`;
-  const descriptionId = `${id}-field-description`;
-  const errorId = `${id}-field-error`;
+function useField({ isError }: UseFieldProps) {
+  const fieldId = useId();
+  const descriptionId = `${fieldId}-description`;
+  const errorId = `${fieldId}-error`;
 
   const [hasDescription, setHasDescription] = useState(false);
 
@@ -44,9 +39,9 @@ function useField(props: UseFieldProps) {
 
   const fieldProps = {
     id: fieldId,
-    "aria-invalid": whenError || undefined,
+    "aria-invalid": isError || undefined,
     "aria-describedby":
-      [hasDescription && descriptionId, whenError && errorId]
+      [hasDescription && descriptionId, isError && errorId]
         .filter(Boolean)
         .join(" ") || undefined,
   } as const satisfies CommonHTMLProps;
@@ -59,7 +54,7 @@ function useField(props: UseFieldProps) {
     id: errorId,
   } as const satisfies CommonHTMLProps;
 
-  return { whenError, labelProps, fieldProps, descriptionProps, errorProps };
+  return { isError, labelProps, fieldProps, descriptionProps, errorProps };
 }
 
 type UseFieldReturn = ReturnType<typeof useField>;
@@ -130,9 +125,9 @@ function FieldError<TAs extends ElementTypeOf<"p">>(
   props: FieldErrorProps<TAs>,
 ) {
   const { as: Comp = "p", ...restProps } = props;
-  const { whenError, errorProps } = useFieldContext();
+  const { isError, errorProps } = useFieldContext();
 
-  if (!whenError) return null;
+  if (!isError) return null;
 
   return <Comp {...errorProps} {...restProps} />;
 }

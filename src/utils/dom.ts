@@ -49,17 +49,13 @@ export function loopFocus(
   }
 }
 
-export interface ScrollWithFocusParams {
-  scrollToOptions?: Omit<ScrollToOptions, "behavior">;
-  idToFocus: string;
-}
-
 /**
  * 所定の位置にスクロールしたあと、所定の要素にフォーカスする。
  */
-export function scrollWithFocus(params: ScrollWithFocusParams) {
-  const { scrollToOptions, idToFocus } = params;
-
+export function scrollWithFocus(
+  element: HTMLElement,
+  scrollToOptions?: Omit<ScrollToOptions, "behavior">,
+) {
   const motionReduced = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
@@ -69,8 +65,7 @@ export function scrollWithFocus(params: ScrollWithFocusParams) {
     behavior: motionReduced ? "instant" : "smooth",
   });
 
-  const fieldElem = document.getElementById(idToFocus);
-  fieldElem?.focus({ preventScroll: !motionReduced });
+  element?.focus({ preventScroll: !motionReduced });
 }
 
 export function findSiblings(base: Element | null): Element[] {
