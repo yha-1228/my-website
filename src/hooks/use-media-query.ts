@@ -21,6 +21,11 @@ function useMediaQuery(
   useEffect(() => {
     const mql = window.matchMedia(query);
 
+    setState({
+      state: "loaded",
+      matches: window.matchMedia(query).matches,
+    });
+
     const listener = (event: MediaQueryListEvent) => {
       setState({ state: "loaded", matches: event.matches });
       onChangeRef.current?.(event);
