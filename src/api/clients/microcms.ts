@@ -39,7 +39,8 @@ export async function getBlogDetail(
       endpoint: "blog",
       contentId: id,
     });
-  } catch {
+  } catch (error) {
+    console.log((error as Error).message);
     return undefined;
   }
 
