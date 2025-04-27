@@ -1,5 +1,11 @@
-## Deploy
+## 概要
 
-```
-netlify deploy --build --prod
-```
+ポートフォリオサイト
+
+## 技術
+
+- JSフレームワーク: React, Next.js
+- CSS: Tailwind CSS
+- お問い合わせフォーム: HubSpot
+- ブログ: microCMS
+- デプロイ: Vercel
