@@ -169,6 +169,7 @@ export function ContactForm() {
         onSubmit={handleSubmit}
         allDisabled={submitMutation.loading}
         className="space-y-6"
+        noValidate
       >
         <div className="space-y-6 md:flex md:space-y-0 md:space-x-4">
           <FieldProvider isError={showError("name", formState)}>
