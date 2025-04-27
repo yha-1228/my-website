@@ -5,6 +5,12 @@ function useIntersectionObserver(
   callback: IntersectionObserverCallback,
   options?: IntersectionObserverInit,
 ) {
+  // 404を起こさせる画面では、ここが-NaNpxになりエラーとなる
+  // 暫定対応
+  if (options?.rootMargin === "-NaNpx") {
+    options.rootMargin = undefined;
+  }
+
   useEffect(() => {
     const target = ref.current;
     if (!target) return;
