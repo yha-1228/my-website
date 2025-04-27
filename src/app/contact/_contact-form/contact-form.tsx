@@ -32,7 +32,7 @@ import {
   FieldProvider,
 } from "@/components/ui/unstyled/field";
 import { Form } from "@/components/ui/unstyled/form";
-import { IsClient } from "@/components/ui/unstyled/is-client";
+import { NoSSR } from "@/components/ui/unstyled/no-ssr";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
 import { useMutation } from "@/hooks/use-mutation";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
@@ -165,113 +165,113 @@ export function ContactForm() {
 
   return (
     <div className="lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11">
-      <Form onSubmit={handleSubmit} allDisabled={submitMutation.loading}>
-        <div className="space-y-6">
-          <div className="space-y-6 md:flex md:space-y-0 md:space-x-4">
-            <FieldProvider isError={showError("name", formState)}>
-              {({ isError }) => (
-                <div className="space-y-2 md:w-1/3">
-                  <FieldLabel as={Label} data-key="name" required>
-                    {keyLabelMap.name}
-                  </FieldLabel>
-                  <Field
-                    as={Input}
-                    type="text"
-                    name="name"
-                    placeholder="田中 太郎"
-                    value={values.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={isError}
-                  />
-                  <FieldError as={FormErrorMessage}>{errors.name}</FieldError>
-                </div>
-              )}
-            </FieldProvider>
-
-            <FieldProvider isError={showError("email", formState)}>
-              {({ isError }) => (
-                <div className="space-y-2 md:w-2/3">
-                  <FieldLabel as={Label} data-key="email" required>
-                    {keyLabelMap.email}
-                  </FieldLabel>
-                  <Field
-                    as={Input}
-                    type="email"
-                    name="email"
-                    placeholder="email@example.com"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    invalid={isError}
-                  />
-                  <FieldError as={FormErrorMessage}>{errors.email}</FieldError>
-                </div>
-              )}
-            </FieldProvider>
-          </div>
-
-          <FieldProvider isError={showError("companyName", formState)}>
+      <Form
+        onSubmit={handleSubmit}
+        allDisabled={submitMutation.loading}
+        className="space-y-6"
+      >
+        <div className="space-y-6 md:flex md:space-y-0 md:space-x-4">
+          <FieldProvider isError={showError("name", formState)}>
             {({ isError }) => (
-              <div className="space-y-2">
-                <FieldLabel as={Label} data-key="companyName">
-                  {keyLabelMap.companyName}
+              <div className="space-y-2 md:w-1/3">
+                <FieldLabel as={Label} data-key="name" required>
+                  {keyLabelMap.name}
                 </FieldLabel>
                 <Field
                   as={Input}
                   type="text"
-                  name="companyName"
-                  placeholder="株式会社ABC / 自営業"
-                  value={values.companyName}
+                  name="name"
+                  placeholder="田中 太郎"
+                  value={values.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   invalid={isError}
                 />
-                <FieldError as={FormErrorMessage}>
-                  {errors.companyName}
-                </FieldError>
+                <FieldError as={FormErrorMessage}>{errors.name}</FieldError>
               </div>
             )}
           </FieldProvider>
 
-          <FieldProvider isError={showError("message", formState)}>
+          <FieldProvider isError={showError("email", formState)}>
             {({ isError }) => (
-              <div className="space-y-2">
-                <FieldLabel as={Label} data-key="message" required>
-                  {keyLabelMap.message}
+              <div className="space-y-2 md:w-2/3">
+                <FieldLabel as={Label} data-key="email" required>
+                  {keyLabelMap.email}
                 </FieldLabel>
                 <Field
-                  as={Textarea}
-                  name="message"
-                  value={values.message}
+                  as={Input}
+                  type="email"
+                  name="email"
+                  placeholder="email@example.com"
+                  value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  rows={6}
                   invalid={isError}
                 />
-                <div>
-                  <FieldDescription
-                    as={FormHelperText}
-                    className="flex justify-between"
-                  >
-                    <span>10文字以上</span>
-                    <InputLengthCounter
-                      currentLength={values.message.length}
-                      maxLength={MESSAGE_MAX_LENGTH}
-                    />
-                  </FieldDescription>
-                  <FieldError as={FormErrorMessage}>
-                    {errors.message}
-                  </FieldError>
-                </div>
+                <FieldError as={FormErrorMessage}>{errors.email}</FieldError>
               </div>
             )}
           </FieldProvider>
         </div>
 
+        <FieldProvider isError={showError("companyName", formState)}>
+          {({ isError }) => (
+            <div className="space-y-2">
+              <FieldLabel as={Label} data-key="companyName">
+                {keyLabelMap.companyName}
+              </FieldLabel>
+              <Field
+                as={Input}
+                type="text"
+                name="companyName"
+                placeholder="株式会社ABC / 自営業"
+                value={values.companyName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                invalid={isError}
+              />
+              <FieldError as={FormErrorMessage}>
+                {errors.companyName}
+              </FieldError>
+            </div>
+          )}
+        </FieldProvider>
+
+        <FieldProvider isError={showError("message", formState)}>
+          {({ isError }) => (
+            <div className="space-y-2">
+              <FieldLabel as={Label} data-key="message" required>
+                {keyLabelMap.message}
+              </FieldLabel>
+              <Field
+                as={Textarea}
+                name="message"
+                value={values.message}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                rows={6}
+                invalid={isError}
+              />
+              <div>
+                <FieldDescription
+                  as={FormHelperText}
+                  className="flex justify-between"
+                >
+                  <span>10文字以上</span>
+                  <InputLengthCounter
+                    currentLength={values.message.length}
+                    maxLength={MESSAGE_MAX_LENGTH}
+                  />
+                </FieldDescription>
+                <FieldError as={FormErrorMessage}>{errors.message}</FieldError>
+              </div>
+            </div>
+          )}
+        </FieldProvider>
+
         {Object.keys(errors).length > 0 && formState.errorSummaryVisible && (
           <FormErrorSummaryList
-            className="mt-9 mb-3"
+            className="my-10"
             heading={`${Object.values(errors).length}件の項目に問題があります。`}
           >
             {entriesOf(errors).map(([key, error]) => (
@@ -286,24 +286,22 @@ export function ContactForm() {
           </FormErrorSummaryList>
         )}
 
-        <IsClient>
-          {({ isClient }) => (
-            <Button
-              disabled={!isClient}
-              className="mt-6 w-full"
-              loading={submitMutation.loading}
-              loadingLabel="送信中..."
-            >
-              {!isClient ? <>&nbsp;</> : "送信する"}
-            </Button>
-          )}
-        </IsClient>
+        <NoSSR fallback={<Button className="block w-full" disabled />}>
+          <Button
+            className="block w-full"
+            loading={submitMutation.loading}
+            loadingLabel="送信中..."
+          >
+            送信する
+          </Button>
+        </NoSSR>
       </Form>
+
       {submitMutation.isSuccess && (
         <Alert
           className="mt-10"
           variant="success"
-          alertTitle="お問い合わせを送信しました"
+          heading="お問い合わせを送信しました"
         >
           <p>お返事まで今しばらくお待ちください。</p>
           <p>
@@ -314,7 +312,7 @@ export function ContactForm() {
         </Alert>
       )}
       {submitMutation.isError && (
-        <Alert className="mt-10" variant="error" alertTitle="エラー">
+        <Alert className="mt-10" variant="error" heading="エラー">
           <p>お問い合わせの送信中にエラーが発生しました。</p>
         </Alert>
       )}
