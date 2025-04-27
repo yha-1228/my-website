@@ -5,17 +5,24 @@ interface FormProps extends ComponentPropsWithRef<"form"> {
 }
 
 function Form(props: FormProps) {
-  const { children, allDisabled, ...restProps } = props;
+  const { allDisabled, ...restProps } = props;
 
-  return (
-    <form {...restProps}>
-      {typeof allDisabled !== "undefined" ? (
-        <fieldset disabled={allDisabled}>{children}</fieldset>
-      ) : (
-        children
-      )}
-    </form>
-  );
+  if (typeof allDisabled === "undefined") {
+    return <form {...restProps} />;
+  } else {
+    const { children, className, style, ...restFormProps } = restProps;
+    return (
+      <form {...restFormProps}>
+        {typeof allDisabled !== "undefined" ? (
+          <fieldset disabled={allDisabled} className={className} style={style}>
+            {children}
+          </fieldset>
+        ) : (
+          children
+        )}
+      </form>
+    );
+  }
 }
 
 export { Form };

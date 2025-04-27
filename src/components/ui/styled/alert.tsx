@@ -2,7 +2,6 @@
 
 import {
   type ComponentPropsWithoutRef,
-  type MouseEvent,
   type ReactNode,
   useEffect,
   useRef,
@@ -34,12 +33,11 @@ const variantIconMap = {
 interface AlertProps
   extends Omit<ComponentPropsWithoutRef<"div">, "role">,
     AlertVariantsProps {
-  alertTitle: ReactNode;
-  closeAction?: { onClick?: (event: MouseEvent<HTMLButtonElement>) => void };
+  heading: ReactNode;
 }
 
 function Alert(props: AlertProps) {
-  const { variant, alertTitle, className, children, ...restProps } = props;
+  const { variant, heading, className, children, ...restProps } = props;
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -57,7 +55,7 @@ function Alert(props: AlertProps) {
     >
       <div className="hidden sm:block">{variantIconMap[variant]}</div>
       <div className="sm:ml-3">
-        <div className="text-lg font-bold">{alertTitle}</div>
+        <div className="text-lg font-bold">{heading}</div>
         <div className="mt-1.5">{children}</div>
       </div>
     </div>
