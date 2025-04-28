@@ -8,9 +8,6 @@ export type DistributiveOmit<
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyFunction<T = any> = (...args: any[]) => T;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AnyAsyncFunction = AnyFunction<Promise<any>>;
-
 export type RecordCanBooleanKey<K, T> = K extends boolean
   ? Record<"true" | "false", T>
   : K extends PropertyKey

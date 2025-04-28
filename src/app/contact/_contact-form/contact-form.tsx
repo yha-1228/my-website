@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  type ChangeEvent,
-  type FocusEvent,
-  type FormEvent,
-  useState,
-} from "react";
+import { type ChangeEvent, type FocusEvent, useState } from "react";
 
 import { submitHubspotForm } from "@/actions/hubspot";
 import { type SubmitHubspotFormRequest } from "@/api/validation/hubspot";
@@ -33,8 +28,8 @@ import {
 } from "@/components/ui/unstyled/field";
 import { Form } from "@/components/ui/unstyled/form";
 import { NoSSR } from "@/components/ui/unstyled/no-ssr";
+import { useActionMutation } from "@/hooks/use-action-mutation";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
-import { useMutation } from "@/hooks/use-mutation";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
 import { type HTMLElementHasNameAndValue } from "@/types/react";
 import { scrollWithFocus } from "@/utils/dom";
@@ -53,15 +48,15 @@ import {
 interface FormState {
   values: ContactFormValues;
   touched: { [key in keyof ContactFormValues]: boolean };
-  errorSummaryVisible: boolean;
+  submitPressedWithError: boolean;
 }
+
+const keys = keysOf(contactFormSchema.shape);
 
 const initialFormState: FormState = {
   values: { name: "", email: "", companyName: "", message: "" },
-  touched: fromEntries(
-    keysOf(contactFormSchema.shape).map((key) => [key, false]),
-  ),
-  errorSummaryVisible: false,
+  touched: fromEntries(keys.map((key) => [key, false])),
+  submitPressedWithError: false,
 };
 
 function getErrors(formState: FormState) {
@@ -93,7 +88,7 @@ export function ContactForm() {
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const errors = getErrors(formState);
 
-  const submitMutation = useMutation({
+  const submitMutation = useActionMutation({
     fn: (data: ContactFormValues) => {
       const request: SubmitHubspotFormRequest["body"] = {
         fields: [
@@ -141,24 +136,27 @@ export function ContactForm() {
     scrollWithFocus(labelElem, { top: scrollToTop });
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const handleSubmit = (formData: FormData) => {
     if (Object.keys(errors).length > 0) {
       setFormState((prev) => ({
         ...prev,
         touched: mapObject(prev.values, () => true),
-        errorSummaryVisible: true,
+        submitPressedWithError: true,
       }));
 
       return;
     }
 
-    await submitMutation.mutate(formState.values);
+    const formValues = fromEntries(keys.map((key) => [key, formData.get(key)]));
+    const validatedFormValues = contactFormSchema.parse(formValues);
+
+    submitMutation.mutate(validatedFormValues);
   };
 
   useBeforeUnload({
-    enabled: Object.values(formState.values).some((value) => value !== ""),
+    enabled: entriesOf(formState.values).some(
+      ([key, value]) => value !== initialFormState.values[key],
+    ),
   });
 
   const { values } = formState;
@@ -166,7 +164,7 @@ export function ContactForm() {
   return (
     <div className="lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11">
       <Form
-        onSubmit={handleSubmit}
+        action={handleSubmit}
         allDisabled={submitMutation.pending}
         className="space-y-6"
         noValidate
@@ -270,7 +268,7 @@ export function ContactForm() {
           )}
         </FieldProvider>
 
-        {Object.keys(errors).length > 0 && formState.errorSummaryVisible && (
+        {Object.keys(errors).length > 0 && formState.submitPressedWithError && (
           <FormErrorSummaryList
             className="my-10"
             heading={`${Object.values(errors).length}件の項目に問題があります。`}
@@ -298,7 +296,7 @@ export function ContactForm() {
         </NoSSR>
       </Form>
 
-      {submitMutation.isSuccess && (
+      {!submitMutation.pending && submitMutation.isSuccess && (
         <Alert
           className="mt-10"
           variant="success"
@@ -312,7 +310,7 @@ export function ContactForm() {
           </p>
         </Alert>
       )}
-      {submitMutation.isError && (
+      {!submitMutation.pending && submitMutation.isError && (
         <Alert className="mt-10" variant="error" heading="エラー">
           <p>お問い合わせの送信中にエラーが発生しました。</p>
         </Alert>
