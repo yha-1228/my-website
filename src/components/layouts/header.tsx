@@ -1,20 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { type CSSProperties, type MouseEvent, useRef, useState } from "react";
+import { type CSSProperties, type MouseEvent, useRef } from "react";
 import { BsList, BsX } from "react-icons/bs";
 
-import { MOBILE_MENU_ID } from "@/constants";
 import { useKeydown } from "@/hooks/use-keydown";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useOnRouteChange } from "@/hooks/use-on-route-change";
-import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { routes } from "@/routes";
 import { loopFocus } from "@/utils/dom";
 import { cn } from "@/utils/styling";
 
 import { Container } from "../ui/styled/container";
 import { ActiveLink } from "../ui/unstyled/active-link";
+import { useMobileMenu } from "./hooks/use-mobile-menu";
 
 const routesWithoutHome = Object.values(routes).filter(
   (route) => route.href !== "/",
@@ -23,53 +22,36 @@ const routesWithoutHome = Object.values(routes).filter(
 const headerBorderBottomWidth = "1px";
 
 export function Header() {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenu = useMobileMenu();
 
+  const headerRef = useRef<HTMLDivElement>(null);
   useKeydown((event) => {
-    if (isMobileMenuOpen) {
+    if (mobileMenu.open) {
       loopFocus(event, headerRef.current);
     }
   });
 
-  useMediaQuery(`(min-width: var(--breakpoint-sm))`, (event) => {
-    if (isMobileMenuOpen) {
-      if (event.matches) {
-        setIsMobileMenuOpen(false);
-      }
+  // `(min-width: breakpoint.sm)`
+  useMediaQuery(`(min-width: 640px)`, (event) => {
+    if (event.matches && mobileMenu.open) {
+      mobileMenu.closeModal();
     }
   });
 
-  useScrollLock({ enabled: isMobileMenuOpen });
-
   useOnRouteChange(() => {
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
+    if (mobileMenu.open) {
+      mobileMenu.closeModal();
     }
   });
 
   const handleMobileNavLinkClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (event.currentTarget.getAttribute("aria-current") === "page") {
-      setIsMobileMenuOpen(false);
+      mobileMenu.closeModal();
     }
-  };
-
-  useKeydown((event) => {
-    if (isMobileMenuOpen) {
-      if (event.key === "Escape") {
-        setIsMobileMenuOpen(false);
-        mobileMenuButtonRef.current?.focus();
-      }
-    }
-  });
-
-  const handleMobileMenuToggle = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const handleHomeLinkClick = () => {
-    setIsMobileMenuOpen(false);
+    mobileMenu.closeModal();
   };
 
   return (
@@ -97,20 +79,14 @@ export function Header() {
 
           {/* mobile only */}
           <button
-            type="button"
-            ref={mobileMenuButtonRef}
+            {...mobileMenu.triggerProps}
             className={cn(
               "flex size-9 items-center justify-center sm:hidden",
               "absolute top-1/2 -right-1.5 -translate-y-1/2",
             )}
-            onClick={handleMobileMenuToggle}
-            aria-label={
-              isMobileMenuOpen ? "メニューを閉じる" : "メニューを開く"
-            }
-            aria-expanded={isMobileMenuOpen}
-            aria-controls={MOBILE_MENU_ID}
+            aria-label={mobileMenu.open ? "メニューを閉じる" : "メニューを開く"}
           >
-            {isMobileMenuOpen ? (
+            {mobileMenu.open ? (
               <BsX aria-hidden="true" className="size-8" />
             ) : (
               <BsList aria-hidden="true" className="size-8" />
@@ -140,10 +116,9 @@ export function Header() {
       </Container>
 
       {/* mobile only */}
-      <nav className="sm:hidden">
+      <nav className="sm:hidden" {...mobileMenu.contentProps}>
         <ul
-          id={MOBILE_MENU_ID}
-          data-is-open={isMobileMenuOpen ? "true" : undefined}
+          data-is-open={mobileMenu.open ? "true" : undefined}
           className={cn(
             // height, visibilityを同時にtransitionで切り替えることで
             // 高さのアニメーションを適用しつつ、閉じているときにフォーカスも無効にする

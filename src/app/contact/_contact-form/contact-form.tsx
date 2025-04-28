@@ -167,8 +167,9 @@ export function ContactForm() {
     <div className="lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11">
       <Form
         onSubmit={handleSubmit}
-        allDisabled={submitMutation.loading}
+        allDisabled={submitMutation.pending}
         className="space-y-6"
+        noValidate
       >
         <div className="space-y-6 md:flex md:space-y-0 md:space-x-4">
           <FieldProvider isError={showError("name", formState)}>
@@ -288,8 +289,8 @@ export function ContactForm() {
 
         <NoSSR fallback={<Button className="block w-full" disabled />}>
           <Button
-            className="block w-full"
-            loading={submitMutation.loading}
+            className="w-full"
+            loading={submitMutation.pending}
             loadingLabel="送信中..."
           >
             送信する
