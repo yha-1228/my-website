@@ -14,22 +14,20 @@ interface UseMutationProps<TAction extends AnyAsyncFunction> {
 
 interface UseMutationState<TError extends Error = Error> {
   pending: boolean;
-  loading: boolean;
   isSuccess: boolean;
   isError: boolean;
   error: TError | undefined;
 }
 
 const initialState: UseMutationState = {
-  pending: true,
-  loading: false,
+  pending: false,
   isSuccess: false,
   isError: false,
   error: undefined,
 };
 
 type Action<TError extends Error> =
-  | { type: "loading" }
+  | { type: "pending" }
   | { type: "success" }
   | { type: "error"; error: TError }
   | { type: "reset" };
@@ -39,10 +37,9 @@ function reducer<TError extends Error>(
   action: Action<TError>,
 ): UseMutationState<TError> {
   switch (action.type) {
-    case "loading": {
+    case "pending": {
       return {
-        pending: false,
-        loading: true,
+        pending: true,
         isSuccess: false,
         isError: false,
         error: undefined,
@@ -52,7 +49,6 @@ function reducer<TError extends Error>(
     case "success": {
       return {
         pending: false,
-        loading: false,
         isSuccess: true,
         isError: false,
         error: undefined,
@@ -62,7 +58,6 @@ function reducer<TError extends Error>(
     case "error": {
       return {
         pending: false,
-        loading: false,
         isSuccess: false,
         isError: true,
         error: action.error,
@@ -85,7 +80,6 @@ interface UseMutationReturn<
   mutate: (...args: Parameters<TAction>) => Promise<void>;
   reset: () => void;
   pending: boolean;
-  loading: boolean;
   isSuccess: boolean;
   isError: boolean;
   error: TError | undefined;
@@ -102,7 +96,7 @@ function useMutation<
   );
 
   const mutate = async (...args: Parameters<TAction>) => {
-    dispatch({ type: "loading" });
+    dispatch({ type: "pending" });
 
     try {
       const result = await fn(...args);
