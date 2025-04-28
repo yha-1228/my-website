@@ -289,7 +289,7 @@ export function ContactForm() {
 
         <NoSSR fallback={<Button className="block w-full" disabled />}>
           <Button
-            className="block w-full"
+            className="w-full"
             loading={submitMutation.loading}
             loadingLabel="送信中..."
           >
