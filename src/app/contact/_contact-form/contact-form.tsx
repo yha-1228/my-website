@@ -4,6 +4,7 @@ import {
   type ChangeEvent,
   type FocusEvent,
   type FormEvent,
+  startTransition,
   useState,
 } from "react";
 
@@ -33,8 +34,8 @@ import {
 } from "@/components/ui/unstyled/field";
 import { Form } from "@/components/ui/unstyled/form";
 import { NoSSR } from "@/components/ui/unstyled/no-ssr";
+import { useActionMutation } from "@/hooks/use-action-mutation";
 import { useBeforeUnload } from "@/hooks/use-beforeunload";
-import { useMutation } from "@/hooks/use-mutation";
 import { getKeyErrorMessageMap } from "@/lib/zod/utils";
 import { type HTMLElementHasNameAndValue } from "@/types/react";
 import { scrollWithFocus } from "@/utils/dom";
@@ -93,7 +94,7 @@ export function ContactForm() {
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const errors = getErrors(formState);
 
-  const submitMutation = useMutation({
+  const submitMutation = useActionMutation({
     fn: (data: ContactFormValues) => {
       const request: SubmitHubspotFormRequest["body"] = {
         fields: [
@@ -154,7 +155,9 @@ export function ContactForm() {
       return;
     }
 
-    await submitMutation.mutate(formState.values);
+    startTransition(() => {
+      submitMutation.mutate(values);
+    });
   };
 
   useBeforeUnload({
@@ -298,7 +301,7 @@ export function ContactForm() {
         </NoSSR>
       </Form>
 
-      {submitMutation.isSuccess && (
+      {!submitMutation.pending && submitMutation.isSuccess && (
         <Alert
           className="mt-10"
           variant="success"
@@ -312,7 +315,7 @@ export function ContactForm() {
           </p>
         </Alert>
       )}
-      {submitMutation.isError && (
+      {!submitMutation.pending && submitMutation.isError && (
         <Alert className="mt-10" variant="error" heading="エラー">
           <p>お問い合わせの送信中にエラーが発生しました。</p>
         </Alert>
