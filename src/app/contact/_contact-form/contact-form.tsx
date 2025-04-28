@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  type ChangeEvent,
-  type FocusEvent,
-  type FormEvent,
-  startTransition,
-  useState,
-} from "react";
+import { type ChangeEvent, type FocusEvent, useState } from "react";
 
 import { submitHubspotForm } from "@/actions/hubspot";
 import { type SubmitHubspotFormRequest } from "@/api/validation/hubspot";
@@ -57,11 +51,11 @@ interface FormState {
   submitPressedWithError: boolean;
 }
 
+const keys = keysOf(contactFormSchema.shape);
+
 const initialFormState: FormState = {
   values: { name: "", email: "", companyName: "", message: "" },
-  touched: fromEntries(
-    keysOf(contactFormSchema.shape).map((key) => [key, false]),
-  ),
+  touched: fromEntries(keys.map((key) => [key, false])),
   submitPressedWithError: false,
 };
 
@@ -142,9 +136,7 @@ export function ContactForm() {
     scrollWithFocus(labelElem, { top: scrollToTop });
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const handleSubmit = (formData: FormData) => {
     if (Object.keys(errors).length > 0) {
       setFormState((prev) => ({
         ...prev,
@@ -155,9 +147,10 @@ export function ContactForm() {
       return;
     }
 
-    startTransition(() => {
-      submitMutation.mutate(values);
-    });
+    const formValues = fromEntries(keys.map((key) => [key, formData.get(key)]));
+    const validatedFormValues = contactFormSchema.parse(formValues);
+
+    submitMutation.mutate(validatedFormValues);
   };
 
   useBeforeUnload({
@@ -171,7 +164,7 @@ export function ContactForm() {
   return (
     <div className="lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11">
       <Form
-        onSubmit={handleSubmit}
+        action={handleSubmit}
         allDisabled={submitMutation.pending}
         className="space-y-6"
         noValidate
