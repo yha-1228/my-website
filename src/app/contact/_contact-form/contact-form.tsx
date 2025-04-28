@@ -54,7 +54,7 @@ import {
 interface FormState {
   values: ContactFormValues;
   touched: { [key in keyof ContactFormValues]: boolean };
-  errorSummaryVisible: boolean;
+  submitPressedWithError: boolean;
 }
 
 const initialFormState: FormState = {
@@ -62,7 +62,7 @@ const initialFormState: FormState = {
   touched: fromEntries(
     keysOf(contactFormSchema.shape).map((key) => [key, false]),
   ),
-  errorSummaryVisible: false,
+  submitPressedWithError: false,
 };
 
 function getErrors(formState: FormState) {
@@ -149,7 +149,7 @@ export function ContactForm() {
       setFormState((prev) => ({
         ...prev,
         touched: mapObject(prev.values, () => true),
-        errorSummaryVisible: true,
+        submitPressedWithError: true,
       }));
 
       return;
@@ -161,7 +161,9 @@ export function ContactForm() {
   };
 
   useBeforeUnload({
-    enabled: Object.values(formState.values).some((value) => value !== ""),
+    enabled: entriesOf(formState.values).some(
+      ([key, value]) => value !== initialFormState.values[key],
+    ),
   });
 
   const { values } = formState;
@@ -273,7 +275,7 @@ export function ContactForm() {
           )}
         </FieldProvider>
 
-        {Object.keys(errors).length > 0 && formState.errorSummaryVisible && (
+        {Object.keys(errors).length > 0 && formState.submitPressedWithError && (
           <FormErrorSummaryList
             className="my-10"
             heading={`${Object.values(errors).length}件の項目に問題があります。`}
