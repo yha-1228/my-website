@@ -19,6 +19,19 @@ export const experiencesOverviewItems: ExperiencesOverviewItem[] = [
     kikan: "2023年9月 - 現在",
     experiences: [
       {
+        kikan: "2025年5月 - 現在",
+        title: "教育系システム",
+        projectCompanyName: "EdTechスタートアップ",
+        description: (
+          <>
+            <p>公教育の業務を支援するシステムの開発。</p>
+            <p>
+              <b>技術:</b> React, Next.js
+            </p>
+          </>
+        ),
+      },
+      {
         kikan: "2024年8月 - 2025年3月",
         title: "株取引サービス/ポータルサイト (新規開発)",
         projectCompanyName: "受託開発会社",

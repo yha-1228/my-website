@@ -8,6 +8,15 @@ function createContentId(rootId: string) {
   return `modal-${rootId}-content` as const;
 }
 
+/**
+ * モバイルメニューの次を管理するHook。
+ *
+ * - 開かれたとき、メニューの中身にフォーカスする
+ * - Escを押下されたら閉じる
+ * - 閉じられたとき、トリガーにフォーカスする
+ * - トリガーのa11y
+ * - メニューの中身のa11y
+ */
 function useMobileMenu() {
   const [open, setOpen] = useState(false);
 
