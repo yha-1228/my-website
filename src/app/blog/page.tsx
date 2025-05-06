@@ -29,18 +29,19 @@ export default async function Page() {
                 <Link
                   href={routes.blog.routes[":id"].href(content.id)}
                   className={cn(
-                    "group border-base-light-300 block rounded-md border border-solid px-5 py-4 transition-colors duration-200 ease-out",
-                    "active:[box-shadow:0_0_0_2px_var(--color-primary-600)]",
+                    "group border-base-light-300 block rounded-sm border px-5 py-4 ease-out",
+                    "hover:bg-base-light-50 hover:border-base-foreground",
                   )}
                 >
-                  <div className="text-xl font-bold underline-offset-[6px] group-hover:underline">
-                    {content.title}
+                  <div className="text-xl font-bold">{content.title}</div>
+                  <div className="mt-3 flex items-center space-x-3 sm:mt-4">
+                    <Tag className="group-hover:border-base-light-300 border border-transparent">
+                      {content.tag.tagName}
+                    </Tag>
+                    <p className="text-base-foreground-weak text-sm">
+                      {dateFormat("yyyy年MM月dd日 HH:mm", content.publishedAt)}
+                    </p>
                   </div>
-                  <p className="text-base-foreground-weak mt-1 text-sm">
-                    {dateFormat("yyyy/MM/dd HH:mm:ss", content.publishedAt)}
-                    に投稿
-                  </p>
-                  <Tag className="mt-5">{content.tag.tagName}</Tag>
                 </Link>
               </li>
             ))}
