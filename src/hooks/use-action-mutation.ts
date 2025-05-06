@@ -8,7 +8,7 @@ interface ActionMutationState {
 interface UseActionMutationProps<Payload, Result> {
   fn: (payload: Payload) => Promise<Result>;
   onSuccess?: (result: Result) => void;
-  onError?: () => void;
+  onError?: (error: Error) => void;
 }
 
 interface UseActionMutationReturn<Payload> {
@@ -38,8 +38,8 @@ function useActionMutation<Payload, Result>(
         const result = await fn(payload);
         onSuccess?.(result);
         return { isSuccess: true, isError: false };
-      } catch {
-        onError?.();
+      } catch (error) {
+        onError?.(error as Error);
         return { isSuccess: false, isError: true };
       }
     },
