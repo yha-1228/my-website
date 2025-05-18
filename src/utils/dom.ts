@@ -33,7 +33,7 @@ export function loopFocus(
     if (!event.shiftKey && activeFocusIndex === focusableElements.length - 1) {
       event.preventDefault();
 
-      const nextFocusElement = focusableElements[0];
+      const nextFocusElement = focusableElements.at(0);
       nextFocusElement?.focus();
       return;
     }

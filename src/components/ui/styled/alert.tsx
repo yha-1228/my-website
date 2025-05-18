@@ -43,7 +43,7 @@ function Alert(props: AlertProps) {
   useEffect(() => {
     if (!ref.current) return;
     const focusableElements = findFocusableElements(ref.current);
-    focusableElements[0]?.focus();
+    focusableElements.at(0)?.focus();
   }, []);
 
   return (
