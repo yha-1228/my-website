@@ -81,8 +81,8 @@ export function Header() {
           <button
             {...mobileMenu.triggerProps}
             className={cn(
-              "flex size-9 items-center justify-center sm:hidden",
-              "absolute top-1/2 -right-1.5 -translate-y-1/2",
+              "hover:bg-base-light-100 flex size-12 items-center justify-center rounded-full bg-white sm:hidden",
+              "absolute top-1/2 -right-[0.8rem] -translate-y-1/2",
             )}
             aria-label={mobileMenu.open ? "メニューを閉じる" : "メニューを開く"}
           >
