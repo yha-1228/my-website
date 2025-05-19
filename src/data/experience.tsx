@@ -26,7 +26,8 @@ export const experiencesOverviewItems: ExperiencesOverviewItem[] = [
           <>
             <p>公教育の業務を支援するシステムの開発。</p>
             <p>
-              <b>技術:</b> React, Next.js
+              <b>技術:</b> React 19, Next.js 15 (App Router), TypeScript,
+              Tailwind CSS, React Native
             </p>
           </>
         ),

@@ -24,5 +24,7 @@ export function getKeyErrorMessageMap<Input>(
   safeParseReturn: SafeParseReturnType<Input, Input>,
 ): { [key in keyof Input]?: string } {
   const keyErrorMessagesMap = getKeyErrorMessagesMap(safeParseReturn);
-  return mapObject(keyErrorMessagesMap, (errorMessages) => errorMessages?.[0]);
+  return mapObject(keyErrorMessagesMap, (errorMessages) =>
+    errorMessages?.at(0),
+  );
 }
