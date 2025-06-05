@@ -34,7 +34,7 @@ import { getKeyErrorMessageMap } from "@/lib/zod/utils";
 import { type HTMLElementHasNameAndValue } from "@/types/react";
 import { scrollWithFocus } from "@/utils/dom";
 import { entriesOf, fromEntries, keysOf, mapObject } from "@/utils/object";
-import { getCSSVar, remToPx } from "@/utils/styling";
+import { cn, getCSSVar, remToPx } from "@/utils/styling";
 
 import {
   contactFormSchema,
@@ -84,7 +84,7 @@ function showError(name: keyof ContactFormValues, formState: FormState) {
 // export
 // ----------------------------------------
 
-export function ContactForm() {
+export function ContactForm({ className }: { className?: string }) {
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const errors = getErrors(formState);
 
@@ -162,7 +162,12 @@ export function ContactForm() {
   const { values } = formState;
 
   return (
-    <div className="lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11">
+    <div
+      className={cn(
+        "lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11",
+        className,
+      )}
+    >
       <Form
         action={handleSubmit}
         allDisabled={submitMutation.pending}

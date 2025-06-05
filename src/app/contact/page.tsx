@@ -15,10 +15,10 @@ export default function Page() {
     <div className="py-14">
       <Container>
         <section>
-          <div className="pb-10 text-center">
+          <div className="text-center">
             <Heading1>{routes.contact.label}</Heading1>
           </div>
-          <ContactForm />
+          <ContactForm className="mt-10" />
         </section>
       </Container>
     </div>
