@@ -126,7 +126,8 @@ export function ContactForm({ className }: { className?: string }) {
     const labelY = labelElem.getBoundingClientRect().top;
     if (!labelY) return;
 
-    const bufferMargin = 12;
+    const bufferMargin = remToPx(getCSSVar("--spacing")) * 4;
+
     const scrollToTop =
       window.scrollY +
       labelY -
