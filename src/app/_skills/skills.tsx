@@ -3,7 +3,6 @@ import { type ReactNode } from "react";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { Heading2 } from "@/components/ui/styled/heading2";
-import { SplitNode } from "@/components/ui/unstyled/split-node";
 import {
   CATEGORIES,
   type Rank,
@@ -94,21 +93,20 @@ export function Skills() {
                     {skillWordCategoryHeadingMap[category]}
                   </Heading2>
 
-                  <div className="leading-loose">
-                    <SplitNode
-                      separator={
+                  <ul className="leading-loose">
+                    {filteredSkillWordsByCategory.map((s) => (
+                      <li
+                        key={s.label}
+                        className="inline first:*:[[data-separator]]:hidden"
+                      >
                         <span
+                          data-separator
                           aria-hidden="true"
-                          aria-label=","
                           className="text-base-light-400"
                         >
                           {` / `}
                         </span>
-                      }
-                    >
-                      {filteredSkillWordsByCategory.map((s) => (
                         <span
-                          key={s.label}
                           lang="en"
                           className={cn(
                             "text-lg",
@@ -118,9 +116,9 @@ export function Skills() {
                         >
                           {s.label}
                         </span>
-                      ))}
-                    </SplitNode>
-                  </div>
+                      </li>
+                    ))}
+                  </ul>
                 </section>
               );
             })}
