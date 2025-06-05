@@ -20,10 +20,10 @@ export default async function Page() {
     <div className="py-14">
       <Container>
         <section>
-          <div className="pb-10 text-center">
+          <div className="text-center">
             <Heading1>{routes.blog.label}</Heading1>
           </div>
-          <ul className="space-y-4">
+          <ul className="mt-10 space-y-4">
             {contents.map((content) => (
               <li key={content.id}>
                 <Link

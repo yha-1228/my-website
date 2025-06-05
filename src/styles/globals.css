@@ -109,26 +109,14 @@ body {
   --base-outline-width: 2px;
 }
 
-button,
-[role="button"],
-a {
-  outline-color: transparent;
-
-  &:focus-visible {
-    outline-color: var(--base-outline-color);
-    outline-offset: var(--base-outline-offset);
-    outline-style: var(--base-outline-style);
-    outline-width: var(--base-outline-width);
-  }
-}
-
-input,
-textarea,
-select {
-  &:focus-visible {
-    outline-color: var(--base-outline-color);
-    outline-offset: var(--base-outline-offset);
-    outline-style: var(--base-outline-style);
-    outline-width: var(--base-outline-width);
-  }
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline-color: var(--base-outline-color);
+  outline-offset: var(--base-outline-offset);
+  outline-style: var(--base-outline-style);
+  outline-width: var(--base-outline-width);
 }

@@ -25,6 +25,7 @@ export const skillWords: SkillWord[] = [
   { category: "tools", label: "Bitbucket", strong: true },
   { category: "tools", label: "Notion", strong: true },
   { category: "tools", label: "Jira", strong: true },
+  { category: "tools", label: "Asana" },
   { category: "tools", label: "Redmine" },
   { category: "tools", label: "Figma" },
 ];

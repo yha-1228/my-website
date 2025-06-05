@@ -37,10 +37,10 @@ export default function Page() {
     <div className="py-14">
       <Container className="md:max-w-(--breakpoint-md)">
         <section>
-          <div className="pb-10 text-center">
+          <div className="text-center">
             <Heading1>{routes.experience.label}</Heading1>
           </div>
-          <div className="space-y-12">
+          <div className="mt-10 space-y-12">
             {experiencesOverviewItems.map((experiencesOverviewItem) => (
               <section
                 className="space-y-5"
