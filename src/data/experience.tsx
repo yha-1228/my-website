@@ -166,11 +166,11 @@ export const allExperiences = [
   // 副業
   {
     kikan: "2025年6月中旬 - 現在",
-    title: "アパレルブランドWebサイト",
+    title: "デザイン会社コーポレートサイト",
     projectCompanyName: null,
     description: (
       <>
-        <p>アパレルブランドWebサイトの開発。</p>
+        <p>Web制作やデザインを行う会社のコーポレートサイト開発。</p>
         <p>
           <b>技術:</b> React, Next.js, TypeScript, Tailwind CSS, microCMS
         </p>
