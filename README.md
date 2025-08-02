@@ -7,5 +7,5 @@
 - JSフレームワーク: React, Next.js
 - CSS: Tailwind CSS
 - お問い合わせフォーム: HubSpot
-- ブログ: microCMS
+- ブログ: Zenn
 - デプロイ: Vercel
