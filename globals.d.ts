@@ -1,6 +1,6 @@
 namespace NodeJS {
   interface ProcessEnv {
-    NEXT_PUBLIC_GA_ID: string;
+    NEXT_PUBLIC_GA_ID?: string | undefined;
     HUBSPOT_PORTAL_ID?: string | undefined;
     HUBSPOT_FORM_GUID?: string | undefined;
   }

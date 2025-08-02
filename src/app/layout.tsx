@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import { type ReactNode } from "react";
+import { z } from "zod";
 
 import { SITE_TITLE } from "@/constants";
 import { cn } from "@/utils/styling";
@@ -33,7 +34,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer className="mt-auto" />
         </div>
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      <GoogleAnalytics
+        gaId={z.string().min(1).parse(process.env.NEXT_PUBLIC_GA_ID)}
+      />
     </html>
   );
 }
