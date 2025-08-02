@@ -1,22 +1,23 @@
 import {
-  type SubmitHubspotFormRequest,
+  type SubmitHubspotFormRequestBody,
   type SubmitHubspotFormResponse,
   submitHubspotFormResponseSchema,
 } from "../validation/hubspot";
-import { customFetch } from "./common";
 
 /**
  * @see https://developers.hubspot.jp/docs/reference/api/marketing/forms/v3-legacy
  */
 export async function submitHubspotForm(
-  request: SubmitHubspotFormRequest,
+  portalId: string,
+  formGuid: string,
+  requestBody: SubmitHubspotFormRequestBody,
 ): Promise<SubmitHubspotFormResponse> {
-  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${request.path.hubspotPortalId}/${request.path.hubspotFormId}`;
+  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`;
 
-  const json = await customFetch(url, {
+  const json = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(request.body),
+    body: JSON.stringify(requestBody),
   });
 
   const parsedResponse = submitHubspotFormResponseSchema.safeParse(json);
