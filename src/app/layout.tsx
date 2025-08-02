@@ -5,11 +5,12 @@ import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import { type ReactNode } from "react";
 
-import { Footer } from "@/components/layouts/footer";
-import { Header } from "@/components/layouts/header";
-import { MainArea } from "@/components/layouts/main-area";
 import { SITE_TITLE } from "@/constants";
 import { cn } from "@/utils/styling";
+
+import { Footer } from "./_layouts/footer";
+import { Header } from "./_layouts/header";
+import { MainArea } from "./_layouts/main-area";
 
 export const metadata: Metadata = {
   title: { template: `${SITE_TITLE} | %s`, default: SITE_TITLE },

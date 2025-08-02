@@ -1,16 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { type ComponentPropsWithRef } from "react";
+import { BsArrowUpRight } from "react-icons/bs";
 
+import { type TextLinkVariantsProps } from "@/components/ui/styled/text-link";
 import { classVariants, cn } from "@/utils/styling";
-
-export interface TextLinkVariantsProps {
-  /**
-   * @default false
-   */
-  withUnderline?: boolean;
-}
 
 const getVariantClass = classVariants<TextLinkVariantsProps>(
   cn("rounded-xs underline-offset-4"),
@@ -22,26 +16,31 @@ const getVariantClass = classVariants<TextLinkVariantsProps>(
   },
 );
 
-// ----------------------------------------
-
-interface TextLinkProps
-  extends ComponentPropsWithRef<typeof Link>,
+export interface ExternalTextLinkProps
+  extends Omit<ComponentPropsWithRef<"a">, "target" | "rel">,
     TextLinkVariantsProps {
   preventLink?: boolean;
 }
 
-function TextLink(props: TextLinkProps) {
+export function ExternalTextLink(props: ExternalTextLinkProps) {
   const {
     withUnderline = false,
     preventLink,
     onClick,
     className,
+    children,
     ...restProps
   } = props;
 
   return (
-    <Link
-      className={cn(getVariantClass({ withUnderline }), className)}
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        getVariantClass({ withUnderline }),
+        "inline-flex items-center space-x-1",
+        className,
+      )}
       onClick={(event) => {
         if (preventLink) {
           event.preventDefault();
@@ -49,10 +48,9 @@ function TextLink(props: TextLinkProps) {
         onClick?.(event);
       }}
       {...restProps}
-    />
+    >
+      <span>{children}</span>
+      <BsArrowUpRight />
+    </a>
   );
 }
-
-// ----------------------------------------
-export { TextLink };
-export type { TextLinkProps };

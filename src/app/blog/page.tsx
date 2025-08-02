@@ -4,9 +4,9 @@ import Link from "next/link";
 import { getBlogList } from "@/api/clients/microcms";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
-import { Tag } from "@/components/ui/styled/tag";
+import { dateFormat } from "@/features/blog/date";
+import { Tag } from "@/features/blog/tag";
 import { routes } from "@/routes";
-import { dateFormat } from "@/utils/date";
 import { cn } from "@/utils/styling";
 
 export const metadata: Metadata = {
