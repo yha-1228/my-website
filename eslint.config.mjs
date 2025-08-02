@@ -1,5 +1,6 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import prettierConfig from "eslint-config-prettier";
+import noBarrelFiles from "eslint-plugin-no-barrel-files";
 import reactPlugin from "eslint-plugin-react";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import { dirname } from "path";
@@ -85,6 +86,7 @@ export default tseslint.config(
   ...nextConfigs,
   prettierConfig,
   baseConfig,
+  noBarrelFiles.flat, // https://github.com/art0rz/eslint-plugin-no-barrel-files
   typescriptConfig,
   reactConfig,
 );
