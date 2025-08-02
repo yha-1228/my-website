@@ -10,12 +10,12 @@ import {
 import { BsArrowUpShort } from "react-icons/bs";
 
 import { Button } from "@/components/ui/styled/button";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
+import { clientOnly } from "@/lib/next/helpers";
 import { sleep } from "@/utils/misc";
 import { cn, getCSSVar, remToPx } from "@/utils/styling";
 
-import { clientOnly } from "./client-only";
-import { SafetyPortal } from "./safety-portal";
-import { useIntersectionObserver } from "./use-intersection-observer";
+import { SafetyPortal } from "../ui/unstyled/safety-portal";
 
 function useScrollToTopButton() {
   const refToIntersect = useRef<HTMLDivElement | null>(null);

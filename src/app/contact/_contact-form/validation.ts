@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { errorMessages } from "@/form/error-messages";
+
 export const MESSAGE_MAX_LENGTH = 1000;
 
 export const contactFormSchema = z.object({
@@ -8,7 +10,7 @@ export const contactFormSchema = z.object({
    *
    * @description 必須
    */
-  name: z.string().min(1, { message: "入力してください。" }),
+  name: z.string().min(1, { message: errorMessages.required() }),
 
   /**
    * メールアドレス
@@ -17,8 +19,8 @@ export const contactFormSchema = z.object({
    */
   email: z
     .string()
-    .min(1, { message: "入力してください。" })
-    .email({ message: "メールアドレスの形式で入力してください。" }),
+    .min(1, { message: errorMessages.required() })
+    .email({ message: errorMessages.isEmail() }),
 
   /**
    * 会社名
@@ -28,7 +30,7 @@ export const contactFormSchema = z.object({
   companyName: z
     .string()
     .min(1)
-    .max(100, { message: "100文字以内で入力してください。" })
+    .max(100, { message: errorMessages.isLength({ max: 100 }) })
     .or(z.literal("")),
 
   /**
@@ -38,10 +40,10 @@ export const contactFormSchema = z.object({
    */
   message: z
     .string()
-    .min(1, { message: "入力してください。" })
-    .min(10, { message: "10文字以上で入力してください。" })
+    .min(1, { message: errorMessages.required() })
+    .min(10, { message: errorMessages.isLength({ min: 10 }) })
     .max(MESSAGE_MAX_LENGTH, {
-      message: `${MESSAGE_MAX_LENGTH}文字以内で入力してください。`,
+      message: errorMessages.isLength({ max: MESSAGE_MAX_LENGTH }),
     }),
 });
 

@@ -3,8 +3,6 @@ import { type ReactNode } from "react";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { Heading2 } from "@/components/ui/styled/heading2";
-import { cn } from "@/utils/styling";
-
 import {
   CATEGORIES,
   type Rank,
@@ -12,7 +10,8 @@ import {
   skillDetails,
   type SkillWord,
   skillWords,
-} from "./data";
+} from "@/data/skills";
+import { cn } from "@/utils/styling";
 
 interface SkillDetailCardProps {
   heading: ReactNode;

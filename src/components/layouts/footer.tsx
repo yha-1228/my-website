@@ -1,9 +1,8 @@
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
-import { Container } from "../../ui/styled/container";
-import { TextLink } from "../../ui/styled/text-link";
-import { ExternalTextLink } from "./external-text-link";
+import { Container } from "../ui/styled/container";
+import { ExternalTextLink, TextLink } from "../ui/styled/text-link";
 
 interface LinkInterface {
   href: string;

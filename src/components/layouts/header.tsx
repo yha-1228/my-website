@@ -4,16 +4,16 @@ import Link from "next/link";
 import { type CSSProperties, type MouseEvent, useRef } from "react";
 import { BsList, BsX } from "react-icons/bs";
 
+import { useKeydown } from "@/hooks/use-keydown";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { useOnRouteChange } from "@/hooks/use-on-route-change";
 import { routes } from "@/routes";
+import { loopFocus } from "@/utils/dom";
 import { cn } from "@/utils/styling";
 
-import { Container } from "../../ui/styled/container";
-import { ActiveLink } from "./active-link";
-import { loopFocus } from "./loop-focus";
-import { useKeydown } from "./use-keydown";
-import { useMediaQuery } from "./use-media-query";
-import { useMobileMenu } from "./use-mobile-menu";
-import { useOnRouteChange } from "./use-on-route-change";
+import { Container } from "../ui/styled/container";
+import { ActiveLink } from "../ui/unstyled/active-link";
+import { useMobileMenu } from "./hooks/use-mobile-menu";
 
 const routesWithoutHome = Object.values(routes).filter(
   (route) => route.href !== "/",

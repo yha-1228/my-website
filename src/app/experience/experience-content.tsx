@@ -4,18 +4,20 @@ import { type ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import { z } from "zod";
 
 import { Heading2 } from "@/components/ui/styled/heading2";
-import { routes } from "@/routes";
-import { assertNever } from "@/utils/misc";
-import { entriesOf } from "@/utils/object";
-
+import { Timeline, type TimelineItem } from "@/components/ui/styled/timeline";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/components/ui/styled/toggle-group";
 import {
   allExperiences,
   type Experience,
   typeKikanMap,
   typeNameMap,
-} from "./data";
-import { Timeline, type TimelineItem } from "./timeline";
-import { ToggleGroup, ToggleGroupItem } from "./toggle-group";
+} from "@/data/experience";
+import { routes } from "@/routes";
+import { assertNever } from "@/utils/misc";
+import { entriesOf } from "@/utils/object";
 
 const jobCategoryLabelMap = {
   all: "すべて",

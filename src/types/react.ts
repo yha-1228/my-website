@@ -34,4 +34,11 @@ export type PropsWithAs<
   "as"
 >;
 
+export type HTMLElementHasNameAndValue =
+  | HTMLButtonElement
+  | HTMLFormElement
+  | HTMLInputElement
+  | HTMLSelectElement
+  | HTMLTextAreaElement;
+
 export type ChildAsFunction<P> = ReactNode | ((props: P) => ReactNode);

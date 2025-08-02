@@ -1,7 +1,8 @@
 import { type ComponentPropsWithRef, type ReactNode } from "react";
 
-import { TextLink } from "@/components/ui/styled/text-link";
 import { cn } from "@/utils/styling";
+
+import { TextLink } from "./text-link";
 
 interface FormErrorSummaryListProps
   extends Omit<ComponentPropsWithRef<"div">, "role"> {
