@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
+
 import { ArrowRight } from "@/assets/arrow-right";
-import { ButtonLink } from "@/components/ui/styled/button";
+import { Button } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";
 
@@ -18,7 +20,8 @@ export function HeroHeader() {
           </p>
         </div>
 
-        <ButtonLink
+        <Button
+          as={Link}
           size="lg"
           href={routes.experience.href}
           className="group mt-8 flex items-center lg:inline-flex lg:items-center lg:px-6 lg:text-lg"
@@ -27,7 +30,7 @@ export function HeroHeader() {
           <span className="ml-1 inline-block lg:ml-1.5 lg:transition-transform lg:duration-300 lg:group-hover:translate-x-1 lg:motion-reduce:transform-none">
             <ArrowRight aria-hidden="true" className="size-4" />
           </span>
-        </ButtonLink>
+        </Button>
       </Container>
     </div>
   );

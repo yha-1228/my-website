@@ -1,12 +1,8 @@
-import Link from "next/link";
-import { type ComponentPropsWithRef, type ReactNode } from "react";
+import { type ElementType, type ReactNode } from "react";
 import { CgSpinner } from "react-icons/cg";
 
-import { type CommonHTMLProps } from "@/types/react";
+import { type PropsWithAs } from "@/types/react";
 import { classVariants, cn } from "@/utils/styling";
-
-// common
-// ----------------------------------------
 
 interface ButtonVariantsProps {
   /**
@@ -29,7 +25,7 @@ const getVariantClass = classVariants<ButtonVariantsProps>(
         "bg-primary-600 text-white hover:bg-primary-800 active:bg-primary-700",
       ),
       outline: cn(
-        "border border-[currentColor] text-primary-600 bg-white hover:bg-primary-50",
+        "border border-current text-primary-600 bg-white hover:bg-primary-50",
       ),
     },
     size: {
@@ -39,31 +35,27 @@ const getVariantClass = classVariants<ButtonVariantsProps>(
   },
 );
 
-interface ButtonBaseProps extends ButtonVariantsProps {
-  /**
-   * @default false
-   */
-  loading?: boolean;
-  /**
-   * `loading: true`のとき有効
-   *
-   * @default undefined
-   */
-  loadingLabel?: ReactNode;
-  /**
-   * @default false
-   */
-  disabled?: boolean;
-}
+type ButtonProps<T extends ElementType> = PropsWithAs<T, "button"> &
+  ButtonVariantsProps & {
+    /**
+     * @default false
+     */
+    loading?: boolean;
+    /**
+     * `loading: true`のとき有効
+     *
+     * @default undefined
+     */
+    loadingLabel?: ReactNode;
+    /**
+     * @default false
+     */
+    disabled?: boolean;
+  };
 
-// ----------------------------------------
-
-interface ButtonProps
-  extends ComponentPropsWithRef<"button">,
-    ButtonBaseProps {}
-
-function Button(props: ButtonProps) {
+function Button<T extends ElementType>(props: ButtonProps<T>) {
   const {
+    as: Comp = "button",
     variant = "fill",
     size = "md",
     loading = false,
@@ -75,7 +67,7 @@ function Button(props: ButtonProps) {
   } = props;
 
   return (
-    <button
+    <Comp
       className={cn(
         getVariantClass({ variant, size }),
         "disabled:bg-base-light-400 disabled:cursor-not-allowed",
@@ -92,61 +84,8 @@ function Button(props: ButtonProps) {
       ) : (
         children
       )}
-    </button>
+    </Comp>
   );
 }
 
-// ----------------------------------------
-
-function getDisabledLinkAriaProps(disabled: boolean) {
-  return {
-    "aria-disabled": disabled ? "true" : undefined,
-    tabIndex: disabled ? -1 : undefined,
-  } as const satisfies CommonHTMLProps;
-}
-
-interface ButtonLinkProps
-  extends Omit<
-      ComponentPropsWithRef<typeof Link>,
-      "aria-disabled" | "role" | "tabIndex"
-    >,
-    ButtonBaseProps {}
-
-function ButtonLink(props: ButtonLinkProps) {
-  const {
-    variant = "fill",
-    size = "md",
-    loading = false,
-    loadingLabel = undefined,
-    disabled = false,
-    className,
-    children,
-    ...restProps
-  } = props;
-
-  return (
-    <Link
-      role="button"
-      className={cn(
-        getVariantClass({ variant, size }),
-        "aria-disabled:bg-base-light-400 aria-disabled:pointer-events-none",
-        className,
-      )}
-      {...getDisabledLinkAriaProps(disabled || loading)}
-      {...restProps}
-    >
-      {loading ? (
-        <>
-          <CgSpinner className="mr-3 size-5 animate-spin" aria-hidden="true" />
-          {loadingLabel || children}
-        </>
-      ) : (
-        children
-      )}
-    </Link>
-  );
-}
-
-// ----------------------------------------
-
-export { Button, type ButtonProps, ButtonLink, type ButtonLinkProps };
+export { Button, type ButtonProps };
