@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 import { BsArrowUpRight } from "react-icons/bs";
-import Parser from "rss-parser";
 
+import { getZennArticles } from "@/api/endpoints/blog";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { SITE_TITLE } from "@/constants";
@@ -9,14 +9,6 @@ import { dateFormat } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
-
-const parser = new Parser();
-
-async function getZennArticles() {
-  const url = "https://zenn.dev/yhase_rqp/feed?all=1";
-  const feed = await parser.parseURL(url);
-  return feed.items;
-}
 
 export const metadata: Metadata = {
   title: `${routes.blog.label} | ${SITE_TITLE}`,
