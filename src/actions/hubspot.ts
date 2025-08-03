@@ -2,11 +2,11 @@
 
 import { z } from "zod";
 
-import { submitHubspotForm as _submitHubspotForm } from "@/api/clients/hubspot";
+import { submitHubspotForm as _submitHubspotForm } from "@/api/endpoints/hubspot";
 import {
   type SubmitHubspotFormRequestBody,
   type SubmitHubspotFormResponse,
-} from "@/api/validation/hubspot";
+} from "@/api/models/hubspot";
 
 export async function submitHubspotForm(
   requestBody: SubmitHubspotFormRequestBody,

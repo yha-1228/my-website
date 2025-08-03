@@ -3,7 +3,7 @@
 import { type ChangeEvent, type FocusEvent, useState } from "react";
 
 import { submitHubspotForm } from "@/actions/hubspot";
-import { type SubmitHubspotFormRequestBody } from "@/api/validation/hubspot";
+import { type SubmitHubspotFormRequestBody } from "@/api/models/hubspot";
 import { Button } from "@/components/ui/styled/button";
 import { TextLink } from "@/components/ui/styled/text-link";
 import { type HTMLElementHasNameAndValue } from "@/types/react";

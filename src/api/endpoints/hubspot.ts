@@ -2,7 +2,7 @@ import {
   type SubmitHubspotFormRequestBody,
   type SubmitHubspotFormResponse,
   submitHubspotFormResponseSchema,
-} from "../validation/hubspot";
+} from "../models/hubspot";
 
 /**
  * @see https://developers.hubspot.jp/docs/reference/api/marketing/forms/v3-legacy
