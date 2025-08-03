@@ -14,7 +14,7 @@ import { Header } from "./_layouts/header";
 import { MainArea } from "./_layouts/main-area";
 
 export const metadata: Metadata = {
-  title: { template: `${SITE_TITLE} | %s`, default: SITE_TITLE },
+  title: SITE_TITLE,
   formatDetection: { email: false, address: false, telephone: false },
 };
 

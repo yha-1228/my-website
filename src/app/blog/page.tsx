@@ -4,6 +4,7 @@ import Parser from "rss-parser";
 
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
+import { SITE_TITLE } from "@/constants";
 import { dateFormat } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
 import { routes } from "@/routes";
@@ -18,7 +19,7 @@ async function getZennArticles() {
 }
 
 export const metadata: Metadata = {
-  title: routes.blog.label,
+  title: `${routes.blog.label} | ${SITE_TITLE}`,
 };
 
 export default async function Page() {
