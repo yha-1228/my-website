@@ -6,7 +6,10 @@ function Container(props: ComponentPropsWithRef<"div">) {
   const { className, ...restProps } = props;
 
   return (
-    <div className={cn("container mx-auto px-5", className)} {...restProps} />
+    <div
+      className={cn("container mx-auto px-(--screen-margin)", className)}
+      {...restProps}
+    />
   );
 }
 
