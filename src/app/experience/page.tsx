@@ -3,12 +3,13 @@ import { Suspense } from "react";
 
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
+import { SITE_TITLE } from "@/constants";
 import { routes } from "@/routes";
 
 import { ExperienceContent } from "./_experience-content";
 
 export const metadata: Metadata = {
-  title: routes.experience.label,
+  title: `${routes.experience.label} | ${SITE_TITLE}`,
 };
 
 export default function Page() {

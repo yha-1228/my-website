@@ -3,11 +3,10 @@
 import { type ChangeEvent, type FocusEvent, useState } from "react";
 
 import { submitHubspotForm } from "@/actions/hubspot";
-import { type SubmitHubspotFormRequest } from "@/api/validation/hubspot";
+import { type SubmitHubspotFormRequestBody } from "@/api/models/hubspot";
 import { Button } from "@/components/ui/styled/button";
 import { TextLink } from "@/components/ui/styled/text-link";
-import { type HTMLElementHasNameAndValue } from "@/types/react";
-import { entriesOf, fromEntries, keysOf, mapObject } from "@/utils/object";
+import { entriesOf } from "@/utils/object";
 import { cn, getCSSVar, remToPx } from "@/utils/styling";
 
 import {
@@ -19,6 +18,8 @@ import {
 } from "./headless-ui/field";
 import { Form } from "./headless-ui/form";
 import { NoSSR } from "./no-ssr";
+import { fromEntries, keysOf, mapObject } from "./object-utils";
+import { type HTMLElementHasNameAndValue } from "./react-utils";
 import { scrollWithFocus } from "./scroll-with-focus";
 import { Alert } from "./ui/alert";
 import { Input, InputLengthCounter, Textarea } from "./ui/field";
@@ -86,7 +87,7 @@ export function ContactForm({ className }: { className?: string }) {
 
   const submitMutation = useActionMutation({
     fn: (data: ContactFormValues) => {
-      const request: SubmitHubspotFormRequest["body"] = {
+      const request: SubmitHubspotFormRequestBody = {
         fields: [
           { objectTypeId: "0-1", name: "fullname", value: data.name },
           { objectTypeId: "0-1", name: "email", value: data.email },

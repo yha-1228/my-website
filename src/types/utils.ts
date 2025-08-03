@@ -13,9 +13,3 @@ export type RecordCanBooleanKey<K, T> = K extends boolean
   : K extends PropertyKey
     ? Record<K, T>
     : never;
-
-export type Replace<T, U extends { [key in keyof T]?: unknown }> = Omit<
-  T,
-  keyof U
-> &
-  U;
