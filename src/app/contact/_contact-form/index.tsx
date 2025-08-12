@@ -315,7 +315,11 @@ export function ContactForm({ className }: { className?: string }) {
       )}
       {!submitMutation.pending && submitMutation.isError && (
         <Alert className="mt-10" variant="error" heading="エラー">
-          <p>お問い合わせの送信中にエラーが発生しました。</p>
+          <p>
+            お問い合わせの送信中にエラーが発生しました。
+            <br />
+            現在フォーム送信に失敗しやすい状態が続いているため、お手数ですがyuta.hasegawa.tech@gmail.comに直接ご連絡ください。
+          </p>
         </Alert>
       )}
     </div>
