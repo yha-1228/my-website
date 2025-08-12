@@ -40,6 +40,10 @@ function useActionMutation<Payload, Result>(
         return { isSuccess: true, isError: false };
       } catch (error) {
         onError?.(error as Error);
+
+        // @ts-expect-error ignore type
+        console.log(`useActionMutation error`, error.message);
+
         return { isSuccess: false, isError: true };
       }
     },
