@@ -20,11 +20,18 @@ export async function submitHubspotForm(
     body: JSON.stringify(requestBody),
   });
 
-  const json = await response.json();
+  let json;
+
+  try {
+    json = await response.json();
+  } catch (error) {
+    console.log(`JSON parse error`, (error as Error).message);
+  }
 
   const parsedResponse = submitHubspotFormResponseSchema.safeParse(json);
 
   if (!parsedResponse.success) {
+    console.log(`Zod error`, parsedResponse.error.message);
     throw new Error(`Parse error: ${parsedResponse.error.toString()}`);
   }
 
