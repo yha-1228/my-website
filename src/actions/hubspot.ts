@@ -1,15 +1,17 @@
 "use server";
 
-import { z } from "zod";
-
 import { submitHubspotForm as _submitHubspotForm } from "@/api/endpoints/hubspot";
 import { type SubmitHubspotFormRequestBody } from "@/api/models/hubspot";
 
 export async function submitHubspotForm(
   requestBody: SubmitHubspotFormRequestBody,
 ) {
-  const portalId = z.string().min(1).parse(process.env.HUBSPOT_PORTAL_ID);
-  const formGuid = z.string().min(1).parse(process.env.HUBSPOT_FORM_GUID);
+  console.log(`process.env.HUBSPOT_PORTAL_ID!`, process.env.HUBSPOT_PORTAL_ID!);
+  console.log(`process.env.HUBSPOT_FORM_GUID!`, process.env.HUBSPOT_FORM_GUID!);
 
-  return _submitHubspotForm(portalId, formGuid, requestBody);
+  return _submitHubspotForm(
+    process.env.HUBSPOT_PORTAL_ID!,
+    process.env.HUBSPOT_FORM_GUID!,
+    requestBody,
+  );
 }
