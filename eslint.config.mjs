@@ -3,6 +3,7 @@ import prettierConfig from "eslint-config-prettier";
 import noBarrelFiles from "eslint-plugin-no-barrel-files";
 import reactPlugin from "eslint-plugin-react";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
+import unusedImports from "eslint-plugin-unused-imports";
 import { dirname } from "path";
 import tseslint from "typescript-eslint";
 import { fileURLToPath } from "url";
@@ -23,6 +24,7 @@ const nextConfigs = [
 const baseConfig = {
   plugins: {
     "simple-import-sort": simpleImportSort,
+    "unused-imports": unusedImports,
   },
   rules: {
     // https://eslint.org/docs/latest/rules/dot-notation
@@ -51,6 +53,18 @@ const typescriptConfig = {
     "@typescript-eslint/no-empty-function": "error",
     // https://typescript-eslint.io/rules/no-inferrable-types
     "@typescript-eslint/no-inferrable-types": "error",
+    // https://github.com/sweepline/eslint-plugin-unused-imports
+    "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        vars: "all",
+        varsIgnorePattern: "^_",
+        args: "after-used",
+        argsIgnorePattern: "^_",
+      },
+    ],
   },
 };
 

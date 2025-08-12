@@ -22,10 +22,5 @@ export const routes = {
   blog: {
     href: "/blog",
     label: "ブログ",
-    routes: {
-      ":id": {
-        href: (id: string) => `/blog/${id}`,
-      },
-    },
   },
 } as const satisfies Record<string, Route>;

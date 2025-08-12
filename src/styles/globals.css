@@ -81,6 +81,8 @@
   --z-index-header: 9999;
 
   --height-header: 4rem;
+
+  --screen-margin: calc(var(--spacing) * 5);
 }
 
 /* https://tailwindcss.com/docs/upgrade-guide#buttons-use-the-default-cursor */
