@@ -21,13 +21,13 @@ export const skillWords: SkillWord[] = [
   { category: "be", label: "PHP" },
   { category: "be", label: "SQL" },
   { category: "tools", label: "Visual Studio Code", strong: true },
+  { category: "tools", label: "Figma", strong: true },
   { category: "tools", label: "GitHub", strong: true },
   { category: "tools", label: "Bitbucket", strong: true },
   { category: "tools", label: "Notion", strong: true },
   { category: "tools", label: "Jira", strong: true },
   { category: "tools", label: "Asana" },
   { category: "tools", label: "Redmine" },
-  { category: "tools", label: "Figma" },
 ];
 
 export type Rank = "good" | "normal" | "bad";
@@ -37,7 +37,7 @@ export interface SkillDetail {
   items: Array<{ rank: Rank; text: string }>;
 }
 
-export const skillDetails: SkillDetail[] = [
+export const skillDetails = [
   {
     category: "技術的スキル",
     items: [
@@ -88,4 +88,4 @@ export const skillDetails: SkillDetail[] = [
       },
     ],
   },
-];
+] as const satisfies SkillDetail[];
