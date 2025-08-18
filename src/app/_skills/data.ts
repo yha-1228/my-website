@@ -11,81 +11,52 @@ export const skillWords: SkillWord[] = [
   { category: "fe", label: "Next.js", strong: true },
   { category: "fe", label: "TypeScript", strong: true },
   { category: "fe", label: "CSS", strong: true },
-  { category: "fe", label: "Sass", strong: true },
+  { category: "fe", label: "Sass" },
   { category: "fe", label: "Tailwind CSS", strong: true },
   { category: "fe", label: "jQuery" },
-  { category: "fe", label: "jotai", strong: true },
+  { category: "fe", label: "jotai" },
   { category: "be", label: "TypeScript", strong: true },
-  { category: "be", label: "Node.js", strong: true },
-  { category: "be", label: "Express", strong: true },
+  { category: "be", label: "Node.js" },
+  { category: "be", label: "Express" },
   { category: "be", label: "PHP" },
   { category: "be", label: "SQL" },
   { category: "tools", label: "Visual Studio Code", strong: true },
+  { category: "tools", label: "Cursor", strong: true },
   { category: "tools", label: "Figma", strong: true },
   { category: "tools", label: "GitHub", strong: true },
-  { category: "tools", label: "Bitbucket", strong: true },
-  { category: "tools", label: "Notion", strong: true },
-  { category: "tools", label: "Jira", strong: true },
+  { category: "tools", label: "Bitbucket" },
+  { category: "tools", label: "Notion" },
+  { category: "tools", label: "Jira" },
   { category: "tools", label: "Asana" },
   { category: "tools", label: "Redmine" },
 ];
 
-export type Rank = "good" | "normal" | "bad";
-
 export interface SkillDetail {
   category: string;
-  items: Array<{ rank: Rank; text: string }>;
+  items: string[];
 }
 
 export const skillDetails = [
   {
-    category: "技術的スキル",
+    category: "フロントエンド開発",
     items: [
-      {
-        rank: "good",
-        text: "JSX・CSSを利用したマークアップ",
-      },
-      {
-        rank: "good",
-        text: "デザインに柔軟に対応し、機能性・拡張性を備えたコンポーネントライブラリの構築",
-      },
-      {
-        rank: "good",
-        text: "動的な変化・UXを両立させたUIの開発",
-      },
-      {
-        rank: "good",
-        text: "様々なJavaScriptライブラリの利用経験",
-      },
-      {
-        rank: "good",
-        text: "プロジェクト構成・BE連携・認証・コンポーネント設計・Lintをはじめとした初期からのアーキテクチャ設計",
-      },
-      {
-        rank: "good",
-        text: "様々な規模・領域・実装パターンに対応した状態管理の設計",
-      },
-      {
-        rank: "good",
-        text: "バックエンド・デザインとの連携や提案",
-      },
-      {
-        rank: "normal",
-        text: "MVC・クリーンアーキテクチャを参考にしたバックエンドの設計",
-      },
+      "マークアップ",
+      "コンポーネントライブラリの構築",
+      "状態管理設計",
+      "フォーム・バックエンド連携",
+      "初期段階からのアーキテクチャ設計",
+      "コードレビュー・チーム教育",
     ],
   },
   {
-    category: "チーム開発スキル",
+    category: "UIデザイン",
     items: [
-      { rank: "normal", text: "初級者メンバーの教育" },
-      { rank: "normal", text: "教育用Wikiの作成" },
-      { rank: "normal", text: "勉強会の開催" },
-      { rank: "normal", text: "継続的なコードレビュー" },
-      {
-        rank: "normal",
-        text: "中〜大規模チームにおけるFEリード内の提案や議論",
-      },
+      "文言やレイアウトのパターン構築",
+      "Figmaを用いた画面デザイン制作・デザインシステム構築",
+      "コーポレートサイトデザイン",
+      "社内管理画面デザイン",
+      "ユースケース抽出",
+      "ワイヤーフレーム作成",
     ],
   },
 ] as const satisfies SkillDetail[];
