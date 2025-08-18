@@ -25,8 +25,8 @@ export interface Experience {
 export const allExperiences = [
   // 本業 フリーランス
   {
-    kikan: "2025年5月 - 現在",
-    title: "教育系システム",
+    kikan: "2025/5 - 現在",
+    title: "教育系システム / FE開発",
     projectCompanyName: "EdTechスタートアップ",
     description: (
       <>
@@ -40,8 +40,8 @@ export const allExperiences = [
     type: "main-freelance",
   },
   {
-    kikan: "2024年8月 - 2025年3月",
-    title: "株取引サービス/ポータルサイト (新規開発)",
+    kikan: "2024/8 - 2025/3",
+    title: "株取引サービス / FE開発",
     projectCompanyName: "受託開発会社",
     description: (
       <>
@@ -57,8 +57,8 @@ export const allExperiences = [
     type: "main-freelance",
   },
   {
-    kikan: "2023年9月中旬 - 2024年6月",
-    title: "求人掲載システム (リニューアル)",
+    kikan: "2023/9 中旬 - 2024/6",
+    title: "求人掲載システム / FE開発",
     projectCompanyName: "大手受託開発会社",
     description: (
       <>
@@ -78,8 +78,8 @@ export const allExperiences = [
 
   // 本業 1社目
   {
-    kikan: "2022年5月初旬 - 2023年7月",
-    title: "SFAツール (新規開発)",
+    kikan: "2022/5 初旬 - 2023/7",
+    title: "SFAツール / FE開発",
     projectCompanyName: null,
     description: (
       <>
@@ -98,8 +98,8 @@ export const allExperiences = [
     type: "main-company-1",
   },
   {
-    kikan: "2020年12月 - 2022年5月初旬",
-    title: "請求書管理アプリ (新規開発)",
+    kikan: "2020/12 - 2022/5 初旬",
+    title: "医療向け請求書管理アプリ / 開発・UIデザイン",
     projectCompanyName: null,
     description: (
       <>
@@ -118,8 +118,8 @@ export const allExperiences = [
     type: "main-company-1",
   },
   {
-    kikan: "2020年8月 - 2020年11月",
-    title: "勤怠・締め日管理アプリ (新規開発)",
+    kikan: "2020/8 - 2020/11",
+    title: "勤怠・締め日管理アプリ / 開発・QA",
     projectCompanyName: null,
     description: (
       <>
@@ -137,15 +137,8 @@ export const allExperiences = [
     type: "main-company-1",
   },
   {
-    kikan: "2020年5月 - 2020年6月",
-    title: "以下同様",
-    projectCompanyName: null,
-    description: null,
-    type: "main-company-1",
-  },
-  {
-    kikan: "2019年7月 - 2020年1月",
-    title: "建物維持管理アプリ (保守)",
+    kikan: "2019/07 - 2020/06 (空白期間: 3ヶ月)",
+    title: "建物維持管理アプリ / 開発・QA",
     projectCompanyName: null,
     description: (
       <>
@@ -165,12 +158,28 @@ export const allExperiences = [
 
   // 副業
   {
-    kikan: "2025年6月中旬 - 現在",
-    title: "デザイン会社コーポレートサイト",
+    kikan: "2025/8 初旬 - 現在",
+    title: "旅行予約システム / UIデザイン",
     projectCompanyName: null,
     description: (
       <>
-        <p>Web制作やデザインを行う会社のコーポレートサイト開発。</p>
+        <p>プライベートツアーを提供する旅行サービスサイトの管理画面。</p>
+        <p>
+          <b>技術/ツール:</b> Figma, PHP
+        </p>
+      </>
+    ),
+    type: "sub",
+  },
+  {
+    kikan: "2025/6 中旬 - 現在",
+    title: "デザイン会社コーポレートサイト / FE開発・UIデザイン",
+    projectCompanyName: null,
+    description: (
+      <>
+        <p>
+          Web制作をはじめとしてデザインやブランディングを行う会社の自社コーポレートサイト開発。
+        </p>
         <p>
           <b>技術:</b> React, Next.js, TypeScript, Tailwind CSS, microCMS
         </p>
