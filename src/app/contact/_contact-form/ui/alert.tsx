@@ -9,30 +9,22 @@ import {
 import { BsCheck2Circle, BsExclamationCircle } from "react-icons/bs";
 
 import { findFocusableElements } from "@/utils/dom";
-import { classVariants, cn } from "@/utils/styling";
+import { cn } from "@/utils/styling";
 
-interface AlertVariantsProps {
-  variant: "success" | "error";
-}
+type Variant = "success" | "error";
 
-const getVariantClass = classVariants<AlertVariantsProps>(
-  cn("px-5 pt-4 pb-5 block rounded-lg sm:flex"),
-  {
-    variant: {
-      success: cn("bg-primary-50 text-primary-900 "),
-      error: cn("bg-danger-50 text-danger-900"),
-    },
-  },
-);
+const variantClassNames = {
+  success: "bg-primary-50 text-primary-900",
+  error: "bg-danger-50 text-danger-900",
+} as const satisfies Record<Variant, string>;
 
 const variantIconMap = {
   success: <BsCheck2Circle className="fill-primary-600 mt-1 size-5" />,
   error: <BsExclamationCircle className="fill-danger-600 mt-1 size-5" />,
-} as const satisfies Record<AlertVariantsProps["variant"], ReactNode>;
+} as const satisfies Record<Variant, ReactNode>;
 
-interface AlertProps
-  extends Omit<ComponentPropsWithoutRef<"div">, "role">,
-    AlertVariantsProps {
+interface AlertProps extends Omit<ComponentPropsWithoutRef<"div">, "role"> {
+  variant: Variant;
   heading: ReactNode;
 }
 
@@ -49,7 +41,11 @@ function Alert(props: AlertProps) {
   return (
     <div
       role="alert"
-      className={cn(getVariantClass({ variant }), className)}
+      className={cn(
+        "block rounded-lg px-5 pt-4 pb-5 sm:flex",
+        variantClassNames[variant],
+        className,
+      )}
       ref={ref}
       {...restProps}
     >
