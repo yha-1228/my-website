@@ -25,8 +25,8 @@ function SkillDetailCard(props: SkillDetailCardProps) {
   return (
     <div
       className={cn(
-        "w-full rounded-lg px-5 lg:px-6",
-        "shadow-card bg-white",
+        "w-full rounded-sm px-5 lg:px-6",
+        "shadow-card border-base-light-300 border bg-white",
         className,
       )}
     >
@@ -40,11 +40,11 @@ function SkillDetailCard(props: SkillDetailCardProps) {
           "border-t-base-light-300 border-t border-solid",
         )}
       >
-        <ul className="text-base-foreground-weak mt-2 space-y-2.5 text-sm">
+        <ul className="mt-2 space-y-2.5 text-sm">
           {items.map((item) => (
             <li
               key={item}
-              className="bg-[0_0.12rem] bg-[url('/assets/check-circle-fill-color-foreground.svg')] bg-[length:18px_18px] bg-no-repeat ps-[1.75rem] leading-[1.6]"
+              className="bg-[0_0.12rem] bg-[url('/assets/check-circle-fill-color-foreground.svg')] bg-[length:18px_18px] [background-position:0px_2px] bg-no-repeat ps-[1.75rem] leading-[1.6]"
             >
               {item}
             </li>
