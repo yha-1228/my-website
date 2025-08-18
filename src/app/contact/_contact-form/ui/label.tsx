@@ -1,34 +1,24 @@
 import { type ComponentPropsWithRef } from "react";
 
-import { classVariants, cn } from "@/utils/styling";
+import { cn } from "@/utils/styling";
 
-interface LabelVariantsProps {
+interface LabelProps extends ComponentPropsWithRef<"label"> {
   /**
    * @default false
    */
   required?: boolean;
 }
 
-const getVariantClass = classVariants<LabelVariantsProps>(
-  cn("block font-bold"),
-  {
-    required: {
-      true: cn("flex items-center"),
-      false: "",
-    },
-  },
-);
-
-interface LabelProps
-  extends ComponentPropsWithRef<"label">,
-    LabelVariantsProps {}
-
 function Label(props: LabelProps) {
   const { className, children, required = false, ...restProps } = props;
 
   return (
     <label
-      className={cn(getVariantClass({ required }), className)}
+      className={cn(
+        "block font-bold",
+        required && "flex items-center",
+        className,
+      )}
       {...restProps}
     >
       {required ? (

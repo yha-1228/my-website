@@ -1,11 +1,23 @@
 {
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Tailwind CSS
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "files.associations": { "*.css": "tailwindcss" },
+  "tailwindCSS.experimental.classRegex": [
+    // https://github.com/paolotiu/tailwind-intellisense-regex-list?tab=readme-ov-file#string-endings-most-useful
+    ["\\b\\w*ClassName\\b\\s*=\\s*[\"'`]([^\"'`]*)[\"'`]"],
+    // https://github.com/paolotiu/tailwind-intellisense-regex-list?tab=readme-ov-file#javascript-object-variable-with-keywords
+    [
+      "(?:\\b(?:const|let|var)\\s+)?[\\w$_]*(?:ClassNames)[\\w\\d]*\\s*=\\s*{([\\s\\S]*?)}",
+      "\\s?[\\w].*:\\s*?[\"'`]([^\"'`]*).*?,?\\s?"
+    ]
+  ],
   "tailwindCSS.classFunctions": ["cn"]
 }

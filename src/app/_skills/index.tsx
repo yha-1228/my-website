@@ -7,7 +7,6 @@ import { cn } from "@/utils/styling";
 
 import {
   CATEGORIES,
-  type Rank,
   type SkillDetail,
   skillDetails,
   type SkillWord,
@@ -17,26 +16,17 @@ import {
 interface SkillDetailCardProps {
   heading: ReactNode;
   items: SkillDetail["items"];
-  accent?: boolean;
   className?: string;
 }
 
-const rankIconClassNameMap = {
-  good: cn("bg-[url('/assets/check-circle-fill-color-foreground.svg')]"),
-  normal: cn("bg-[url('/assets/check-circle-color-foreground.svg')]"),
-  bad: cn("bg-[url('/assets/dash-circle-color-foreground.svg')]"),
-} as const satisfies Record<Rank, string>;
-
 function SkillDetailCard(props: SkillDetailCardProps) {
-  const { heading, items, className, accent } = props;
+  const { heading, items, className } = props;
 
   return (
     <div
       className={cn(
-        "w-full rounded-lg px-5 lg:px-6",
-        "shadow-card bg-white",
-        "border-2 border-solid",
-        accent ? "border-primary-600" : "border-white",
+        "w-full rounded-sm px-5 lg:px-6",
+        "shadow-card border-base-light-300 border bg-white",
         className,
       )}
     >
@@ -50,16 +40,13 @@ function SkillDetailCard(props: SkillDetailCardProps) {
           "border-t-base-light-300 border-t border-solid",
         )}
       >
-        <ul className="text-base-foreground-weak mt-2 space-y-2.5 text-sm">
+        <ul className="mt-2 space-y-2.5 text-sm">
           {items.map((item) => (
             <li
-              key={item.text}
-              className={cn(
-                "bg-[0_0.12rem] bg-[length:18px_18px] bg-no-repeat ps-[1.75rem] leading-[1.6]",
-                rankIconClassNameMap[item.rank],
-              )}
+              key={item}
+              className="bg-[0_0.12rem] bg-[url('/assets/check-circle-fill-color-foreground.svg')] bg-[length:18px_18px] [background-position:0px_2px] bg-no-repeat ps-[1.75rem] leading-[1.6]"
             >
-              {item.text}
+              {item}
             </li>
           ))}
         </ul>
@@ -103,7 +90,7 @@ export function Skills() {
                         <span
                           data-separator
                           aria-hidden="true"
-                          className="text-base-light-400"
+                          className="text-base-foreground-weak"
                         >
                           {` / `}
                         </span>
@@ -137,13 +124,12 @@ export function Skills() {
         <Container>
           <Heading1>提供可能な業務</Heading1>
           <ul className="mt-8 space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:space-y-0 lg:gap-x-[16px] lg:gap-y-[20px]">
-            {skillDetails.map((skillDetail, idx) => (
+            {skillDetails.map((skillDetail) => (
               <li
                 key={skillDetail.category}
                 className="lg:flex lg:w-[calc(50%-calc(16px/2))]"
               >
                 <SkillDetailCard
-                  accent={idx === 0}
                   heading={skillDetail.category}
                   items={skillDetail.items}
                 />

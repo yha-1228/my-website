@@ -3,30 +3,20 @@
 import Link from "next/link";
 import { type ComponentPropsWithRef } from "react";
 
-import { classVariants, cn } from "@/utils/styling";
+import { cn } from "@/utils/styling";
 
-export interface TextLinkVariantsProps {
+const underlineClassNames = {
+  true: "underline hover:decoration-2",
+  false: "hover:underline hover:decoration-2",
+} as const;
+
+// ----------------------------------------
+
+interface TextLinkProps extends ComponentPropsWithRef<typeof Link> {
   /**
    * @default false
    */
   withUnderline?: boolean;
-}
-
-const getVariantClass = classVariants<TextLinkVariantsProps>(
-  cn("rounded-xs underline-offset-4"),
-  {
-    withUnderline: {
-      true: cn("underline hover:decoration-2"),
-      false: cn("hover:underline hover:decoration-2"),
-    },
-  },
-);
-
-// ----------------------------------------
-
-interface TextLinkProps
-  extends ComponentPropsWithRef<typeof Link>,
-    TextLinkVariantsProps {
   preventLink?: boolean;
 }
 
@@ -41,7 +31,11 @@ function TextLink(props: TextLinkProps) {
 
   return (
     <Link
-      className={cn(getVariantClass({ withUnderline }), className)}
+      className={cn(
+        "rounded-xs underline-offset-4",
+        underlineClassNames[`${withUnderline}`],
+        className,
+      )}
       onClick={(event) => {
         if (preventLink) {
           event.preventDefault();

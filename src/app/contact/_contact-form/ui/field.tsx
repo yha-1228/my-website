@@ -1,43 +1,38 @@
 import { type ComponentPropsWithRef } from "react";
 
-import { classVariants, cn } from "@/utils/styling";
+import { cn } from "@/utils/styling";
 
 // common
 // ----------------------------------------
 
-interface FieldVariantsProps {
+const baseClassName =
+  "placeholder:text-base-light-400 w-full appearance-none rounded-md px-3 disabled:bg-base-light-100 disabled:text-base-foreground/70 disabled:placeholder:text-base-light-400 disabled:cursor-not-allowed transition-[background-color] duration-200 ease-out";
+
+const invalidClassNames = {
+  false: "border border-base-light-300",
+  true: "border border-danger-500",
+} as const;
+
+// ----------------------------------------
+
+interface InputProps extends ComponentPropsWithRef<"input"> {
   /**
    * @default false
    */
   invalid?: boolean;
 }
 
-const getVariantClass = classVariants<FieldVariantsProps>(
-  cn(
-    "w-full appearance-none rounded-md px-3 placeholder:text-base-light-400",
-    "disabled:bg-base-light-100 disabled:text-base-foreground/70 disabled:cursor-not-allowed disabled:placeholder:text-base-light-400",
-    "transition-[background-color] duration-200 ease-out",
-  ),
-  {
-    invalid: {
-      false: cn("border border-base-light-300"),
-      true: cn("border border-danger-500"),
-    },
-  },
-);
-
-// ----------------------------------------
-
-interface InputProps
-  extends ComponentPropsWithRef<"input">,
-    FieldVariantsProps {}
-
 function Input(props: InputProps) {
   const { invalid = false, className, ...restProps } = props;
 
   return (
     <input
-      className={cn("h-10", getVariantClass({ invalid }), className)}
+      className={cn(
+        baseClassName,
+        invalidClassNames[`${invalid}`],
+        "h-10",
+        className,
+      )}
       {...restProps}
     />
   );
@@ -45,9 +40,12 @@ function Input(props: InputProps) {
 
 // ----------------------------------------
 
-interface TextareaProps
-  extends ComponentPropsWithRef<"textarea">,
-    FieldVariantsProps {}
+interface TextareaProps extends ComponentPropsWithRef<"textarea"> {
+  /**
+   * @default false
+   */
+  invalid?: boolean;
+}
 
 function Textarea(props: TextareaProps) {
   const { invalid = false, className, ...restProps } = props;
@@ -55,7 +53,8 @@ function Textarea(props: TextareaProps) {
   return (
     <textarea
       className={cn(
-        getVariantClass({ invalid }),
+        baseClassName,
+        invalidClassNames[`${invalid}`],
         "block py-2.5 leading-normal",
         className,
       )}

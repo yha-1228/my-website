@@ -3,22 +3,19 @@
 import { type ComponentPropsWithRef } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
 
-import { type TextLinkVariantsProps } from "@/components/ui/styled/text-link";
-import { classVariants, cn } from "@/utils/styling";
+import { cn } from "@/utils/styling";
 
-const getVariantClass = classVariants<TextLinkVariantsProps>(
-  cn("rounded-xs underline-offset-4"),
-  {
-    withUnderline: {
-      true: cn("underline hover:decoration-2"),
-      false: cn("hover:underline hover:decoration-2"),
-    },
-  },
-);
+const underlineClassNames = {
+  true: "underline hover:decoration-2",
+  false: "hover:underline hover:decoration-2",
+} as const;
 
 export interface ExternalTextLinkProps
-  extends Omit<ComponentPropsWithRef<"a">, "target" | "rel">,
-    TextLinkVariantsProps {
+  extends Omit<ComponentPropsWithRef<"a">, "target" | "rel"> {
+  /**
+   * @default false
+   */
+  withUnderline?: boolean;
   preventLink?: boolean;
 }
 
@@ -37,7 +34,8 @@ export function ExternalTextLink(props: ExternalTextLinkProps) {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        getVariantClass({ withUnderline }),
+        "rounded-xs underline-offset-4",
+        underlineClassNames[`${withUnderline}`],
         "inline-flex items-center space-x-1",
         className,
       )}

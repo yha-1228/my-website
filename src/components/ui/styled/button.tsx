@@ -2,56 +2,47 @@ import { type ElementType, type ReactNode } from "react";
 import { CgSpinner } from "react-icons/cg";
 
 import { type PropsWithAs } from "@/types/react";
-import { classVariants, cn } from "@/utils/styling";
+import { cn } from "@/utils/styling";
 
-interface ButtonVariantsProps {
+type Variant = "fill" | "outline";
+
+type Size = "md" | "lg";
+
+const variantClassNames = {
+  fill: "bg-primary-600 text-white hover:bg-primary-800 active:bg-primary-700",
+  outline:
+    "border border-current text-primary-600 bg-white hover:bg-primary-50",
+} as const satisfies Record<Variant, string>;
+
+const sizeClassNames = {
+  md: "h-10 px-5",
+  lg: "h-12 px-8",
+} as const satisfies Record<Size, string>;
+
+type ButtonProps<T extends ElementType> = PropsWithAs<T, "button"> & {
   /**
    * @default "fill"
    */
-  variant?: "fill" | "outline";
+  variant?: Variant;
   /**
    * @default "md"
    */
-  size?: "md" | "lg";
-}
-
-const getVariantClass = classVariants<ButtonVariantsProps>(
-  cn(
-    "inline-flex items-center justify-center rounded-md font-bold transition-colors duration-200 ease-out",
-  ),
-  {
-    variant: {
-      fill: cn(
-        "bg-primary-600 text-white hover:bg-primary-800 active:bg-primary-700",
-      ),
-      outline: cn(
-        "border border-current text-primary-600 bg-white hover:bg-primary-50",
-      ),
-    },
-    size: {
-      md: cn("h-10 px-5"),
-      lg: cn("h-12 px-8"),
-    },
-  },
-);
-
-type ButtonProps<T extends ElementType> = PropsWithAs<T, "button"> &
-  ButtonVariantsProps & {
-    /**
-     * @default false
-     */
-    loading?: boolean;
-    /**
-     * `loading: true`のとき有効
-     *
-     * @default undefined
-     */
-    loadingLabel?: ReactNode;
-    /**
-     * @default false
-     */
-    disabled?: boolean;
-  };
+  size?: Size;
+  /**
+   * @default false
+   */
+  loading?: boolean;
+  /**
+   * `loading: true`のとき有効
+   *
+   * @default undefined
+   */
+  loadingLabel?: ReactNode;
+  /**
+   * @default false
+   */
+  disabled?: boolean;
+};
 
 function Button<T extends ElementType>(props: ButtonProps<T>) {
   const {
@@ -69,7 +60,9 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
   return (
     <Comp
       className={cn(
-        getVariantClass({ variant, size }),
+        "inline-flex items-center justify-center rounded-md font-bold transition-colors duration-200 ease-out",
+        variantClassNames[variant],
+        sizeClassNames[size],
         "disabled:bg-base-light-400 disabled:cursor-not-allowed",
         className,
       )}
