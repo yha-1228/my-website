@@ -25,7 +25,7 @@ export interface Experience {
 export const allExperiences = [
   // 本業 フリーランス
   {
-    kikan: "2025/5 - 現在",
+    kikan: "2025/5 - 2025/8",
     title: "教育系システム / FE開発",
     projectCompanyName: "EdTechスタートアップ",
     description: (
@@ -172,7 +172,7 @@ export const allExperiences = [
     type: "sub",
   },
   {
-    kikan: "2025/6 中旬 - 現在",
+    kikan: "2025/6 中旬 - 2025/8",
     title: "デザイン会社コーポレートサイト / FE開発・UIデザイン",
     projectCompanyName: null,
     description: (
@@ -181,7 +181,8 @@ export const allExperiences = [
           Web制作をはじめとしてデザインやブランディングを行う会社の自社コーポレートサイト開発。
         </p>
         <p>
-          <b>技術:</b> React, Next.js, TypeScript, Tailwind CSS, microCMS
+          <b>技術/ツール:</b> Figma, React, Next.js, TypeScript, Tailwind CSS,
+          microCMS
         </p>
       </>
     ),
