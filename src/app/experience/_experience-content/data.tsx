@@ -25,6 +25,17 @@ export interface Experience {
 export const allExperiences = [
   // 本業 フリーランス
   {
+    kikan: "2025/9 - 現在",
+    title: "予約システム開発 / FE開発・UIデザイン",
+    projectCompanyName: "旅客サービス企業",
+    description: (
+      <p>
+        <b>技術:</b> TypeScript, Tailwind CSS, GraphQL
+      </p>
+    ),
+    type: "main-freelance",
+  },
+  {
     kikan: "2025/5 - 2025/8",
     title: "教育系システム / FE開発",
     projectCompanyName: "EdTechスタートアップ",
