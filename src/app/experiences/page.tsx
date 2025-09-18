@@ -9,7 +9,7 @@ import { routes } from "@/routes";
 import { ExperienceContent } from "./_experience-content";
 
 export const metadata: Metadata = {
-  title: `${routes.experience.label} | ${SITE_TITLE}`,
+  title: `${routes.experiences.label} | ${SITE_TITLE}`,
 };
 
 export default function Page() {
@@ -18,7 +18,7 @@ export default function Page() {
       <Container className="md:max-w-(--breakpoint-md)">
         <section>
           <div className="text-center">
-            <Heading1>{routes.experience.label}</Heading1>
+            <Heading1>{routes.experiences.label}</Heading1>
           </div>
           <Suspense>
             <ExperienceContent />

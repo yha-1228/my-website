@@ -15,6 +15,7 @@ export const typeKikanMap = {
 } as const satisfies Record<Type, string | null>;
 
 export interface Experience {
+  id: string;
   type: Type;
   kikan: string;
   title: ReactNode;
@@ -36,6 +37,7 @@ export const allExperiences = [
   //   type: "main-freelance",
   // },
   {
+    id: "7",
     kikan: "2025/5 - 2025/8",
     title: "教育系システム / FE開発",
     projectCompanyName: "EdTechスタートアップ",
@@ -51,6 +53,7 @@ export const allExperiences = [
     type: "main-freelance",
   },
   {
+    id: "6",
     kikan: "2024/8 - 2025/3",
     title: "株取引サービス / FE開発",
     projectCompanyName: "受託開発会社",
@@ -68,6 +71,7 @@ export const allExperiences = [
     type: "main-freelance",
   },
   {
+    id: "5",
     kikan: "2023/9 中旬 - 2024/6",
     title: "求人掲載システム / FE開発",
     projectCompanyName: "大手受託開発会社",
@@ -89,6 +93,7 @@ export const allExperiences = [
 
   // 本業 1社目
   {
+    id: "4",
     kikan: "2022/5 初旬 - 2023/7",
     title: "SFAツール / FE開発",
     projectCompanyName: null,
@@ -109,6 +114,7 @@ export const allExperiences = [
     type: "main-company-1",
   },
   {
+    id: "3",
     kikan: "2020/12 - 2022/5 初旬",
     title: "医療向け請求書管理アプリ / 開発・UIデザイン",
     projectCompanyName: null,
@@ -129,6 +135,7 @@ export const allExperiences = [
     type: "main-company-1",
   },
   {
+    id: "2",
     kikan: "2020/8 - 2020/11",
     title: "勤怠・締め日管理アプリ / 開発・QA",
     projectCompanyName: null,
@@ -148,6 +155,7 @@ export const allExperiences = [
     type: "main-company-1",
   },
   {
+    id: "1",
     kikan: "2019/07 - 2020/06 (空白期間: 3ヶ月)",
     title: "建物維持管理アプリ / 開発・QA",
     projectCompanyName: null,
@@ -169,6 +177,7 @@ export const allExperiences = [
 
   // 副業
   {
+    id: "9",
     kikan: "2025/8 初旬 - 現在",
     title: "旅行予約システム / UIデザイン",
     projectCompanyName: null,
@@ -183,6 +192,7 @@ export const allExperiences = [
     type: "sub",
   },
   {
+    id: "8",
     kikan: "2025/6 中旬 - 2025/8",
     title: "デザイン会社コーポレートサイト / FE開発・UIデザイン",
     projectCompanyName: null,

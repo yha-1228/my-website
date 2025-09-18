@@ -11,8 +11,8 @@ export const routes = {
     href: "/",
     label: "トップ",
   },
-  experience: {
-    href: "/experience",
+  experiences: {
+    href: "/experiences",
     label: "職務経歴",
   },
   contact: {
