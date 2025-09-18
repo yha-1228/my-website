@@ -23,7 +23,7 @@ export function HeroHeader() {
         <Button
           as={Link}
           size="lg"
-          href={routes.experiences.href}
+          href={routes.experience.href}
           className="group mt-8 flex items-center lg:inline-flex lg:items-center lg:px-6 lg:text-lg"
         >
           <span>職務経歴を見る</span>

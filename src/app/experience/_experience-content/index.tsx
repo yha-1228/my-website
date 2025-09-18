@@ -77,7 +77,7 @@ export function ExperienceContent() {
           <ToggleGroupItem
             key={value}
             value={value}
-            href={`${routes.experiences.href}?jobCategory=${value}`}
+            href={`${routes.experience.href}?jobCategory=${value}`}
           >
             {label}
           </ToggleGroupItem>
