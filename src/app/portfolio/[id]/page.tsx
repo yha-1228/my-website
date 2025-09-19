@@ -59,7 +59,11 @@ export default async function Page({ params }: Props) {
             </p>
           </header>
           <div className="border-t-base-light-300 mt-8 border-t border-solid py-5 md:py-6">
-            <Tag>タグが入ります</Tag>
+            <div className="flex flex-wrap gap-1.5">
+              {content.tags.map((tag) => (
+                <Tag key={tag.id}>{tag.label}</Tag>
+              ))}
+            </div>
             <div
               className={cn(
                 "pt-4",
