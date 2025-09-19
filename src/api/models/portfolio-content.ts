@@ -10,6 +10,8 @@ export const getPortfolioContentsResponseSchema = z.object({
       revisedAt: z.string(),
       title: z.string(),
       body: z.string(),
+      start: z.string(),
+      end: z.string(),
       tags: z.array(
         z.object({
           id: z.string(),
@@ -39,6 +41,8 @@ export const getPortfolioContentResponseSchema = z.object({
   revisedAt: z.string(),
   title: z.string(),
   body: z.string(),
+  start: z.string(),
+  end: z.string(),
   tags: z.array(
     z.object({
       id: z.string(),

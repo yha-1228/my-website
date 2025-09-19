@@ -9,7 +9,6 @@ import {
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { TextLink } from "@/components/ui/styled/text-link";
-import { dateFormat } from "@/features/portfolio/date";
 import { Tag } from "@/features/portfolio/tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
@@ -55,7 +54,7 @@ export default async function Page({ params }: Props) {
           <header>
             <Heading1>{content.title}</Heading1>
             <p className="text-base-foreground-weak mt-4 text-sm font-normal">
-              {dateFormat("yyyy年MM月dd日 HH:mm", content.publishedAt)} に投稿
+              {content.start} - {content.end}
             </p>
           </header>
           <div className="border-t-base-light-300 mt-8 border-t border-solid py-5 md:py-6">

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { getPortfolioContents } from "@/api/endpoints/portfolio-content";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
-import { dateFormat } from "@/features/portfolio/date";
 import { Tag } from "@/features/portfolio/tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
@@ -44,8 +43,7 @@ export default async function Page() {
                     </div>
 
                     <p className="text-base-foreground-weak text-sm">
-                      投稿:{" "}
-                      {dateFormat("yyyy年MM月dd日 HH:mm", content.createdAt)}
+                      {content.start} - {content.end}
                     </p>
                   </div>
                 </Link>
