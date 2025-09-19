@@ -49,16 +49,18 @@ export function Footer({ className }: FooterProps) {
             ))}
           </ul>
           <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-y-0 md:space-x-4">
-            {Object.values(routes).map((route) => (
-              <li key={route.href}>
-                <TextLink
-                  className="inline-block leading-normal font-bold"
-                  href={route.href}
-                >
-                  {route.label}
-                </TextLink>
-              </li>
-            ))}
+            {Object.values(routes)
+              .filter((route) => route.hierarchy === 1)
+              .map((route) => (
+                <li key={route.href}>
+                  <TextLink
+                    className="inline-block leading-normal font-bold"
+                    href={route.href}
+                  >
+                    {route.label}
+                  </TextLink>
+                </li>
+              ))}
           </ul>
         </div>
         <div className="border-base-foreground/20 mt-5 border-t border-solid">

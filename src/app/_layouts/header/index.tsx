@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { type CSSProperties, type MouseEvent, useRef } from "react";
 import { BsList, BsX } from "react-icons/bs";
+import { FaLock } from "react-icons/fa";
 
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";
@@ -15,9 +16,9 @@ import { useMediaQuery } from "./use-media-query";
 import { useMobileMenu } from "./use-mobile-menu";
 import { useOnRouteChange } from "./use-on-route-change";
 
-const routesWithoutHome = Object.values(routes).filter(
-  (route) => route.href !== "/",
-);
+const routesWithoutHome = Object.values(routes)
+  .filter((route) => route.href !== "/")
+  .filter((route) => route.hierarchy === 1);
 
 const headerBorderBottomWidth = "1px";
 
@@ -31,8 +32,8 @@ export function Header() {
     }
   });
 
-  // `(min-width: breakpoint.sm)`
-  useMediaQuery(`(min-width: 640px)`, (event) => {
+  // `(min-width: breakpoint.md)`
+  useMediaQuery(`(min-width: 768px)`, (event) => {
     if (event.matches && mobileMenu.open) {
       mobileMenu.closeModal();
     }
@@ -81,7 +82,7 @@ export function Header() {
           <button
             {...mobileMenu.triggerProps}
             className={cn(
-              "hover:bg-base-light-100 flex size-12 items-center justify-center rounded-full bg-white sm:hidden",
+              "hover:bg-base-light-100 flex size-12 items-center justify-center rounded-full bg-white md:hidden",
               "absolute top-1/2 -right-[0.8rem] -translate-y-1/2",
             )}
             aria-label={mobileMenu.open ? "メニューを閉じる" : "メニューを開く"}
@@ -94,7 +95,7 @@ export function Header() {
           </button>
 
           {/* desktop only */}
-          <nav className="hidden sm:block">
+          <nav className="hidden md:block">
             <ul className="flex">
               {routesWithoutHome.map((route) => (
                 <li key={route.href}>
@@ -104,8 +105,10 @@ export function Header() {
                       "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-4 font-bold transition-colors duration-200 ease-out",
                       "hover:bg-base-light-100 active:bg-base-light-200",
                       "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-1 data-active:before:w-full data-active:before:content-['']",
+                      route.protected && "flex gap-2",
                     )}
                   >
+                    {route.protected && <FaLock />}
                     {route.label}
                   </ActiveLink>
                 </li>
@@ -116,7 +119,7 @@ export function Header() {
       </Container>
 
       {/* mobile only */}
-      <nav className="sm:hidden" {...mobileMenu.contentProps}>
+      <nav className="md:hidden" {...mobileMenu.contentProps}>
         <ul
           data-is-open={mobileMenu.open ? "true" : undefined}
           className={cn(
@@ -138,7 +141,15 @@ export function Header() {
                 )}
                 onClick={handleMobileNavLinkClick}
               >
-                <div className="px-6">{route.label}</div>
+                <div
+                  className={cn(
+                    "px-6",
+                    route.protected && "flex items-center gap-2",
+                  )}
+                >
+                  {route.protected && <FaLock />}
+                  {route.label}
+                </div>
               </ActiveLink>
             </li>
           ))}
