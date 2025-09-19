@@ -18,8 +18,7 @@ import { useOnRouteChange } from "./use-on-route-change";
 
 const routesWithoutHome = Object.values(routes)
   .filter((route) => route.href !== "/")
-  .filter((route) => route.hierarchy === 1)
-  .filter((route) => route.href !== "/portfolio");
+  .filter((route) => route.hierarchy === 1);
 
 const headerBorderBottomWidth = "1px";
 
@@ -108,6 +107,7 @@ export function Header() {
                       "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-1 data-active:before:w-full data-active:before:content-['']",
                       route.protected && "flex gap-2",
                     )}
+                    prefetch={!route.protected}
                   >
                     {route.protected && <FaLock />}
                     {route.label}
@@ -141,6 +141,7 @@ export function Header() {
                   "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:h-full data-active:before:w-1.5 data-active:before:content-['']",
                 )}
                 onClick={handleMobileNavLinkClick}
+                prefetch={!route.protected}
               >
                 <div
                   className={cn(
