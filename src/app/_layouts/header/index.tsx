@@ -20,6 +20,7 @@ const routesWithoutHome = Object.values(routes)
   .filter((route) => route.href !== "/")
   .filter((route) => route.hierarchy === 1)
   .filter((route) => route.href !== "/portfolio");
+
 const headerBorderBottomWidth = "1px";
 
 export function Header() {
