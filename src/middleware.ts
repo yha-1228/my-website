@@ -6,12 +6,9 @@ export default function middleware(req: NextRequest) {
   const basicAuth = req.headers.get("authorization");
   const url = req.nextUrl;
 
-  // /portfolio 配下以外は何もしない
-  if (!url.pathname.startsWith("/portfolio")) {
-    return NextResponse.next();
-  }
+  console.log(`url`, url);
 
-  if (basicAuth && url.pathname.startsWith("/portfolio")) {
+  if (basicAuth) {
     const authValue = basicAuth.split(" ")[1];
     const [user, pwd] = atob(authValue).split(":");
 
