@@ -3,25 +3,27 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 export default function middleware(req: NextRequest) {
-  const basicAuth = req.headers.get("authorization");
   const url = req.nextUrl;
 
-  console.log(`url`, url);
+  const protectedPathname = "/portfolio";
+  if (url.pathname.startsWith(protectedPathname)) {
+    const basicAuth = req.headers.get("authorization");
 
-  if (basicAuth) {
-    const authValue = basicAuth.split(" ")[1];
-    const [user, pwd] = atob(authValue).split(":");
+    if (basicAuth) {
+      const authValue = basicAuth.split(" ")[1];
+      const [user, pwd] = atob(authValue).split(":");
 
-    if (
-      user === process.env.BASIC_AUTH_USER &&
-      pwd === process.env.BASIC_AUTH_PASSWORD
-    ) {
-      return NextResponse.next();
+      if (
+        user === process.env.BASIC_AUTH_USER &&
+        pwd === process.env.BASIC_AUTH_PASSWORD
+      ) {
+        return NextResponse.next();
+      }
     }
-  }
-  url.pathname = "/api/auth";
+    url.pathname = "/api/auth";
 
-  return NextResponse.rewrite(url);
+    return NextResponse.rewrite(url);
+  }
 }
 
 export const config = {
