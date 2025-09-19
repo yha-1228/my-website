@@ -2,10 +2,6 @@
 
 import { type NextRequest, NextResponse } from "next/server";
 
-export const config = {
-  matcher: ["/design"],
-};
-
 export default function middleware(req: NextRequest) {
   const basicAuth = req.headers.get("authorization");
   const url = req.nextUrl;
@@ -25,3 +21,7 @@ export default function middleware(req: NextRequest) {
 
   return NextResponse.rewrite(url);
 }
+
+export const config = {
+  matcher: "/portfolio/:path*",
+};
