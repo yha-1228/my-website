@@ -51,6 +51,7 @@ export function Footer({ className }: FooterProps) {
           <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-y-0 md:space-x-4">
             {Object.values(routes)
               .filter((route) => route.hierarchy === 1)
+              .filter((route) => route.href !== "/portfolio")
               .map((route) => (
                 <li key={route.href}>
                   <TextLink
