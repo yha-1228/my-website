@@ -60,7 +60,7 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
   return (
     <Comp
       className={cn(
-        "inline-flex items-center justify-center rounded-md font-bold transition-colors duration-200 ease-out",
+        "inline-flex cursor-pointer items-center justify-center rounded-md font-bold transition-colors duration-200 ease-out",
         variantClassNames[variant],
         sizeClassNames[size],
         "disabled:bg-base-light-400 disabled:cursor-not-allowed",
