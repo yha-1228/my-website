@@ -24,7 +24,7 @@ export function LogoutButton() {
           // ホーム画面にリダイレクト
           window.location.href = window.location.origin;
           // 暫く待たないとログアウトされずに遷移される
-        }, 20);
+        }, 100);
       }}
     >
       <LogOut />
