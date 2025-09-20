@@ -11,7 +11,6 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "microcms-js-sdk": "^3.1.1",
     "@next/third-parties": "^15.2.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
@@ -20,6 +19,8 @@
     "date-fns": "^3.6.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "lucide-react": "^0.544.0",
+    "microcms-js-sdk": "^3.1.1",
     "next": "15.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

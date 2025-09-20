@@ -116,3 +116,10 @@ body {
     outline-width: 2px;
   }
 }
+
+html {
+  --spacing-for-scroll-padding-top: 1rem;
+  scroll-padding-top: calc(
+    var(--height-header) + var(--spacing-for-scroll-padding-top)
+  );
+}

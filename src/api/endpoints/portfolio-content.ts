@@ -1,23 +1,13 @@
-import { createClient } from "microcms-js-sdk";
-import { z } from "zod";
-
 import {
   type GetPortfolioContentResponse,
   getPortfolioContentResponseSchema,
   type GetPortfolioContentsResponse,
   getPortfolioContentsResponseSchema,
 } from "../models/portfolio-content";
-
-/**
- * @see https://document.microcms.io/tutorial/next/next-getting-started
- */
-const _client = createClient({
-  serviceDomain: z.string().parse(process.env.SERVICE_DOMAIN),
-  apiKey: z.string().parse(process.env.API_KEY),
-});
+import { client } from "./_microcms";
 
 export async function getPortfolioContents(): Promise<GetPortfolioContentsResponse> {
-  const response = await _client.getList({ endpoint: "portfolio-contents" });
+  const response = await client.getList({ endpoint: "portfolio-contents" });
 
   return getPortfolioContentsResponseSchema.parse(response);
 }
@@ -25,7 +15,7 @@ export async function getPortfolioContents(): Promise<GetPortfolioContentsRespon
 export async function getPortfolioContent(
   id: string,
 ): Promise<GetPortfolioContentResponse> {
-  const response = await _client.getListDetail({
+  const response = await client.getListDetail({
     endpoint: "portfolio-contents",
     contentId: id,
   });
