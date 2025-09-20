@@ -107,7 +107,7 @@ export function Header() {
                       "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-1 data-active:before:w-full data-active:before:content-['']",
                       route.protected && "flex gap-2",
                     )}
-                    prefetch={!route.protected}
+                    prefetch={!route.protected} // これがないと該当ページに居るとき以外でも読み込みが行われ、Basic認証のダイアログが出る
                   >
                     {route.protected && <FaLock />}
                     {route.label}
@@ -141,7 +141,7 @@ export function Header() {
                   "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:h-full data-active:before:w-1.5 data-active:before:content-['']",
                 )}
                 onClick={handleMobileNavLinkClick}
-                prefetch={!route.protected}
+                prefetch={!route.protected} // これがないと該当ページに居るとき以外でも読み込みが行われ、Basic認証のダイアログが出る
               >
                 <div
                   className={cn(

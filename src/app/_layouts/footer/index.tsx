@@ -56,7 +56,7 @@ export function Footer({ className }: FooterProps) {
                   <TextLink
                     className="inline-block leading-normal font-bold"
                     href={route.href}
-                    prefetch={!route.protected}
+                    prefetch={!route.protected} // これがないと該当ページに居るとき以外でも読み込みが行われ、Basic認証のダイアログが出る
                   >
                     {route.label}
                   </TextLink>
