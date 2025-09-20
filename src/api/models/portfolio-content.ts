@@ -1,5 +1,17 @@
 import { z } from "zod";
 
+export const tagSchema = z.object({
+  id: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  publishedAt: z.string(),
+  revisedAt: z.string(),
+  label: z.string(),
+  category: z.array(z.string()),
+});
+
+export type Tag = z.infer<typeof tagSchema>;
+
 export const getPortfolioContentsResponseSchema = z.object({
   contents: z.array(
     z.object({
@@ -12,16 +24,7 @@ export const getPortfolioContentsResponseSchema = z.object({
       body: z.string(),
       start: z.string(),
       end: z.string(),
-      tags: z.array(
-        z.object({
-          id: z.string(),
-          createdAt: z.string(),
-          updatedAt: z.string(),
-          publishedAt: z.string(),
-          revisedAt: z.string(),
-          label: z.string(),
-        }),
-      ),
+      tags: z.array(tagSchema),
     }),
   ),
   totalCount: z.number(),
@@ -43,16 +46,7 @@ export const getPortfolioContentResponseSchema = z.object({
   body: z.string(),
   start: z.string(),
   end: z.string(),
-  tags: z.array(
-    z.object({
-      id: z.string(),
-      createdAt: z.string(),
-      updatedAt: z.string(),
-      publishedAt: z.string(),
-      revisedAt: z.string(),
-      label: z.string(),
-    }),
-  ),
+  tags: z.array(tagSchema),
 });
 
 export type GetPortfolioContentResponse = z.infer<
