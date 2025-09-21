@@ -42,7 +42,7 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
-  const { toolTags, projectTags, uxLayerTags, assignTags, jobTypeTags } =
+  const { methodTags, projectTags, uxLayerTags, assignTags, jobTypeTags } =
     groupTags(content.tags);
 
   return (
@@ -65,10 +65,10 @@ export default async function Page({ params }: Props) {
                 {content.start} - {content.end}
               </p>
             </header>
-            <div className="border-t-base-light-300 mt-8 border-t border-solid py-5 md:py-6">
+            <div className="border-t-base-light-300 mt-8 flex flex-col gap-10 border-t border-solid pt-5">
               <div className="flex flex-wrap items-center gap-1.5">
                 <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
-                  ツール: {toolTags.map((tag) => tag.label).join(" / ")}
+                  手法: {methodTags.map((tag) => tag.label).join(" / ")}
                 </Tag>
                 <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
                   案件: {projectTags.map((tag) => tag.label).join(" / ")}
@@ -83,7 +83,23 @@ export default async function Page({ params }: Props) {
                   稼働: {jobTypeTags.map((tag) => tag.label).join(" / ")}
                 </Tag>
               </div>
-              <HtmlRenderer html={content.body} className="mt-10" />
+
+              <div className="border-base-foreground flex flex-col gap-2 rounded-sm border px-6 py-5 text-sm">
+                <dl>
+                  <dt className="font-bold">体制・役割</dt>
+                  <dd>{content.structureAndRole}</dd>
+                </dl>
+                <dl>
+                  <dt className="font-bold">デザインツール</dt>
+                  <dd>{content.tools}</dd>
+                </dl>
+                <dl>
+                  <dt className="font-bold">言語/FWなど</dt>
+                  <dd>{content.langAndFws}</dd>
+                </dl>
+              </div>
+
+              <HtmlRenderer html={content.body} />
             </div>
           </article>
         </Container>

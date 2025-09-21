@@ -22,9 +22,12 @@ export const getPortfolioContentsResponseSchema = z.object({
       revisedAt: z.string(),
       title: z.string(),
       body: z.string(),
+      tags: z.array(tagSchema),
       start: z.string(),
       end: z.string(),
-      tags: z.array(tagSchema),
+      structureAndRole: z.string(),
+      tools: z.string(),
+      langAndFws: z.string(),
     }),
   ),
   totalCount: z.number(),
@@ -44,9 +47,12 @@ export const getPortfolioContentResponseSchema = z.object({
   revisedAt: z.string(),
   title: z.string(),
   body: z.string(),
+  tags: z.array(tagSchema),
   start: z.string(),
   end: z.string(),
-  tags: z.array(tagSchema),
+  structureAndRole: z.string(),
+  tools: z.string(),
+  langAndFws: z.string(),
 });
 
 export type GetPortfolioContentResponse = z.infer<

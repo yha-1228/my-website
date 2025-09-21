@@ -80,7 +80,7 @@ export default async function Page() {
             <ul className="flex flex-col gap-4">
               {portfolioContents.map((content) => {
                 const {
-                  toolTags,
+                  methodTags,
                   projectTags,
                   uxLayerTags,
                   assignTags,
@@ -101,8 +101,8 @@ export default async function Page() {
                       <div className="flex flex-col gap-2">
                         <div className="flex flex-wrap items-center gap-1.5">
                           <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
-                            ツール:{" "}
-                            {toolTags.map((tag) => tag.label).join(" / ")}
+                            手法:{" "}
+                            {methodTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
                           <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
                             案件:{" "}
