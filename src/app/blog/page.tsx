@@ -60,7 +60,7 @@ export default async function Page() {
                       </div>
                       <BsArrowUpRight />
                     </div>
-                    <div className="mt-3 flex items-center space-x-3 sm:mt-4">
+                    <div className="mt-3 flex flex-col gap-2 sm:mt-4 md:flex-row md:items-center md:gap-4">
                       <div className="flex gap-2">
                         <Tag className="bg-[#ecf5ff] group-hover:bg-[#cce3ff] group-active:bg-[#cce3ff]">
                           Zenn
