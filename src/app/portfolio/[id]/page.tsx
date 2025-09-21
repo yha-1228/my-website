@@ -55,7 +55,7 @@ export default async function Page({ params }: Props) {
             className="inline-flex items-center space-x-1"
           >
             <BsChevronLeft />
-            <span>案件一覧</span>
+            <span>実績一覧に戻る</span>
           </TextLink>
 
           <article className="mt-8">
