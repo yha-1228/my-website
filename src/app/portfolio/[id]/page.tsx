@@ -102,6 +102,14 @@ export default async function Page({ params }: Props) {
               <HtmlRenderer html={content.body} />
             </div>
           </article>
+
+          <TextLink
+            href={`${routes.portfolio.href}#${IDS["portfolio-projects-heading"]}`}
+            className="mt-12 inline-flex items-center space-x-1"
+          >
+            <BsChevronLeft />
+            <span>実績一覧に戻る</span>
+          </TextLink>
         </Container>
       </div>
     </>
