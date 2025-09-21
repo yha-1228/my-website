@@ -1,21 +1,22 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type ComponentPropsWithRef } from "react";
+import { type ElementType } from "react";
 
-type ActiveLinkProps = Omit<
-  ComponentPropsWithRef<typeof Link>,
+import { type PropsWithAs } from "@/types/react";
+
+type ActiveLinkProps<TAs extends ElementType> = Omit<
+  PropsWithAs<TAs, "a">,
   "aria-current" | "data-active"
 >;
 
-function ActiveLink(props: ActiveLinkProps) {
-  const { href, ...restProps } = props;
+function ActiveLink<TAs extends ElementType>(props: ActiveLinkProps<TAs>) {
+  const { as: Comp = "a", href, ...restProps } = props;
   const pathname = usePathname();
   const firstPathActive = href === `/${pathname.split("/")[1]}`;
 
   return (
-    <Link
+    <Comp
       href={href}
       aria-current={firstPathActive ? "page" : undefined}
       data-active={firstPathActive ? "true" : undefined}

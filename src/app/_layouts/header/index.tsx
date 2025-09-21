@@ -100,6 +100,9 @@ export function Header() {
               {routesWithoutHome.map((route) => (
                 <li key={route.href}>
                   <ActiveLink
+                    // Linkコンポーネントだと、Basic認証に失敗したあともう一度ダイアログが現れてしまう。
+                    // 通常のaタグにして回避する。
+                    as={route.protected ? undefined : Link}
                     href={route.href}
                     className={cn(
                       "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-4 font-bold transition-colors duration-200 ease-out",
@@ -107,7 +110,6 @@ export function Header() {
                       "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-1 data-active:before:w-full data-active:before:content-['']",
                       route.protected && "flex gap-2",
                     )}
-                    prefetch={!route.protected} // これがないと該当ページに居るとき以外でも読み込みが行われ、Basic認証のダイアログが出る
                   >
                     {route.protected && <FaLock />}
                     {route.label}
@@ -133,6 +135,9 @@ export function Header() {
           {routesWithoutHome.map((route) => (
             <li key={route.href}>
               <ActiveLink
+                // Linkコンポーネントだと、Basic認証に失敗したあともう一度ダイアログが現れてしまう。
+                // 通常のaタグにして回避する。
+                as={route.protected ? undefined : Link}
                 href={route.href}
                 className={cn(
                   "flex items-center justify-between py-3 font-bold",
@@ -141,7 +146,6 @@ export function Header() {
                   "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:h-full data-active:before:w-1.5 data-active:before:content-['']",
                 )}
                 onClick={handleMobileNavLinkClick}
-                prefetch={!route.protected} // これがないと該当ページに居るとき以外でも読み込みが行われ、Basic認証のダイアログが出る
               >
                 <div
                   className={cn(
