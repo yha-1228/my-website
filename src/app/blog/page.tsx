@@ -1,3 +1,4 @@
+import { isWithinInterval, subMonths } from "date-fns";
 import { type Metadata } from "next";
 import { BsArrowUpRight } from "react-icons/bs";
 
@@ -9,6 +10,18 @@ import { dateFormat } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
+
+/**
+ * `targetDateISO`が`baseDate`から一ヶ月以内かどうか判定する。
+ */
+function isWithinOneMonth(targetDateISO: string, baseDate = new Date()) {
+  const targetDate = new Date(targetDateISO);
+
+  return isWithinInterval(targetDate, {
+    start: subMonths(baseDate, 1),
+    end: baseDate,
+  });
+}
 
 export const metadata: Metadata = {
   title: `${routes.blog.label} | ${SITE_TITLE}`,
@@ -48,9 +61,16 @@ export default async function Page() {
                       <BsArrowUpRight />
                     </div>
                     <div className="mt-3 flex items-center space-x-3 sm:mt-4">
-                      <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
-                        Tech
-                      </Tag>
+                      <div className="flex gap-2">
+                        <Tag className="group-hover:bg-base-light-200 group-active:bg-base-light-200">
+                          Tech
+                        </Tag>
+                        {isWithinOneMonth(zennArticle.isoDate) && (
+                          <Tag className="bg-danger-600 group-hover:bg-danger-700 group-active:bg-danger-700 text-white">
+                            1ヶ月以内に投稿
+                          </Tag>
+                        )}
+                      </div>
                       <p className="text-base-foreground-weak text-sm">
                         {dateFormat(
                           "yyyy年MM月dd日 HH:mm",
