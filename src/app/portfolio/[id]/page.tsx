@@ -12,6 +12,7 @@ import { TextLink } from "@/components/ui/styled/text-link";
 import { IDS, SITE_TITLE } from "@/constants";
 import { LogoutBanner } from "@/features/basic-auth/logout-banner";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
+import { groupTags } from "@/features/blog/misc";
 import { Tag } from "@/features/portfolio/tag";
 import { routes } from "@/routes";
 
@@ -41,6 +42,9 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
+  const { toolTags, projectTags, uxLayerTags, assignTags, jobTypeTags } =
+    groupTags(content.tags);
+
   return (
     <>
       <LogoutBanner />
@@ -51,7 +55,7 @@ export default async function Page({ params }: Props) {
             className="inline-flex items-center space-x-1"
           >
             <BsChevronLeft />
-            <span>案件一覧</span>
+            <span>実績一覧に戻る</span>
           </TextLink>
 
           <article className="mt-8">
@@ -62,10 +66,22 @@ export default async function Page({ params }: Props) {
               </p>
             </header>
             <div className="border-t-base-light-300 mt-8 border-t border-solid py-5 md:py-6">
-              <div className="flex flex-wrap gap-1.5">
-                {content.tags.map((tag) => (
-                  <Tag key={tag.id}>{tag.label}</Tag>
-                ))}
+              <div className="flex flex-wrap items-center gap-1.5">
+                <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
+                  ツール: {toolTags.map((tag) => tag.label).join(" / ")}
+                </Tag>
+                <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
+                  案件: {projectTags.map((tag) => tag.label).join(" / ")}
+                </Tag>
+                <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
+                  UX階層: {uxLayerTags.map((tag) => tag.label).join(" / ")}
+                </Tag>
+                <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
+                  参画: {assignTags.map((tag) => tag.label).join(" / ")}
+                </Tag>
+                <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
+                  稼働: {jobTypeTags.map((tag) => tag.label).join(" / ")}
+                </Tag>
               </div>
               <HtmlRenderer html={content.body} className="mt-10" />
             </div>

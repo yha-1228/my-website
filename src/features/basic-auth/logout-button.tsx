@@ -13,7 +13,11 @@ export function LogoutButton() {
       className="inline-flex items-center gap-2 px-4"
       onClick={async () => {
         const confirm = window.confirm(
-          "ログアウトしますか？\n\nログアウト後は自動でホーム画面に戻ります。\n（切り替わるまでお待ちください）",
+          [
+            "ログアウトしますか？\n\n",
+            "・ログアウト後は自動でホーム画面に戻ります。\n",
+            "・新規ウィンドウが開きますが、自動で閉じられます。",
+          ].join(""),
         );
         if (!confirm) return;
 
@@ -24,7 +28,7 @@ export function LogoutButton() {
           // ホーム画面にリダイレクト
           window.location.href = window.location.origin;
           // 暫く待たないとログアウトされずに遷移される
-        }, 20);
+        }, 100);
       }}
     >
       <LogOut />
