@@ -8,10 +8,10 @@ import { generateLogoutUrl } from "./auth";
 
 export function LogoutButton({
   loading,
-  onClick,
+  onOkClick,
 }: {
   loading?: boolean;
-  onClick?: () => void;
+  onOkClick?: () => void;
 }) {
   return (
     <Button
@@ -19,7 +19,6 @@ export function LogoutButton({
       className="inline-flex items-center gap-2 px-4"
       loading={loading}
       onClick={async () => {
-        onClick?.();
         const confirm = window.confirm(
           [
             "ログアウトしますか？\n\n",
@@ -28,6 +27,8 @@ export function LogoutButton({
           ].join(""),
         );
         if (!confirm) return;
+
+        onOkClick?.();
 
         const newWindow = window.open(generateLogoutUrl(), "_blank");
 

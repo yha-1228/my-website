@@ -21,7 +21,7 @@ export function LogoutBanner() {
         <p>ポートフォリオページにログイン中です。</p>
         <LogoutButton
           loading={didLogoutClick}
-          onClick={() => setDidLogoutClick(true)}
+          onOkClick={() => setDidLogoutClick(true)}
         />
       </Container>
     </div>
