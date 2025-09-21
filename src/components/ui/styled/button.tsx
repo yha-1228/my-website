@@ -9,9 +9,9 @@ type Variant = "fill" | "outline";
 type Size = "md" | "lg";
 
 const variantClassNames = {
-  fill: "bg-primary-600 text-white hover:bg-primary-800 active:bg-primary-700",
+  fill: "bg-primary-600 text-white hover:not-disabled:bg-primary-800 active:not-disabled:bg-primary-700",
   outline:
-    "border border-current text-primary-600 bg-white hover:bg-primary-50",
+    "border border-current text-primary-600 bg-white hover:not-disabled:bg-primary-50",
 } as const satisfies Record<Variant, string>;
 
 const sizeClassNames = {
@@ -63,7 +63,7 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
         "inline-flex cursor-pointer items-center justify-center rounded-md font-bold transition-colors duration-200 ease-out",
         variantClassNames[variant],
         sizeClassNames[size],
-        "disabled:bg-base-light-400 disabled:cursor-not-allowed",
+        "disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
       disabled={disabled || loading}

@@ -6,12 +6,20 @@ import { Button } from "@/components/ui/styled/button";
 
 import { generateLogoutUrl } from "./auth";
 
-export function LogoutButton() {
+export function LogoutButton({
+  loading,
+  onClick,
+}: {
+  loading?: boolean;
+  onClick?: () => void;
+}) {
   return (
     <Button
       variant="outline"
       className="inline-flex items-center gap-2 px-4"
+      loading={loading}
       onClick={async () => {
+        onClick?.();
         const confirm = window.confirm(
           [
             "ログアウトしますか？\n\n",
@@ -28,7 +36,7 @@ export function LogoutButton() {
           // ホーム画面にリダイレクト
           window.location.href = window.location.origin;
           // 暫く待たないとログアウトされずに遷移される
-        }, 100);
+        }, 1000);
       }}
     >
       <LogOut />
