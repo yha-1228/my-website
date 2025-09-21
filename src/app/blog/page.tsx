@@ -66,7 +66,7 @@ export default async function Page() {
                           Tech
                         </Tag>
                         {isWithinOneMonth(zennArticle.isoDate) && (
-                          <Tag className="bg-danger-600 group-hover:bg-danger-700 group-active:bg-danger-700 text-white">
+                          <Tag className="bg-danger-600 group-hover:bg-danger-700 group-active:bg-danger-700 font-bold text-white">
                             1ヶ月以内に投稿
                           </Tag>
                         )}
