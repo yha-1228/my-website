@@ -62,8 +62,8 @@ export default async function Page() {
                     </div>
                     <div className="mt-3 flex items-center space-x-3 sm:mt-4">
                       <div className="flex gap-2">
-                        <Tag className="group-hover:bg-base-light-200 group-active:bg-base-light-200">
-                          Tech
+                        <Tag className="bg-[#ecf5ff] group-hover:bg-[#cce3ff] group-active:bg-[#cce3ff]">
+                          Zenn
                         </Tag>
                         {isWithinOneMonth(zennArticle.isoDate) && (
                           <Tag className="bg-danger-600 group-hover:bg-danger-700 group-active:bg-danger-700 font-bold text-white">
