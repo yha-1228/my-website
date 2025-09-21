@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { type ComponentPropsWithRef } from "react";
+import { type ElementType, type MouseEvent } from "react";
 
+import { type PropsWithAs } from "@/types/react";
 import { cn } from "@/utils/styling";
 
 const underlineClassNames = {
@@ -10,18 +10,20 @@ const underlineClassNames = {
   false: "hover:underline hover:decoration-2",
 } as const;
 
-// ----------------------------------------
-
-interface TextLinkProps extends ComponentPropsWithRef<typeof Link> {
+type TextLinkProps<TAs extends ElementType> = Omit<
+  PropsWithAs<TAs, "a">,
+  "withUnderline" | "preventLink"
+> & {
   /**
    * @default false
    */
   withUnderline?: boolean;
   preventLink?: boolean;
-}
+};
 
-function TextLink(props: TextLinkProps) {
+function TextLink<TAs extends ElementType>(props: TextLinkProps<TAs>) {
   const {
+    as: Comp = "a",
     withUnderline = false,
     preventLink,
     onClick,
@@ -30,13 +32,13 @@ function TextLink(props: TextLinkProps) {
   } = props;
 
   return (
-    <Link
+    <Comp
       className={cn(
         "rounded-xs underline-offset-4",
         underlineClassNames[`${withUnderline}`],
         className,
       )}
-      onClick={(event) => {
+      onClick={(event: MouseEvent) => {
         if (preventLink) {
           event.preventDefault();
         }
@@ -47,6 +49,5 @@ function TextLink(props: TextLinkProps) {
   );
 }
 
-// ----------------------------------------
 export { TextLink };
 export type { TextLinkProps };

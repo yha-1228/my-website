@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Container } from "@/components/ui/styled/container";
 import { TextLink } from "@/components/ui/styled/text-link";
 import { routes } from "@/routes";
@@ -54,9 +56,11 @@ export function Footer({ className }: FooterProps) {
               .map((route) => (
                 <li key={route.href}>
                   <TextLink
+                    // Linkコンポーネントだと、Basic認証に失敗したあともう一度ダイアログが現れてしまう。
+                    // 通常のaタグにして回避する。
+                    as={route.protected ? undefined : Link}
                     className="inline-block leading-normal font-bold"
                     href={route.href}
-                    prefetch={!route.protected} // これがないと該当ページに居るとき以外でも読み込みが行われ、Basic認証のダイアログが出る
                   >
                     {route.label}
                   </TextLink>
