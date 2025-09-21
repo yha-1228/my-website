@@ -53,12 +53,15 @@ export default async function Page() {
       <div className="py-14">
         <Container className="flex flex-col gap-14">
           <SectionBox titleElem={<Heading1>自己紹介</Heading1>}>
-            <div className="border-base-light-300 rounded-[4px] border *:p-8 lg:flex">
+            <div className="border-base-light-300 text-base-foreground-weak mb-4 rounded-sm border px-4 py-2 text-sm">
+              申し訳ございませんが、スマートフォンでは表示が崩れるためPCまたはタブレットでの閲覧を推奨します。
+            </div>
+            <div className="border-base-light-300 rounded-[4px] border">
               <HtmlRenderer
-                className="bg-base-light-100 rounded-[3px] lg:w-[360px] lg:shrink-0"
+                className="bg-base-light-100 rounded-[3px] px-8"
                 html={portfolioIntroductionLeft.body}
               />
-              <HtmlRenderer html={portfolioIntroduction.body} />
+              <HtmlRenderer className="p-8" html={portfolioIntroduction.body} />
             </div>
           </SectionBox>
 
@@ -69,7 +72,7 @@ export default async function Page() {
                   className="underline-offset-8 hover:underline hover:decoration-2"
                   href={`#${IDS["portfolio-projects-heading"]}`}
                 >
-                  案件一覧
+                  実績一覧
                 </a>
               </Heading1>
             }
