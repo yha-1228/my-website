@@ -42,6 +42,16 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
+  if (content.isDraft) {
+    return (
+      <Container className="md:max-w-(--breakpoint-md)">
+        <p className="text-center">
+          申し訳ございませんが、こちらの案件は掲載許可の確認中です。
+        </p>
+      </Container>
+    );
+  }
+
   const { methodTags, projectTags, uxLayerTags, assignTags, jobTypeTags } =
     groupTags(content.tags);
 

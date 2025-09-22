@@ -28,6 +28,7 @@ export const getPortfolioContentsResponseSchema = z.object({
       structureAndRole: z.string(),
       tools: z.string(),
       langAndFws: z.string(),
+      isDraft: z.boolean().optional(),
     }),
   ),
   totalCount: z.number(),
@@ -53,6 +54,7 @@ export const getPortfolioContentResponseSchema = z.object({
   structureAndRole: z.string(),
   tools: z.string(),
   langAndFws: z.string(),
+  isDraft: z.boolean().optional(),
 });
 
 export type GetPortfolioContentResponse = z.infer<
