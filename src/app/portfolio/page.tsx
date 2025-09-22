@@ -3,10 +3,7 @@ import Link from "next/link";
 import { type ReactNode } from "react";
 
 import { getPortfolioContents } from "@/api/endpoints/portfolio-content";
-import {
-  getPortfolioIntroduction,
-  getPortfolioIntroductionLeft,
-} from "@/api/endpoints/portfolio-introduction";
+import { getPortfolioIntroduction } from "@/api/endpoints/portfolio-introduction";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { IDS, SITE_TITLE } from "@/constants";
@@ -32,20 +29,16 @@ function SectionBox({ titleElem, children, className }: SectionBoxProps) {
   );
 }
 
+const introductionTagClassName =
+  "rounded-sm border bg-white border-[black]/30 px-2.5 py-0.5 text-sm";
+
 export const metadata: Metadata = {
   title: `${routes.portfolio.label} | ${SITE_TITLE}`,
 };
 
 export default async function Page() {
-  const [
-    portfolioIntroductionLeft,
-    portfolioIntroduction,
-    { contents: portfolioContents },
-  ] = await Promise.all([
-    getPortfolioIntroductionLeft(),
-    getPortfolioIntroduction(),
-    getPortfolioContents(),
-  ]);
+  const [portfolioIntroduction, { contents: portfolioContents }] =
+    await Promise.all([getPortfolioIntroduction(), getPortfolioContents()]);
 
   return (
     <>
@@ -53,14 +46,58 @@ export default async function Page() {
       <div className="py-14">
         <Container className="flex flex-col gap-14">
           <SectionBox titleElem={<Heading1>自己紹介</Heading1>}>
-            <div className="border-base-light-300 text-base-foreground-weak mb-4 rounded-sm border px-4 py-2 text-sm">
-              申し訳ございませんが、スマートフォンでは表示が崩れるためPCまたはタブレットでの閲覧を推奨します。
-            </div>
-            <div className="border-base-light-300 rounded-[4px] border">
-              <HtmlRenderer
-                className="bg-base-light-100 rounded-[3px] px-8"
-                html={portfolioIntroductionLeft.body}
-              />
+            <div className="border-base-light-300 overflow-hidden rounded-md border">
+              <table
+                className={cn(
+                  "bg-base-light-100 flex flex-col px-8 py-4",
+                  "[&_th]:py-4 [&_th]:text-left [&_th]:align-top [&_th]:text-xl [&_th]:leading-[1.3] [&_th]:whitespace-nowrap",
+                  "[&_td]:py-4 [&_td]:pl-8 [&_td]:align-top",
+                )}
+              >
+                <tbody>
+                  <tr>
+                    <th>対応領域</th>
+                    <td>
+                      <div className="flex flex-wrap gap-2">
+                        {portfolioIntroduction.scope.split(", ").map((text) => (
+                          <span key={text} className={introductionTagClassName}>
+                            {text}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>使用言語・FW</th>
+                    <td>
+                      <div className="flex flex-wrap gap-2">
+                        {portfolioIntroduction.langAndFws
+                          .split(", ")
+                          .map((text) => (
+                            <span
+                              key={text}
+                              className={introductionTagClassName}
+                            >
+                              {text}
+                            </span>
+                          ))}
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>使用ツール</th>
+                    <td>
+                      <div className="flex flex-wrap gap-2">
+                        {portfolioIntroduction.tools.split(", ").map((text) => (
+                          <span key={text} className={introductionTagClassName}>
+                            {text}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
               <HtmlRenderer className="p-8" html={portfolioIntroduction.body} />
             </div>
           </SectionBox>
