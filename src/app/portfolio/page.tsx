@@ -121,6 +121,11 @@ export default async function Page() {
                             {jobTypeTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
                         </div>
+                        {content.isDraft && (
+                          <div className="text-danger-600 text-sm font-bold">
+                            掲載許可確認中
+                          </div>
+                        )}
                         <div className="text-base-foreground-weak text-sm">
                           {content.start} - {content.end}
                         </div>
