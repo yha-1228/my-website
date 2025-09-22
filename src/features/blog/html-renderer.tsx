@@ -18,7 +18,7 @@ export function HtmlRenderer({ html, className }: HtmlRendererProps) {
         "[&>table_tr]:border-t-base-light-400 [&>table_tr]:border-t [&>table_tr]:first:border-t-0",
         "[&>table_th]:py-8 [&>table_th]:pr-6 [&>table_th]:text-left [&>table_th]:align-top [&>table_th]:text-lg [&>table_th]:leading-tight [&>table_th]:font-bold [&>table_th]:whitespace-nowrap md:[&>table_th]:text-2xl",
         "[&>table_td]:py-8 [&>table_td]:pr-6",
-        "[&>figure]:border-base-light-300 [&>figure]:hover:border-base-foreground [&>figure]:overflow-hidden [&>figure]:rounded-md [&>figure]:border",
+        "[&>figure]:hover:border-primary-700 [&>figure]:border-base-light-300 [&>figure]:flex [&>figure]:flex-col [&>figure]:items-center [&>figure]:overflow-hidden [&>figure]:rounded-md [&>figure]:border [&>figure]:p-4 [&>figure]:shadow-md [&>figure]:hover:cursor-pointer",
         "[&>figure>figcaption]:pt-3 [&>figure>figcaption]:pb-4 [&>figure>figcaption]:text-center [&>figure>figcaption]:text-sm [&>figure>figcaption]:font-bold [&>figure>figcaption]:hover:cursor-pointer",
         className,
       )}
