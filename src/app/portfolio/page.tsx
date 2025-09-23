@@ -134,7 +134,14 @@ export default async function Page() {
                         "active:bg-base-light-50 active:border-base-foreground",
                       )}
                     >
-                      <div className="text-xl font-bold">{content.title}</div>
+                      <div className="flex flex-col gap-1">
+                        <div className="text-xl font-bold">{content.title}</div>
+                        {content.subTitle && (
+                          <div className="text-base-foreground-weak text-xs">
+                            {content.subTitle}
+                          </div>
+                        )}
+                      </div>
                       <div className="flex flex-col gap-2">
                         <div className="flex flex-wrap items-center gap-1.5">
                           <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
