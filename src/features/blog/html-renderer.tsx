@@ -15,15 +15,15 @@ export function HtmlRenderer({ html, className }: HtmlRendererProps) {
         "[&_ul]:pl-6 [&_ul>li]:list-disc",
         "[&>hr]:text-base-light-200 [&>hr]:my-6 [&>hr]:border-y-2",
         "[&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:hover:decoration-2",
-        "[&>table_tr]:border-t-base-light-400 [&>table_tr]:border-t [&>table_tr]:first:border-t-0",
-        "[&>table_th]:py-8 [&>table_th]:pr-6 [&>table_th]:text-left [&>table_th]:align-top [&>table_th]:text-lg [&>table_th]:leading-tight [&>table_th]:font-bold [&>table_th]:whitespace-nowrap md:[&>table_th]:text-2xl",
-        "[&>table_td]:py-8 [&>table_td]:pr-6",
         cn(
-          "[&>figure]:has-[a]:hover:border-primary-700 [&>figure]:has-[a]:transition-colors [&>figure]:has-[a]:hover:cursor-pointer",
           "[&>figure]:my-3",
-          "[&>figure]:border-base-light-300",
+          // これがないと崩れる
           "[&>figure]:flex [&>figure]:flex-col [&>figure]:items-center [&>figure]:overflow-hidden",
-          "[&>figure]:rounded-md [&>figure]:border [&>figure]:p-4",
+          "[&>figure>a]:hover:border-primary-700",
+          "[&>figure>a]:hover:cursor-pointer",
+          "[&>figure>a]:transition-colors",
+          "[&>figure>a]:border-base-light-300 [&>figure>a]:border",
+          "[&>figure>a]:rounded-md [&>figure>a]:p-4",
         ),
         className,
       )}
