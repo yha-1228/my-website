@@ -15,14 +15,18 @@ const html = `<!doctype html>
     .p-20 {
       padding: 20px;
     }
+
+    h1 {
+      font-size: 24px;
+    }
   </style>
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-icon.png" />
 </head>
 <body>
   <main class="p-20">
-    <h1>認証に失敗しました</h1>
-    <div>
+    <h1>ログインが中断されました</h1>
+    <div class="a-wrap">
       <a href="${routes.index.href}">ホーム画面に戻る</a><br />
       <a href="${routes.portfolio.href}">もう一度ログインする</a>
     </div>
