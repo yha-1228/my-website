@@ -6,7 +6,7 @@ import { type PropsWithAs } from "@/types/react";
 import { cn } from "@/utils/styling";
 
 const underlineClassNames = {
-  true: "underline hover:decoration-2",
+  true: "decoration-1 underline hover:decoration-2",
   false: "hover:underline hover:decoration-2",
 } as const;
 
