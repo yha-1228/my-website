@@ -1,4 +1,5 @@
 import { SITE_TITLE } from "@/constants";
+import { routes } from "@/routes";
 
 const html = `<!doctype html>
 <html lang="ja">
@@ -22,8 +23,8 @@ const html = `<!doctype html>
   <main class="p-20">
     <h1>認証に失敗しました</h1>
     <div>
-      <a href="/">ホーム画面に戻る</a><br />
-      <a href="/portfolio">もう一度ログインする</a>
+      <a href="${routes.index.href}">ホーム画面に戻る</a><br />
+      <a href="${routes.portfolio.href}">もう一度ログインする</a>
     </div>
   </main>
 </body>
