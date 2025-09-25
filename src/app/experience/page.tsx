@@ -26,7 +26,7 @@ export default function Page() {
               <TextLink
                 href={routes.contact.href}
                 as={Link}
-                className="text-primary-600 font-bold"
+                className="text-base-foreground font-bold"
                 withUnderline
               >
                 お問い合わせ

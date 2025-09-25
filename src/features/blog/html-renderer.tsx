@@ -14,12 +14,12 @@ export function HtmlRenderer({ html, className }: HtmlRendererProps) {
         "[&>p]:my-3 [&>p]:first:mt-0",
         "[&_ul]:pl-5 [&_ul>li]:list-disc",
         "[&>hr]:text-base-light-200 [&>hr]:my-6 [&>hr]:border-y-2",
-        "[&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:hover:decoration-2",
+        "[&_a]:font-bold [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:hover:decoration-2",
         cn(
           "[&>figure]:my-3",
           // これがないと崩れる
           "[&>figure]:flex [&>figure]:flex-col [&>figure]:items-center [&>figure]:overflow-hidden",
-          "[&>figure>a]:hover:border-primary-700",
+          "[&>figure>a]:hover:border-primary-600",
           "[&>figure>a]:hover:cursor-pointer",
           "[&>figure>a]:transition-colors",
           "[&>figure>a]:border-base-light-300 [&>figure>a]:border",
