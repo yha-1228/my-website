@@ -81,17 +81,17 @@ function ToggleGroupItem<T extends string = string>(
       role="radio"
       aria-checked={selectedValue === value}
       className={cn(
-        "text-base-foreground inline-flex h-9 flex-1 items-center justify-center bg-white px-3 text-sm first:rounded-l-md last:rounded-r-md sm:h-10 sm:text-base",
+        "text-foreground-primary inline-flex h-9 flex-1 items-center justify-center bg-white px-3 text-sm first:rounded-l-md last:rounded-r-md sm:h-10 sm:text-base",
         cn(
-          "border-y-base-light-300 border-y",
-          "first:border-l-base-light-300 first:border-l",
-          "last:border-r-base-light-300 last:border-r",
-          "not-first:border-l-base-light-300 not-first:border-l",
+          "border-y border-y-gray-300",
+          "first:border-l first:border-l-gray-300",
+          "last:border-r last:border-r-gray-300",
+          "not-first:border-l not-first:border-l-gray-300",
         ),
-        "hover:bg-base-light-100",
+        "hover:bg-gray-100",
         cn(
-          "[[aria-checked='true']]:bg-primary-700",
-          "[[aria-checked='true']]:border-primary-700 [[aria-checked='true']]:border-l-primary-700 [[aria-checked='true']+*]:border-l-primary-700",
+          "[[aria-checked='true']]:bg-brand-active",
+          "[[aria-checked='true']]:border-brand-active [[aria-checked='true']]:border-l-brand-active [[aria-checked='true']+*]:border-l-brand-active",
           "[[aria-checked='true']]:text-white",
           "[[aria-checked='true']]:font-bold",
         ),

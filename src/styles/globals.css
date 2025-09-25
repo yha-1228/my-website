@@ -10,38 +10,20 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
 
-  --color-*: initial;
-  --color-primary-50: #eaf6ff;
-  --color-primary-100: #d8eeff;
-  --color-primary-200: #b9dcff;
-  --color-primary-300: #8ec4ff;
-  --color-primary-400: #629eff;
-  --color-primary-500: #3e77ff;
-  --color-primary-600: #1c4cff;
-  --color-primary-700: #1e48f1;
-  --color-primary-800: #1237c1;
-  --color-primary-900: #183697;
-  --color-primary-950: #0e1d58;
-  --color-danger-50: #fef2f2;
-  --color-danger-100: #fee2e2;
-  --color-danger-200: #fecaca;
-  --color-danger-300: #fca5a5;
-  --color-danger-400: #f87171;
-  --color-danger-500: #ef4444;
-  --color-danger-600: #dc2626;
-  --color-danger-700: #b91c1c;
-  --color-danger-800: #991b1b;
-  --color-danger-900: #7f1d1d;
-  --color-danger-950: #450a0a;
-  --color-accent: #fde047;
-  --color-base-foreground: #1f2937;
-  --color-base-foreground-weak: #6b7280;
-  --color-base-light-400: #9ca3af;
-  --color-base-light-300: #d1d5db;
-  --color-base-light-200: #e5e7eb;
-  --color-base-light-100: #f3f4f6;
-  --color-base-light-50: #f9fafb;
-  --color-white: #fff;
+  --color-brand-background: var(--color-blue-50);
+  --color-brand-base: var(--color-blue-600);
+  --color-brand-active: var(--color-blue-700);
+  --color-brand-hover: var(--color-blue-800);
+  --color-brand-dark: var(--color-blue-900);
+  --color-danger-background: var(--color-red-50);
+  --color-danger-base: var(--color-red-600);
+  --color-danger-active: var(--color-red-700);
+  --color-danger-hover: var(--color-red-800);
+  --color-danger-dark: var(--color-red-900);
+  --color-accent: var(--color-yellow-300);
+  --color-foreground-primary: var(--color-gray-900);
+  --color-foreground-secondary: var(--color-gray-500);
+  --color-foreground-placeholder: var(--color-gray-400);
 
   --font-sans:
     "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
@@ -63,16 +45,6 @@
   --text-3xl--line-height: var(--root-base-line-height);
   --text-4xl: 2.25rem;
   --text-4xl--line-height: var(--root-base-line-height);
-  --text-5xl: 3rem;
-  --text-5xl--line-height: var(--root-base-line-height);
-  --text-6xl: 3.75rem;
-  --text-6xl--line-height: var(--root-base-line-height);
-  --text-7xl: 4.5rem;
-  --text-7xl--line-height: var(--root-base-line-height);
-  --text-8xl: 6rem;
-  --text-8xl--line-height: var(--root-base-line-height);
-  --text-9xl: 8rem;
-  --text-9xl--line-height: var(--root-base-line-height);
 
   --shadow-card: 0px 2px 25px -15px rgba(0, 0, 0, 0.2);
   --shadow-wide: 0 30px 60px rgba(0, 0, 0, 0.12);
@@ -99,7 +71,7 @@
 
 body {
   background-color: var(--color-white);
-  color: var(--color-base-foreground);
+  color: var(--color-foreground-primary);
   line-height: var(--root-base-line-height);
 }
 
@@ -110,7 +82,7 @@ body {
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
-    outline-color: var(--color-primary-600);
+    outline-color: var(--color-brand-base);
     outline-offset: 1.5px;
     outline-style: solid;
     outline-width: 2px;

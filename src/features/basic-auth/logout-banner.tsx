@@ -16,7 +16,7 @@ export function LogoutBanner() {
   }, [didLogoutClick]);
 
   return (
-    <div className="bg-primary-100 py-4">
+    <div className="bg-brand-background py-4">
       <Container className="flex flex-col items-center justify-between gap-2 md:flex-row">
         <p>ポートフォリオページにログイン中です。</p>
         <LogoutButton

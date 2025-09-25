@@ -8,7 +8,7 @@ function FormErrorMessage(props: ComponentPropsWithRef<"p">) {
 
   return (
     <p
-      className={cn("text-danger-500 flex items-center text-sm", className)}
+      className={cn("text-danger-base flex items-center text-sm", className)}
       {...restProps}
     >
       <BsFillExclamationCircleFill aria-hidden="true" />

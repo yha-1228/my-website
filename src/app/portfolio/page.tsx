@@ -43,7 +43,7 @@ function IntroductionTable({
   rows: Array<{ header: string; data: ReactNode }>;
 }) {
   return (
-    <div className="border-b-base-light-300 first:border-t-base-light-300 border-b py-5 first:border-t">
+    <div className="border-b border-b-gray-300 py-5 first:border-t first:border-t-gray-300">
       <table
         className={cn(
           "flex flex-col",
@@ -83,7 +83,7 @@ export default async function Page() {
     <>
       <LogoutBanner />
       <Container className="mt-8">
-        <p className="text-base-foreground-weak">
+        <p className="text-foreground-secondary">
           デザイン経験のポートフォリオです。
           <br />
           エンジニア経験については別のページをご覧ください。
@@ -202,43 +202,43 @@ export default async function Page() {
                     <Link
                       href={routes["portfolio/[id]"].href(content.id)}
                       className={cn(
-                        "group border-base-light-300 flex flex-col gap-3 rounded-sm border px-5 py-4 transition-colors ease-out",
-                        "hover:bg-base-light-50 hover:border-base-foreground",
-                        "active:bg-base-light-50 active:border-base-foreground",
+                        "group flex flex-col gap-3 rounded-sm border border-gray-300 px-5 py-4 transition-colors ease-out",
+                        "hover:border-foreground-primary hover:bg-gray-50",
+                        "active:border-foreground-primary active:bg-gray-50",
                       )}
                     >
                       <div className="flex flex-col gap-1">
                         <div className="text-xl font-bold">{content.title}</div>
                         {content.subTitle && (
-                          <div className="text-base-foreground-weak text-xs">
+                          <div className="text-foreground-secondary text-xs">
                             {content.subTitle}
                           </div>
                         )}
                       </div>
                       <div className="flex flex-col gap-2">
                         <div className="flex flex-wrap items-center gap-1.5">
-                          <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
+                          <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
                             手法:{" "}
                             {methodTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
-                          <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
+                          <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
                             案件:{" "}
                             {projectTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
-                          <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
+                          <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
                             UX階層:{" "}
                             {uxLayerTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
-                          <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
+                          <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
                             参画:{" "}
                             {assignTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
-                          <Tag className="group-hover:border-base-light-300 group-active:border-base-light-300 border border-transparent">
+                          <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
                             稼働:{" "}
                             {jobTypeTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
                         </div>
-                        <div className="text-base-foreground-weak text-sm">
+                        <div className="text-foreground-secondary text-sm">
                           {content.start} - {content.end}
                         </div>
                       </div>

@@ -24,7 +24,7 @@ function Label(props: LabelProps) {
       {required ? (
         <>
           <span>{children}</span>
-          <span className="bg-danger-600 ml-1.5 rounded-xs px-[0.35rem] py-[0.05rem] text-xs text-white">
+          <span className="bg-danger-base ml-1.5 rounded-xs px-[0.35rem] py-[0.05rem] text-xs text-white">
             必須
           </span>
         </>

@@ -6,11 +6,11 @@ import { cn } from "@/utils/styling";
 // ----------------------------------------
 
 const baseClassName =
-  "placeholder:text-base-light-400 w-full appearance-none rounded-md px-3 disabled:bg-base-light-100 disabled:text-base-foreground/70 disabled:placeholder:text-base-light-400 disabled:cursor-not-allowed transition-[background-color] duration-200 ease-out";
+  "placeholder:text-foreground-placeholder w-full appearance-none rounded-md px-3 disabled:bg-gray-100 disabled:text-foreground-primary/70 disabled:placeholder:text-foreground-placeholder disabled:cursor-not-allowed transition-[background-color] duration-200 ease-out";
 
 const invalidClassNames = {
-  false: "border border-base-light-300",
-  true: "border border-danger-500",
+  false: "border border-gray-300 ",
+  true: "border border-danger-base",
 } as const;
 
 // ----------------------------------------
@@ -78,7 +78,7 @@ function InputLengthCounter(props: InputLengthCounterProps) {
 
   return (
     <span
-      className={cn(isError && "text-danger-500", className)}
+      className={cn(isError && "text-danger-base", className)}
       {...restProps}
     >
       {isError

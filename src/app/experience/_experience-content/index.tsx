@@ -89,7 +89,7 @@ export function ExperienceContent() {
             <div>
               <Heading2>{typeNameMap[type]}</Heading2>
               {typeKikanMap[type] && (
-                <div className="text-base-foreground-weak mt-6 text-sm">
+                <div className="text-foreground-secondary mt-6 text-sm">
                   {typeKikanMap[type]}
                 </div>
               )}
@@ -104,7 +104,7 @@ export function ExperienceContent() {
                   const heading = projectCompanyName ? (
                     <>
                       {title} <br />
-                      <div className="text-base-foreground mt-2 text-lg font-normal">
+                      <div className="text-foreground-primary mt-2 text-lg font-normal">
                         {projectCompanyName}
                       </div>
                     </>

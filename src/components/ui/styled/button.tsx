@@ -9,9 +9,9 @@ type Variant = "fill" | "outline";
 type Size = "md" | "lg";
 
 const variantClassNames = {
-  fill: "bg-primary-600 text-white hover:not-disabled:bg-primary-800 active:not-disabled:bg-primary-700",
+  fill: "bg-brand-base text-white hover:not-disabled:bg-brand-hover active:not-disabled:bg-brand-active",
   outline:
-    "border border-current text-primary-600 bg-white hover:not-disabled:bg-primary-50",
+    "border border-current text-brand-base bg-white hover:not-disabled:bg-brand-background",
 } as const satisfies Record<Variant, string>;
 
 const sizeClassNames = {

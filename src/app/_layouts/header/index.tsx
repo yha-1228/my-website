@@ -65,14 +65,14 @@ export function Header() {
       }
       className={cn(
         "z-header sticky top-0",
-        "border-b-base-light-300 h-(--height-header) border-b-[length:var(--header-border-bottom-width)] border-solid bg-white",
+        "h-(--height-header) border-b-[length:var(--header-border-bottom-width)] border-solid border-b-gray-300 bg-white",
       )}
     >
       <Container>
         <div className="relative flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center justify-between">
           <Link
             href="/"
-            className="hover:text-base-foreground-weak text-2xl font-bold transition-colors duration-200 ease-out"
+            className="hover:text-foreground-secondary text-2xl font-bold transition-colors duration-200 ease-out"
             onClick={handleHomeLinkClick}
           >
             Yuta Hasegawa
@@ -82,7 +82,7 @@ export function Header() {
           <button
             {...mobileMenu.triggerProps}
             className={cn(
-              "hover:bg-base-light-100 flex size-12 items-center justify-center rounded-full bg-white md:hidden",
+              "flex size-12 items-center justify-center rounded-full bg-white hover:bg-gray-100 md:hidden",
               "absolute top-1/2 -right-[0.8rem] -translate-y-1/2",
             )}
             aria-label={mobileMenu.open ? "メニューを閉じる" : "メニューを開く"}
@@ -106,8 +106,8 @@ export function Header() {
                     href={route.href}
                     className={cn(
                       "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-4 font-bold transition-colors duration-200 ease-out",
-                      "hover:bg-base-light-100 active:bg-base-light-200",
-                      "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-1 data-active:before:w-full data-active:before:content-['']",
+                      "hover:bg-gray-100 active:bg-gray-200",
+                      "data-active:before:bg-brand-base data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-1 data-active:before:w-full data-active:before:content-['']",
                       route.protected && "flex gap-2",
                     )}
                   >
@@ -141,9 +141,9 @@ export function Header() {
                 href={route.href}
                 className={cn(
                   "flex items-center justify-between py-3 font-bold",
-                  "hover:bg-base-light-100",
+                  "hover:bg-gray-100",
                   "data-active:relative",
-                  "data-active:before:bg-primary-600 data-active:before:absolute data-active:before:h-full data-active:before:w-1.5 data-active:before:content-['']",
+                  "data-active:before:bg-brand-base data-active:before:absolute data-active:before:h-full data-active:before:w-1.5 data-active:before:content-['']",
                 )}
                 onClick={handleMobileNavLinkClick}
               >

@@ -68,8 +68,8 @@ export function Footer({ className }: FooterProps) {
               ))}
           </ul>
         </div>
-        <div className="border-base-foreground/20 mt-5 border-t border-solid">
-          <p className="text-base-foreground/70 pt-5">{COPYRIGHT_TEXT}</p>
+        <div className="border-foreground-primary/20 mt-5 border-t border-solid">
+          <p className="text-foreground-primary/70 pt-5">{COPYRIGHT_TEXT}</p>
         </div>
       </Container>
     </footer>

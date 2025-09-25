@@ -14,13 +14,13 @@ import { cn } from "@/utils/styling";
 type Variant = "success" | "error";
 
 const variantClassNames = {
-  success: "bg-primary-50 text-primary-900",
-  error: "bg-danger-50 text-danger-900",
+  success: "bg-brand-background text-brand-dark",
+  error: "bg-danger-background text-danger-dark",
 } as const satisfies Record<Variant, string>;
 
 const variantIconMap = {
-  success: <BsCheck2Circle className="fill-primary-600 mt-1 size-5" />,
-  error: <BsExclamationCircle className="fill-danger-600 mt-1 size-5" />,
+  success: <BsCheck2Circle className="fill-brand-base mt-1 size-5" />,
+  error: <BsExclamationCircle className="fill-danger-base mt-1 size-5" />,
 } as const satisfies Record<Variant, ReactNode>;
 
 interface AlertProps extends Omit<ComponentPropsWithoutRef<"div">, "role"> {

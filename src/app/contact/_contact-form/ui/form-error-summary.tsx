@@ -15,7 +15,7 @@ function FormErrorSummaryList(props: FormErrorSummaryListProps) {
     <div
       role="alert"
       className={cn(
-        "bg-danger-100 border-l-danger-600 text-danger-900 rounded-md border-l-[6px] py-4 pl-6",
+        "bg-danger-background border-l-danger-base text-danger-dark rounded-md border-l-[6px] py-4 pl-6",
         className,
       )}
       {...restProps}

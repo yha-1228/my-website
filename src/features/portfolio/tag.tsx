@@ -8,7 +8,7 @@ function Tag(props: ComponentPropsWithRef<"div">) {
   return (
     <div
       className={cn(
-        "bg-base-light-100 text-base-foreground inline-block rounded-sm px-1.5 text-xs whitespace-nowrap",
+        "text-foreground-primary inline-block rounded-sm bg-gray-100 px-1.5 text-xs whitespace-nowrap",
         className,
       )}
       {...restProps}

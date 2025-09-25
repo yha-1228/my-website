@@ -15,7 +15,7 @@ export function HeroHeader() {
           ユーザーフレンドリーで堅牢なWebを開発します。
         </h1>
         <div className="mt-3.5">
-          <p className="text-base-foreground-weak lg:text-lg">
+          <p className="text-foreground-secondary lg:text-lg">
             新卒でシステム開発企業に入社し、主にWebアプリ開発のフロントエンドを担当してきました。マークアップ技術とReactを利用して、ストレス無く快適に閲覧や操作を行える体験を提供できるよう心掛けています。
           </p>
         </div>

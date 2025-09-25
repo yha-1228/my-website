@@ -162,7 +162,7 @@ export function ContactForm({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "lg:border-base-light-200 lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:bg-white lg:px-10 lg:pt-8 lg:pb-11",
+        "lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:border-gray-200 lg:bg-white lg:px-10 lg:pt-8 lg:pb-11",
         className,
       )}
     >

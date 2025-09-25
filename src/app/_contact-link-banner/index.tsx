@@ -11,7 +11,7 @@ export function ContactLinkBanner() {
       <Container>
         <Link
           href={routes.contact.href}
-          className="bg-primary-800 group hover:bg-primary-700 block rounded-xl p-6 text-center text-white transition-colors sm:flex sm:items-center sm:justify-between sm:px-10 sm:py-8 sm:text-left"
+          className="bg-brand-base group hover:bg-brand-hover active:bg-brand-active block rounded-xl p-6 text-center text-white transition-colors sm:flex sm:items-center sm:justify-between sm:px-10 sm:py-8 sm:text-left"
         >
           <div>
             <h1 className="text-2xl font-bold sm:text-3xl">お問い合わせ</h1>
@@ -20,7 +20,7 @@ export function ContactLinkBanner() {
           <div
             className={cn(
               "mt-6 inline-block w-full rounded-md border border-white py-2 text-lg font-bold text-white transition-colors sm:flex sm:w-auto sm:px-8 sm:py-4",
-              "group-hover:text-primary-700 group-hover:bg-white",
+              "group-hover:text-brand-hover group-active:text-brand-active group-hover:bg-white",
             )}
           >
             <span>フォームを開く</span>

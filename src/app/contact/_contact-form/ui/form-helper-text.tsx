@@ -7,7 +7,7 @@ function FormHelperText(props: ComponentPropsWithRef<"p">) {
 
   return (
     <p
-      className={cn("text-base-foreground-weak text-sm", className)}
+      className={cn("text-foreground-secondary text-sm", className)}
       {...restProps}
     />
   );

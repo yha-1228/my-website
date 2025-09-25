@@ -26,7 +26,7 @@ function SkillDetailCard(props: SkillDetailCardProps) {
     <div
       className={cn(
         "w-full rounded-sm px-5 lg:px-6",
-        "shadow-card border-base-light-300 border bg-white",
+        "shadow-card border border-gray-300 bg-white",
         className,
       )}
     >
@@ -36,8 +36,8 @@ function SkillDetailCard(props: SkillDetailCardProps) {
       <div
         className={cn(
           "space-y-5 pt-5 pb-8",
-          "text-base-foreground",
-          "border-t-base-light-300 border-t border-solid",
+          "text-foreground-primary",
+          "border-t border-solid border-t-gray-300",
         )}
       >
         <ul className="mt-2 space-y-2.5 text-sm">
@@ -66,7 +66,7 @@ const skillWordCategoryHeadingMap = {
 export function Skills() {
   return (
     <>
-      <div className="bg-base-light-100 py-14">
+      <div className="bg-gray-100 py-14">
         <Container>
           <Heading1>言語/FW等</Heading1>
           <div className="mt-8 space-y-3 sm:flex sm:space-y-0 sm:space-x-8 sm:*:w-1/3">
@@ -90,7 +90,7 @@ export function Skills() {
                         <span
                           data-separator
                           aria-hidden="true"
-                          className="text-base-foreground-weak"
+                          className="text-foreground-secondary"
                         >
                           {` / `}
                         </span>
@@ -114,13 +114,13 @@ export function Skills() {
         </Container>
       </div>
 
-      <div className="bg-base-light-100 pt-3">
+      <div className="bg-gray-100 pt-3">
         <Container>
-          <hr className="bg-base-light-400 h-px w-full border-0" />
+          <hr className="bg-foreground-placeholder h-px w-full border-0" />
         </Container>
       </div>
 
-      <div className="bg-base-light-100 py-14">
+      <div className="bg-gray-100 py-14">
         <Container>
           <Heading1>提供可能な業務</Heading1>
           <ul className="mt-8 space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:space-y-0 lg:gap-x-[16px] lg:gap-y-[20px]">

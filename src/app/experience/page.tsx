@@ -21,12 +21,12 @@ export default function Page() {
         <section>
           <div className="flex flex-col gap-4 text-center">
             <Heading1>{routes.experience.label}</Heading1>
-            <p className="text-base-foreground-weak">
+            <p className="text-foreground-secondary">
               詳細なスキルシートについては
               <TextLink
                 href={routes.contact.href}
                 as={Link}
-                className="text-base-foreground font-bold"
+                className="text-foreground-primary font-bold"
                 withUnderline
               >
                 お問い合わせ
