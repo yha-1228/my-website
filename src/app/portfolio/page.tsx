@@ -18,19 +18,56 @@ interface SectionBoxProps {
   titleElem: ReactNode;
   children: ReactNode;
   className?: string;
+  contentClassName?: string;
 }
 
-function SectionBox({ titleElem, children, className }: SectionBoxProps) {
+function SectionBox({
+  titleElem,
+  children,
+  className,
+  contentClassName,
+}: SectionBoxProps) {
   return (
     <section className={cn("flex flex-col gap-10", className)}>
       {titleElem}
-      <div>{children}</div>
+      <div className={contentClassName}>{children}</div>
     </section>
   );
 }
 
+function IntroductionTable({
+  className,
+  rows,
+}: {
+  className?: string;
+  rows: Array<{ header: string; data: ReactNode }>;
+}) {
+  return (
+    <table
+      className={cn(
+        "flex flex-col px-7 py-2",
+        "[&_tr]:border-t [&_tr]:first:border-none",
+        "[&_td]:py-4 [&_th]:py-4",
+        "[&_td]:leading-[1.55]! [&_th]:leading-[1.5]!",
+        "[&_th]:w-[240px] [&_th]:text-left [&_th]:align-top [&_th]:text-xl [&_th]:whitespace-nowrap",
+        "[&_td]:align-top",
+        className,
+      )}
+    >
+      <tbody>
+        {rows.map((row, index) => (
+          <tr key={index}>
+            <th>{row.header}</th>
+            <td>{row.data}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 const introductionTagClassName =
-  "rounded-sm border bg-white border-[black]/30 px-2.5 py-0.5 text-sm";
+  "rounded-sm border bg-white border-[black]/30 px-1.5 text-sm";
 
 export const metadata: Metadata = {
   title: `${routes.portfolio.label} | ${SITE_TITLE}`,
@@ -45,32 +82,30 @@ export default async function Page() {
       <LogoutBanner />
       <div className="py-14">
         <Container className="flex flex-col gap-14">
-          <SectionBox titleElem={<Heading1>自己紹介</Heading1>}>
+          <SectionBox
+            titleElem={<Heading1>自己紹介</Heading1>}
+            contentClassName="flex flex-col gap-4"
+          >
             <div className="border-base-light-300 overflow-hidden rounded-md border">
-              <table
-                className={cn(
-                  "bg-base-light-100 flex flex-col px-8 py-4",
-                  "[&_th]:py-4 [&_th]:text-left [&_th]:align-top [&_th]:text-xl [&_th]:leading-[1.3] [&_th]:whitespace-nowrap",
-                  "[&_td]:py-4 [&_td]:pl-8 [&_td]:align-top",
-                )}
-              >
-                <tbody>
-                  <tr>
-                    <th>対応領域</th>
-                    <td>
-                      <div className="flex flex-wrap gap-2">
+              <IntroductionTable
+                className="bg-base-light-100 [&_tr]:border-base-light-300"
+                rows={[
+                  {
+                    header: "対応領域",
+                    data: (
+                      <div className="flex flex-wrap gap-1.5">
                         {portfolioIntroduction.scope.split(", ").map((text) => (
                           <span key={text} className={introductionTagClassName}>
                             {text}
                           </span>
                         ))}
                       </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>使用言語・FW</th>
-                    <td>
-                      <div className="flex flex-wrap gap-2">
+                    ),
+                  },
+                  {
+                    header: "使用言語・FW",
+                    data: (
+                      <div className="flex flex-wrap gap-1.5">
                         {portfolioIntroduction.langAndFws
                           .split(", ")
                           .map((text) => (
@@ -82,23 +117,53 @@ export default async function Page() {
                             </span>
                           ))}
                       </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>使用ツール</th>
-                    <td>
-                      <div className="flex flex-wrap gap-2">
+                    ),
+                  },
+                  {
+                    header: "使用ツール",
+                    data: (
+                      <div className="flex flex-wrap gap-1.5">
                         {portfolioIntroduction.tools.split(", ").map((text) => (
                           <span key={text} className={introductionTagClassName}>
                             {text}
                           </span>
                         ))}
                       </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <HtmlRenderer className="p-8" html={portfolioIntroduction.body} />
+                    ),
+                  },
+                ]}
+              />
+              <IntroductionTable
+                className="[&_tr]:border-base-light-200"
+                rows={[
+                  {
+                    header: "概要",
+                    data: (
+                      <HtmlRenderer html={portfolioIntroduction.overview} />
+                    ),
+                  },
+                  {
+                    header: "職務経歴",
+                    data: (
+                      <HtmlRenderer html={portfolioIntroduction.experience} />
+                    ),
+                  },
+                  {
+                    header: "大切にしていること",
+                    data: (
+                      <HtmlRenderer html={portfolioIntroduction.torikumi} />
+                    ),
+                  },
+                  {
+                    header: "強み",
+                    data: <HtmlRenderer html={portfolioIntroduction.tsuyomi} />,
+                  },
+                  {
+                    header: "今後やりたいこと",
+                    data: <HtmlRenderer html={portfolioIntroduction.kongo} />,
+                  },
+                ]}
+              />
             </div>
           </SectionBox>
 
