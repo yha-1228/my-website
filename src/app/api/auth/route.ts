@@ -19,26 +19,27 @@ const html = `<!doctype html>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>認証エラー | ${SITE_TITLE}</title>
   <style>
-    .p-80 {
-      padding: 80px;
+    body {
+      font-family: sans-serif;
+    }
+
+    .p-20 {
+      padding: 20px;
     }
   </style>
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-icon.png" />
-  <meta name="description" content="認証に失敗しました" />
   <script>
     ${goBack.toString()}
     ${reload.toString()}
   </script>
 </head>
 <body>
-  <main class="p-80">
+  <main class="p-20">
     <h1>認証に失敗しました</h1>
-    <p>ユーザー名またはパスワードが正しくありません。もう一度お試しください。<br>
-      不明な場合は、ご担当者または長谷川にお問い合わせください。</p>
     <div>
-      <button onclick="${goBack.name}()">ホーム画面に戻る</button>
-      <button onclick="${reload.name}()">もう一度ログインする</button>
+      <a href="/">ホーム画面に戻る</a><br />
+      <a href="/portfolio">もう一度ログインする</a>
     </div>
   </main>
 </body>
