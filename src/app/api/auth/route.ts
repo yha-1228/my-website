@@ -1,17 +1,5 @@
 import { SITE_TITLE } from "@/constants";
 
-function goBack() {
-  if (window.history.length > 1) {
-    window.history.back();
-  } else {
-    window.location.href = "/";
-  }
-}
-
-function reload() {
-  window.location.reload();
-}
-
 const html = `<!doctype html>
 <html lang="ja">
 <head>
@@ -29,10 +17,6 @@ const html = `<!doctype html>
   </style>
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-icon.png" />
-  <script>
-    ${goBack.toString()}
-    ${reload.toString()}
-  </script>
 </head>
 <body>
   <main class="p-20">
