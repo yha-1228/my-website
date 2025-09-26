@@ -11,10 +11,10 @@ export function ContactLinkBanner() {
       <Container>
         <Link
           href={routes.contact.href}
-          className="bg-brand-base group hover:bg-brand-hover active:bg-brand-active block rounded-xl p-6 text-center text-white transition-colors sm:flex sm:items-center sm:justify-between sm:px-10 sm:py-8 sm:text-left"
+          className="bg-brand-base group hover:not-disabled:bg-brand-hover active:not-disabled:bg-brand-active block rounded-xl p-6 text-center text-white transition-colors sm:flex sm:items-center sm:justify-between sm:px-10 sm:py-8 sm:text-left"
         >
           <div>
-            <h1 className="text-2xl font-bold sm:text-3xl">お問い合わせ</h1>
+            <h1 className="text-2xl sm:text-3xl">お問い合わせ</h1>
             <p className="mt-0.5">お気軽にお問い合わせください。</p>
           </div>
           <div

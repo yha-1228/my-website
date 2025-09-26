@@ -42,7 +42,7 @@ export function Footer({ className }: FooterProps) {
             {myExternalLinks.map((link) => (
               <li key={link.href}>
                 <ExternalTextLink
-                  className="leading-normal font-bold"
+                  className="py-2 leading-normal transition-colors"
                   href={link.href}
                 >
                   {link.label}
@@ -59,7 +59,7 @@ export function Footer({ className }: FooterProps) {
                     // Linkコンポーネントだと、Basic認証に失敗したあともう一度ダイアログが現れてしまう。
                     // 通常のaタグにして回避する。
                     as={route.protected ? undefined : Link}
-                    className="inline-block leading-normal font-bold"
+                    className="inline-block py-2 leading-normal transition-colors"
                     href={route.href}
                   >
                     {route.label}

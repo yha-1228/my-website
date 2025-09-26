@@ -10,20 +10,31 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
 
-  --color-brand-background: var(--color-blue-50);
-  --color-brand-base: var(--color-blue-600);
-  --color-brand-active: var(--color-blue-700);
-  --color-brand-hover: var(--color-blue-800);
-  --color-brand-dark: var(--color-blue-900);
-  --color-danger-background: var(--color-red-50);
-  --color-danger-base: var(--color-red-600);
-  --color-danger-active: var(--color-red-700);
-  --color-danger-hover: var(--color-red-800);
-  --color-danger-dark: var(--color-red-900);
+  /* primitive */
+  --color-blue-ribbon-50: #eef8ff;
+  --color-blue-ribbon-100: #d9eeff;
+  --color-blue-ribbon-200: #bce1ff;
+  --color-blue-ribbon-300: #8dd0ff;
+  --color-blue-ribbon-400: #58b3ff;
+  --color-blue-ribbon-500: #3193ff;
+  --color-blue-ribbon-600: #126ef5;
+  --color-blue-ribbon-700: #135ce2;
+  --color-blue-ribbon-800: #164bb7;
+  --color-blue-ribbon-900: #184290;
+  --color-blue-ribbon-950: #142957;
+
+  --color-brand-background: var(--color-blue-ribbon-100);
+  --color-brand-base: var(--color-blue-ribbon-600);
+  --color-brand-active: var(--color-blue-ribbon-700);
+  --color-brand-hover: var(--color-blue-ribbon-800);
+  --color-brand-dark: var(--color-blue-ribbon-900);
+  --color-danger-background: var(--color-rose-50);
+  --color-danger-base: var(--color-rose-600);
+  --color-danger-dark: var(--color-rose-900);
   --color-accent: var(--color-yellow-300);
-  --color-foreground-primary: var(--color-gray-900);
-  --color-foreground-secondary: var(--color-gray-500);
-  --color-foreground-placeholder: var(--color-gray-400);
+  --color-foreground-primary: var(--color-stone-900);
+  --color-foreground-secondary: var(--color-stone-500);
+  --color-foreground-placeholder: var(--color-stone-400);
 
   --font-sans:
     "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
@@ -55,6 +66,8 @@
   --height-header: 4rem;
 
   --screen-margin: calc(var(--spacing) * 5);
+
+  --radius-touchable: var(--radius-md);
 }
 
 /* https://tailwindcss.com/docs/upgrade-guide#buttons-use-the-default-cursor */
@@ -83,9 +96,15 @@ body {
   textarea:focus-visible,
   select:focus-visible {
     outline-color: var(--color-brand-base);
-    outline-offset: 1.5px;
+    outline-offset: 1px;
     outline-style: solid;
-    outline-width: 2px;
+    outline-width: 2.5px;
+  }
+
+  input[aria-invalid="true"]:focus-visible,
+  textarea[aria-invalid="true"]:focus-visible,
+  select[aria-invalid="true"]:focus-visible {
+    outline-color: var(--color-danger-base);
   }
 }
 

@@ -9,9 +9,9 @@ type Variant = "fill" | "outline";
 type Size = "md" | "lg";
 
 const variantClassNames = {
-  fill: "bg-brand-base text-white hover:not-disabled:bg-brand-hover active:not-disabled:bg-brand-active",
+  fill: "bg-foreground-primary text-white hover:not-disabled:opacity-80 active:not-disabled:opacity-70",
   outline:
-    "border border-current text-brand-base bg-white hover:not-disabled:bg-brand-background",
+    "border border-current text-foreground-primary bg-white hover:not-disabled:opacity-80 active:not-disabled:opacity-70",
 } as const satisfies Record<Variant, string>;
 
 const sizeClassNames = {
@@ -42,6 +42,12 @@ type ButtonProps<T extends ElementType> = PropsWithAs<T, "button"> & {
    * @default false
    */
   disabled?: boolean;
+  /**
+   * NOTE: `twMerge`の不具合？により、外部から`rounded-*`を付与しても上書きされない
+   *
+   * @default false
+   */
+  fullRounded?: boolean;
 };
 
 function Button<T extends ElementType>(props: ButtonProps<T>) {
@@ -52,6 +58,7 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
     loading = false,
     loadingLabel = undefined,
     disabled = false,
+    fullRounded = false,
     className,
     children,
     ...restProps
@@ -60,10 +67,11 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
   return (
     <Comp
       className={cn(
-        "inline-flex cursor-pointer items-center justify-center rounded-md font-bold transition-colors duration-200 ease-out",
+        "inline-flex cursor-pointer items-center justify-center transition-opacity duration-200 ease-out",
         variantClassNames[variant],
         sizeClassNames[size],
-        "disabled:cursor-not-allowed disabled:opacity-50",
+        "disabled:cursor-not-allowed disabled:opacity-40",
+        fullRounded ? "rounded-full" : "rounded-touchable",
         className,
       )}
       disabled={disabled || loading}

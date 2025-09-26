@@ -49,9 +49,9 @@ export default async function Page() {
                     rel="noopener noreferrer"
                     href={zennArticle.link}
                     className={cn(
-                      "group block rounded-sm border border-gray-300 px-5 py-4 transition-colors ease-out",
-                      "hover:border-foreground-primary hover:bg-gray-50",
-                      "active:border-foreground-primary active:bg-gray-50",
+                      "group block rounded-sm border border-stone-300 px-5 py-4 transition-colors ease-out",
+                      "hover:border-foreground-primary hover:bg-stone-50",
+                      "active:border-foreground-primary active:bg-stone-50",
                     )}
                   >
                     <div className="flex items-center gap-x-2">
@@ -62,11 +62,11 @@ export default async function Page() {
                     </div>
                     <div className="mt-3 flex flex-col gap-2 sm:mt-4 md:flex-row md:items-center md:gap-4">
                       <div className="flex gap-2">
-                        <Tag className="bg-[#ecf5ff] transition-colors group-hover:bg-[#cce3ff] group-active:bg-[#cce3ff]">
+                        <Tag className="bg-[#cce3ff] transition-colors">
                           Zenn
                         </Tag>
                         {isWithinOneMonth(zennArticle.isoDate) && (
-                          <Tag className="bg-danger-base group-hover:bg-danger-hover group-active:bg-danger-active font-bold text-white transition-colors">
+                          <Tag className="bg-foreground-primary text-white transition-colors">
                             1ヶ月以内に投稿
                           </Tag>
                         )}

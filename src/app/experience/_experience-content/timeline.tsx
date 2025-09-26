@@ -20,16 +20,14 @@ export function Timeline({ items }: TimelineProps) {
             {/* Dot */}
             <div className="border-brand-base size-4 rounded-full border-4 border-solid bg-white" />
             {/* Axis */}
-            <div className="bg-brand-base h-full w-0.5" />
+            <div className="h-full w-0.5 bg-stone-300" />
           </div>
 
           {/* Body */}
           <div className="ml-5 w-full pb-10">
-            <div className="text-brand-base leading-none font-semibold">
-              {item.point}
-            </div>
+            <div className="text-brand-base leading-none">{item.point}</div>
 
-            <div className="mt-4 border-t border-solid border-t-gray-300 pt-2">
+            <div className="mt-4 border-t border-solid border-t-gray-200 pt-2">
               <div className="py-1 text-xl leading-snug font-bold">
                 {item.heading}
               </div>

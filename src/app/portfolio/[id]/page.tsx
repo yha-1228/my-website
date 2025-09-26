@@ -65,21 +65,21 @@ export default async function Page({ params }: Props) {
                 {content.start} - {content.end}
               </p>
             </header>
-            <div className="mt-8 flex flex-col gap-10 border-t border-solid border-t-gray-300 pt-5">
+            <div className="mt-8 flex flex-col gap-10 border-t border-solid border-t-stone-300 pt-5">
               <div className="flex flex-wrap items-center gap-1.5">
-                <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
+                <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
                   手法: {methodTags.map((tag) => tag.label).join(" / ")}
                 </Tag>
-                <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
+                <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
                   案件: {projectTags.map((tag) => tag.label).join(" / ")}
                 </Tag>
-                <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
+                <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
                   UX階層: {uxLayerTags.map((tag) => tag.label).join(" / ")}
                 </Tag>
-                <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
+                <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
                   参画: {assignTags.map((tag) => tag.label).join(" / ")}
                 </Tag>
-                <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
+                <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
                   稼働: {jobTypeTags.map((tag) => tag.label).join(" / ")}
                 </Tag>
               </div>

@@ -26,7 +26,7 @@ function SkillDetailCard(props: SkillDetailCardProps) {
     <div
       className={cn(
         "w-full rounded-sm px-5 lg:px-6",
-        "shadow-card border border-gray-300 bg-white",
+        "shadow-card border border-stone-300 bg-white",
         className,
       )}
     >
@@ -37,7 +37,7 @@ function SkillDetailCard(props: SkillDetailCardProps) {
         className={cn(
           "space-y-5 pt-5 pb-8",
           "text-foreground-primary",
-          "border-t border-solid border-t-gray-300",
+          "border-t border-solid border-t-stone-300",
         )}
       >
         <ul className="mt-2 space-y-2.5 text-sm">
@@ -66,7 +66,7 @@ const skillWordCategoryHeadingMap = {
 export function Skills() {
   return (
     <>
-      <div className="bg-gray-100 py-14">
+      <div className="bg-stone-100 py-14">
         <Container>
           <Heading1>言語/FW等</Heading1>
           <div className="mt-8 space-y-3 sm:flex sm:space-y-0 sm:space-x-8 sm:*:w-1/3">
@@ -99,7 +99,7 @@ export function Skills() {
                           className={cn(
                             "text-lg",
                             s.strong &&
-                              "font-extrabold [background:linear-gradient(transparent_75%,var(--color-accent)_75%)]",
+                              "[background:linear-gradient(transparent_75%,var(--color-accent)_75%)]",
                           )}
                         >
                           {s.label}
@@ -114,13 +114,13 @@ export function Skills() {
         </Container>
       </div>
 
-      <div className="bg-gray-100 pt-3">
+      <div className="bg-stone-100 pt-3">
         <Container>
           <hr className="bg-foreground-placeholder h-px w-full border-0" />
         </Container>
       </div>
 
-      <div className="bg-gray-100 py-14">
+      <div className="bg-stone-100 py-14">
         <Container>
           <Heading1>提供可能な業務</Heading1>
           <ul className="mt-8 space-y-6 lg:flex lg:flex-wrap lg:justify-between lg:space-y-0 lg:gap-x-[16px] lg:gap-y-[20px]">

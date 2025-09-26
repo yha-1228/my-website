@@ -14,9 +14,15 @@ import { cn } from "@/utils/styling";
 type Variant = "success" | "error";
 
 const variantClassNames = {
-  success: "bg-brand-background text-brand-dark",
-  error: "bg-danger-background text-danger-dark",
-} as const satisfies Record<Variant, string>;
+  success: {
+    root: cn("border border-brand-base"),
+    heading: cn("text-brand-dark"),
+  },
+  error: {
+    root: cn("border border-danger-base"),
+    heading: cn("text-danger-dark"),
+  },
+} as const satisfies Record<Variant, unknown>;
 
 const variantIconMap = {
   success: <BsCheck2Circle className="fill-brand-base mt-1 size-5" />,
@@ -43,7 +49,7 @@ function Alert(props: AlertProps) {
       role="alert"
       className={cn(
         "block rounded-lg px-5 pt-4 pb-5 sm:flex",
-        variantClassNames[variant],
+        variantClassNames[variant].root,
         className,
       )}
       ref={ref}
@@ -51,7 +57,14 @@ function Alert(props: AlertProps) {
     >
       <div className="hidden sm:block">{variantIconMap[variant]}</div>
       <div className="sm:ml-3">
-        <div className="text-lg font-bold">{heading}</div>
+        <div
+          className={cn(
+            "text-lg font-bold",
+            variantClassNames[variant].heading,
+          )}
+        >
+          {heading}
+        </div>
         <div className="mt-1.5">{children}</div>
       </div>
     </div>

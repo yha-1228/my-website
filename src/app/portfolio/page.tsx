@@ -43,7 +43,7 @@ function IntroductionTable({
   rows: Array<{ header: string; data: ReactNode }>;
 }) {
   return (
-    <div className="border-b border-b-gray-300 py-5 first:border-t first:border-t-gray-300">
+    <div className="border-b border-b-stone-300 py-5 first:border-t first:border-t-stone-300">
       <table
         className={cn(
           "flex flex-col",
@@ -202,9 +202,9 @@ export default async function Page() {
                     <Link
                       href={routes["portfolio/[id]"].href(content.id)}
                       className={cn(
-                        "group flex flex-col gap-3 rounded-sm border border-gray-300 px-5 py-4 transition-colors ease-out",
-                        "hover:border-foreground-primary hover:bg-gray-50",
-                        "active:border-foreground-primary active:bg-gray-50",
+                        "group flex flex-col gap-3 rounded-sm border border-stone-300 px-5 py-4 transition-colors ease-out",
+                        "hover:border-foreground-primary hover:bg-stone-50",
+                        "active:border-foreground-primary active:bg-stone-50",
                       )}
                     >
                       <div className="flex flex-col gap-1">
@@ -217,23 +217,23 @@ export default async function Page() {
                       </div>
                       <div className="flex flex-col gap-2">
                         <div className="flex flex-wrap items-center gap-1.5">
-                          <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
+                          <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
                             手法:{" "}
                             {methodTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
-                          <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
+                          <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
                             案件:{" "}
                             {projectTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
-                          <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
+                          <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
                             UX階層:{" "}
                             {uxLayerTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
-                          <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
+                          <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
                             参画:{" "}
                             {assignTags.map((tag) => tag.label).join(" / ")}
                           </Tag>
-                          <Tag className="border border-transparent group-hover:border-gray-300 group-active:border-gray-300">
+                          <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
                             稼働:{" "}
                             {jobTypeTags.map((tag) => tag.label).join(" / ")}
                           </Tag>

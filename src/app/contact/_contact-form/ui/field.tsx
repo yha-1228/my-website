@@ -6,11 +6,11 @@ import { cn } from "@/utils/styling";
 // ----------------------------------------
 
 const baseClassName =
-  "placeholder:text-foreground-placeholder w-full appearance-none rounded-md px-3 disabled:bg-gray-100 disabled:text-foreground-primary/70 disabled:placeholder:text-foreground-placeholder disabled:cursor-not-allowed transition-[background-color] duration-200 ease-out";
+  "placeholder:text-foreground-placeholder w-full appearance-none rounded-touchable px-3 disabled:bg-stone-100 disabled:text-foreground-primary/70 disabled:placeholder:text-foreground-placeholder disabled:cursor-not-allowed transition-[background-color] duration-200 ease-out";
 
 const invalidClassNames = {
-  false: "border border-gray-300 ",
-  true: "border border-danger-base",
+  false: "border border-stone-400  hover:bg-brand-background/30",
+  true: "border border-danger-base/30 bg-danger-background/50 hover:bg-danger-background",
 } as const;
 
 // ----------------------------------------

@@ -1,9 +1,9 @@
 "use client";
 
+import { Lock, LockOpen } from "lucide-react";
 import Link from "next/link";
 import { type CSSProperties, type MouseEvent, useRef } from "react";
 import { BsList, BsX } from "react-icons/bs";
-import { FaLock } from "react-icons/fa";
 
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";
@@ -65,7 +65,7 @@ export function Header() {
       }
       className={cn(
         "z-header sticky top-0",
-        "h-(--height-header) border-b-[length:var(--header-border-bottom-width)] border-solid border-b-gray-300 bg-white",
+        "h-(--height-header) border-b-[length:var(--header-border-bottom-width)] border-solid border-b-stone-300 bg-white",
       )}
     >
       <Container>
@@ -82,7 +82,7 @@ export function Header() {
           <button
             {...mobileMenu.triggerProps}
             className={cn(
-              "flex size-12 items-center justify-center rounded-full bg-white hover:bg-gray-100 md:hidden",
+              "flex size-12 items-center justify-center rounded-full bg-white hover:bg-stone-100 md:hidden",
               "absolute top-1/2 -right-[0.8rem] -translate-y-1/2",
             )}
             aria-label={mobileMenu.open ? "メニューを閉じる" : "メニューを開く"}
@@ -105,14 +105,23 @@ export function Header() {
                     as={route.protected ? undefined : Link}
                     href={route.href}
                     className={cn(
-                      "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-4 font-bold transition-colors duration-200 ease-out",
-                      "hover:bg-gray-100 active:bg-gray-200",
-                      "data-active:before:bg-brand-base data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-1 data-active:before:w-full data-active:before:content-['']",
+                      "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-4 transition-colors duration-200 ease-out",
+                      "hover:bg-stone-100 active:bg-stone-200",
+                      "data-active:before:bg-brand-base data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-[6px] data-active:before:w-full data-active:before:content-['']",
                       route.protected && "flex gap-2",
                     )}
                   >
-                    {route.protected && <FaLock />}
-                    {route.label}
+                    {(active) => (
+                      <>
+                        {route.protected &&
+                          (active ? (
+                            <LockOpen size={20} />
+                          ) : (
+                            <Lock size={20} />
+                          ))}
+                        {route.label}
+                      </>
+                    )}
                   </ActiveLink>
                 </li>
               ))}
@@ -140,22 +149,25 @@ export function Header() {
                 as={route.protected ? undefined : Link}
                 href={route.href}
                 className={cn(
-                  "flex items-center justify-between py-3 font-bold",
-                  "hover:bg-gray-100",
+                  "flex items-center justify-between py-3",
+                  "hover:bg-stone-100",
                   "data-active:relative",
                   "data-active:before:bg-brand-base data-active:before:absolute data-active:before:h-full data-active:before:w-1.5 data-active:before:content-['']",
                 )}
                 onClick={handleMobileNavLinkClick}
               >
-                <div
-                  className={cn(
-                    "px-6",
-                    route.protected && "flex items-center gap-2",
-                  )}
-                >
-                  {route.protected && <FaLock />}
-                  {route.label}
-                </div>
+                {(active) => (
+                  <div
+                    className={cn(
+                      "px-6",
+                      route.protected && "flex items-center gap-2",
+                    )}
+                  >
+                    {route.protected &&
+                      (active ? <LockOpen size={20} /> : <Lock size={20} />)}
+                    {route.label}
+                  </div>
+                )}
               </ActiveLink>
             </li>
           ))}

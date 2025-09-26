@@ -1,54 +1,30 @@
 "use client";
 
-import { type ComponentPropsWithRef } from "react";
-import { BsArrowUpRight } from "react-icons/bs";
+import { ExternalLink } from "lucide-react";
+import { type ElementType } from "react";
 
+import { TextLink, type TextLinkProps } from "@/components/ui/styled/text-link";
 import { cn } from "@/utils/styling";
 
-const underlineClassNames = {
-  true: "underline hover:decoration-2",
-  false: "hover:underline hover:decoration-2",
-} as const;
+export type ExternalTextLinkProps<TAs extends ElementType> = Omit<
+  TextLinkProps<TAs>,
+  "target" | "rel"
+>;
 
-export interface ExternalTextLinkProps
-  extends Omit<ComponentPropsWithRef<"a">, "target" | "rel"> {
-  /**
-   * @default false
-   */
-  withUnderline?: boolean;
-  preventLink?: boolean;
-}
-
-export function ExternalTextLink(props: ExternalTextLinkProps) {
-  const {
-    withUnderline = false,
-    preventLink,
-    onClick,
-    className,
-    children,
-    ...restProps
-  } = props;
+export function ExternalTextLink<TAs extends ElementType>(
+  props: ExternalTextLinkProps<TAs>,
+) {
+  const { className, children, ...restProps } = props;
 
   return (
-    <a
+    <TextLink
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(
-        "rounded-xs underline-offset-4",
-        underlineClassNames[`${withUnderline}`],
-        "inline-flex items-center space-x-1",
-        className,
-      )}
-      onClick={(event) => {
-        if (preventLink) {
-          event.preventDefault();
-        }
-        onClick?.(event);
-      }}
+      className={cn("inline-flex items-center space-x-1", className)}
       {...restProps}
     >
       <span>{children}</span>
-      <BsArrowUpRight />
-    </a>
+      <ExternalLink size={20} />
+    </TextLink>
   );
 }

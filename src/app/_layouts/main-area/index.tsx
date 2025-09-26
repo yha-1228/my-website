@@ -80,8 +80,9 @@ export function MainArea({ children }: { children: ReactNode }) {
           onClick={scrollToTopButton.handleClick}
           aria-label="トップに戻る"
           data-hidden={scrollToTopButton.visible ? undefined : "true"}
+          fullRounded
           className={cn(
-            "fixed right-6 bottom-5 size-14! rounded-full p-0 text-3xl shadow-lg md:bottom-9",
+            "fixed right-6 bottom-5 size-14! p-0 text-3xl shadow-lg md:bottom-9",
             "[transition:opacity_200ms,background-color_200ms,scale_200ms]",
             "data-[hidden='true']:pointer-events-none data-[hidden='true']:opacity-0",
             "active:scale-[0.95]",

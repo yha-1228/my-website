@@ -6,14 +6,12 @@ import { type PropsWithAs } from "@/types/react";
 import { cn } from "@/utils/styling";
 
 const underlineClassNames = {
-  true: "decoration-1 underline hover:decoration-2",
-  false: "hover:underline hover:decoration-2",
+  true: "underline-offset-[6px] decoration-1 underline hover:decoration-2 decoration-brand-base",
+  false:
+    "hover:underline underline-offset-[6px] hover:decoration-1 decoration-brand-base",
 } as const;
 
-type TextLinkProps<TAs extends ElementType> = Omit<
-  PropsWithAs<TAs, "a">,
-  "withUnderline" | "preventLink"
-> & {
+type TextLinkProps<TAs extends ElementType> = PropsWithAs<TAs, "a"> & {
   /**
    * @default false
    */
@@ -33,11 +31,7 @@ function TextLink<TAs extends ElementType>(props: TextLinkProps<TAs>) {
 
   return (
     <Comp
-      className={cn(
-        "rounded-xs underline-offset-4",
-        underlineClassNames[`${withUnderline}`],
-        className,
-      )}
+      className={cn(underlineClassNames[`${withUnderline}`], className)}
       onClick={(event: MouseEvent) => {
         if (preventLink) {
           event.preventDefault();
