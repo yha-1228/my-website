@@ -15,12 +15,12 @@ function FormErrorSummaryList(props: FormErrorSummaryListProps) {
     <div
       role="alert"
       className={cn(
-        "bg-danger-background border-l-danger-base text-danger-dark rounded-md border-l-[6px] py-4 pl-6",
+        "border-danger-base rounded-sm border-2 py-4 pl-6",
         className,
       )}
       {...restProps}
     >
-      <div className="text-lg font-bold">{heading}</div>
+      <div className="text-danger-base text-lg font-bold">{heading}</div>
       <ul className="mt-2 space-y-1 sm:list-disc sm:space-y-0.5 sm:pl-4">
         {children}
       </ul>
@@ -42,7 +42,7 @@ function FormErrorSummaryItem(props: FormErrorSummaryItemProps) {
       <br className="sm:hidden" />
       <TextLink
         href="/"
-        className="font-bold sm:ml-1"
+        className="decoration-danger-base font-bold sm:ml-1"
         withUnderline
         preventLink
         onClick={onClick}

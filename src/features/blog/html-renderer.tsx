@@ -14,7 +14,10 @@ export function HtmlRenderer({ html, className }: HtmlRendererProps) {
         "[&>p]:my-4 [&>p]:first:mt-0",
         "[&_ul]:pl-5 [&_ul>li]:list-disc",
         "[&>hr]:my-6 [&>hr]:border-y-2 [&>hr]:text-stone-200",
-        "[&_a]:font-bold [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:hover:decoration-2",
+        "[&_a]:decoration-brand-base [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:hover:decoration-2",
+
+        //
+
         cn(
           "[&>figure]:my-4",
           // これがないと崩れる
