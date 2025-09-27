@@ -34,7 +34,7 @@ function SectionBox({
   );
 }
 
-function IntroductionTable({
+function IntroductionDlList({
   className,
   rows,
 }: {
@@ -42,27 +42,23 @@ function IntroductionTable({
   rows: Array<{ header: string; data: ReactNode }>;
 }) {
   return (
-    <div className="border-b border-b-stone-300 py-5 first:border-t first:border-t-stone-300">
-      <table
-        className={cn(
-          "flex flex-col",
-          "[&_td]:py-4 [&_th]:py-4",
-          "[&_td]:max-w-(--breakpoint-md)",
-          "[&_td]:leading-[1.6]! [&_th]:leading-[1.3]!",
-          "[&_th]:w-[196px] [&_th]:text-left [&_th]:align-top [&_th]:text-xl [&_th]:whitespace-nowrap",
-          "[&_td]:align-top",
-          className,
-        )}
-      >
-        <tbody>
-          {rows.map((row, index) => (
-            <tr key={index}>
-              <th>{row.header}</th>
-              <td>{row.data}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div
+      className={cn(
+        "border-b border-b-stone-300 py-8 first:border-t first:border-t-stone-300",
+        "flex flex-col gap-8",
+        className,
+      )}
+    >
+      {rows.map((row, index) => (
+        <dl key={index} className="flex flex-col gap-4 lg:flex-row lg:gap-0">
+          <dt className="shrink-0 text-left text-xl leading-[1.3] font-bold whitespace-nowrap lg:w-[196px]">
+            {row.header}
+          </dt>
+          <dd className="max-w-[--breakpoint-md] align-top leading-[1.6]">
+            {row.data}
+          </dd>
+        </dl>
+      ))}
     </div>
   );
 }
@@ -91,7 +87,7 @@ export default async function Page() {
       <div className="py-14">
         <Container className="flex flex-col gap-16">
           <SectionBox titleElem={<Heading1>概要</Heading1>}>
-            <IntroductionTable
+            <IntroductionDlList
               rows={[
                 {
                   header: "対応領域",
@@ -134,7 +130,7 @@ export default async function Page() {
               ]}
             />
 
-            <IntroductionTable
+            <IntroductionDlList
               rows={[
                 {
                   header: "職務経歴",
@@ -145,7 +141,7 @@ export default async function Page() {
               ]}
             />
 
-            <IntroductionTable
+            <IntroductionDlList
               rows={[
                 {
                   header: "自己紹介",
@@ -154,7 +150,7 @@ export default async function Page() {
               ]}
             />
 
-            <IntroductionTable
+            <IntroductionDlList
               rows={[
                 {
                   header: "強み",
@@ -163,7 +159,7 @@ export default async function Page() {
               ]}
             />
 
-            <IntroductionTable
+            <IntroductionDlList
               rows={[
                 {
                   header: "今後の意向",
