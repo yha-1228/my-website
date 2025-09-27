@@ -1,6 +1,6 @@
 import { isWithinInterval, subMonths } from "date-fns";
+import { ExternalLink } from "lucide-react";
 import { type Metadata } from "next";
-import { BsArrowUpRight } from "react-icons/bs";
 
 import { getZennArticles } from "@/api/endpoints/blog";
 import { Container } from "@/components/ui/styled/container";
@@ -58,7 +58,7 @@ export default async function Page() {
                       <div className="text-xl font-bold">
                         {zennArticle.title}
                       </div>
-                      <BsArrowUpRight />
+                      <ExternalLink />
                     </div>
                     <div className="mt-3 flex flex-col gap-2 sm:mt-4 md:flex-row md:items-center md:gap-4">
                       <div className="flex gap-2">

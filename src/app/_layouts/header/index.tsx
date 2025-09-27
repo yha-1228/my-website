@@ -1,8 +1,8 @@
 "use client";
 
+import { TextAlignJustify, X } from "lucide-react";
 import Link from "next/link";
 import { type CSSProperties, type MouseEvent, useRef } from "react";
-import { BsList, BsX } from "react-icons/bs";
 
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";
@@ -87,9 +87,9 @@ export function Header() {
             aria-label={mobileMenu.open ? "メニューを閉じる" : "メニューを開く"}
           >
             {mobileMenu.open ? (
-              <BsX aria-hidden="true" className="size-8" />
+              <X className="size-7" />
             ) : (
-              <BsList aria-hidden="true" className="size-8" />
+              <TextAlignJustify className="size-7" />
             )}
           </button>
 

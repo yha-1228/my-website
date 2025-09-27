@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowUp } from "lucide-react";
 import {
   type MouseEventHandler,
   type ReactNode,
@@ -7,7 +8,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { BsArrowUpShort } from "react-icons/bs";
 
 import { Button } from "@/components/ui/styled/button";
 import { sleep } from "@/utils/misc";
@@ -88,7 +88,7 @@ export function MainArea({ children }: { children: ReactNode }) {
             "active:scale-[0.95]",
           )}
         >
-          <BsArrowUpShort aria-hidden="true" />
+          <ArrowUp />
         </Button>
       </SafetyPortal>
     </>

@@ -1,12 +1,12 @@
 "use client";
 
+import { CircleAlert, CircleCheckBig } from "lucide-react";
 import {
   type ComponentPropsWithoutRef,
   type ReactNode,
   useEffect,
   useRef,
 } from "react";
-import { BsCheck2Circle, BsExclamationCircle } from "react-icons/bs";
 
 import { findFocusableElements } from "@/utils/dom";
 import { cn } from "@/utils/styling";
@@ -25,8 +25,8 @@ const variantClassNames = {
 } as const satisfies Record<Variant, unknown>;
 
 const variantIconMap = {
-  success: <BsCheck2Circle className="fill-brand-base mt-1 size-5" />,
-  error: <BsExclamationCircle className="fill-danger-base mt-1 size-5" />,
+  success: <CircleCheckBig className="stroke-brand-base mt-1.5 size-5" />,
+  error: <CircleAlert className="stroke-danger-base mt-1.5 size-5" />,
 } as const satisfies Record<Variant, ReactNode>;
 
 interface AlertProps extends Omit<ComponentPropsWithoutRef<"div">, "role"> {

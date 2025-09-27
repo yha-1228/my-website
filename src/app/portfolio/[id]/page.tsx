@@ -1,6 +1,6 @@
+import { ChevronLeft } from "lucide-react";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BsChevronLeft } from "react-icons/bs";
 
 import {
   getPortfolioContent,
@@ -54,7 +54,7 @@ export default async function Page({ params }: Props) {
             href={`${routes.portfolio.href}#${IDS["portfolio-projects-heading"]}`}
             className="inline-flex items-center space-x-1"
           >
-            <BsChevronLeft />
+            <ChevronLeft />
             <span>実績一覧に戻る</span>
           </TextLink>
 
@@ -107,7 +107,7 @@ export default async function Page({ params }: Props) {
             href={`${routes.portfolio.href}#${IDS["portfolio-projects-heading"]}`}
             className="mt-12 inline-flex items-center space-x-1"
           >
-            <BsChevronLeft />
+            <ChevronLeft />
             <span>実績一覧に戻る</span>
           </TextLink>
         </Container>

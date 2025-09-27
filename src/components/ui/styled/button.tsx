@@ -1,5 +1,5 @@
+import { LoaderCircle } from "lucide-react";
 import { type ElementType, type ReactNode } from "react";
-import { CgSpinner } from "react-icons/cg";
 
 import { type PropsWithAs } from "@/types/react";
 import { cn } from "@/utils/styling";
@@ -79,7 +79,7 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
     >
       {loading ? (
         <>
-          <CgSpinner className="mr-3 size-5 animate-spin" aria-hidden="true" />
+          <LoaderCircle className="mr-3 size-5 animate-spin" />
           {loadingLabel || children}
         </>
       ) : (
