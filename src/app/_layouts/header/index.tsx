@@ -1,6 +1,5 @@
 "use client";
 
-import { Lock, LockOpen } from "lucide-react";
 import Link from "next/link";
 import { type CSSProperties, type MouseEvent, useRef } from "react";
 import { BsList, BsX } from "react-icons/bs";
@@ -100,28 +99,15 @@ export function Header() {
               {routesWithoutHome.map((route) => (
                 <li key={route.href}>
                   <ActiveLink
-                    // Linkコンポーネントだと、Basic認証に失敗したあともう一度ダイアログが現れてしまう。
-                    // 通常のaタグにして回避する。
-                    as={route.protected ? undefined : Link}
+                    as={Link}
                     href={route.href}
                     className={cn(
                       "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-4 transition-colors duration-200 ease-out",
                       "hover:bg-stone-100 active:bg-stone-200",
                       "data-active:before:bg-brand-base data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-[6px] data-active:before:w-full data-active:before:content-['']",
-                      route.protected && "flex gap-2",
                     )}
                   >
-                    {(active) => (
-                      <>
-                        {route.protected &&
-                          (active ? (
-                            <LockOpen size={20} />
-                          ) : (
-                            <Lock size={20} />
-                          ))}
-                        {route.label}
-                      </>
-                    )}
+                    {route.label}
                   </ActiveLink>
                 </li>
               ))}
@@ -144,9 +130,7 @@ export function Header() {
           {routesWithoutHome.map((route) => (
             <li key={route.href}>
               <ActiveLink
-                // Linkコンポーネントだと、Basic認証に失敗したあともう一度ダイアログが現れてしまう。
-                // 通常のaタグにして回避する。
-                as={route.protected ? undefined : Link}
+                as={Link}
                 href={route.href}
                 className={cn(
                   "flex items-center justify-between py-3",
@@ -156,18 +140,7 @@ export function Header() {
                 )}
                 onClick={handleMobileNavLinkClick}
               >
-                {(active) => (
-                  <div
-                    className={cn(
-                      "px-6",
-                      route.protected && "flex items-center gap-2",
-                    )}
-                  >
-                    {route.protected &&
-                      (active ? <LockOpen size={20} /> : <Lock size={20} />)}
-                    {route.label}
-                  </div>
-                )}
+                <div className="px-6">{route.label}</div>
               </ActiveLink>
             </li>
           ))}

@@ -10,10 +10,7 @@ const html = `<!doctype html>
   <style>
     body {
       font-family: sans-serif;
-    }
-
-    .p-20 {
-      padding: 20px;
+      padding: 40px;
     }
 
     h1 {
@@ -24,15 +21,12 @@ const html = `<!doctype html>
   <link rel="apple-touch-icon" href="/apple-icon.png" />
 </head>
 <body>
-  <main class="p-20">
+  <main>
     <h1>ログインが中断されました</h1>
-    <div class="a-wrap">
-      <a href="${routes.index.href}">ホーム画面に戻る</a><br />
-      <a href="${routes.portfolio.href}">もう一度ログインする</a>
-    </div>
+    <a href="${routes.portfolio.href}">ポートフォリオのホームに戻る</a><br />
   </main>
 </body>
-</html>`;
+</html>` as const;
 
 export async function GET() {
   return new Response(html, {

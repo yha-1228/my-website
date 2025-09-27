@@ -22,8 +22,8 @@ export function LogoutButton({
         const confirm = window.confirm(
           [
             "ログアウトしますか？\n\n",
-            "・ログアウト後は自動でホーム画面に戻ります。\n",
-            "・新規ウィンドウが開きますが、自動で閉じられます。",
+            "・ログアウト後はポートフォリオのホーム画面に戻ります。\n",
+            "・新規ウィンドウが開きますが、自動で閉じられるまでお待ちください。",
           ].join(""),
         );
         if (!confirm) return;
@@ -34,8 +34,7 @@ export function LogoutButton({
 
         setTimeout(() => {
           newWindow?.close();
-          // ホーム画面にリダイレクト
-          window.location.href = window.location.origin;
+          window.location.href = window.location.origin + "/portfolio";
           // 暫く待たないとログアウトされずに遷移される
         }, 1000);
       }}

@@ -23,5 +23,6 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/portfolio/:path*"],
+  // /portfolio/{anyText} にマッチする
+  matcher: ["/portfolio/:path+"],
 };

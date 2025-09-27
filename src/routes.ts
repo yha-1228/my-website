@@ -24,7 +24,7 @@ export const routes = {
     href: "/portfolio",
     label: "ポートフォリオ",
     hierarchy: 1,
-    protected: true,
+    protected: false,
   },
   "portfolio/[id]": {
     href: (id: string) => `/portfolio/${id}`,

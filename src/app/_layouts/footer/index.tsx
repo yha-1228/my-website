@@ -56,9 +56,7 @@ export function Footer({ className }: FooterProps) {
               .map((route) => (
                 <li key={route.href}>
                   <TextLink
-                    // Linkコンポーネントだと、Basic認証に失敗したあともう一度ダイアログが現れてしまう。
-                    // 通常のaタグにして回避する。
-                    as={route.protected ? undefined : Link}
+                    as={Link}
                     className="inline-block py-2 leading-normal transition-colors"
                     href={route.href}
                   >

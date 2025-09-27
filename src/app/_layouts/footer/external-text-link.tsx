@@ -24,7 +24,7 @@ export function ExternalTextLink<TAs extends ElementType>(
       {...restProps}
     >
       <span>{children}</span>
-      <ExternalLink size={20} />
+      <ExternalLink size={18} />
     </TextLink>
   );
 }

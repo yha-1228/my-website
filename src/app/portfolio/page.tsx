@@ -1,5 +1,5 @@
+import { Lock } from "lucide-react";
 import { type Metadata } from "next";
-import Link from "next/link";
 import { type ReactNode } from "react";
 
 import { getPortfolioContents } from "@/api/endpoints/portfolio-content";
@@ -7,7 +7,6 @@ import { getPortfolioIntroduction } from "@/api/endpoints/portfolio-introduction
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { IDS, SITE_TITLE } from "@/constants";
-import { LogoutBanner } from "@/features/basic-auth/logout-banner";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
 import { groupTags } from "@/features/blog/misc";
 import { Tag } from "@/features/portfolio/tag";
@@ -81,7 +80,6 @@ export default async function Page() {
 
   return (
     <>
-      <LogoutBanner />
       <Container className="mt-8">
         <p className="text-foreground-secondary">
           デザイン経験のポートフォリオです。
@@ -199,7 +197,7 @@ export default async function Page() {
 
                 return (
                   <li key={content.id}>
-                    <Link
+                    <a
                       href={routes["portfolio/[id]"].href(content.id)}
                       className={cn(
                         "group flex flex-col gap-3 rounded-sm border border-stone-300 px-5 py-4 transition-colors ease-out",
@@ -208,7 +206,12 @@ export default async function Page() {
                       )}
                     >
                       <div className="flex flex-col gap-1">
-                        <div className="text-xl font-bold">{content.title}</div>
+                        <div className="flex items-center gap-2">
+                          <Lock size={20} />
+                          <div className="text-xl font-bold">
+                            {content.title}
+                          </div>
+                        </div>
                         {content.subTitle && (
                           <div className="text-foreground-secondary text-xs">
                             {content.subTitle}
@@ -242,7 +245,7 @@ export default async function Page() {
                           {content.start} - {content.end}
                         </div>
                       </div>
-                    </Link>
+                    </a>
                   </li>
                 );
               })}
