@@ -81,7 +81,7 @@ export function Header() {
           <button
             {...mobileMenu.triggerProps}
             className={cn(
-              "flex size-12 items-center justify-center rounded-full bg-white hover:bg-stone-100 md:hidden",
+              "flex size-12 items-center justify-center rounded-full bg-white active:bg-stone-100 md:hidden",
               "absolute top-1/2 -right-[0.8rem] -translate-y-1/2",
             )}
             aria-label={mobileMenu.open ? "メニューを閉じる" : "メニューを開く"}
@@ -134,7 +134,7 @@ export function Header() {
                 href={route.href}
                 className={cn(
                   "flex items-center justify-between py-3",
-                  "hover:bg-stone-100",
+                  "active:bg-stone-100",
                   "data-active:relative",
                   "data-active:before:bg-brand-base data-active:before:absolute data-active:before:h-full data-active:before:w-1.5 data-active:before:content-['']",
                 )}
