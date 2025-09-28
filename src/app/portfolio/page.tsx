@@ -203,7 +203,7 @@ export default async function Page() {
                     >
                       <div className="flex flex-col gap-1">
                         <div className="flex items-center gap-2">
-                          <Lock size={20} />
+                          <Lock size={20} className="shrink-0" />
                           <div className="text-xl font-bold">
                             {content.title}
                           </div>

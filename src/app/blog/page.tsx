@@ -58,7 +58,7 @@ export default async function Page() {
                       <div className="text-xl font-bold">
                         {zennArticle.title}
                       </div>
-                      <ExternalLink />
+                      <ExternalLink className="shrink-0" />
                     </div>
                     <div className="mt-3 flex flex-col gap-2 sm:mt-4 md:flex-row md:items-center md:gap-4">
                       <div className="flex gap-2">
