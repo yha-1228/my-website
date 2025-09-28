@@ -104,7 +104,7 @@ export function Header() {
                     className={cn(
                       "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-4 transition-colors duration-200 ease-out",
                       "hover:bg-stone-100 active:bg-stone-200",
-                      "data-active:before:bg-brand-base data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-[6px] data-active:before:w-full data-active:before:content-['']",
+                      "data-active:before:bg-brand-base data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-[2px] data-active:before:w-full data-active:before:content-['']",
                     )}
                   >
                     {route.label}
@@ -136,7 +136,7 @@ export function Header() {
                   "flex items-center justify-between py-3",
                   "active:bg-stone-100",
                   "data-active:relative",
-                  "data-active:before:bg-brand-base data-active:before:absolute data-active:before:h-full data-active:before:w-1.5 data-active:before:content-['']",
+                  "data-active:before:bg-brand-base data-active:before:absolute data-active:before:h-full data-active:before:w-[4px] data-active:before:content-['']",
                 )}
                 onClick={handleMobileNavLinkClick}
               >

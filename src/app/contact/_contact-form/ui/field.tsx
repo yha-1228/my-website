@@ -9,8 +9,8 @@ const baseClassName =
   "placeholder:text-foreground-placeholder w-full appearance-none rounded-touchable px-3 disabled:bg-stone-100 disabled:text-foreground-primary/70 disabled:placeholder:text-foreground-placeholder disabled:cursor-not-allowed transition-[background-color] duration-200 ease-out";
 
 const invalidClassNames = {
-  false: "border border-stone-400  hover:bg-brand-background/30",
-  true: "border border-danger-base/30 bg-danger-background/50 hover:bg-danger-background",
+  false: "border border-stone-400",
+  true: "border border-danger-base/40 bg-danger-background/50",
 } as const;
 
 // ----------------------------------------
