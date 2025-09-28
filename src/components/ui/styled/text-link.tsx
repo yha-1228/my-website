@@ -6,9 +6,9 @@ import { type PropsWithAs } from "@/types/react";
 import { cn } from "@/utils/styling";
 
 const underlineClassNames = {
-  true: "underline-offset-4 decoration-1 underline hover:decoration-2 decoration-brand-base",
+  true: "underline-offset-4 decoration-1 underline hover:decoration-2 active:decoration-2 decoration-brand-base",
   false:
-    "hover:underline underline-offset-4 hover:decoration-1 decoration-brand-base",
+    "hover:underline underline-offset-4 hover:decoration-1 active:underline active:decoration-1 decoration-brand-base",
 } as const;
 
 type TextLinkProps<TAs extends ElementType> = PropsWithAs<TAs, "a"> & {

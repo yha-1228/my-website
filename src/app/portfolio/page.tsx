@@ -173,7 +173,7 @@ export default async function Page() {
             titleElem={
               <Heading1 id={IDS["portfolio-projects-heading"]}>
                 <a
-                  className="underline-offset-8 hover:underline hover:decoration-2"
+                  className="underline-offset-8 hover:underline hover:decoration-2 active:underline"
                   href={`#${IDS["portfolio-projects-heading"]}`}
                 >
                   実績一覧
