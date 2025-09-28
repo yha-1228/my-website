@@ -293,6 +293,7 @@ export function ContactForm({ className }: { className?: string }) {
             className="w-full"
             loading={submitMutation.pending}
             loadingLabel="送信中..."
+            size="lg"
           >
             送信する
           </Button>

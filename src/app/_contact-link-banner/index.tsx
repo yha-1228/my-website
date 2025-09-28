@@ -20,7 +20,7 @@ export function ContactLinkBanner() {
           <div
             className={cn(
               "mt-6 inline-block w-full rounded-md border border-white py-2 text-lg font-bold text-white transition-colors sm:flex sm:w-auto sm:px-8 sm:py-4",
-              "group-hover:text-brand-hover group-active:text-brand-active group-hover:bg-white",
+              "group-hover:text-brand-hover group-active:text-brand-active group-hover:bg-white group-active:bg-white",
             )}
           >
             <span>フォームを開く</span>

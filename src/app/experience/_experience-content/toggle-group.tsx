@@ -81,7 +81,7 @@ function ToggleGroupItem<T extends string = string>(
       role="radio"
       aria-checked={selectedValue === value}
       className={cn(
-        "text-foreground-primary first:rounded-l-touchable last:rounded-r-touchable inline-flex h-9 flex-1 items-center justify-center bg-white px-3 text-sm sm:h-10 sm:text-base",
+        "text-foreground-primary first:rounded-l-touchable last:rounded-r-touchable inline-flex h-9 flex-1 items-center justify-center bg-white px-3 text-sm transition-colors sm:h-10 sm:text-base",
         cn(
           "border-y border-y-stone-300",
           "first:border-l first:border-l-stone-300",
