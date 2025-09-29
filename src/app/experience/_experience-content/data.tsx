@@ -2,6 +2,8 @@ import { type ReactNode } from "react";
 
 import { type Project } from "@/api/models/project";
 
+import { ellipsisTextByComma } from "./utils";
+
 export const sortedTypes = [
   "main-freelance",
   "main-company-1",
@@ -43,10 +45,10 @@ export function getAllExperiences(projects: Project[]): Experience[] {
         />
         <div className="mt-4 space-y-1">
           <p>
-            <b>言語/FW:</b> {project.langAndFws}
+            <b>言語/FW:</b> {ellipsisTextByComma(project.langAndFws, 3)}
           </p>
           <p>
-            <b>ツール:</b> {project.tools}
+            <b>ツール:</b> {ellipsisTextByComma(project.tools, 3)}
           </p>
         </div>
       </>
