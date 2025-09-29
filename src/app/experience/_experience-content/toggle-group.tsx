@@ -33,7 +33,7 @@ function ToggleGroupItem(props: ToggleGroupItemProps) {
           "last:border-r last:border-r-stone-300",
           "not-first:border-l not-first:border-l-stone-300",
         ),
-        "hover:bg-stone-100",
+        "hover:bg-stone-100 active:bg-stone-100",
         cn(
           "[[data-checked='true']]:bg-foreground-primary",
           "[[data-checked='true']]:border-foreground-primary [[data-checked='true']]:border-l-foreground-primary [[data-checked='true']+*]:border-l-foreground-primary",
