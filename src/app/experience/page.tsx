@@ -1,3 +1,4 @@
+import { type MicroCMSQueries } from "microcms-js-sdk";
 import { type Metadata } from "next";
 import Link from "next/link";
 
@@ -17,29 +18,30 @@ export const metadata: Metadata = {
   title: `${routes.experience.label} | ${SITE_TITLE}`,
 };
 
-export const dynamic = "error";
+function createQueries(
+  parsedSearchParams: Awaited<ReturnType<typeof parseSearchParams>>,
+): MicroCMSQueries {
+  if (parsedSearchParams === "main") {
+    return { filters: `type[contains]main` };
+  }
+  if (parsedSearchParams === "sub") {
+    return { filters: `type[contains]sub` };
+  }
+
+  return assertNever(parsedSearchParams);
+}
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const { contents: projects } = await getProjects();
-
   const parsedSearchParams = await parseSearchParams(searchParams);
 
-  // filter by client
-  const filteredProjects = projects.filter((project) => {
-    if (parsedSearchParams === "main") {
-      return project.type.includes("main");
-    }
-    if (parsedSearchParams === "sub") {
-      return project.type === "sub";
-    }
-    return assertNever(parsedSearchParams);
-  });
+  const queries = createQueries(parsedSearchParams);
+  const { contents: projects } = await getProjects(queries);
 
-  const experiences = getAllExperiences(filteredProjects);
+  const experiences = getAllExperiences(projects);
 
   return (
     <div className="py-14">
