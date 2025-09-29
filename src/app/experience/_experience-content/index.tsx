@@ -3,14 +3,16 @@
 import { type ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import { z } from "zod";
 
+import { type GetProjectsResponse } from "@/api/models/project";
 import { Heading2 } from "@/components/ui/styled/heading2";
 import { routes } from "@/routes";
 import { assertNever } from "@/utils/misc";
 import { entriesOf } from "@/utils/object";
 
 import {
-  allExperiences,
   type Experience,
+  getAllExperiences,
+  sortedTypes,
   typeKikanMap,
   typeNameMap,
 } from "./data";
@@ -57,15 +59,18 @@ function parseSearchParams(searchParams: ReadonlyURLSearchParams) {
 
 // ----------------------------------------
 
-export function ExperienceContent() {
+export function ExperienceContent({
+  projects,
+}: {
+  projects: GetProjectsResponse["contents"];
+}) {
   const searchParams = useSearchParams();
   const parsedSearchParams = parseSearchParams(searchParams);
 
   const experiences = findExperiencesByJobCategory(
-    allExperiences,
+    getAllExperiences(projects),
     parsedSearchParams.jobCategory || "all",
   );
-  const types = [...new Set(experiences.map((experience) => experience.type))];
 
   return (
     <>
@@ -84,45 +89,50 @@ export function ExperienceContent() {
         ))}
       </ToggleGroup>
       <div className="mt-10 space-y-12">
-        {types.map((type) => (
-          <section className="space-y-5" key={type}>
-            <div>
-              <Heading2>{typeNameMap[type]}</Heading2>
-              {typeKikanMap[type] && (
-                <div className="text-foreground-secondary mt-6 text-sm">
-                  {typeKikanMap[type]}
-                </div>
-              )}
-            </div>
-            <Timeline
-              items={experiences
-                .filter((experience) => experience.type === type)
-                .map((experience) => {
-                  const { kikan, title, projectCompanyName, description } =
-                    experience;
+        {sortedTypes
+          .filter((type) => {
+            const experienceTypes = experiences.map(({ type }) => type);
+            return experienceTypes.includes(type);
+          })
+          .map((type) => (
+            <section className="space-y-5" key={type}>
+              <div>
+                <Heading2>{typeNameMap[type]}</Heading2>
+                {typeKikanMap[type] && (
+                  <div className="text-foreground-secondary mt-6 text-sm">
+                    {typeKikanMap[type]}
+                  </div>
+                )}
+              </div>
+              <Timeline
+                items={experiences
+                  .filter((experience) => experience.type === type)
+                  .map((experience) => {
+                    const { kikan, title, projectCompanyName, description } =
+                      experience;
 
-                  const heading = projectCompanyName ? (
-                    <>
-                      {title} <br />
-                      <div className="text-foreground-primary mt-2 text-lg font-normal">
-                        {projectCompanyName}
-                      </div>
-                    </>
-                  ) : (
-                    title
-                  );
+                    const heading = projectCompanyName ? (
+                      <>
+                        {title} <br />
+                        <div className="text-foreground-primary mt-2 text-lg font-normal">
+                          {projectCompanyName}
+                        </div>
+                      </>
+                    ) : (
+                      title
+                    );
 
-                  const item: TimelineItem = {
-                    point: kikan,
-                    heading: heading,
-                    content: description,
-                  };
+                    const item: TimelineItem = {
+                      point: kikan,
+                      heading: heading,
+                      content: description,
+                    };
 
-                  return item;
-                })}
-            />
-          </section>
-        ))}
+                    return item;
+                  })}
+              />
+            </section>
+          ))}
       </div>
     </>
   );

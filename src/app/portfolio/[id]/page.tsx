@@ -2,10 +2,7 @@ import { ChevronLeft } from "lucide-react";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import {
-  getPortfolioContent,
-  getPortfolioContents,
-} from "@/api/endpoints/portfolio-content";
+import { getProject, getProjects } from "@/api/endpoints/project";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { TextLink } from "@/components/ui/styled/text-link";
@@ -22,28 +19,28 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const blogDetail = await getPortfolioContent(id);
+  const project = await getProject(id);
 
   return {
-    title: `${blogDetail?.title} | ${SITE_TITLE}`,
+    title: `${project?.title} | ${SITE_TITLE}`,
   };
 }
 
 export async function generateStaticParams(): Promise<Array<{ id: string }>> {
-  const { contents } = await getPortfolioContents();
+  const { contents } = await getProjects();
   return contents.map((content) => ({ id: content.id }));
 }
 
 export default async function Page({ params }: Props) {
   const { id } = await params;
-  const content = await getPortfolioContent(id);
+  const project = await getProject(id);
 
-  if (!content) {
+  if (!project) {
     notFound();
   }
 
   const { methodTags, projectTags, uxLayerTags, assignTags, jobTypeTags } =
-    groupTags(content.tags);
+    groupTags(project.tags);
 
   return (
     <>
@@ -60,9 +57,9 @@ export default async function Page({ params }: Props) {
 
           <article className="mt-8">
             <header>
-              <Heading1>{content.title}</Heading1>
+              <Heading1>{project.title}</Heading1>
               <p className="text-foreground-secondary mt-4 text-sm font-normal">
-                {content.start} - {content.end}
+                {project.start} - {project.end}
               </p>
             </header>
             <div className="mt-8 flex flex-col gap-10 border-t border-solid border-t-stone-300 pt-5">
@@ -87,19 +84,19 @@ export default async function Page({ params }: Props) {
               <div className="border-foreground-primary flex flex-col gap-2 rounded-sm border px-6 py-5 text-sm">
                 <dl>
                   <dt className="font-bold">体制・役割</dt>
-                  <dd>{content.structureAndRole}</dd>
+                  <dd>{project.structureAndRole}</dd>
                 </dl>
                 <dl>
                   <dt className="font-bold">デザインツール</dt>
-                  <dd>{content.tools}</dd>
+                  <dd>{project.tools}</dd>
                 </dl>
                 <dl>
                   <dt className="font-bold">言語/FWなど</dt>
-                  <dd>{content.langAndFws}</dd>
+                  <dd>{project.langAndFws}</dd>
                 </dl>
               </div>
 
-              <HtmlRenderer html={content.body} />
+              <HtmlRenderer html={project.body || ""} />
             </div>
           </article>
 

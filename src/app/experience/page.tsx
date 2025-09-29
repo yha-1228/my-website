@@ -2,6 +2,7 @@ import { type Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 
+import { getProjects } from "@/api/endpoints/project";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { TextLink } from "@/components/ui/styled/text-link";
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
   title: `${routes.experience.label} | ${SITE_TITLE}`,
 };
 
-export default function Page() {
+export default async function Page() {
+  const { contents: projects } = await getProjects();
+
   return (
     <div className="py-14">
       <Container className="md:max-w-(--breakpoint-md)">
@@ -35,7 +38,7 @@ export default function Page() {
             </p>
           </div>
           <Suspense>
-            <ExperienceContent />
+            <ExperienceContent projects={projects} />
           </Suspense>
         </section>
       </Container>

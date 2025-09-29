@@ -2,8 +2,8 @@ import { Lock } from "lucide-react";
 import { type Metadata } from "next";
 import { type ReactNode } from "react";
 
-import { getPortfolioContents } from "@/api/endpoints/portfolio-content";
 import { getPortfolioIntroduction } from "@/api/endpoints/portfolio-introduction";
+import { getProjects } from "@/api/endpoints/project";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { IDS, SITE_TITLE } from "@/constants";
@@ -72,7 +72,10 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const [portfolioIntroduction, { contents: portfolioContents }] =
-    await Promise.all([getPortfolioIntroduction(), getPortfolioContents()]);
+    await Promise.all([
+      getPortfolioIntroduction(),
+      getProjects({ filters: "hasDesignPortfolio[equals]true" }),
+    ]);
 
   return (
     <>

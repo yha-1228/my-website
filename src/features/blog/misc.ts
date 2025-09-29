@@ -1,6 +1,6 @@
-import { type Tag } from "@/api/models/portfolio-content";
+import { type ProjectTag } from "@/api/models/project";
 
-export function groupTags(tags: Tag[]) {
+export function groupTags(tags: ProjectTag[]) {
   return {
     methodTags: tags.filter((tag) => tag.category[0] === "手法"),
     projectTags: tags.filter((tag) => tag.category[0] === "案件"),
