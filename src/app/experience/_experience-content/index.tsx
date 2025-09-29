@@ -1,17 +1,9 @@
-"use client";
-
-import { type ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
-import { z } from "zod";
-
-import { type GetProjectsResponse } from "@/api/models/project";
 import { Heading2 } from "@/components/ui/styled/heading2";
 import { routes } from "@/routes";
-import { assertNever } from "@/utils/misc";
 import { entriesOf } from "@/utils/object";
 
 import {
   type Experience,
-  getAllExperiences,
   sortedTypes,
   typeKikanMap,
   typeNameMap,
@@ -19,64 +11,25 @@ import {
 import { Timeline, type TimelineItem } from "./timeline";
 import { ToggleGroup, ToggleGroupItem } from "./toggle-group";
 
+export type JobCategory = "main" | "sub";
+
 const jobCategoryLabelMap = {
-  all: "すべて",
-  main: "本業",
+  main: "フルタイム",
   sub: "副業",
-} as const;
-
-type JobCategory = keyof typeof jobCategoryLabelMap;
-
-function findExperiencesByJobCategory(
-  experiences: Experience[],
-  jobCategory: JobCategory,
-) {
-  if (jobCategory === "all") {
-    return experiences;
-  }
-
-  if (jobCategory === "main") {
-    return experiences.filter((experience) => experience.type !== "sub");
-  }
-
-  if (jobCategory === "sub") {
-    return experiences.filter((experience) => experience.type === "sub");
-  }
-
-  return assertNever(jobCategory);
-}
-
-function parseSearchParams(searchParams: ReadonlyURLSearchParams) {
-  const jobCategory = searchParams.get("jobCategory");
-  const safeParsedFilter = z
-    .enum(["all", "main", "sub"] as const satisfies JobCategory[])
-    .safeParse(jobCategory);
-
-  return {
-    jobCategory: safeParsedFilter.success ? safeParsedFilter.data : null,
-  };
-}
-
-// ----------------------------------------
+} as const satisfies Record<JobCategory, string>;
 
 export function ExperienceContent({
-  projects,
+  experiences,
+  initialSelectedValue,
 }: {
-  projects: GetProjectsResponse["contents"];
+  experiences: Experience[];
+  initialSelectedValue: JobCategory;
 }) {
-  const searchParams = useSearchParams();
-  const parsedSearchParams = parseSearchParams(searchParams);
-
-  const experiences = findExperiencesByJobCategory(
-    getAllExperiences(projects),
-    parsedSearchParams.jobCategory || "all",
-  );
-
   return (
     <>
       <ToggleGroup
         className="mx-auto mt-10"
-        initialSelectedValue={parsedSearchParams.jobCategory || "all"}
+        initialSelectedValue={initialSelectedValue}
       >
         {entriesOf(jobCategoryLabelMap).map(([value, label]) => (
           <ToggleGroupItem

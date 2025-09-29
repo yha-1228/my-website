@@ -33,6 +33,7 @@ const projectSchema = z.object({
   langAndFws: z.string().optional(),
   isDraft: z.boolean().optional(),
   hasDesignPortfolio: z.boolean().optional(),
+  type: z.enum(["main-company-1", "main-freelance", "sub"]),
 });
 
 export type Project = z.infer<typeof projectSchema>;
