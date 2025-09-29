@@ -1,39 +1,22 @@
 import { type MicroCMSQueries } from "microcms-js-sdk";
 import { type Metadata } from "next";
 import Link from "next/link";
-import { z } from "zod";
 
 import { getProjects } from "@/api/endpoints/project";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { TextLink } from "@/components/ui/styled/text-link";
 import { SITE_TITLE } from "@/constants";
+import { parseSearchParams } from "@/features/experience/query";
 import { routes } from "@/routes";
 import { assertNever } from "@/utils/misc";
 
-import { ExperienceContent, type JobCategory } from "./_experience-content";
+import { ExperienceContent } from "./_experience-content";
 import { getAllExperiences } from "./_experience-content/data";
 
 export const metadata: Metadata = {
   title: `${routes.experience.label} | ${SITE_TITLE}`,
 };
-
-async function parseSearchParams(
-  searchParams: Promise<Record<string, string | string[] | undefined>>,
-) {
-  const awaitedSearchParams = await searchParams;
-
-  const jobCategorySchema = z.enum([
-    "main",
-    "sub",
-  ] as const satisfies JobCategory[]);
-  const parsedJobCategory = jobCategorySchema.safeParse(
-    awaitedSearchParams.jobCategory,
-  );
-  return parsedJobCategory.success
-    ? parsedJobCategory.data
-    : ("main" as const satisfies JobCategory);
-}
 
 function createQueries(
   parsedSearchParams: Awaited<ReturnType<typeof parseSearchParams>>,
@@ -81,7 +64,7 @@ export default async function Page({
           </div>
           <ExperienceContent
             experiences={experiences}
-            initialSelectedValue={parsedSearchParams}
+            searchParams={searchParams}
           />
         </section>
       </Container>

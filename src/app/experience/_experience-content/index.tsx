@@ -1,4 +1,8 @@
 import { Heading2 } from "@/components/ui/styled/heading2";
+import {
+  type JobCategory,
+  parseSearchParams,
+} from "@/features/experience/query";
 import { routes } from "@/routes";
 import { entriesOf } from "@/utils/object";
 
@@ -11,30 +15,27 @@ import {
 import { Timeline, type TimelineItem } from "./timeline";
 import { ToggleGroup, ToggleGroupItem } from "./toggle-group";
 
-export type JobCategory = "main" | "sub";
-
 const jobCategoryLabelMap = {
   main: "フルタイム",
   sub: "副業",
 } as const satisfies Record<JobCategory, string>;
 
-export function ExperienceContent({
+export async function ExperienceContent({
   experiences,
-  initialSelectedValue,
+  searchParams,
 }: {
   experiences: Experience[];
-  initialSelectedValue: JobCategory;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
+  const parsedSearchParams = await parseSearchParams(searchParams);
+
   return (
     <>
-      <ToggleGroup
-        className="mx-auto mt-10"
-        initialSelectedValue={initialSelectedValue}
-      >
+      <ToggleGroup className="mx-auto mt-10">
         {entriesOf(jobCategoryLabelMap).map(([value, label]) => (
           <ToggleGroupItem
             key={value}
-            value={value}
+            checked={parsedSearchParams === value}
             href={`${routes.experience.href}?jobCategory=${value}`}
           >
             {label}
