@@ -1,5 +1,7 @@
 import { type MicroCMSQueries } from "microcms-js-sdk";
 
+import { sleep } from "@/utils/misc";
+
 import {
   type GetProjectResponse,
   getProjectResponseSchema,
@@ -11,6 +13,8 @@ import { client } from "./_microcms";
 export async function getProjects(
   queries?: MicroCMSQueries,
 ): Promise<GetProjectsResponse> {
+  await sleep(100);
+
   const response = await client.getList({ endpoint: "projects", queries });
 
   return getProjectsResponseSchema.parse(response);
