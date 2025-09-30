@@ -28,6 +28,8 @@ export const metadata: Metadata = {
   title: `${routes.experience.label} | ${SITE_TITLE}`,
 };
 
+export const dynamic = "force-static";
+
 export default async function Page({
   searchParams,
 }: {
