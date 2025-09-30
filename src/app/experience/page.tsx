@@ -5,23 +5,10 @@ import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { TextLink } from "@/components/ui/styled/text-link";
 import { SITE_TITLE } from "@/constants";
-import {
-  type JobCategory,
-  parseSearchParams,
-} from "@/features/experience/query";
 import { routes } from "@/routes";
-import { entriesOf } from "@/utils/object";
 
 import { ExperienceContent } from "./_experience-content";
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "./_experience-content/toggle-group";
-
-const jobCategoryLabelMap = {
-  main: "フルタイム",
-  sub: "副業",
-} as const satisfies Record<JobCategory, string>;
+import { ExperienceToggle } from "./_experience-toggle";
 
 export const metadata: Metadata = {
   title: `${routes.experience.label} | ${SITE_TITLE}`,
@@ -29,13 +16,7 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-static";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  const parsedSearchParams = await parseSearchParams(searchParams);
-
+export default function Page() {
   return (
     <div className="py-14">
       <Container className="md:max-w-(--breakpoint-md)">
@@ -55,17 +36,7 @@ export default async function Page({
               からご連絡ください。
             </p>
           </div>
-          <ToggleGroup className="mx-auto mt-10">
-            {entriesOf(jobCategoryLabelMap).map(([value, label]) => (
-              <ToggleGroupItem
-                key={value}
-                checked={parsedSearchParams === value}
-                href={`${routes.experience.href}?jobCategory=${value}`}
-              >
-                {label}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
+          <ExperienceToggle />
           <ExperienceContent />
         </section>
       </Container>
