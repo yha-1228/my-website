@@ -1,9 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { type ComponentPropsWithRef, useEffect, useTransition } from "react";
+import { type ComponentPropsWithRef } from "react";
 
-import { useTransitionUpdateContext } from "@/contexts/transition-context";
 import { cn } from "@/utils/styling";
 
 // ----------------------------------------
@@ -26,18 +25,9 @@ function ToggleGroupItem(props: ToggleGroupItemProps) {
   const { checked, href, className, ...restProps } = props;
 
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const { setIsPending } = useTransitionUpdateContext();
-
-  useEffect(() => {
-    setIsPending(isPending);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPending]);
 
   const handleClick = () => {
-    startTransition(() => {
-      router.push(href);
-    });
+    router.push(href);
   };
 
   return (

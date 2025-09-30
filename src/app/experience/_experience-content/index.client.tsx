@@ -1,30 +1,36 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
+import { type Project } from "@/api/models/project";
 import { Heading2 } from "@/components/ui/styled/heading2";
-import { useTransitionUpdateContext } from "@/contexts/transition-context";
-import { cn } from "@/utils/styling";
+import { parseSearchParamsClient } from "@/features/experience/query";
 
 import {
-  type Experience,
+  getAllExperiences,
   sortedTypes,
   typeKikanMap,
   typeNameMap,
 } from "./data";
 import { Timeline, type TimelineItem } from "./timeline";
 
-export function Client({ experiences }: { experiences: Experience[] }) {
-  const { isPending } = useTransitionUpdateContext();
+export function Client({ projects }: { projects: Project[] }) {
+  const searchParams = useSearchParams();
+  const parsedSearchParams = parseSearchParamsClient(searchParams);
+
+  const filteredProjects = projects.filter((project) => {
+    if (parsedSearchParams === "main") {
+      return project.type.includes("main");
+    }
+    if (parsedSearchParams === "sub") {
+      return project.type === "sub";
+    }
+  });
+
+  const experiences = getAllExperiences(filteredProjects);
 
   return (
-    <div
-      className={cn(
-        "mt-10 space-y-12",
-        cn(
-          "transition-opacity duration-200 ease-out",
-          isPending ? "opacity-30" : "opacity-100",
-        ),
-      )}
-    >
+    <div className="mt-10 space-y-12">
       {sortedTypes
         .filter((type) => {
           const experienceTypes = experiences.map(({ type }) => type);
