@@ -1,4 +1,3 @@
-import { Lock } from "lucide-react";
 import { type Metadata } from "next";
 import { type ReactNode } from "react";
 
@@ -8,10 +7,10 @@ import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { IDS, SITE_TITLE } from "@/constants";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
-import { groupTags } from "@/features/blog/misc";
-import { Tag } from "@/features/portfolio/tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
+
+import { ContentButton } from "./_content-button";
 
 interface SectionBoxProps {
   titleElem: ReactNode;
@@ -185,69 +184,11 @@ export default async function Page() {
             }
           >
             <ul className="flex flex-col gap-4">
-              {portfolioContents.map((content) => {
-                const {
-                  methodTags,
-                  projectTags,
-                  uxLayerTags,
-                  assignTags,
-                  jobTypeTags,
-                } = groupTags(content.tags);
-
-                return (
-                  <li key={content.id}>
-                    <a
-                      href={routes["portfolio/[id]"].href(content.id)}
-                      className={cn(
-                        "group flex flex-col gap-3 rounded-sm border border-stone-300 px-5 py-4 transition-colors ease-out",
-                        "hover:border-foreground-primary hover:bg-stone-50",
-                        "active:border-foreground-primary active:bg-stone-50",
-                      )}
-                    >
-                      <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-2">
-                          <Lock size={20} className="shrink-0" />
-                          <div className="text-xl font-bold">
-                            {content.title}
-                          </div>
-                        </div>
-                        {content.subTitle && (
-                          <div className="text-foreground-secondary text-xs">
-                            {content.subTitle}
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-                            手法:{" "}
-                            {methodTags.map((tag) => tag.label).join(" / ")}
-                          </Tag>
-                          <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-                            案件:{" "}
-                            {projectTags.map((tag) => tag.label).join(" / ")}
-                          </Tag>
-                          <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-                            UX階層:{" "}
-                            {uxLayerTags.map((tag) => tag.label).join(" / ")}
-                          </Tag>
-                          <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-                            参画:{" "}
-                            {assignTags.map((tag) => tag.label).join(" / ")}
-                          </Tag>
-                          <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-                            稼働:{" "}
-                            {jobTypeTags.map((tag) => tag.label).join(" / ")}
-                          </Tag>
-                        </div>
-                        <div className="text-foreground-secondary text-sm">
-                          {content.start} - {content.end}
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                );
-              })}
+              {portfolioContents.map((content) => (
+                <li key={content.id}>
+                  <ContentButton project={content} />
+                </li>
+              ))}
             </ul>
           </SectionBox>
         </Container>
