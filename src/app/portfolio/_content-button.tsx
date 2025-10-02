@@ -1,6 +1,6 @@
 "use client";
 
-import { Lock } from "lucide-react";
+import { Lock, X } from "lucide-react";
 import { useState } from "react";
 
 import { type Project } from "@/api/models/project";
@@ -80,18 +80,27 @@ export function ContentButton({ project }: { project: Project }) {
         />
         <DialogContent
           className={cn(
-            "fixed top-[10%] left-[50%] z-[100001] translate-x-[-50%]",
+            "fixed top-[50%] left-[50%] z-[100001] translate-x-[-50%] translate-y-[-50%] sm:top-[10%] sm:translate-y-[0%]",
             "w-full max-w-[calc(100%-calc(var(--screen-margin)*2))] sm:max-w-[560px]",
-            "rounded-lg bg-white p-8 pt-6",
-            "flex flex-col gap-6",
+            "overflow-hidden rounded-lg bg-white",
+            "flex flex-col gap-7",
           )}
         >
-          <DialogTitle className="text-xl font-bold">閲覧の確認</DialogTitle>
-          <div>
+          <div className="flex items-center justify-between pt-6 pr-6 pl-8">
+            <DialogTitle className="text-2xl font-bold">閲覧の確認</DialogTitle>
+            <DialogClose
+              aria-label="閉じる"
+              className="inline-flex size-10 items-center justify-center transition-opacity hover:opacity-60 active:opacity-50 disabled:cursor-not-allowed disabled:opacity-40"
+              disabled={didConfirmClick}
+            >
+              <X />
+            </DialogClose>
+          </div>
+          <div className="px-8">
             <p>デザイン実績の閲覧にはユーザー名とパスワードが必要です。</p>
             <p>不明な場合は長谷川または求人担当者様にお問い合わせください。</p>
           </div>
-          <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+          <div className="flex flex-col-reverse gap-2 border-t border-t-stone-300 bg-stone-50 px-8 py-5 sm:flex-row sm:justify-end">
             <DialogClose
               as={Button}
               variant="outline"
@@ -112,5 +121,3 @@ export function ContentButton({ project }: { project: Project }) {
     </DialogProvider>
   );
 }
-
-// bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-[425px]
