@@ -5,12 +5,12 @@ import Link from "next/link";
 import { type CSSProperties, type MouseEvent, useRef } from "react";
 
 import { Container } from "@/components/ui/styled/container";
+import { useKeydown } from "@/hooks/use-keydown";
 import { routes } from "@/routes";
+import { loopFocus } from "@/utils/loop-focus";
 import { cn } from "@/utils/styling";
 
 import { ActiveLink } from "./active-link";
-import { loopFocus } from "./loop-focus";
-import { useKeydown } from "./use-keydown";
 import { useMediaQuery } from "./use-media-query";
 import { useMobileMenu } from "./use-mobile-menu";
 import { useOnRouteChange } from "./use-on-route-change";

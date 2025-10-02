@@ -9,12 +9,12 @@ import {
   useState,
 } from "react";
 
+import { SafetyPortal } from "@/components/ui/headless/safety-portal";
 import { Button } from "@/components/ui/styled/button";
 import { sleep } from "@/utils/misc";
 import { cn, getCSSVar, remToPx } from "@/utils/styling";
 
 import { clientOnly } from "./client-only";
-import { SafetyPortal } from "./safety-portal";
 import { useIntersectionObserver } from "./use-intersection-observer";
 
 function useScrollToTopButton() {

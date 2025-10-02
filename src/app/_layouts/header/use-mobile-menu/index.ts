@@ -1,9 +1,8 @@
 import { type ComponentProps, useEffect, useId, useRef, useState } from "react";
 
+import { useKeydown } from "@/hooks/use-keydown";
+import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { sleep } from "@/utils/misc";
-
-import { useKeydown } from "../use-keydown";
-import { useScrollLock } from "./use-scroll-lock";
 
 function createContentId(rootId: string) {
   return `modal-${rootId}-content` as const;
