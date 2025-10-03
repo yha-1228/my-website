@@ -1,13 +1,9 @@
-/* eslint-disable react/hook-use-state */
-/* eslint-disable react-hooks/rules-of-hooks */
 import { hideOthers } from "aria-hidden";
 import {
   type ComponentProps,
   type ComponentPropsWithoutRef,
-  type Dispatch,
   type MouseEvent,
   type ReactNode,
-  type SetStateAction,
   useEffect,
   useId,
   useRef,
@@ -16,16 +12,14 @@ import {
 
 import { useKeydown } from "@/hooks/use-keydown";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
-import {
-  type ChildAsFunction,
-  type ElementTypeOf,
-  type PropsWithAs,
-} from "@/types/react";
+import { type ElementTypeOf, type PropsWithAs } from "@/types/react";
 import { loopFocus } from "@/utils/loop-focus";
 import { sleep } from "@/utils/misc";
 import { getContextAndHook } from "@/utils/react";
 
 import { SafetyPortal } from "../headless/safety-portal";
+
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 // helpers
 // ----------------------------------------
@@ -45,15 +39,7 @@ interface UseDialogProps {
   /**
    * @default false
    */
-  initialOpen?: boolean | (() => boolean);
-  /**
-   * @default undefined
-   */
-  open?: boolean;
-  /**
-   * @default undefined
-   */
-  setOpen?: Dispatch<SetStateAction<boolean>>;
+  initialOpen?: boolean;
   /**
    * @default true
    */
@@ -61,22 +47,14 @@ interface UseDialogProps {
 }
 
 function useDialog(props: UseDialogProps) {
-  const {
-    initialOpen = false,
-    closeOnEscKeyDown = true,
-    open: openProp,
-    setOpen: setOpenProp,
-  } = props;
+  const { initialOpen = false, closeOnEscKeyDown = true } = props;
 
   const rootId = useId();
 
   const contentRef = useRef<HTMLDivElement>(null);
   const activeElementOnOpenRef = useRef<Element | null>(null);
 
-  const [open, setOpen] =
-    openProp !== undefined && setOpenProp !== undefined
-      ? [openProp, setOpenProp]
-      : useState(initialOpen);
+  const [open, setOpen] = useState(initialOpen);
 
   const onCloseDialog = () => {
     setOpen(false);
@@ -116,13 +94,17 @@ function useDialog(props: UseDialogProps) {
 
 type UseDialogReturn = ReturnType<typeof useDialog>;
 
+// ---
+
 const [useDialogContext, DialogContext] = getContextAndHook<UseDialogReturn>(
   "useDialogContext",
   "DialogProvider",
 );
 
+// ---
+
 interface DialogProviderProps extends UseDialogProps {
-  children?: ChildAsFunction<UseDialogReturn>;
+  children: ReactNode;
 }
 
 /**
@@ -147,11 +129,7 @@ function DialogProvider(props: DialogProviderProps) {
   const { children, ...useDialogProps } = props;
   const value = useDialog(useDialogProps);
 
-  return (
-    <DialogContext value={value}>
-      {children instanceof Function ? children(value) : children}
-    </DialogContext>
-  );
+  return <DialogContext value={value}>{children}</DialogContext>;
 }
 
 // components
@@ -160,35 +138,21 @@ function DialogProvider(props: DialogProviderProps) {
 type DialogTriggerProps<TAs extends ElementTypeOf<"button">> = Omit<
   PropsWithAs<TAs, "button">,
   "type" | "aria-controls" | "aria-haspopup" | "aria-expanded"
-> & {
-  /**
-   * @default () => true
-   */
-  canOpen?: () => boolean;
-};
+>;
 
 function DialogTrigger<TAs extends ElementTypeOf<"button">>(
   props: DialogTriggerProps<TAs>,
 ) {
-  const {
-    as: Comp = "button",
-    canOpen = () => true,
-    onClick,
-    ...restProps
-  } = props;
+  const { as: Comp = "button", onClick, ...restProps } = props;
   const context = useDialogContext();
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     onClick?.(event);
 
-    console.log(`canOpen()`, canOpen());
-
-    if (canOpen() && !context.open) {
+    if (!context.open) {
       context.setOpen(true);
-      return;
     } else {
       context.setOpen(false);
-      return;
     }
   };
 
