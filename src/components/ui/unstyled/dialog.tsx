@@ -19,8 +19,6 @@ import { getContextAndHook } from "@/utils/react";
 
 import { SafetyPortal } from "../headless/safety-portal";
 
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
 // helpers
 // ----------------------------------------
 
@@ -35,11 +33,21 @@ function createTitleId(rootId: string) {
 // context
 // ----------------------------------------
 
+const states = {
+  IDLE: "idle",
+  ENTER: "enter",
+  ENTER_ACTIVE: "enter-active",
+  LEAVE: "leave",
+  LEAVE_ACTIVE: "leave-active",
+} as const;
+
+type State = (typeof states)[keyof typeof states];
+
 interface UseDialogProps {
   /**
-   * @default false
+   * @default "idle"
    */
-  initialOpen?: boolean;
+  initialState?: State;
   /**
    * @default true
    */
@@ -47,17 +55,17 @@ interface UseDialogProps {
 }
 
 function useDialog(props: UseDialogProps) {
-  const { initialOpen = false, closeOnEscKeyDown = true } = props;
+  const { initialState = states.IDLE, closeOnEscKeyDown = true } = props;
 
   const rootId = useId();
 
   const contentRef = useRef<HTMLDivElement>(null);
   const activeElementOnOpenRef = useRef<Element | null>(null);
 
-  const [open, setOpen] = useState(initialOpen);
+  const [state, setState] = useState<State>(initialState);
 
   const onCloseDialog = () => {
-    setOpen(false);
+    setState(states.LEAVE);
 
     if (activeElementOnOpenRef.current instanceof HTMLElement) {
       activeElementOnOpenRef.current.focus();
@@ -65,34 +73,50 @@ function useDialog(props: UseDialogProps) {
   };
 
   useEffect(() => {
-    if (open) {
+    if (state === states.ENTER_ACTIVE) {
       activeElementOnOpenRef.current = document.activeElement;
       sleep(0).then(() => {
         contentRef.current?.focus();
       });
     }
-  }, [open]);
+  }, [state]);
 
   useScrollLock({
-    enabled: open,
+    enabled: state === states.ENTER_ACTIVE,
   });
 
   useKeydown((event) => {
-    if (open) {
+    if (state === states.ENTER_ACTIVE) {
       loopFocus(event, contentRef.current);
     }
   });
 
   useKeydown((event) => {
-    if (open && closeOnEscKeyDown && event.key === "Escape") {
+    if (
+      state === states.ENTER_ACTIVE &&
+      closeOnEscKeyDown &&
+      event.key === "Escape"
+    ) {
       onCloseDialog();
     }
   });
 
-  return { rootId, contentRef, open, setOpen, onCloseDialog };
+  return {
+    rootId,
+    contentRef,
+    state,
+    setState,
+    onCloseDialog,
+  };
 }
 
 type UseDialogReturn = ReturnType<typeof useDialog>;
+
+function getDataAttr(context: UseDialogReturn) {
+  return {
+    "data-state": context.state,
+  };
+}
 
 // ---
 
@@ -148,12 +172,7 @@ function DialogTrigger<TAs extends ElementTypeOf<"button">>(
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     onClick?.(event);
-
-    if (!context.open) {
-      context.setOpen(true);
-    } else {
-      context.setOpen(false);
-    }
+    context.setState(states.ENTER);
   };
 
   return (
@@ -161,7 +180,7 @@ function DialogTrigger<TAs extends ElementTypeOf<"button">>(
       type="button"
       aria-controls={createContentId(context.rootId)}
       aria-haspopup="dialog"
-      aria-expanded={context.open}
+      aria-expanded={context.state === states.ENTER_ACTIVE}
       onClick={handleClick}
       {...restProps}
     />
@@ -172,7 +191,12 @@ function DialogTrigger<TAs extends ElementTypeOf<"button">>(
 
 function DialogPortal({ children }: { children: ReactNode }) {
   const context = useDialogContext();
-  return context.open ? <SafetyPortal>{children}</SafetyPortal> : null;
+
+  if (context.state === states.IDLE) return null;
+
+  if (context.state === states.LEAVE_ACTIVE) return null;
+
+  return <SafetyPortal>{children}</SafetyPortal>;
 }
 
 // ---
@@ -195,7 +219,25 @@ function DialogOverlay(props: DialogOverlayProps) {
     onClick?.(event);
   };
 
-  return <div onClick={handleClick} {...restProps} />;
+  useEffect(() => {
+    const onAnimationend = () => {
+      if (context.state === states.ENTER) {
+        context.setState(states.ENTER_ACTIVE);
+        return;
+      }
+
+      if (context.state === states.LEAVE) {
+        context.setState(states.LEAVE_ACTIVE);
+        return;
+      }
+    };
+
+    addEventListener("animationend", onAnimationend);
+    return () => removeEventListener("animationend", onAnimationend);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [context.state]);
+
+  return <div onClick={handleClick} {...getDataAttr(context)} {...restProps} />;
 }
 
 // ---
@@ -243,12 +285,31 @@ function DialogContent(props: DialogContentProps) {
     return () => undo();
   }, [context.contentRef]);
 
+  useEffect(() => {
+    const onAnimationend = () => {
+      if (context.state === states.ENTER) {
+        context.setState(states.ENTER_ACTIVE);
+        return;
+      }
+
+      if (context.state === states.LEAVE) {
+        context.setState(states.LEAVE_ACTIVE);
+        return;
+      }
+    };
+
+    addEventListener("animationend", onAnimationend);
+    return () => removeEventListener("animationend", onAnimationend);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [context.state]);
+
   return (
     <div
       id={createContentId(context.rootId)}
       role="dialog"
       aria-labelledby={createTitleId(context.rootId)}
       tabIndex={-1}
+      {...getDataAttr(context)}
       ref={context.contentRef}
       {...props}
     />

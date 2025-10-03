@@ -70,13 +70,26 @@ export function ContentButton({ project }: { project: Project }) {
         </div>
       </DialogTrigger>
       <DialogPortal>
-        <DialogOverlay className="fixed inset-0 z-[10000] bg-[#000]/50" />
+        <DialogOverlay
+          className={cn(
+            "fixed inset-0 z-[10000] bg-[#000]/50",
+            // animation
+            "fill-mode-forwards",
+            "data-[state=enter]:animate-in data-[state=leave]:animate-out",
+            "data-[state=leave]:fade-out-0 data-[state=enter]:fade-in-0",
+          )}
+        />
         <DialogContent
           className={cn(
             "fixed top-[50%] left-[50%] z-[100001] translate-x-[-50%] translate-y-[-50%] sm:top-[10%] sm:translate-y-[0%]",
             "w-full max-w-[calc(100%-calc(var(--screen-margin)*2))] sm:max-w-[560px]",
             "overflow-hidden rounded-lg bg-white",
             "flex flex-col gap-7",
+            // animation
+            "fill-mode-forwards",
+            "data-[state=enter]:animate-in data-[state=leave]:animate-out",
+            "data-[state=leave]:fade-out-0 data-[state=enter]:fade-in-0",
+            "data-[state=leave]:zoom-out-95 data-[state=enter]:zoom-in-95",
           )}
         >
           <div className="flex items-center justify-between pt-6 pr-6 pl-8">
