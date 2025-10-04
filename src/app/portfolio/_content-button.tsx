@@ -38,7 +38,14 @@ export function ContentButton({ project }: { project: Project }) {
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <Lock size={20} className="shrink-0" />
-            <div className="text-xl font-bold">{project.title}</div>
+            <div className="flex items-center gap-2">
+              <div className="text-xl font-bold">{project.title}</div>
+              {project.end === "現在" && (
+                <span className="bg-brand-base rounded-full px-2 py-1.5 text-xs leading-[1.2] font-normal text-white">
+                  稼働中
+                </span>
+              )}
+            </div>
           </div>
           {project.subTitle && (
             <div className="text-foreground-secondary text-xs">
@@ -47,7 +54,7 @@ export function ContentButton({ project }: { project: Project }) {
           )}
         </div>
         <div className="flex flex-col gap-2">
-          <div className="flex flex-wrap items-center gap-1.5">
+          <div className="hidden flex-wrap items-center gap-1.5 lg:flex">
             <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
               手法: {methodTags.map((tag) => tag.label).join(" / ")}
             </Tag>
