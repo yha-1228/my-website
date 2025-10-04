@@ -38,7 +38,7 @@ export function ContentButton({ project }: { project: Project }) {
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <Lock size={20} className="shrink-0" />
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <div className="text-xl font-bold">{project.title}</div>
               {project.end === "現在" && (
                 <span className="bg-brand-base rounded-full px-2 py-1.5 text-xs leading-[1.2] font-normal text-white">
