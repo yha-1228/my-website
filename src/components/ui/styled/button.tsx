@@ -11,7 +11,7 @@ type Size = "md" | "lg";
 const variantClassNames = {
   fill: "bg-foreground-primary text-white hover:not-disabled:opacity-80 active:not-disabled:opacity-70",
   outline:
-    "border border-current text-foreground-primary bg-white hover:not-disabled:opacity-80 active:not-disabled:opacity-70",
+    "border border-current text-foreground-primary bg-white hover:not-disabled:bg-stone-100 active:not-disabled:bg-stone-200",
 } as const satisfies Record<Variant, string>;
 
 const sizeClassNames = {
@@ -67,7 +67,7 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
   return (
     <Comp
       className={cn(
-        "inline-flex cursor-pointer items-center justify-center transition-opacity duration-200 ease-out",
+        "inline-flex cursor-pointer items-center justify-center transition-[opacity,background-color] duration-200 ease-out",
         variantClassNames[variant],
         sizeClassNames[size],
         "disabled:cursor-not-allowed disabled:opacity-40",
