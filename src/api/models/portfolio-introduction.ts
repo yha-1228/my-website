@@ -11,7 +11,6 @@ export const getPortfolioIntroductionResponseSchema = z.object({
   // ---
   overview: z.string(),
   experience: z.string(),
-  torikumi: z.string(),
   tsuyomi: z.string(),
   kongo: z.string(),
 });
