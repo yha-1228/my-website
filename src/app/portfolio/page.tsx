@@ -53,9 +53,7 @@ function IntroductionDlList({
           <dt className="shrink-0 text-left text-xl leading-[1.3] font-bold whitespace-nowrap lg:w-[196px]">
             {row.header}
           </dt>
-          <dd className="max-w-[--breakpoint-md] align-top leading-[1.6]">
-            {row.data}
-          </dd>
+          <dd className="align-top leading-[1.6]">{row.data}</dd>
         </dl>
       ))}
     </div>
