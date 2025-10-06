@@ -103,7 +103,7 @@ export function ContentButton({ project }: { project: Project }) {
             <DialogTitle className="text-2xl font-bold">閲覧の確認</DialogTitle>
             <DialogClose
               aria-label="閉じる"
-              className="inline-flex size-10 items-center justify-center transition-opacity hover:opacity-60 active:opacity-50 disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-touchable inline-flex size-10 items-center justify-center transition-[opacity,background-color] hover:bg-stone-100 active:bg-stone-100 active:opacity-70 disabled:cursor-not-allowed disabled:opacity-40"
             >
               <X />
             </DialogClose>
