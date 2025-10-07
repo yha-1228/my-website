@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const getPortfolioIntroductionResponseSchema = z.object({
+export const portfolioIntroductionSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   publishedAt: z.string(),
@@ -15,6 +15,4 @@ export const getPortfolioIntroductionResponseSchema = z.object({
   kongo: z.string(),
 });
 
-export type GetPortfolioIntroductionResponse = z.infer<
-  typeof getPortfolioIntroductionResponseSchema
->;
+export type PortfolioIntroduction = z.infer<typeof portfolioIntroductionSchema>;

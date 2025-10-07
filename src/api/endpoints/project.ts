@@ -1,26 +1,22 @@
 import { type MicroCMSQueries } from "microcms-js-sdk";
 
-import {
-  type GetProjectResponse,
-  getProjectResponseSchema,
-  type GetProjectsResponse,
-  getProjectsResponseSchema,
-} from "../models/project";
+import { createListResponseSchema, type ListResponse } from "../models/_zod";
+import { type Project, projectSchema } from "../models/project";
 import { client } from "./_microcms";
 
 export async function getProjects(
   queries?: MicroCMSQueries,
-): Promise<GetProjectsResponse> {
+): Promise<ListResponse<Project>> {
   const response = await client.getList({ endpoint: "projects", queries });
 
-  return getProjectsResponseSchema.parse(response);
+  return createListResponseSchema(projectSchema).parse(response);
 }
 
-export async function getProject(id: string): Promise<GetProjectResponse> {
+export async function getProject(id: string): Promise<Project> {
   const response = await client.getListDetail({
     endpoint: "projects",
     contentId: id,
   });
 
-  return getProjectResponseSchema.parse(response);
+  return projectSchema.parse(response);
 }

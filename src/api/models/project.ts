@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const tagSchema = z.object({
+export const projectTagSchema = z.object({
   id: z.string(),
   createdAt: z.string(),
   updatedAt: z.string(),
@@ -10,9 +10,9 @@ const tagSchema = z.object({
   category: z.array(z.string()),
 });
 
-export type ProjectTag = z.infer<typeof tagSchema>;
+export type ProjectTag = z.infer<typeof projectTagSchema>;
 
-const projectSchema = z.object({
+export const projectSchema = z.object({
   id: z.string(),
   createdAt: z.string(),
   updatedAt: z.string(),
@@ -24,7 +24,7 @@ const projectSchema = z.object({
   descriptionContent: z.string().optional(),
   subTitle: z.string().optional(),
   body: z.string().optional(),
-  tags: z.array(tagSchema),
+  tags: z.array(projectTagSchema),
   start: z.string(),
   end: z.string(),
   blank: z.string().optional(),
@@ -37,16 +37,3 @@ const projectSchema = z.object({
 });
 
 export type Project = z.infer<typeof projectSchema>;
-
-export const getProjectsResponseSchema = z.object({
-  contents: z.array(projectSchema),
-  totalCount: z.number(),
-  offset: z.number(),
-  limit: z.number(),
-});
-
-export type GetProjectsResponse = z.infer<typeof getProjectsResponseSchema>;
-
-export const getProjectResponseSchema = projectSchema;
-
-export type GetProjectResponse = z.infer<typeof getProjectResponseSchema>;

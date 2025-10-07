@@ -1,13 +1,13 @@
 import {
-  type GetPortfolioIntroductionResponse,
-  getPortfolioIntroductionResponseSchema,
+  type PortfolioIntroduction,
+  portfolioIntroductionSchema,
 } from "../models/portfolio-introduction";
 import { client } from "./_microcms";
 
-export async function getPortfolioIntroduction(): Promise<GetPortfolioIntroductionResponse> {
+export async function getPortfolioIntroduction(): Promise<PortfolioIntroduction> {
   const response = await client.getObject({
     endpoint: "portfolio-introduction",
   });
 
-  return getPortfolioIntroductionResponseSchema.parse(response);
+  return portfolioIntroductionSchema.parse(response);
 }
