@@ -83,8 +83,12 @@ export default async function Page({ params }: Props) {
 
               <div className="border-foreground-primary flex flex-col gap-2 rounded-sm border px-6 py-5 text-sm">
                 <dl>
-                  <dt className="font-bold">体制・役割</dt>
+                  <dt className="font-bold">体制</dt>
                   <dd>{project.structureAndRole}</dd>
+                </dl>
+                <dl>
+                  <dt className="font-bold">役割</dt>
+                  <dd>{project.roles.join(", ")}</dd>
                 </dl>
                 <dl>
                   <dt className="font-bold">デザインツール</dt>

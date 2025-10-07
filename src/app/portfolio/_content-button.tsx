@@ -19,8 +19,7 @@ import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
 export function ContentButton({ project }: { project: Project }) {
-  const { methodTags, projectTags, uxLayerTags, assignTags, jobTypeTags } =
-    groupTags(project.tags);
+  const { projectTags, assignTags, jobTypeTags } = groupTags(project.tags);
 
   const onConfirmClick = () => {
     window.location.href = routes["portfolio/[id]"].href(project.id);
@@ -38,7 +37,7 @@ export function ContentButton({ project }: { project: Project }) {
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <Lock size={20} className="shrink-0" />
-            <div className="text-xl font-bold">{project.title}</div>
+            <div className="text-xl font-bold">{`${project.title} / ${project.roles.join("・")}`}</div>
           </div>
           {project.subTitle && (
             <div className="text-foreground-secondary text-xs">
@@ -49,13 +48,7 @@ export function ContentButton({ project }: { project: Project }) {
         <div className="flex flex-col gap-2">
           <div className="hidden flex-wrap items-center gap-1.5 lg:flex">
             <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-              手法: {methodTags.map((tag) => tag.label).join(" / ")}
-            </Tag>
-            <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
               案件: {projectTags.map((tag) => tag.label).join(" / ")}
-            </Tag>
-            <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-              UX階層: {uxLayerTags.map((tag) => tag.label).join(" / ")}
             </Tag>
             <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
               参画: {assignTags.map((tag) => tag.label).join(" / ")}
