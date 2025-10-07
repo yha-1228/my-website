@@ -89,4 +89,4 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
   );
 }
 
-export { Button, type ButtonProps };
+export { Button, type ButtonProps, type Variant as ButtonVariant };

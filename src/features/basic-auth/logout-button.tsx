@@ -3,6 +3,8 @@
 import { LogOut } from "lucide-react";
 
 import { Button } from "@/components/ui/styled/button";
+import { Dialog } from "@/components/ui/styled/dialog";
+import { DialogTrigger } from "@/components/ui/unstyled/dialog";
 
 import { generateLogoutUrl } from "./auth";
 
@@ -14,33 +16,46 @@ export function LogoutButton({
   onOkClick?: () => void;
 }) {
   return (
-    <Button
-      variant="outline"
-      className="inline-flex items-center gap-2 px-4"
-      loading={loading}
-      onClick={async () => {
-        const confirm = window.confirm(
-          [
-            "ログアウトしますか？\n\n",
-            "・ログアウト後はポートフォリオのホーム画面に戻ります。\n",
-            "・新規ウィンドウが開きますが、自動で閉じられるまでお待ちください。",
-          ].join(""),
-        );
-        if (!confirm) return;
+    <Dialog
+      trigger={
+        <DialogTrigger
+          as={Button}
+          variant="outline"
+          loading={loading}
+          className="inline-flex items-center gap-2 px-4"
+        >
+          <LogOut />
+          ログアウト
+        </DialogTrigger>
+      }
+      dialogTitle="ログアウトしますか？"
+      dialogBody={
+        <>
+          <p>ログアウト後はポートフォリオのホーム画面に戻ります。</p>
+          <p>新規ウィンドウが開きますが、自動で閉じるまでお待ちください。</p>
+        </>
+      }
+      dialogButtons={[
+        {
+          content: "キャンセル",
+          variant: "outline",
+        },
+        {
+          content: "ログアウトする",
+          variant: "fill",
+          onClick: async () => {
+            onOkClick?.();
 
-        onOkClick?.();
+            const newWindow = window.open(generateLogoutUrl(), "_blank");
 
-        const newWindow = window.open(generateLogoutUrl(), "_blank");
-
-        setTimeout(() => {
-          newWindow?.close();
-          window.location.href = window.location.origin + "/portfolio";
-          // 暫く待たないとログアウトされずに遷移される
-        }, 1000);
-      }}
-    >
-      <LogOut />
-      ログアウト
-    </Button>
+            setTimeout(() => {
+              newWindow?.close();
+              window.location.href = window.location.origin + "/portfolio";
+              // 暫く待たないとログアウトされずに遷移される
+            }, 1000);
+          },
+        },
+      ]}
+    />
   );
 }
