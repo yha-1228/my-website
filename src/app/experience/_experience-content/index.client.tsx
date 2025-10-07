@@ -6,13 +6,9 @@ import { type Project } from "@/api/models/project";
 import { Heading2 } from "@/components/ui/styled/heading2";
 import { parseSearchParamsClient } from "@/features/experience/query";
 
-import {
-  getAllExperiences,
-  sortedTypes,
-  typeKikanMap,
-  typeNameMap,
-} from "./data";
-import { Timeline, type TimelineItem } from "./timeline";
+import { sortedTypes, typeKikanMap, typeNameMap } from "./models";
+import { Timeline } from "./ui/timeline";
+import { ellipsisTextByComma } from "./utils";
 
 export function Client({ projects }: { projects: Project[] }) {
   const searchParams = useSearchParams();
@@ -27,14 +23,12 @@ export function Client({ projects }: { projects: Project[] }) {
     }
   });
 
-  const experiences = getAllExperiences(filteredProjects);
-
   return (
     <div className="mt-10 space-y-12">
       {sortedTypes
         .filter((type) => {
-          const experienceTypes = experiences.map(({ type }) => type);
-          return experienceTypes.includes(type);
+          const projectTypes = filteredProjects.map(({ type }) => type);
+          return projectTypes.includes(type);
         })
         .map((type) => (
           <section className="space-y-5" key={type}>
@@ -47,31 +41,33 @@ export function Client({ projects }: { projects: Project[] }) {
               )}
             </div>
             <Timeline
-              items={experiences
-                .filter((experience) => experience.type === type)
-                .map((experience) => {
-                  const { kikan, title, projectCompanyName, description } =
-                    experience;
-
-                  const heading = projectCompanyName ? (
+              items={filteredProjects
+                .filter((project) => project.type === type)
+                .map((project: Project) => ({
+                  point:
+                    `${project.start} - ${project.end}` +
+                    (project.blank ? ` (空白期間: ${project.blank})` : ""),
+                  heading: `${project.title} / ${project.roles.join("・")}`,
+                  content: (
                     <>
-                      {title} <br />
-                      <div className="text-foreground-primary mt-2 text-lg font-normal">
-                        {projectCompanyName}
+                      <div
+                        className="space-y-2.5"
+                        dangerouslySetInnerHTML={{
+                          __html: project.descriptionContent || "",
+                        }}
+                      />
+                      <div className="mt-4 space-y-1">
+                        <p>
+                          <b>言語/FW:</b>{" "}
+                          {ellipsisTextByComma(project.langAndFws, 3)}
+                        </p>
+                        <p>
+                          <b>ツール:</b> {ellipsisTextByComma(project.tools, 3)}
+                        </p>
                       </div>
                     </>
-                  ) : (
-                    title
-                  );
-
-                  const item: TimelineItem = {
-                    point: kikan,
-                    heading: heading,
-                    content: description,
-                  };
-
-                  return item;
-                })}
+                  ),
+                }))}
             />
           </section>
         ))}

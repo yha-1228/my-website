@@ -12,7 +12,7 @@ import { entriesOf } from "@/utils/object";
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from "./_experience-content/toggle-group";
+} from "./_experience-content/ui/toggle-group";
 
 const jobCategoryLabelMap = {
   main: "フルタイム",
