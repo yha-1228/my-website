@@ -156,6 +156,31 @@ function DialogProvider(props: DialogProviderProps) {
   return <DialogContext value={value}>{children}</DialogContext>;
 }
 
+// hooks
+// ----------------------------------------
+
+function useUpdateStateOnAnimationEnd() {
+  const context = useDialogContext();
+
+  useEffect(() => {
+    const onAnimationend = () => {
+      if (context.state === states.ENTER) {
+        context.setState(states.ENTER_ACTIVE);
+        return;
+      }
+
+      if (context.state === states.LEAVE) {
+        context.setState(states.LEAVE_ACTIVE);
+        return;
+      }
+    };
+
+    addEventListener("animationend", onAnimationend);
+    return () => removeEventListener("animationend", onAnimationend);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [context.state]);
+}
+
 // components
 // ----------------------------------------
 
@@ -219,23 +244,7 @@ function DialogOverlay(props: DialogOverlayProps) {
     onClick?.(event);
   };
 
-  useEffect(() => {
-    const onAnimationend = () => {
-      if (context.state === states.ENTER) {
-        context.setState(states.ENTER_ACTIVE);
-        return;
-      }
-
-      if (context.state === states.LEAVE) {
-        context.setState(states.LEAVE_ACTIVE);
-        return;
-      }
-    };
-
-    addEventListener("animationend", onAnimationend);
-    return () => removeEventListener("animationend", onAnimationend);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context.state]);
+  useUpdateStateOnAnimationEnd();
 
   return <div onClick={handleClick} {...getDataAttr(context)} {...restProps} />;
 }
@@ -285,23 +294,7 @@ function DialogContent(props: DialogContentProps) {
     return () => undo();
   }, [context.contentRef]);
 
-  useEffect(() => {
-    const onAnimationend = () => {
-      if (context.state === states.ENTER) {
-        context.setState(states.ENTER_ACTIVE);
-        return;
-      }
-
-      if (context.state === states.LEAVE) {
-        context.setState(states.LEAVE_ACTIVE);
-        return;
-      }
-    };
-
-    addEventListener("animationend", onAnimationend);
-    return () => removeEventListener("animationend", onAnimationend);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context.state]);
+  useUpdateStateOnAnimationEnd();
 
   return (
     <div
