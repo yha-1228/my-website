@@ -35,7 +35,7 @@ export function getAllExperiences(projects: Project[]): Experience[] {
     kikan:
       `${project.start} - ${project.end}` +
       (project.blank ? ` (空白期間: ${project.blank})` : ""),
-    title: `${project.title} / ${project.role}`,
+    title: `${project.title} / ${project.roles.join("・")}`,
     projectCompanyName: null,
     description: (
       <>

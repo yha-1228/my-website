@@ -19,7 +19,7 @@ export const projectSchema = z.object({
   publishedAt: z.string(),
   revisedAt: z.string(),
   title: z.string(),
-  role: z.string().optional(),
+  roles: z.array(z.string()),
   company: z.string().optional(),
   descriptionContent: z.string().optional(),
   subTitle: z.string().optional(),
