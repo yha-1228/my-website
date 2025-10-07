@@ -66,16 +66,7 @@ export function Client({ projects }: { projects: Project[] }) {
 
                   const item: TimelineItem = {
                     point: kikan,
-                    heading: experience.kikan.includes("現在") ? (
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                        {heading}
-                        <span className="bg-brand-base rounded-full px-2 py-1.5 text-xs leading-[1.2] font-normal text-white">
-                          稼働中
-                        </span>
-                      </div>
-                    ) : (
-                      heading
-                    ),
+                    heading: heading,
                     content: description,
                   };
 
