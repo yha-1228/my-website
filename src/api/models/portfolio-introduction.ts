@@ -10,7 +10,6 @@ export const portfolioIntroductionSchema = z.object({
   tools: z.string(),
   // ---
   overview: z.string(),
-  experience: z.string(),
   tsuyomi: z.string(),
   kongo: z.string(),
 });

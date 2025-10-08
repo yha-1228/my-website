@@ -36,8 +36,10 @@ export default function Page() {
               からご連絡ください。
             </p>
           </div>
-          <ExperienceToggle />
-          <ExperienceContent />
+          <div className="mt-10 flex flex-col gap-8">
+            <ExperienceToggle className="sticky top-[80px]" />
+            <ExperienceContent />
+          </div>
         </section>
       </Container>
     </div>

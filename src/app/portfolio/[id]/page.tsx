@@ -1,17 +1,16 @@
-import { ChevronLeft } from "lucide-react";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getProject, getProjects } from "@/api/endpoints/project";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
-import { TextLink } from "@/components/ui/styled/text-link";
-import { IDS, SITE_TITLE } from "@/constants";
+import { SITE_TITLE } from "@/constants";
 import { LogoutBanner } from "@/features/basic-auth/logout-banner";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
 import { groupTags } from "@/features/blog/misc";
 import { Tag } from "@/features/portfolio/tag";
-import { routes } from "@/routes";
+
+import { BackButton } from "./_back-button";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -46,16 +45,10 @@ export default async function Page({ params }: Props) {
     <>
       <LogoutBanner />
       <div className="py-14">
-        <Container className="md:max-w-(--breakpoint-md)">
-          <TextLink
-            href={`${routes.portfolio.href}#${IDS["portfolio-projects-heading"]}`}
-            className="inline-flex items-center space-x-1"
-          >
-            <ChevronLeft />
-            <span>実績一覧に戻る</span>
-          </TextLink>
+        <Container className="flex flex-col gap-8 md:max-w-(--breakpoint-md)">
+          <BackButton />
 
-          <article className="mt-8">
+          <article>
             <header>
               <Heading1>{project.title}</Heading1>
               <p className="text-foreground-secondary mt-4 text-sm font-normal">
@@ -104,13 +97,7 @@ export default async function Page({ params }: Props) {
             </div>
           </article>
 
-          <TextLink
-            href={`${routes.portfolio.href}#${IDS["portfolio-projects-heading"]}`}
-            className="mt-12 inline-flex items-center space-x-1"
-          >
-            <ChevronLeft />
-            <span>実績一覧に戻る</span>
-          </TextLink>
+          <BackButton />
         </Container>
       </div>
     </>

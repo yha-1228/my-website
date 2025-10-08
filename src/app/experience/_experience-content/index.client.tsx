@@ -16,29 +16,48 @@ import { typeNameMap } from "./models";
 import { Timeline } from "./ui/timeline";
 import { ellipsisTextByComma, splitText } from "./utils";
 
+function someIncludes<T>(array: T[], searchElements: T[]): boolean {
+  return searchElements.some((el) => array.includes(el));
+}
+
 export function Client({ projects }: { projects: Project[] }) {
   const searchParams = useSearchParams();
   const parsedSearchParams = parseSearchParamsClient(searchParams);
 
-  const filteredProjects = projects.filter((project) => {
-    if (parsedSearchParams === "all") {
-      return project;
-    }
-    if (parsedSearchParams === "main") {
-      return project.type.includes("main");
-    }
-    if (parsedSearchParams === "sub") {
-      return project.type === "sub";
-    }
-  });
+  const filteredProjects = projects
+    .filter((project) => {
+      if (parsedSearchParams.jobCategory === "all") {
+        return project;
+      }
+      if (parsedSearchParams.jobCategory === "main") {
+        return project.type.includes("main");
+      }
+      if (parsedSearchParams.jobCategory === "sub") {
+        return project.type === "sub";
+      }
+    })
+    .filter((project) => {
+      if (parsedSearchParams.role === "all") {
+        return project;
+      }
+      if (parsedSearchParams.role === "dev") {
+        return someIncludes(project.roles, ["開発", "FE開発"]);
+      }
+      if (parsedSearchParams.role === "design") {
+        return someIncludes(project.roles, ["UIデザイン"]);
+      }
+    });
 
   return (
-    <div className="mt-10">
+    <div className="flex flex-col gap-4">
+      <div>
+        <span className="text-2xl">{filteredProjects.length}</span>
+        <span className="ml-0.5 text-sm">件</span>
+      </div>
       <Timeline
         items={filteredProjects.map((project) => {
           const langAndFwsSpitted = splitText(project.langAndFws, 3);
           const toolsSplitted = splitText(project.tools, 3);
-
           return {
             point:
               `${project.start} - ${project.end}` +
@@ -79,7 +98,6 @@ export function Client({ projects }: { projects: Project[] }) {
                       )}
                     </div>
                   </div>
-
                   <div className="flex flex-col items-start gap-y-0.5 sm:flex-row">
                     <span className="font-bold sm:w-20 sm:shrink-0">
                       ツール
@@ -99,14 +117,12 @@ export function Client({ projects }: { projects: Project[] }) {
                     </div>
                   </div>
                 </div>
-
                 <div
                   className="space-y-1.5 pt-3 text-sm sm:text-base"
                   dangerouslySetInnerHTML={{
                     __html: project.descriptionContent || "",
                   }}
                 />
-
                 {project.hasDesignPortfolio && (
                   <div className="mt-3">
                     <Dialog
