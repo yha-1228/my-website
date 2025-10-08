@@ -13,10 +13,6 @@ import { cn } from "@/utils/styling";
 export function ContentButton({ project }: { project: Project }) {
   const { projectTags, assignTags, jobTypeTags } = groupTags(project.tags);
 
-  const onConfirmClick = () => {
-    window.location.href = routes["portfolio/[id]"].href(project.id);
-  };
-
   return (
     <Dialog
       trigger={
@@ -71,7 +67,9 @@ export function ContentButton({ project }: { project: Project }) {
         {
           content: "閲覧に進む",
           variant: "fill",
-          onClick: onConfirmClick,
+          onClick: () => {
+            window.location.href = routes["portfolio/[id]"].href(project.id);
+          },
         },
       ]}
     />

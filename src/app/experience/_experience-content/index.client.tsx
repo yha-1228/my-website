@@ -1,10 +1,16 @@
 "use client";
 
+import { ArrowRight } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
 import { type Project } from "@/api/models/project";
+import { Button } from "@/components/ui/styled/button";
+import { Dialog } from "@/components/ui/styled/dialog";
 import { Heading2 } from "@/components/ui/styled/heading2";
+import { DialogTrigger } from "@/components/ui/unstyled/dialog";
 import { parseSearchParamsClient } from "@/features/experience/query";
+import { routes } from "@/routes";
+import { cn } from "@/utils/styling";
 
 import { sortedTypes, typeKikanMap, typeNameMap } from "./models";
 import { Timeline } from "./ui/timeline";
@@ -64,6 +70,80 @@ export function Client({ projects }: { projects: Project[] }) {
                         <p>
                           <b>ツール:</b> {ellipsisTextByComma(project.tools, 3)}
                         </p>
+                        {project.hasDesignPortfolio && (
+                          <Dialog
+                            trigger={
+                              <DialogTrigger
+                                as={Button}
+                                className={cn(
+                                  "mt-4",
+                                  "flex items-center",
+                                  "group lg:inline-flex lg:items-center",
+                                )}
+                              >
+                                <span>この案件のデザイン実績を見る</span>
+                                <span
+                                  className={cn(
+                                    "ml-1 inline-block lg:ml-1.5",
+                                    "lg:transition-transform lg:duration-300 lg:group-hover:translate-x-0.5 lg:motion-reduce:transform-none",
+                                  )}
+                                >
+                                  <ArrowRight
+                                    aria-hidden="true"
+                                    className="size-4"
+                                  />
+                                </span>
+                              </DialogTrigger>
+                            }
+                            dialogTitle="閲覧の確認"
+                            dialogBody={
+                              <>
+                                <p>
+                                  デザイン実績の閲覧にはユーザー名とパスワードが必要です。
+                                </p>
+                                <p>
+                                  不明な場合は長谷川または求人担当者様にお問い合わせください。
+                                </p>
+                              </>
+                            }
+                            dialogButtons={[
+                              {
+                                content: "キャンセル",
+                                variant: "outline",
+                              },
+                              {
+                                content: "閲覧に進む",
+                                variant: "fill",
+                                onClick: () => {
+                                  window.location.href = routes[
+                                    "portfolio/[id]"
+                                  ].href(project.id);
+                                },
+                              },
+                            ]}
+                          />
+                          // {/* <Button
+                          //   as="a"
+                          //   href={routes["portfolio/[id]"].href(project.id)}
+                          //   className={cn(
+                          //     "flex items-center",
+                          //     "group lg:inline-flex lg:items-center",
+                          //   )}
+                          // >
+                          //   <span>この案件のデザイン実績を見る</span>
+                          //   <span
+                          //     className={cn(
+                          //       "ml-1 inline-block lg:ml-1.5",
+                          //       "lg:transition-transform lg:duration-300 lg:group-hover:translate-x-0.5 lg:motion-reduce:transform-none",
+                          //     )}
+                          //   >
+                          //     <ArrowRight
+                          //       aria-hidden="true"
+                          //       className="size-4"
+                          //     />
+                          //   </span>
+                          // </Button> */}
+                        )}
                       </div>
                     </>
                   ),
