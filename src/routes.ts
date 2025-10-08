@@ -27,7 +27,7 @@ export const routes = {
     protected: false,
   },
   "portfolio/[id]": {
-    href: (id: string) => `/portfolio/${id}`,
+    href: (id: string) => `/portfolio/${id}` as const,
     hierarchy: 2,
     protected: true,
   },
