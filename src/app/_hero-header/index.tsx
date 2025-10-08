@@ -1,11 +1,12 @@
 "use client";
 
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-import { ArrowRight } from "@/assets/arrow-right";
 import { Button } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
 import { routes } from "@/routes";
+import { cn } from "@/utils/styling";
 
 export function HeroHeader() {
   return (
@@ -24,11 +25,19 @@ export function HeroHeader() {
           as={Link}
           size="lg"
           href={routes.experience.href}
-          className="group mt-8 flex items-center lg:inline-flex lg:items-center lg:px-6 lg:text-lg"
+          className={cn(
+            "mt-8 flex items-center",
+            "group lg:inline-flex lg:items-center lg:px-6 lg:text-lg",
+          )}
         >
           <span>職務経歴を見る</span>
-          <span className="ml-1 inline-block lg:ml-1.5 lg:transition-transform lg:duration-300 lg:group-hover:translate-x-1 lg:motion-reduce:transform-none">
-            <ArrowRight aria-hidden="true" className="size-4" />
+          <span
+            className={cn(
+              "ml-1 inline-block lg:ml-1.5",
+              "lg:transition-transform lg:duration-300 lg:group-hover:translate-x-1 lg:motion-reduce:transform-none",
+            )}
+          >
+            <ArrowRight aria-hidden="true" className="size-5" />
           </span>
         </Button>
       </Container>
