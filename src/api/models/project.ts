@@ -22,7 +22,6 @@ export const projectSchema = z.object({
   roles: z.array(z.string()),
   company: z.string().optional(),
   descriptionContent: z.string().optional(),
-  subTitle: z.string().optional(),
   body: z.string().optional(),
   tags: z.array(projectTagSchema),
   start: z.string(),
