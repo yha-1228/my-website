@@ -31,7 +31,7 @@ export function LogoutButton({
       dialogTitle="ログアウトしますか？"
       dialogBody={
         <>
-          <p>ログアウト後はポートフォリオのホーム画面に戻ります。</p>
+          <p>ログアウト後はホーム画面に戻ります。</p>
           <p>新規ウィンドウが開きますが、自動で閉じるまでお待ちください。</p>
         </>
       }
@@ -50,7 +50,7 @@ export function LogoutButton({
 
             setTimeout(() => {
               newWindow?.close();
-              window.location.href = window.location.origin + "/portfolio";
+              window.location.href = window.location.origin;
               // 暫く待たないとログアウトされずに遷移される
             }, 1000);
           },

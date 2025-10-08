@@ -6,11 +6,11 @@ const html = `<!doctype html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>認証エラー | ${SITE_TITLE}</title>
+  <title>ログイン失敗 | ${SITE_TITLE}</title>
   <style>
     body {
       font-family: sans-serif;
-      padding: 40px;
+      padding: 24px;
     }
 
     h1 {
@@ -23,7 +23,7 @@ const html = `<!doctype html>
 <body>
   <main>
     <h1>ログインが中断されました</h1>
-    <a href="${routes.portfolio.href}">ポートフォリオのホームに戻る</a><br />
+    <a href="${routes.index.href}">ホームに戻る</a><br />
   </main>
 </body>
 </html>` as const;
