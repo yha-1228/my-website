@@ -122,27 +122,6 @@ export function Client({ projects }: { projects: Project[] }) {
                               },
                             ]}
                           />
-                          // {/* <Button
-                          //   as="a"
-                          //   href={routes["portfolio/[id]"].href(project.id)}
-                          //   className={cn(
-                          //     "flex items-center",
-                          //     "group lg:inline-flex lg:items-center",
-                          //   )}
-                          // >
-                          //   <span>この案件のデザイン実績を見る</span>
-                          //   <span
-                          //     className={cn(
-                          //       "ml-1 inline-block lg:ml-1.5",
-                          //       "lg:transition-transform lg:duration-300 lg:group-hover:translate-x-0.5 lg:motion-reduce:transform-none",
-                          //     )}
-                          //   >
-                          //     <ArrowRight
-                          //       aria-hidden="true"
-                          //       className="size-4"
-                          //     />
-                          //   </span>
-                          // </Button> */}
                         )}
                       </div>
                     </>
