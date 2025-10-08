@@ -7,8 +7,8 @@ export const sortedTypes = [
 ] as const satisfies Array<Project["type"]>;
 
 export const typeNameMap = {
-  "main-company-1": "システム開発会社",
-  "main-freelance": "自営業",
+  "main-company-1": "フルタイム / 正社員",
+  "main-freelance": "フルタイム / 自営業",
   sub: "副業",
 } as const satisfies Record<Project["type"], string>;
 

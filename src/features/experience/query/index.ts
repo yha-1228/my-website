@@ -1,10 +1,11 @@
 import { type ReadonlyURLSearchParams } from "next/navigation";
 import { z } from "zod";
 
-export type JobCategory = "main" | "sub";
+export type JobCategory = "all" | "main" | "sub";
 
 export function parseSearchParamsClient(searchParams: ReadonlyURLSearchParams) {
   const jobCategorySchema = z.enum([
+    "all",
     "main",
     "sub",
   ] as const satisfies JobCategory[]);
@@ -13,5 +14,5 @@ export function parseSearchParamsClient(searchParams: ReadonlyURLSearchParams) {
   );
   return parsedJobCategory.success
     ? parsedJobCategory.data
-    : ("main" as const satisfies JobCategory);
+    : ("all" as const satisfies JobCategory);
 }

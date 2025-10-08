@@ -1,26 +1,29 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { LockIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
 import { type Project } from "@/api/models/project";
 import { Button } from "@/components/ui/styled/button";
 import { Dialog } from "@/components/ui/styled/dialog";
-import { Heading2 } from "@/components/ui/styled/heading2";
 import { DialogTrigger } from "@/components/ui/unstyled/dialog";
 import { parseSearchParamsClient } from "@/features/experience/query";
+import { SkillTag } from "@/features/skill-tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
-import { sortedTypes, typeKikanMap, typeNameMap } from "./models";
+import { typeNameMap } from "./models";
 import { Timeline } from "./ui/timeline";
-import { ellipsisTextByComma } from "./utils";
+import { ellipsisTextByComma, splitText } from "./utils";
 
 export function Client({ projects }: { projects: Project[] }) {
   const searchParams = useSearchParams();
   const parsedSearchParams = parseSearchParamsClient(searchParams);
 
   const filteredProjects = projects.filter((project) => {
+    if (parsedSearchParams === "all") {
+      return project;
+    }
     if (parsedSearchParams === "main") {
       return project.type.includes("main");
     }
@@ -30,106 +33,130 @@ export function Client({ projects }: { projects: Project[] }) {
   });
 
   return (
-    <div className="mt-10 space-y-12">
-      {sortedTypes
-        .filter((type) => {
-          const projectTypes = filteredProjects.map(({ type }) => type);
-          return projectTypes.includes(type);
-        })
-        .map((type) => (
-          <section className="space-y-5" key={type}>
-            <div>
-              <Heading2>{typeNameMap[type]}</Heading2>
-              {typeKikanMap[type] && (
-                <div className="text-foreground-secondary mt-6 text-sm">
-                  {typeKikanMap[type]}
+    <div className="mt-10">
+      <Timeline
+        items={filteredProjects.map((project) => {
+          const langAndFwsSpitted = splitText(project.langAndFws, 3);
+          const toolsSplitted = splitText(project.tools, 3);
+
+          return {
+            point:
+              `${project.start} - ${project.end}` +
+              (project.blank ? ` (空白期間: ${project.blank})` : ""),
+            heading: (
+              <div className="flex flex-col items-start gap-x-2 gap-y-1 sm:flex-row sm:items-center">
+                <div>{project.title}</div>
+                <div className="inline-block grow-0 rounded-sm border border-stone-200 bg-stone-100 px-1.5 text-xs font-normal whitespace-nowrap sm:text-sm">
+                  {typeNameMap[project.type]}
                 </div>
-              )}
-            </div>
-            <Timeline
-              items={filteredProjects
-                .filter((project) => project.type === type)
-                .map((project: Project) => ({
-                  point:
-                    `${project.start} - ${project.end}` +
-                    (project.blank ? ` (空白期間: ${project.blank})` : ""),
-                  heading: `${project.title} / ${project.roles.join("・")}`,
-                  content: (
-                    <>
-                      <div
-                        className="space-y-2.5"
-                        dangerouslySetInnerHTML={{
-                          __html: project.descriptionContent || "",
-                        }}
-                      />
-                      <div className="mt-4 space-y-1">
-                        <p>
-                          <b>言語/FW:</b>{" "}
-                          {ellipsisTextByComma(project.langAndFws, 3)}
-                        </p>
-                        <p>
-                          <b>ツール:</b> {ellipsisTextByComma(project.tools, 3)}
-                        </p>
-                        {project.hasDesignPortfolio && (
-                          <Dialog
-                            trigger={
-                              <DialogTrigger
-                                as={Button}
-                                className={cn(
-                                  "mt-4",
-                                  "flex items-center",
-                                  "group lg:inline-flex lg:items-center",
-                                )}
-                              >
-                                <span>この案件のデザイン実績を見る</span>
-                                <span
-                                  className={cn(
-                                    "ml-1 inline-block lg:ml-1.5",
-                                    "lg:transition-transform lg:duration-300 lg:group-hover:translate-x-0.5 lg:motion-reduce:transform-none",
-                                  )}
-                                >
-                                  <ArrowRight
-                                    aria-hidden="true"
-                                    className="size-4"
-                                  />
-                                </span>
-                              </DialogTrigger>
-                            }
-                            dialogTitle="閲覧の確認"
-                            dialogBody={
-                              <>
-                                <p>
-                                  デザイン実績の閲覧にはユーザー名とパスワードが必要です。
-                                </p>
-                                <p>
-                                  不明な場合は長谷川または求人担当者様にお問い合わせください。
-                                </p>
-                              </>
-                            }
-                            dialogButtons={[
-                              {
-                                content: "キャンセル",
-                                variant: "outline",
-                              },
-                              {
-                                content: "閲覧に進む",
-                                variant: "fill",
-                                onClick: () => {
-                                  window.location.href = routes[
-                                    "portfolio/[id]"
-                                  ].href(project.id);
-                                },
-                              },
-                            ]}
-                          />
-                        )}
-                      </div>
-                    </>
-                  ),
-                }))}
-            />
-          </section>
-        ))}
+              </div>
+            ),
+            subHeading: project.roles.join(" / "),
+            content: (
+              <>
+                <div
+                  className={cn(
+                    "flex flex-col",
+                    "gap-4 border-y border-y-stone-200 py-4",
+                    "sm:gap-1.5 sm:rounded-md sm:border sm:border-stone-200 sm:bg-stone-50 sm:px-5",
+                  )}
+                >
+                  <div className="flex flex-col items-start gap-y-2 sm:flex-row">
+                    <span className="font-bold sm:w-20 sm:shrink-0">
+                      言語/FW
+                    </span>
+                    <span className="text-sm sm:hidden">
+                      {ellipsisTextByComma(project.langAndFws, 3)}
+                    </span>
+                    <div className="hidden flex-wrap items-center gap-2 sm:flex">
+                      {langAndFwsSpitted.texts.map((text, i) => (
+                        <SkillTag key={i}>{text}</SkillTag>
+                      ))}
+                      {langAndFwsSpitted.isOver && (
+                        <span className="text-foreground-secondary text-sm">
+                          etc.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-start gap-y-0.5 sm:flex-row">
+                    <span className="font-bold sm:w-20 sm:shrink-0">
+                      ツール
+                    </span>
+                    <span className="text-sm sm:hidden">
+                      {ellipsisTextByComma(project.tools, 3)}
+                    </span>
+                    <div className="hidden flex-wrap items-center gap-2 sm:flex">
+                      {toolsSplitted.texts.map((text, i) => (
+                        <SkillTag key={i}>{text}</SkillTag>
+                      ))}
+                      {toolsSplitted.isOver && (
+                        <span className="text-foreground-secondary text-sm">
+                          etc.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  className="space-y-1.5 pt-3 text-sm sm:text-base"
+                  dangerouslySetInnerHTML={{
+                    __html: project.descriptionContent || "",
+                  }}
+                />
+
+                {project.hasDesignPortfolio && (
+                  <div className="mt-3">
+                    <Dialog
+                      trigger={
+                        <DialogTrigger
+                          as={Button}
+                          variant="outline"
+                          className={cn(
+                            "flex w-full items-center gap-2 sm:w-auto",
+                            "lg:inline-flex lg:items-center",
+                          )}
+                        >
+                          <LockIcon aria-hidden="true" className="size-4" />
+                          <span>デザイン実績を見る</span>
+                        </DialogTrigger>
+                      }
+                      dialogTitle="閲覧の確認"
+                      dialogBody={
+                        <>
+                          <p>
+                            デザイン実績の閲覧にはユーザー名とパスワードが必要です。
+                          </p>
+                          <p>
+                            不明な場合は長谷川または求人担当者様にお問い合わせください。
+                          </p>
+                        </>
+                      }
+                      dialogButtons={[
+                        {
+                          content: "キャンセル",
+                          variant: "outline",
+                        },
+                        {
+                          content: "閲覧に進む",
+                          variant: "fill",
+                          onClick: () => {
+                            window.location.href = routes[
+                              "portfolio/[id]"
+                            ].href(project.id);
+                          },
+                        },
+                      ]}
+                    />
+                  </div>
+                )}
+              </>
+            ),
+          };
+        })}
+      />
     </div>
   );
 }

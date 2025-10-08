@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { IDS, SITE_TITLE } from "@/constants";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
+import { SkillTag } from "@/features/skill-tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
@@ -60,9 +61,6 @@ function IntroductionDlList({
   );
 }
 
-const introductionTagClassName =
-  "rounded-sm border bg-white border-[black]/30 px-1.5 text-sm";
-
 export const metadata: Metadata = {
   title: `${routes.portfolio.label} | ${SITE_TITLE}`,
 };
@@ -94,9 +92,7 @@ export default async function Page() {
                   data: (
                     <div className="flex flex-wrap gap-2">
                       {portfolioIntroduction.scope.split(", ").map((text) => (
-                        <span key={text} className={introductionTagClassName}>
-                          {text}
-                        </span>
+                        <SkillTag key={text}>{text}</SkillTag>
                       ))}
                     </div>
                   ),
@@ -108,9 +104,7 @@ export default async function Page() {
                       {portfolioIntroduction.langAndFws
                         .split(", ")
                         .map((text) => (
-                          <span key={text} className={introductionTagClassName}>
-                            {text}
-                          </span>
+                          <SkillTag key={text}>{text}</SkillTag>
                         ))}
                     </div>
                   ),
@@ -120,9 +114,7 @@ export default async function Page() {
                   data: (
                     <div className="flex flex-wrap gap-2">
                       {portfolioIntroduction.tools.split(", ").map((text) => (
-                        <span key={text} className={introductionTagClassName}>
-                          {text}
-                        </span>
+                        <SkillTag key={text}>{text}</SkillTag>
                       ))}
                     </div>
                   ),

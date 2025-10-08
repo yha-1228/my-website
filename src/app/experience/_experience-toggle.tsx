@@ -15,6 +15,7 @@ import {
 } from "./_experience-content/ui/toggle-group";
 
 const jobCategoryLabelMap = {
+  all: "すべて",
   main: "フルタイム",
   sub: "副業",
 } as const satisfies Record<JobCategory, string>;

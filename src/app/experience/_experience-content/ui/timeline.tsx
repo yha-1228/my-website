@@ -1,8 +1,9 @@
 import { type ReactNode } from "react";
 
 export interface TimelineItem {
-  point: string;
+  point: ReactNode;
   heading: ReactNode;
+  subHeading: ReactNode;
   content?: ReactNode;
 }
 
@@ -24,18 +25,20 @@ export function Timeline({ items }: TimelineProps) {
           </div>
 
           {/* Body */}
-          <div className="ml-5 w-full pb-10">
+          <div className="ml-5 w-full pb-12">
             <div className="text-brand-base leading-none">{item.point}</div>
 
-            <div className="mt-4 border-t border-solid border-t-gray-200 pt-2">
-              <div className="py-1 text-xl leading-snug font-bold">
-                {item.heading}
-              </div>
-              {!!item.content && (
-                <div className="text-foreground-secondary mt-3 space-y-2.5 text-sm leading-[1.65]">
-                  {item.content}
+            <div className="mt-4 flex flex-col gap-4 border-t border-solid border-t-gray-300 pt-2">
+              <div className="flex flex-col">
+                <div className="pt-2 text-lg leading-snug font-bold sm:text-2xl">
+                  {item.heading}
                 </div>
-              )}
+                <div className="mt-2 text-base sm:text-lg">
+                  {item.subHeading}
+                </div>
+              </div>
+
+              {item.content}
             </div>
           </div>
         </li>
