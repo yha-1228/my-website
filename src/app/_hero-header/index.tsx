@@ -24,7 +24,7 @@ export function HeroHeader() {
           <div
             className={cn(
               "lg:hidden",
-              "text-foreground-placeholder rotate-90 self-center",
+              "text-foreground-placeholder rotate-90 self-center sm:rotate-0",
             )}
           >
             <ArrowRightLeft size={20} />
