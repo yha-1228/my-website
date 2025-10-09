@@ -32,13 +32,13 @@ export default async function Page() {
 
   return (
     <div className="py-14">
-      <Container>
+      <Container className="md:max-w-(--breakpoint-md)">
         <section>
           <div className="text-center">
             <Heading1>{routes.blog.label}</Heading1>
           </div>
 
-          <ul className="mt-10 space-y-4">
+          <ul className="mt-10 flex flex-col gap-10">
             {zennArticles.map((zennArticle) => {
               if (!zennArticle.isoDate) return null;
 
@@ -49,34 +49,36 @@ export default async function Page() {
                     rel="noopener noreferrer"
                     href={zennArticle.link}
                     className={cn(
-                      "group block rounded-sm border border-stone-300 px-5 py-4 transition-colors ease-out",
-                      "hover:border-foreground-primary hover:bg-stone-50",
-                      "active:border-foreground-primary active:bg-stone-50",
+                      "group flex flex-col gap-4 border-b border-b-stone-300 pb-6 transition-colors ease-out",
                     )}
                   >
-                    <div className="flex items-center gap-x-2">
-                      <div className="text-xl font-bold">
-                        {zennArticle.title}
-                      </div>
-                      <ExternalLink className="shrink-0" />
-                    </div>
-                    <div className="mt-3 flex flex-col gap-2 sm:mt-4 md:flex-row md:items-center md:gap-4">
-                      <div className="flex gap-2">
-                        <Tag className="bg-[#cce3ff] transition-colors">
-                          Zenn
-                        </Tag>
-                        {isWithinOneMonth(zennArticle.isoDate) && (
-                          <Tag className="bg-foreground-primary text-white transition-colors">
-                            1ヶ月以内に投稿
-                          </Tag>
-                        )}
-                      </div>
+                    <div>
                       <p className="text-foreground-secondary text-sm">
                         {dateFormat(
                           "yyyy年MM月dd日 HH:mm",
                           zennArticle.isoDate,
                         )}
                       </p>
+                      <div
+                        className={cn(
+                          "flex items-start gap-x-2",
+                          "group-hover:text-brand-base group-active:text-brand-base",
+                        )}
+                      >
+                        <div className={cn("text-xl font-bold")}>
+                          {zennArticle.title}
+                        </div>
+                        <ExternalLink className="mt-1 shrink-0" />
+                      </div>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <Tag variant="zenn" className="transition-colors">
+                        Zenn
+                      </Tag>
+                      {isWithinOneMonth(zennArticle.isoDate) && (
+                        <Tag variant="withinOneMonth">1ヶ月以内に投稿</Tag>
+                      )}
                     </div>
                   </a>
                 </li>
