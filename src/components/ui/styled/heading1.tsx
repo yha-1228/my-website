@@ -1,13 +1,14 @@
-import { type ComponentPropsWithRef } from "react";
+import { type ElementType } from "react";
 
+import { type PropsWithAs } from "@/types/react";
 import { cn } from "@/utils/styling";
 
-function Heading1(props: ComponentPropsWithRef<"h1">) {
-  const { className, ...restProps } = props;
+function Heading1<T extends ElementType>(props: PropsWithAs<T, "h1">) {
+  const { as: Comp = "h1", className, ...restProps } = props;
 
   return (
-    <h1
-      className={cn("text-3xl leading-tight font-bold sm:text-4xl", className)}
+    <Comp
+      className={cn("text-2xl leading-tight font-bold sm:text-3xl", className)}
       {...restProps}
     />
   );

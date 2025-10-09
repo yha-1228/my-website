@@ -1,13 +1,15 @@
 import { ContactLinkBanner } from "./_contact-link-banner";
 import { HeroHeader } from "./_hero-header";
-import { Skills } from "./_skills";
+import { Langs } from "./_langs";
+import { Scope } from "./_scope";
 
 export default function Page() {
   return (
-    <>
+    <div className="flex flex-col gap-20 pb-20">
       <HeroHeader />
-      <Skills />
+      <Scope />
+      <Langs />
       <ContactLinkBanner />
-    </>
+    </div>
   );
 }

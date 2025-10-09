@@ -8,10 +8,10 @@ import { getProjects } from "@/api/endpoints/project";
 import { Button } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
+import { TextLink } from "@/components/ui/styled/text-link";
 import { SITE_TITLE } from "@/constants";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
 import { isDesign } from "@/features/project";
-import { SkillTag } from "@/features/skill-tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
@@ -67,34 +67,17 @@ export default async function Page() {
               <IntroductionDlList
                 rows={[
                   {
-                    header: "対応領域",
+                    header: "スキル概要",
                     data: (
-                      <div className="flex flex-wrap gap-2">
-                        {portfolioIntroduction.scope.split(", ").map((text) => (
-                          <SkillTag key={text}>{text}</SkillTag>
-                        ))}
-                      </div>
-                    ),
-                  },
-                  {
-                    header: "使用言語 / FW",
-                    data: (
-                      <div className="flex flex-wrap gap-2">
-                        {portfolioIntroduction.langAndFws
-                          .split(", ")
-                          .map((text) => (
-                            <SkillTag key={text}>{text}</SkillTag>
-                          ))}
-                      </div>
-                    ),
-                  },
-                  {
-                    header: "使用ツール",
-                    data: (
-                      <div className="flex flex-wrap gap-2">
-                        {portfolioIntroduction.tools.split(", ").map((text) => (
-                          <SkillTag key={text}>{text}</SkillTag>
-                        ))}
+                      <div>
+                        <TextLink
+                          as={Link}
+                          href={routes.index.href}
+                          withUnderline
+                        >
+                          ホーム
+                        </TextLink>
+                        をご覧ください。
                       </div>
                     ),
                   },

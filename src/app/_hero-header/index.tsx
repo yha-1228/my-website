@@ -10,7 +10,7 @@ import { cn } from "@/utils/styling";
 
 export function HeroHeader() {
   return (
-    <div className="pt-10 pb-12 sm:pt-14 sm:pb-18">
+    <div className="pt-10 sm:pt-14">
       <Container className="flex flex-col gap-12">
         <div className="flex flex-col gap-3 sm:flex-row">
           <div
