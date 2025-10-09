@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowRightLeft } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/styled/button";
@@ -10,36 +10,71 @@ import { cn } from "@/utils/styling";
 
 export function HeroHeader() {
   return (
-    <div className="pt-10 pb-12">
-      <Container>
-        <h1 className="text-2xl leading-[1.35] font-bold lg:text-4xl">
-          ユーザーフレンドリーで堅牢なWebを開発します。
-        </h1>
-        <div className="mt-3.5">
-          <p className="text-foreground-secondary lg:text-lg">
-            新卒でシステム開発企業に入社し、主にWebアプリ開発のフロントエンドを担当してきました。マークアップ技術とReactを利用して、ストレス無く快適に閲覧や操作を行える体験を提供できるよう心掛けています。
+    <div className="pt-10 pb-12 sm:pt-14 sm:pb-18">
+      <Container className="flex flex-col gap-12">
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <div
+            className={cn(
+              "border-brand-active border-2 border-dashed p-4 lg:p-5",
+              "text-brand-active flex items-center justify-center text-6xl font-bold tracking-tight sm:justify-start sm:text-5xl md:text-6xl lg:text-8xl",
+            )}
+          >
+            Design
+          </div>
+          <div
+            className={cn(
+              "lg:hidden",
+              "text-foreground-placeholder rotate-90 self-center",
+            )}
+          >
+            <ArrowRightLeft size={20} />
+          </div>
+          <div
+            className={cn(
+              "hidden lg:block",
+              "text-foreground-placeholder self-center",
+            )}
+          >
+            <ArrowRightLeft size={30} />
+          </div>
+
+          <div
+            className={cn(
+              "border-l-4 border-stone-300 bg-stone-100 p-4 lg:p-5",
+              "flex items-center justify-center font-mono text-4xl tracking-[-0.09em] text-[black]/80 sm:justify-start sm:text-5xl md:text-6xl lg:text-8xl",
+            )}
+          >
+            development
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <p className="lg:text-lg">
+            様々な案件のWebアプリケーションやWebサイトのプロジェクトに参画し、主にフロントエンド開発とUIデザインを担当してきました。ユーザーファーストかつ保守性に優れた体験を提供できるよう心掛けています。
           </p>
         </div>
 
-        <Button
-          as={Link}
-          size="lg"
-          href={routes.experience.href}
-          className={cn(
-            "mt-8 flex items-center",
-            "group lg:inline-flex lg:items-center lg:px-6 lg:text-lg",
-          )}
-        >
-          <span>職務経歴を見る</span>
-          <span
+        <div>
+          <Button
+            as={Link}
+            size="lg"
+            href={routes.experience.href}
             className={cn(
-              "ml-1 inline-block lg:ml-1.5",
-              "lg:transition-transform lg:duration-300 lg:group-hover:translate-x-1 lg:motion-reduce:transform-none",
+              "flex items-center",
+              "group lg:inline-flex lg:items-center lg:px-6 lg:text-lg",
             )}
           >
-            <ArrowRight aria-hidden="true" className="size-5" />
-          </span>
-        </Button>
+            <span>職務経歴を見る</span>
+            <span
+              className={cn(
+                "ml-1 inline-block lg:ml-1.5",
+                "lg:transition-transform lg:duration-300 lg:group-hover:translate-x-1 lg:motion-reduce:transform-none",
+              )}
+            >
+              <ArrowRight aria-hidden="true" className="size-5" />
+            </span>
+          </Button>
+        </div>
       </Container>
     </div>
   );
