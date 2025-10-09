@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/styled/button";
 import { Dialog } from "@/components/ui/styled/dialog";
 import { DialogTrigger } from "@/components/ui/unstyled/dialog";
 import { parseSearchParamsClient } from "@/features/experience/query";
+import { isDesign, isDev } from "@/features/project";
 import { SkillTag } from "@/features/skill-tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
@@ -15,10 +16,6 @@ import { cn } from "@/utils/styling";
 import { typeNameMap } from "./models";
 import { Timeline } from "./ui/timeline";
 import { ellipsisTextByComma, splitText } from "./utils";
-
-function someIncludes<T>(array: T[], searchElements: T[]): boolean {
-  return searchElements.some((el) => array.includes(el));
-}
 
 export function Client({ projects }: { projects: Project[] }) {
   const searchParams = useSearchParams();
@@ -41,10 +38,10 @@ export function Client({ projects }: { projects: Project[] }) {
         return project;
       }
       if (parsedSearchParams.role === "dev") {
-        return someIncludes(project.roles, ["開発", "FE開発"]);
+        return isDev(project);
       }
       if (parsedSearchParams.role === "design") {
-        return someIncludes(project.roles, ["UIデザイン"]);
+        return isDesign(project);
       }
     });
 
@@ -80,24 +77,26 @@ export function Client({ projects }: { projects: Project[] }) {
                     "sm:gap-1.5 sm:rounded-md sm:border sm:border-stone-200 sm:bg-stone-50 sm:px-5",
                   )}
                 >
-                  <div className="flex flex-col items-start gap-y-2 sm:flex-row">
-                    <span className="font-bold sm:w-20 sm:shrink-0">
-                      言語/FW
-                    </span>
-                    <span className="text-sm sm:hidden">
-                      {ellipsisTextByComma(project.langAndFws, 3)}
-                    </span>
-                    <div className="hidden flex-wrap items-center gap-2 sm:flex">
-                      {langAndFwsSpitted.texts.map((text, i) => (
-                        <SkillTag key={i}>{text}</SkillTag>
-                      ))}
-                      {langAndFwsSpitted.isOver && (
-                        <span className="text-foreground-secondary text-sm">
-                          etc.
-                        </span>
-                      )}
+                  {project.langAndFws && (
+                    <div className="flex flex-col items-start gap-y-2 sm:flex-row">
+                      <span className="font-bold sm:w-20 sm:shrink-0">
+                        言語/FW
+                      </span>
+                      <span className="text-sm sm:hidden">
+                        {ellipsisTextByComma(project.langAndFws, 3)}
+                      </span>
+                      <div className="hidden flex-wrap items-center gap-2 sm:flex">
+                        {langAndFwsSpitted.texts.map((text, i) => (
+                          <SkillTag key={i}>{text}</SkillTag>
+                        ))}
+                        {langAndFwsSpitted.isOver && (
+                          <span className="text-foreground-secondary text-sm">
+                            etc.
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )}
                   <div className="flex flex-col items-start gap-y-0.5 sm:flex-row">
                     <span className="font-bold sm:w-20 sm:shrink-0">
                       ツール

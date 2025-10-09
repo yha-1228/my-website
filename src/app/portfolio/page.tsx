@@ -10,6 +10,7 @@ import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { SITE_TITLE } from "@/constants";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
+import { isDesign } from "@/features/project";
 import { SkillTag } from "@/features/skill-tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
@@ -47,10 +48,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const [portfolioIntroduction, { contents: portfolioContents }] =
-    await Promise.all([
-      getPortfolioIntroduction(),
-      getProjects({ filters: "hasDesignPortfolio[equals]true" }),
-    ]);
+    await Promise.all([getPortfolioIntroduction(), getProjects()]);
 
   return (
     <div className="py-14">
@@ -146,7 +144,9 @@ export default async function Page() {
               >
                 <span>
                   デザインの職務経歴
-                  <span className="palt">（{portfolioContents.length}件）</span>
+                  <span className="palt">
+                    （{portfolioContents.filter(isDesign).length}件）
+                  </span>
                   を見る
                 </span>
                 <span
