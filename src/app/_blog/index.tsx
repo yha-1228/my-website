@@ -1,4 +1,3 @@
-import { isWithinInterval, subMonths } from "date-fns";
 import { ChevronRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
@@ -7,24 +6,12 @@ import { ScrollbarHiddenIfTouchDevice } from "@/components/ui/headless/scrollbar
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { TextLink } from "@/components/ui/styled/text-link";
-import { dateFormat } from "@/features/blog/date";
+import { dateFormat, isWithinOneMonth } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
 const LIMIT = 3;
-
-/**
- * `targetDateISO`が`baseDate`から一ヶ月以内かどうか判定する。
- */
-function isWithinOneMonth(targetDateISO: string, baseDate = new Date()) {
-  const targetDate = new Date(targetDateISO);
-
-  return isWithinInterval(targetDate, {
-    start: subMonths(baseDate, 1),
-    end: baseDate,
-  });
-}
 
 export async function Blog() {
   const zennArticles = (await getZennArticles()).filter(

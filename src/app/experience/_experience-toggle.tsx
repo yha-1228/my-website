@@ -1,12 +1,13 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 import {
   type JobCategory,
   parseSearchParamsClient,
   type Role,
 } from "@/features/experience/query";
+import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { entriesOf } from "@/utils/object";
 import { cn } from "@/utils/styling";
 
@@ -15,26 +16,6 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "./_experience-content/ui/toggle-group";
-
-function useUpdateSearchParams() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const updateSearchParams = (name: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set(name, value);
-    const queryString = params.toString();
-
-    const href = `${pathname}?${queryString}`;
-
-    router.replace(href, { scroll: false });
-  };
-
-  return updateSearchParams;
-}
-
-// ----------------------------------------
 
 const jobCategoryLabelMap = {
   all: "すべて",
@@ -70,6 +51,7 @@ export function ExperienceToggle({ className }: { className?: string }) {
       )}
     >
       <div className="flex flex-col gap-1.5">
+        {/* TODO: ベタ書きのID管理を改善する */}
         <div className="sr-only font-bold md:not-sr-only" id="1">
           参画
         </div>
@@ -96,6 +78,7 @@ export function ExperienceToggle({ className }: { className?: string }) {
         </ToggleGroup>
       </div>
       <div className="flex flex-col gap-1.5">
+        {/* TODO: ベタ書きのID管理を改善する */}
         <div className="sr-only font-bold md:not-sr-only" id="2">
           役割
         </div>

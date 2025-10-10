@@ -6,12 +6,12 @@ import { cn } from "@/utils/styling";
 
 import { skillWords } from "./data";
 
-interface IntroductionDlProps {
+interface IntroductionSectionProps {
   heading: string;
   children: ReactNode;
 }
 
-function IntroductionSection({ heading, children }: IntroductionDlProps) {
+function IntroductionSection({ heading, children }: IntroductionSectionProps) {
   return (
     <section
       className={cn(

@@ -74,61 +74,20 @@ const [useTabsContext, TabsContext] = getContextAndHook<UseTabsReturn>(
 /**
  * @example
  * ```tsx
- * function useUpdateSearchParams() {
- *   const router = useRouter();
- *   const pathname = usePathname();
- *   const searchParams = useSearchParams();
- *
- *   const updateSearchParams = (name: string, value: string) => {
- *     const params = new URLSearchParams(searchParams.toString());
- *     params.set(name, value);
- *     const queryString = params.toString();
- *
- *     const href = `${pathname}?${queryString}`;
- *
- *     router.replace(href, { scroll: false });
- *   };
- *
- *   return updateSearchParams;
- * }
- *
- * const tabValues = ["apple", "banana", "melon"] as const;
- *
- * function parseSearchParams(searchParams: ReadonlyURLSearchParams) {
- *   const tabParam = searchParams.get("tab");
- *   const tabParamParseResult = z.enum(tabValues).safeParse(tabParam);
- *
- *   return {
- *     tab: tabParamParseResult.success ? tabParamParseResult.data : tabValues[0],
- *   };
- * }
- *
- * export default function Page() {
- *   const searchParams = useSearchParams();
- *   const parsedSearchParams = parseSearchParams(searchParams);
- *
- *   const updateSearchParams = useUpdateSearchParams();
- *
+ * function Example() {
  *   return (
- *     <div className="mx-auto max-w-[600px]">
- *       <Tabs
- *         defaultIndex={tabValues.indexOf(parsedSearchParams.tab)}
- *         onTabChange={(index) => {
- *           updateSearchParams("tab", tabValues[index]);
- *         }}
- *       >
- *         <TabList className="*:data-[selected=true]:font-bold">
- *           <Tab>Apple</Tab>
- *           <Tab>Banana</Tab>
- *           <Tab>Melon</Tab>
- *         </TabList>
- *         <PanelList>
- *           <Panel>Apple is Lorem ipsum dolor sit.</Panel>
- *           <Panel>Banana is Lorem ipsum dolor sit.</Panel>
- *           <Panel>Melon is Lorem ipsum dolor sit.</Panel>
- *         </PanelList>
- *       </Tabs>
- *     </div>
+ *     <Tabs>
+ *       <TabList className="*:data-[selected=true]:font-bold">
+ *         <Tab>Apple</Tab>
+ *         <Tab>Banana</Tab>
+ *         <Tab>Melon</Tab>
+ *       </TabList>
+ *       <PanelList>
+ *         <Panel>Apple is Lorem ipsum dolor sit.</Panel>
+ *         <Panel>Banana is Lorem ipsum dolor sit.</Panel>
+ *         <Panel>Melon is Lorem ipsum dolor sit.</Panel>
+ *       </PanelList>
+ *     </Tabs>
  *   );
  * }
  * ```
@@ -138,9 +97,9 @@ function Tabs(props: TabsProps) {
   const value = useTabs(useTabsProps);
 
   return (
-    <TabsContext.Provider value={value}>
+    <TabsContext value={value}>
       <div className={className}>{children}</div>
-    </TabsContext.Provider>
+    </TabsContext>
   );
 }
 
@@ -173,7 +132,7 @@ function TabList(props: TabListProps) {
   return (
     <div role="tablist" aria-orientation="horizontal" {...rest} ref={ref}>
       {Children.map(children, (children, index) => (
-        <TabContext.Provider
+        <TabContext
           key={index}
           value={{
             index,
@@ -183,7 +142,7 @@ function TabList(props: TabListProps) {
           }}
         >
           {children}
-        </TabContext.Provider>
+        </TabContext>
       ))}
     </div>
   );
@@ -292,13 +251,17 @@ const [usePanelContext, PanelContext] = getContextAndHook<PanelContextValue>(
   "PanelList",
 );
 
-function PanelList({ children }: { children: ReactNode }) {
+interface PanelListProps {
+  children: ReactNode;
+}
+
+function PanelList({ children }: PanelListProps) {
   return (
     <>
       {Children.map(children, (children, index) => (
-        <PanelContext.Provider key={index} value={{ index }}>
+        <PanelContext key={index} value={{ index }}>
           {children}
-        </PanelContext.Provider>
+        </PanelContext>
       ))}
     </>
   );
@@ -333,4 +296,15 @@ function Panel(props: PanelProps) {
 // export
 // ----------------------------------------
 
-export { Tabs, TabList, Tab, PanelList, Panel };
+export {
+  Tabs,
+  type TabsProps,
+  TabList,
+  type TabListProps,
+  Tab,
+  type TabProps,
+  PanelList,
+  type PanelListProps,
+  Panel,
+  type PanelProps,
+};

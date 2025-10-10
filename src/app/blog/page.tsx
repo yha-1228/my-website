@@ -1,4 +1,3 @@
-import { isWithinInterval, subMonths } from "date-fns";
 import { ExternalLink } from "lucide-react";
 import { type Metadata } from "next";
 
@@ -6,22 +5,10 @@ import { getZennArticles } from "@/api/endpoints/blog";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { SITE_TITLE } from "@/constants";
-import { dateFormat } from "@/features/blog/date";
+import { dateFormat, isWithinOneMonth } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
-
-/**
- * `targetDateISO`が`baseDate`から一ヶ月以内かどうか判定する。
- */
-function isWithinOneMonth(targetDateISO: string, baseDate = new Date()) {
-  const targetDate = new Date(targetDateISO);
-
-  return isWithinInterval(targetDate, {
-    start: subMonths(baseDate, 1),
-    end: baseDate,
-  });
-}
 
 export const metadata: Metadata = {
   title: `${routes.blog.label} | ${SITE_TITLE}`,

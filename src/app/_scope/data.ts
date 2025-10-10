@@ -1,11 +1,13 @@
 interface SkillDetail {
   category: string;
+  kikan: string;
   items: string[];
 }
 
 export const skillDetails = [
   {
-    category: "フロントエンド開発 / 約6年",
+    category: "フロントエンド開発",
+    kikan: "約6年",
     items: [
       "マークアップ",
       "コンポーネントライブラリの構築",
@@ -16,7 +18,8 @@ export const skillDetails = [
     ],
   },
   {
-    category: "デザイン / 約1.8年",
+    category: "デザイン",
+    kikan: "約1.8年",
     items: [
       "UIデザイン",
       "デザインシステム構築",
