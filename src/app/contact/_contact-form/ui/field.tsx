@@ -5,59 +5,31 @@ import { cn } from "@/utils/styling";
 // common
 // ----------------------------------------
 
-const baseClassName =
-  "placeholder:text-foreground-placeholder w-full appearance-none rounded-touchable px-3 disabled:bg-stone-100 disabled:text-foreground-primary/70 disabled:placeholder:text-foreground-placeholder disabled:cursor-not-allowed transition-[background-color] duration-200 ease-out";
-
-const invalidClassNames = {
-  false: "border border-stone-400",
-  true: "border border-danger-base/40 bg-danger-background/50",
-} as const;
+const baseClassName = cn(
+  "w-full appearance-none rounded-touchable px-3 transition-[background-color] duration-200 ease-out border border-stone-400",
+  "disabled:bg-stone-100 disabled:text-foreground-primary/70 disabled:placeholder:text-foreground-placeholder disabled:cursor-not-allowed",
+  "placeholder:text-foreground-placeholder",
+  "data-[invalid=true]:border-danger-base/40 data-[invalid=true]:bg-danger-background/50",
+);
 
 // ----------------------------------------
 
-interface InputProps extends ComponentPropsWithRef<"input"> {
-  /**
-   * @default false
-   */
-  invalid?: boolean;
-}
-
-function Input(props: InputProps) {
-  const { invalid = false, className, ...restProps } = props;
+function Input(props: ComponentPropsWithRef<"input">) {
+  const { className, ...restProps } = props;
 
   return (
-    <input
-      className={cn(
-        baseClassName,
-        invalidClassNames[`${invalid}`],
-        "h-10",
-        className,
-      )}
-      {...restProps}
-    />
+    <input className={cn(baseClassName, "h-10", className)} {...restProps} />
   );
 }
 
 // ----------------------------------------
 
-interface TextareaProps extends ComponentPropsWithRef<"textarea"> {
-  /**
-   * @default false
-   */
-  invalid?: boolean;
-}
-
-function Textarea(props: TextareaProps) {
-  const { invalid = false, className, ...restProps } = props;
+function Textarea(props: ComponentPropsWithRef<"textarea">) {
+  const { className, ...restProps } = props;
 
   return (
     <textarea
-      className={cn(
-        baseClassName,
-        invalidClassNames[`${invalid}`],
-        "block py-2.5 leading-normal",
-        className,
-      )}
+      className={cn(baseClassName, "block py-2.5 leading-normal", className)}
       {...restProps}
     />
   );
@@ -90,11 +62,4 @@ function InputLengthCounter(props: InputLengthCounterProps) {
 
 // ----------------------------------------
 
-export {
-  Input,
-  type InputProps,
-  Textarea,
-  type TextareaProps,
-  InputLengthCounter,
-  type InputLengthCounterProps,
-};
+export { Input, Textarea, InputLengthCounter, type InputLengthCounterProps };

@@ -174,101 +174,87 @@ export function ContactForm({ className }: { className?: string }) {
       >
         <div className="flex flex-col gap-y-6 md:grid md:grid-cols-3 md:gap-x-4 md:gap-y-0">
           <FieldProvider isError={showError("name", formState)}>
-            {({ isError }) => (
-              <div className="flex flex-col gap-2">
-                <FieldLabel as={Label} data-key="name" required>
-                  {keyLabelMap.name}
-                </FieldLabel>
-                <Field
-                  as={Input}
-                  type="text"
-                  name="name"
-                  placeholder="田中 太郎"
-                  value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  invalid={isError}
-                />
-                <FieldError as={FormErrorMessage}>{errors.name}</FieldError>
-              </div>
-            )}
-          </FieldProvider>
-
-          <FieldProvider isError={showError("email", formState)}>
-            {({ isError }) => (
-              <div className="flex flex-col gap-2 md:col-span-2">
-                <FieldLabel as={Label} data-key="email" required>
-                  {keyLabelMap.email}
-                </FieldLabel>
-                <Field
-                  as={Input}
-                  type="email"
-                  name="email"
-                  placeholder="email@example.com"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  invalid={isError}
-                />
-                <FieldError as={FormErrorMessage}>{errors.email}</FieldError>
-              </div>
-            )}
-          </FieldProvider>
-        </div>
-
-        <FieldProvider isError={showError("companyName", formState)}>
-          {({ isError }) => (
             <div className="flex flex-col gap-2">
-              <FieldLabel as={Label} data-key="companyName">
-                {keyLabelMap.companyName}
+              <FieldLabel as={Label} data-key="name" required>
+                {keyLabelMap.name}
               </FieldLabel>
               <Field
                 as={Input}
                 type="text"
-                name="companyName"
-                placeholder="株式会社ABC / 自営業"
-                value={values.companyName}
+                name="name"
+                placeholder="田中 太郎"
+                value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                invalid={isError}
               />
-              <FieldError as={FormErrorMessage}>
-                {errors.companyName}
-              </FieldError>
+              <FieldError as={FormErrorMessage}>{errors.name}</FieldError>
             </div>
-          )}
+          </FieldProvider>
+
+          <FieldProvider isError={showError("email", formState)}>
+            <div className="flex flex-col gap-2 md:col-span-2">
+              <FieldLabel as={Label} data-key="email" required>
+                {keyLabelMap.email}
+              </FieldLabel>
+              <Field
+                as={Input}
+                type="email"
+                name="email"
+                placeholder="email@example.com"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <FieldError as={FormErrorMessage}>{errors.email}</FieldError>
+            </div>
+          </FieldProvider>
+        </div>
+
+        <FieldProvider isError={showError("companyName", formState)}>
+          <div className="flex flex-col gap-2">
+            <FieldLabel as={Label} data-key="companyName">
+              {keyLabelMap.companyName}
+            </FieldLabel>
+            <Field
+              as={Input}
+              type="text"
+              name="companyName"
+              placeholder="株式会社ABC / 自営業"
+              value={values.companyName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <FieldError as={FormErrorMessage}>{errors.companyName}</FieldError>
+          </div>
         </FieldProvider>
 
         <FieldProvider isError={showError("message", formState)}>
-          {({ isError }) => (
-            <div className="flex flex-col gap-2">
-              <FieldLabel as={Label} data-key="message" required>
-                {keyLabelMap.message}
-              </FieldLabel>
-              <Field
-                as={Textarea}
-                name="message"
-                value={values.message}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                rows={6}
-                invalid={isError}
-              />
-              <div>
-                <FieldDescription
-                  as={FormHelperText}
-                  className="flex justify-between"
-                >
-                  <span>10文字以上</span>
-                  <InputLengthCounter
-                    currentLength={values.message.length}
-                    maxLength={MESSAGE_MAX_LENGTH}
-                  />
-                </FieldDescription>
-                <FieldError as={FormErrorMessage}>{errors.message}</FieldError>
-              </div>
+          <div className="flex flex-col gap-2">
+            <FieldLabel as={Label} data-key="message" required>
+              {keyLabelMap.message}
+            </FieldLabel>
+            <Field
+              as={Textarea}
+              name="message"
+              value={values.message}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              rows={6}
+            />
+            <div>
+              <FieldDescription
+                as={FormHelperText}
+                className="flex justify-between"
+              >
+                <span>10文字以上</span>
+                <InputLengthCounter
+                  currentLength={values.message.length}
+                  maxLength={MESSAGE_MAX_LENGTH}
+                />
+              </FieldDescription>
+              <FieldError as={FormErrorMessage}>{errors.message}</FieldError>
             </div>
-          )}
+          </div>
         </FieldProvider>
 
         {Object.keys(errors).length > 0 && formState.submitPressedWithError && (

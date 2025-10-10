@@ -37,7 +37,7 @@ function useField({ isError }: UseFieldProps) {
     htmlFor: fieldId,
   } as const satisfies ComponentProps<"label">;
 
-  const fieldProps = {
+  const baseFieldProps = {
     id: fieldId,
     "aria-invalid": isError || undefined,
     "aria-describedby":
@@ -45,6 +45,11 @@ function useField({ isError }: UseFieldProps) {
         .filter(Boolean)
         .join(" ") || undefined,
   } as const satisfies CommonHTMLProps;
+
+  const fieldProps = {
+    ...baseFieldProps,
+    "data-invalid": isError || undefined,
+  } as const;
 
   const descriptionProps = {
     id: descriptionId,
