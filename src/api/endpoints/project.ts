@@ -1,6 +1,9 @@
 import { type MicroCMSQueries } from "microcms-js-sdk";
 
-import { createListResponseSchema, type ListResponse } from "../models/_zod";
+import {
+  createListResponseSchema,
+  type ListResponse,
+} from "../models/_microcms";
 import { type Project, projectSchema } from "../models/project";
 import { client } from "./_microcms";
 
