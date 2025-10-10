@@ -24,8 +24,8 @@ function IntroductionSection({ heading, children }: IntroductionDlProps) {
       </Heading1>
       <div
         className={cn(
-          "grid gap-x-9 gap-y-1.5",
-          "grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
+          "grid gap-x-4 gap-y-1.5 sm:gap-x-9",
+          "grid-cols-2 md:grid-cols-3",
           "w-full leading-[1.6]",
         )}
       >
@@ -37,7 +37,6 @@ function IntroductionSection({ heading, children }: IntroductionDlProps) {
 
 const baseItemClassName = cn(
   "inline-flex items-end justify-between gap-2 pb-1",
-  "*:inline-block",
   "border-b border-b-stone-300",
 );
 
@@ -50,8 +49,8 @@ export function Langs() {
             .filter((skillWord) => skillWord.category === "langOrFw")
             .map(({ label, kikan }) => (
               <span className={baseItemClassName} key={label}>
-                <span className="text-xl">{label}</span>
-                <span className="text-foreground-secondary text-sm leading-[2.3]">
+                <span className="inline-block text-lg sm:text-xl">{label}</span>
+                <span className="text-foreground-secondary hidden text-sm leading-[2.3] sm:inline-block">
                   {kikan}
                 </span>
               </span>
@@ -63,9 +62,12 @@ export function Langs() {
         <IntroductionSection heading="ツール">
           {skillWords
             .filter((skillWord) => skillWord.category === "tools")
-            .map(({ label }) => (
-              <span className={baseItemClassName} key={label}>
-                <span className="text-xl">{label}</span>
+            .map(({ label, extraClassName }) => (
+              <span
+                className={cn(baseItemClassName, extraClassName)}
+                key={label}
+              >
+                <span className="inline-block text-lg sm:text-xl">{label}</span>
               </span>
             ))}
         </IntroductionSection>

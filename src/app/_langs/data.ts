@@ -1,8 +1,10 @@
+import { cn } from "@/utils/styling";
+
 type SkillWord =
   | { label: string; kikan: string; category: "langOrFw" }
-  | { label: string; category: "tools" };
+  | { label: string; category: "tools"; extraClassName?: string };
 
-export const skillWords = [
+export const skillWords: SkillWord[] = [
   { category: "langOrFw", label: "TypeScript", kikan: "約4年" },
   { category: "langOrFw", label: "React", kikan: "約4年" },
   { category: "langOrFw", label: "Next.js", kikan: "約2年" },
@@ -16,7 +18,12 @@ export const skillWords = [
   { category: "langOrFw", label: "Express", kikan: "約1年半強" },
   { category: "langOrFw", label: "SQL", kikan: "約2年" },
 
-  { category: "tools", label: "Visual Studio Code" },
+  { category: "tools", label: "VS Code", extraClassName: cn("sm:hidden") },
+  {
+    category: "tools",
+    label: "Visual Studio Code",
+    extraClassName: cn("hidden sm:inline"),
+  },
   { category: "tools", label: "Cursor" },
   { category: "tools", label: "Figma" },
   { category: "tools", label: "draw.io" },
@@ -28,4 +35,4 @@ export const skillWords = [
   { category: "tools", label: "Redmine" },
   { category: "tools", label: "GitHub" },
   { category: "tools", label: "Bitbucket" },
-] as const satisfies SkillWord[];
+];
