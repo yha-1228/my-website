@@ -7,33 +7,36 @@ import { cn } from "@/utils/styling";
 import { skillWords } from "./data";
 
 interface IntroductionDlProps {
-  title: string;
-  description: ReactNode;
+  heading: string;
+  children: ReactNode;
 }
 
-function IntroductionDl({ title, description }: IntroductionDlProps) {
+function IntroductionSection({ heading, children }: IntroductionDlProps) {
   return (
-    <dl className="flex flex-col gap-10 lg:flex-row lg:gap-0">
-      <Heading1
-        as="dt"
-        className="shrink-0 text-left leading-[1.1] whitespace-nowrap lg:w-72"
-      >
-        {title}
+    <section
+      className={cn(
+        "border-t pt-8",
+        "flex flex-col gap-10 lg:flex-row lg:gap-0",
+      )}
+    >
+      <Heading1 className="shrink-0 text-left leading-[1.1] whitespace-nowrap lg:w-72">
+        {heading}
       </Heading1>
-      <dd
+      <div
         className={cn(
-          "flex flex-wrap gap-x-9 gap-y-1.5 align-top leading-[1.6]",
+          "grid gap-x-9 gap-y-1.5",
+          "grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
+          "w-full leading-[1.6]",
         )}
       >
-        {description}
-      </dd>
-    </dl>
+        {children}
+      </div>
+    </section>
   );
 }
 
 const baseItemClassName = cn(
-  "inline-flex items-end gap-2 pb-1",
-  "w-full md:w-[200px]",
+  "inline-flex items-end justify-between gap-2 pb-1",
   "*:inline-block",
   "border-b border-b-stone-300",
 );
@@ -42,47 +45,30 @@ export function Langs() {
   return (
     <>
       <Container>
-        <section className="border-t pt-8">
-          <IntroductionDl
-            title="言語 / FW"
-            description={skillWords
-              .filter(
-                ({ category }) => category === "langs" || category === "fws",
-              )
-              .map(({ label }) => {
-                const splittedLabel = label.split(":");
-
-                const namePart = splittedLabel[0];
-                const kikanPart = splittedLabel[1]?.trim();
-
-                return (
-                  <span className={baseItemClassName} key={label}>
-                    <span className="text-xl">{namePart}</span>
-                    {kikanPart && (
-                      <span className="text-foreground-secondary text-sm leading-[2.3]">
-                        {kikanPart}
-                      </span>
-                    )}
-                  </span>
-                );
-              })}
-          />
-        </section>
+        <IntroductionSection heading="言語 / FW">
+          {skillWords
+            .filter((skillWord) => skillWord.category === "langOrFw")
+            .map(({ label, kikan }) => (
+              <span className={baseItemClassName} key={label}>
+                <span className="text-xl">{label}</span>
+                <span className="text-foreground-secondary text-sm leading-[2.3]">
+                  {kikan}
+                </span>
+              </span>
+            ))}
+        </IntroductionSection>
       </Container>
 
       <Container>
-        <section className="border-t pt-8">
-          <IntroductionDl
-            title="ツール"
-            description={skillWords
-              .filter(({ category }) => category === "tools")
-              .map(({ label }) => (
-                <span className={baseItemClassName} key={label}>
-                  <span className="text-xl">{label}</span>
-                </span>
-              ))}
-          />
-        </section>
+        <IntroductionSection heading="ツール">
+          {skillWords
+            .filter((skillWord) => skillWord.category === "tools")
+            .map(({ label }) => (
+              <span className={baseItemClassName} key={label}>
+                <span className="text-xl">{label}</span>
+              </span>
+            ))}
+        </IntroductionSection>
       </Container>
     </>
   );
