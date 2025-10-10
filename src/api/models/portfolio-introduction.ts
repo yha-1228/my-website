@@ -5,10 +5,6 @@ export const portfolioIntroductionSchema = z.object({
   updatedAt: z.string(),
   publishedAt: z.string(),
   revisedAt: z.string(),
-  scope: z.string(),
-  langAndFws: z.string(),
-  tools: z.string(),
-  // ---
   overview: z.string(),
   tsuyomi: z.string(),
   kongo: z.string(),
