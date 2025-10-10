@@ -1,13 +1,13 @@
 import {
   type ComponentProps,
   type ElementType,
+  type ReactNode,
   useEffect,
   useId,
   useState,
 } from "react";
 
 import {
-  type ChildAsFunction,
   type CommonHTMLProps,
   type ElementTypeOf,
   type PropsWithAs,
@@ -72,18 +72,14 @@ const [useFieldContext, FieldContext] = getContextAndHook<UseFieldReturn>(
 // ---
 
 interface FieldProviderProps extends UseFieldProps {
-  children?: ChildAsFunction<UseFieldProps>;
+  children: ReactNode;
 }
 
 function FieldProvider(props: FieldProviderProps) {
   const { children, ...restProps } = props;
   const value = useField(restProps);
 
-  return (
-    <FieldContext value={value}>
-      {children instanceof Function ? children(value) : children}
-    </FieldContext>
-  );
+  return <FieldContext value={value}>{children}</FieldContext>;
 }
 // ---
 
