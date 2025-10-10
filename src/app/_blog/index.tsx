@@ -82,9 +82,7 @@ export async function Blog() {
                 </div>
 
                 <div className="flex gap-2">
-                  <Tag variant="zenn" className="transition-colors">
-                    Zenn
-                  </Tag>
+                  <Tag variant="zenn">Zenn</Tag>
                   {isWithinOneMonth(zennArticle.isoDate) && (
                     <Tag variant="withinOneMonth">1ヶ月以内に投稿</Tag>
                   )}
