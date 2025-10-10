@@ -85,7 +85,7 @@ export default async function Page() {
                 className={cn(
                   "flex items-center",
                   "group lg:inline-flex lg:items-center lg:px-6 lg:text-lg",
-                  "w-full sm:w-1/2",
+                  "w-full md:w-1/2",
                 )}
               >
                 <span>
