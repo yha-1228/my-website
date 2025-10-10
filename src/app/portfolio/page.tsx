@@ -15,30 +15,26 @@ import { isDesign } from "@/features/project";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
-function IntroductionDlList({
-  className,
-  rows,
+function IntroductionDl({
+  header,
+  children,
 }: {
-  className?: string;
-  rows: Array<{ header: string; data: ReactNode }>;
+  header: string;
+  children: ReactNode;
 }) {
   return (
-    <div
+    <dl
       className={cn(
-        "border-b border-b-stone-300 py-8 first:border-t first:border-t-stone-300",
-        "flex flex-col gap-8",
-        className,
+        "flex flex-col gap-4 lg:flex-row lg:gap-0",
+        "border-b border-b-stone-300 py-8",
+        "first:border-t first:border-t-stone-300",
       )}
     >
-      {rows.map((row, index) => (
-        <dl key={index} className="flex flex-col gap-4 lg:flex-row lg:gap-0">
-          <dt className="shrink-0 text-left text-xl leading-[1.3] font-bold whitespace-nowrap lg:w-[196px]">
-            {row.header}
-          </dt>
-          <dd className="align-top leading-[1.6]">{row.data}</dd>
-        </dl>
-      ))}
-    </div>
+      <dt className="shrink-0 text-left text-xl leading-[1.3] font-bold whitespace-nowrap lg:w-[196px]">
+        {header}
+      </dt>
+      <dd className="align-top leading-[1.6]">{children}</dd>
+    </dl>
   );
 }
 
@@ -64,54 +60,21 @@ export default async function Page() {
           </div>
           <div className="mt-10 flex flex-col gap-8">
             <div>
-              <IntroductionDlList
-                rows={[
-                  {
-                    header: "スキル概要",
-                    data: (
-                      <div>
-                        <TextLink
-                          as={Link}
-                          href={routes.index.href}
-                          withUnderline
-                        >
-                          ホーム
-                        </TextLink>
-                        をご覧ください。
-                      </div>
-                    ),
-                  },
-                ]}
-              />
-
-              <IntroductionDlList
-                rows={[
-                  {
-                    header: "自己紹介",
-                    data: (
-                      <HtmlRenderer html={portfolioIntroduction.overview} />
-                    ),
-                  },
-                ]}
-              />
-
-              <IntroductionDlList
-                rows={[
-                  {
-                    header: "強み",
-                    data: <HtmlRenderer html={portfolioIntroduction.tsuyomi} />,
-                  },
-                ]}
-              />
-
-              <IntroductionDlList
-                rows={[
-                  {
-                    header: "今後の意向",
-                    data: <HtmlRenderer html={portfolioIntroduction.kongo} />,
-                  },
-                ]}
-              />
+              <IntroductionDl header="スキル概要">
+                <TextLink as={Link} href={routes.index.href} withUnderline>
+                  ホーム
+                </TextLink>
+                をご覧ください。
+              </IntroductionDl>
+              <IntroductionDl header="自己紹介">
+                <HtmlRenderer html={portfolioIntroduction.overview} />
+              </IntroductionDl>
+              <IntroductionDl header="強み">
+                <HtmlRenderer html={portfolioIntroduction.tsuyomi} />
+              </IntroductionDl>
+              <IntroductionDl header="今後の意向">
+                <HtmlRenderer html={portfolioIntroduction.kongo} />
+              </IntroductionDl>
             </div>
 
             <div className="flex flex-col items-center gap-2">
