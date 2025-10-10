@@ -49,7 +49,7 @@ export function Langs() {
             .filter((skillWord) => skillWord.category === "langOrFw")
             .map(({ label, kikan }) => (
               <span className={baseItemClassName} key={label}>
-                <span className="inline-block text-lg sm:text-xl">{label}</span>
+                <span className="inline-block text-xl">{label}</span>
                 <span className="text-foreground-secondary hidden text-sm leading-[2.3] sm:inline-block">
                   {kikan}
                 </span>
@@ -67,7 +67,7 @@ export function Langs() {
                 className={cn(baseItemClassName, extraClassName)}
                 key={label}
               >
-                <span className="inline-block text-lg sm:text-xl">{label}</span>
+                <span className="inline-block text-xl">{label}</span>
               </span>
             ))}
         </IntroductionSection>
