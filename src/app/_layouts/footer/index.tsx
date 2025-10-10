@@ -38,7 +38,7 @@ export function Footer({ className }: FooterProps) {
     <footer className={cn("pt-10 pb-14", className)}>
       <Container>
         <div className="flex justify-between">
-          <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-y-0 md:space-x-4">
+          <ul className="flex w-1/2 flex-col gap-y-2.5 md:w-auto md:flex-row md:gap-x-4 md:gap-y-0">
             {myExternalLinks.map((link) => (
               <li key={link.href}>
                 <ExternalTextLink
@@ -50,7 +50,7 @@ export function Footer({ className }: FooterProps) {
               </li>
             ))}
           </ul>
-          <ul className="w-1/2 space-y-2.5 md:flex md:w-auto md:space-y-0 md:space-x-4">
+          <ul className="flex w-1/2 flex-col gap-y-2.5 md:w-auto md:flex-row md:gap-x-4 md:gap-y-0">
             {Object.values(routes)
               .filter((route) => route.hierarchy === 1)
               .map((route) => (

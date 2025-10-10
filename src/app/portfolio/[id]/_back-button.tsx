@@ -10,7 +10,7 @@ export function BackButton() {
   return (
     <TextLink
       as="button"
-      className="inline-flex items-center space-x-1"
+      className="inline-flex items-center gap-1"
       onClick={() => {
         router.back();
       }}

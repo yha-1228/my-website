@@ -20,7 +20,7 @@ export function ExternalTextLink<TAs extends ElementType>(
     <TextLink
       target="_blank"
       rel="noopener noreferrer"
-      className={cn("inline-flex items-center space-x-1", className)}
+      className={cn("inline-flex items-center gap-1", className)}
       {...restProps}
     >
       <span>{children}</span>

@@ -117,9 +117,9 @@ export function Client({ projects }: { projects: Project[] }) {
                   </div>
                 </div>
                 <div
-                  className="space-y-1.5 pt-3 text-sm sm:text-base"
+                  className="flex flex-col gap-1.5 pt-3 text-sm sm:text-base"
                   dangerouslySetInnerHTML={{
-                    __html: project.descriptionContent || "",
+                    __html: project.descriptionContent,
                   }}
                 />
                 {project.hasDesignPortfolio && (

@@ -45,7 +45,7 @@ export default async function Page({ params }: Props) {
     <>
       <LogoutBanner />
       <div className="py-14">
-        <Container className="flex flex-col gap-8 md:max-w-(--breakpoint-md)">
+        <Container className="flex flex-col items-start gap-8 md:max-w-(--breakpoint-md)">
           <BackButton />
 
           <article>

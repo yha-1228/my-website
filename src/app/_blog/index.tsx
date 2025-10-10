@@ -39,7 +39,7 @@ export async function Blog() {
           <TextLink
             as={Link}
             href={routes.blog.href}
-            className="inline-flex items-center space-x-1"
+            className="inline-flex items-center gap-1"
           >
             <span>もっと見る</span>
             <ChevronRight />

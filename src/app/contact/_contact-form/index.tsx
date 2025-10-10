@@ -169,13 +169,13 @@ export function ContactForm({ className }: { className?: string }) {
       <Form
         action={handleSubmit}
         allDisabled={submitMutation.pending}
-        className="space-y-6"
+        className="flex flex-col gap-6"
         noValidate
       >
-        <div className="space-y-6 md:flex md:space-y-0 md:space-x-4">
+        <div className="flex flex-col gap-y-6 md:grid md:grid-cols-3 md:gap-x-4 md:gap-y-0">
           <FieldProvider isError={showError("name", formState)}>
             {({ isError }) => (
-              <div className="space-y-2 md:w-1/3">
+              <div className="flex flex-col gap-2">
                 <FieldLabel as={Label} data-key="name" required>
                   {keyLabelMap.name}
                 </FieldLabel>
@@ -196,7 +196,7 @@ export function ContactForm({ className }: { className?: string }) {
 
           <FieldProvider isError={showError("email", formState)}>
             {({ isError }) => (
-              <div className="space-y-2 md:w-2/3">
+              <div className="flex flex-col gap-2 md:col-span-2">
                 <FieldLabel as={Label} data-key="email" required>
                   {keyLabelMap.email}
                 </FieldLabel>
@@ -218,7 +218,7 @@ export function ContactForm({ className }: { className?: string }) {
 
         <FieldProvider isError={showError("companyName", formState)}>
           {({ isError }) => (
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <FieldLabel as={Label} data-key="companyName">
                 {keyLabelMap.companyName}
               </FieldLabel>
@@ -241,7 +241,7 @@ export function ContactForm({ className }: { className?: string }) {
 
         <FieldProvider isError={showError("message", formState)}>
           {({ isError }) => (
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <FieldLabel as={Label} data-key="message" required>
                 {keyLabelMap.message}
               </FieldLabel>

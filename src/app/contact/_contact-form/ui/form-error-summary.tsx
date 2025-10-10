@@ -21,7 +21,7 @@ function FormErrorSummaryList(props: FormErrorSummaryListProps) {
       {...restProps}
     >
       <div className="text-danger-base text-lg font-bold">{heading}</div>
-      <ul className="mt-2 space-y-1 sm:list-disc sm:space-y-0.5 sm:pl-4">
+      <ul className="mt-2 flex flex-col gap-1 sm:list-disc sm:gap-0.5 sm:pl-4">
         {children}
       </ul>
     </div>
