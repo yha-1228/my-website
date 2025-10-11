@@ -1,10 +1,10 @@
-"use client";
-
 import { type ComponentPropsWithRef } from "react";
 
 import { cn } from "@/utils/styling";
 
-function ToggleGroup(props: ComponentPropsWithRef<"div">) {
+type ToggleGroupProps = Omit<ComponentPropsWithRef<"div">, "role">;
+
+function ToggleGroup(props: ToggleGroupProps) {
   const { className, ...restProps } = props;
 
   return (
@@ -15,7 +15,10 @@ function ToggleGroup(props: ComponentPropsWithRef<"div">) {
 // ----------------------------------------
 
 interface ToggleGroupItemProps
-  extends Omit<ComponentPropsWithRef<"button">, "type"> {
+  extends Omit<
+    ComponentPropsWithRef<"button">,
+    "type" | "aria-checked" | "role"
+  > {
   checked?: boolean;
 }
 
@@ -38,9 +41,9 @@ function ToggleGroupItem(props: ToggleGroupItemProps) {
         ),
         "hover:bg-stone-100 active:bg-stone-100",
         cn(
-          "[[data-checked='true']]:bg-foreground-primary",
-          "[[data-checked='true']]:border-foreground-primary [[data-checked='true']]:border-l-foreground-primary [[data-checked='true']+*]:border-l-foreground-primary",
-          "[[data-checked='true']]:text-white",
+          "data-[checked=true]:bg-foreground-primary",
+          "data-[checked=true]:border-foreground-primary data-[checked=true]:border-l-foreground-primary [[data-checked='true']+*]:border-l-foreground-primary",
+          "data-[checked=true]:text-white",
         ),
         className,
       )}
@@ -51,5 +54,9 @@ function ToggleGroupItem(props: ToggleGroupItemProps) {
 
 // ----------------------------------------
 
-export { ToggleGroup, ToggleGroupItem };
-export type { ToggleGroupItemProps };
+export {
+  ToggleGroup,
+  type ToggleGroupProps,
+  ToggleGroupItem,
+  type ToggleGroupItemProps,
+};
