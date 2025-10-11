@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { type JSX, type ReactNode } from "react";
+import { type JSX, type ReactNode, Suspense } from "react";
 
 import { getPortfolioIntroduction } from "@/api/endpoints/portfolio-introduction";
 import { getProjects } from "@/api/endpoints/project";
@@ -97,51 +97,53 @@ export async function Detail() {
       <section className="flex flex-col gap-10 border-t pt-8">
         <Heading1>詳細</Heading1>
 
-        <TabsQueryProvider
-          name="detailSectionTab"
-          values={["dev", "design"]}
-          className="flex flex-col gap-8"
-        >
-          <TabList
-            className={cn(
-              "flex gap-4",
-              "*:text-foreground-secondary *:text-lg",
-              "*:data-[selected=true]:text-foreground-primary",
-            )}
+        <Suspense>
+          <TabsQueryProvider
+            name="detailSectionTab"
+            values={["dev", "design"]}
+            className="flex flex-col gap-8"
           >
-            <Tab>開発</Tab>
-            <Tab>デザイン</Tab>
-          </TabList>
-          <PanelList>
-            <Panel className="flex flex-col gap-8">
-              <IntroductionDl header="概要">
-                <HtmlRenderer html={portfolioIntroduction.overviewDev} />
-              </IntroductionDl>
-              <div className="flex flex-col items-center">
-                <ExperienceLinkButton role="dev" projects={projects} />
-              </div>
-            </Panel>
-            <Panel className="flex flex-col gap-8">
-              <div>
-                <IntroductionDl header="自己紹介">
-                  <HtmlRenderer html={portfolioIntroduction.overviewDesign} />
+            <TabList
+              className={cn(
+                "flex gap-4",
+                "*:text-foreground-secondary *:text-lg",
+                "*:data-[selected=true]:text-foreground-primary",
+              )}
+            >
+              <Tab>開発</Tab>
+              <Tab>デザイン</Tab>
+            </TabList>
+            <PanelList>
+              <Panel className="flex flex-col gap-8">
+                <IntroductionDl header="概要">
+                  <HtmlRenderer html={portfolioIntroduction.overviewDev} />
                 </IntroductionDl>
-                <IntroductionDl header="強み">
-                  <HtmlRenderer html={portfolioIntroduction.tsuyomiDesign} />
-                </IntroductionDl>
-                <IntroductionDl header="今後の意向">
-                  <HtmlRenderer html={portfolioIntroduction.kongoDesign} />
-                </IntroductionDl>
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <ExperienceLinkButton role="design" projects={projects} />
-                <p className="text-foreground-secondary text-sm">
-                  実績詳細も上記ページから閲覧できます
-                </p>
-              </div>
-            </Panel>
-          </PanelList>
-        </TabsQueryProvider>
+                <div className="flex flex-col items-center">
+                  <ExperienceLinkButton role="dev" projects={projects} />
+                </div>
+              </Panel>
+              <Panel className="flex flex-col gap-8">
+                <div>
+                  <IntroductionDl header="自己紹介">
+                    <HtmlRenderer html={portfolioIntroduction.overviewDesign} />
+                  </IntroductionDl>
+                  <IntroductionDl header="強み">
+                    <HtmlRenderer html={portfolioIntroduction.tsuyomiDesign} />
+                  </IntroductionDl>
+                  <IntroductionDl header="今後の意向">
+                    <HtmlRenderer html={portfolioIntroduction.kongoDesign} />
+                  </IntroductionDl>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <ExperienceLinkButton role="design" projects={projects} />
+                  <p className="text-foreground-secondary text-sm">
+                    実績詳細も上記ページから閲覧できます
+                  </p>
+                </div>
+              </Panel>
+            </PanelList>
+          </TabsQueryProvider>
+        </Suspense>
       </section>
     </Container>
   );
