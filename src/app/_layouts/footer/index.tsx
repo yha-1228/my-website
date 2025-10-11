@@ -35,7 +35,7 @@ export interface FooterProps {
 
 export function Footer({ className }: FooterProps) {
   return (
-    <footer className={cn("pt-10 pb-14", className)}>
+    <footer className={cn("pb-14", className)}>
       <Container>
         <div className="flex justify-between">
           <ul className="flex w-1/2 flex-col gap-y-2.5 md:w-auto md:flex-row md:gap-x-4 md:gap-y-0">

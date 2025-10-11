@@ -61,7 +61,7 @@ type UseTabsReturn = ReturnType<typeof useTabs>;
 
 // ----------------------------------------
 
-interface TabsProps extends UseTabsProps {
+interface TabsProviderProps extends UseTabsProps {
   children: ReactNode;
   className?: string;
 }
@@ -92,7 +92,7 @@ const [useTabsContext, TabsContext] = getContextAndHook<UseTabsReturn>(
  * }
  * ```
  */
-function Tabs(props: TabsProps) {
+function TabsProvider(props: TabsProviderProps) {
   const { children, className, ...useTabsProps } = props;
   const value = useTabs(useTabsProps);
 
@@ -286,9 +286,10 @@ function Panel(props: PanelProps) {
       role="tabpanel"
       aria-labelledby={getTabId(index, id)}
       id={getPanelId(index, id)}
+      hidden={!selected}
       {...rest}
     >
-      {selected && children}
+      {children}
     </div>
   );
 }
@@ -297,8 +298,8 @@ function Panel(props: PanelProps) {
 // ----------------------------------------
 
 export {
-  Tabs,
-  type TabsProps,
+  TabsProvider,
+  type TabsProviderProps,
   TabList,
   type TabListProps,
   Tab,

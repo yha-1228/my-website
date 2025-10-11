@@ -81,7 +81,7 @@ function showError(name: keyof ContactFormValues, formState: FormState) {
 // export
 // ----------------------------------------
 
-export function ContactForm({ className }: { className?: string }) {
+export function ContactForm() {
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const errors = getErrors(formState);
 
@@ -163,7 +163,6 @@ export function ContactForm({ className }: { className?: string }) {
     <div
       className={cn(
         "lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:border-gray-200 lg:bg-white lg:px-10 lg:pt-8 lg:pb-11",
-        className,
       )}
     >
       <Form

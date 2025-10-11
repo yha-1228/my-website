@@ -1,15 +1,26 @@
+"use client";
+
 import { useSearchParams } from "next/navigation";
 import { z } from "zod";
 
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
-import { type TabsProps } from "./tabs";
+import { type TabsProviderProps } from "./tabs";
 
-export function useTabsWithQuery<T extends string>(
-  name: string,
-  values: [T, ...T[]],
-  fallbackValue: T = values[0],
-) {
+export interface UseTabsWithQueryProps<T extends string> {
+  name: string;
+  values: [T, ...T[]];
+  /**
+   * @default values[0]
+   */
+  fallbackValue?: T;
+}
+
+export function useTabsWithQuery<T extends string>({
+  name,
+  values,
+  fallbackValue = values[0],
+}: UseTabsWithQueryProps<T>) {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get(name);
 
@@ -25,7 +36,7 @@ export function useTabsWithQuery<T extends string>(
     onTabChange: (selectedIndex: number) => {
       updateSearchParams(name, values[selectedIndex]);
     },
-  } as const satisfies Partial<TabsProps>;
+  } as const satisfies Partial<TabsProviderProps>;
 
   return { tabsProps };
 }
