@@ -1,6 +1,7 @@
 import { type ComponentPropsWithRef, type ReactNode } from "react";
 
 import { TextLink } from "@/components/ui/styled/text-link";
+import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
 interface FormErrorSummaryListProps
@@ -41,7 +42,7 @@ function FormErrorSummaryItem(props: FormErrorSummaryItemProps) {
       <span>{label}:</span>
       <br className="sm:hidden" />
       <TextLink
-        href="/"
+        href={routes.index.href}
         className="decoration-danger-base font-bold sm:ml-1"
         withUnderline
         preventLink

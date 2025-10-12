@@ -70,7 +70,7 @@ export function Header() {
       <Container>
         <div className="relative flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center justify-between">
           <Link
-            href="/"
+            href={routes.index.href}
             className="hover:text-foreground-secondary text-2xl font-bold transition-colors duration-200 ease-out"
             onClick={handleHomeLinkClick}
           >

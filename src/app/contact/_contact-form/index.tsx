@@ -6,6 +6,7 @@ import { submitHubspotForm } from "@/actions/hubspot";
 import { type SubmitHubspotFormRequestBody } from "@/api/models/hubspot";
 import { Button } from "@/components/ui/styled/button";
 import { TextLink } from "@/components/ui/styled/text-link";
+import { routes } from "@/routes";
 import { entriesOf } from "@/utils/object";
 import { cn, getCSSVar, remToPx } from "@/utils/styling";
 
@@ -293,7 +294,11 @@ export function ContactForm() {
         >
           <p>お返事まで今しばらくお待ちください。</p>
           <p>
-            <TextLink href="/" withUnderline className="font-bold">
+            <TextLink
+              href={routes.index.href}
+              withUnderline
+              className="font-bold"
+            >
               ホームに戻る
             </TextLink>
           </p>
