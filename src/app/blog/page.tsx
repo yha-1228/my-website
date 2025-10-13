@@ -9,26 +9,6 @@ import { routes } from "@/routes";
 
 import { PageClient } from "./page.client";
 
-/**
- * @example
- * ```ts
- * pick({foo:1, bar,2, buz: 3}, ["foo", "buz"])
- * // {foo:1, buz: 3}
- * ```
- */
-function pick<T extends object, K extends keyof T>(
-  o: T,
-  keys: K[],
-): Pick<T, K> {
-  const result = {} as Pick<T, K>;
-  for (const key of keys) {
-    if (key in o) {
-      result[key] = o[key];
-    }
-  }
-  return result;
-}
-
 export const metadata: Metadata = {
   title: `${routes.blog.label} | ${SITE_TITLE}`,
 };
@@ -47,13 +27,7 @@ export default async function Page() {
               <Heading1>{routes.blog.label}</Heading1>
             </div>
 
-            <PageClient
-              // そのまま渡すとServerComponentで解析できないpropsが含まれるので、絞り込む
-              zennArticles={zennArticles.map((a) =>
-                pick(a, ["isoDate", "guid", "link", "title"]),
-              )}
-              limit={8}
-            />
+            <PageClient zennArticles={zennArticles} limit={8} />
           </section>
         </Container>
       </div>

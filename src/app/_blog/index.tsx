@@ -39,44 +39,40 @@ export async function Blog() {
             "lg:grid lg:grid-cols-3",
           )}
         >
-          {zennArticles.map((zennArticle) => {
-            if (!zennArticle.isoDate) return null;
-
-            return (
-              <a
-                key={zennArticle.guid}
-                target="_blank"
-                rel="noopener noreferrer"
-                href={zennArticle.link}
-                className={cn(
-                  "rounded-sm border border-stone-300 bg-white px-5 py-4 transition-colors ease-out",
-                  "flex flex-col justify-between gap-6 lg:gap-10",
-                  "w-64 shrink-0 lg:w-auto",
-                  "hover:border-foreground-primary hover:bg-stone-50",
-                  "active:border-foreground-primary active:bg-stone-50",
-                )}
-              >
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-start gap-x-1.5">
-                    <div className="text-lg leading-[1.5] font-bold">
-                      {zennArticle.title}
-                    </div>
-                    <ExternalLink className="mt-1 shrink-0" />
+          {zennArticles.map((zennArticle) => (
+            <a
+              key={zennArticle.guid}
+              target="_blank"
+              rel="noopener noreferrer"
+              href={zennArticle.link}
+              className={cn(
+                "rounded-sm border border-stone-300 bg-white px-5 py-4 transition-colors ease-out",
+                "flex flex-col justify-between gap-6 lg:gap-10",
+                "w-64 shrink-0 lg:w-auto",
+                "hover:border-foreground-primary hover:bg-stone-50",
+                "active:border-foreground-primary active:bg-stone-50",
+              )}
+            >
+              <div className="flex flex-col gap-2">
+                <div className="flex items-start gap-x-1.5">
+                  <div className="text-lg leading-[1.5] font-bold">
+                    {zennArticle.title}
                   </div>
-                  <p className="text-foreground-secondary text-sm">
-                    {dateFormat("yyyy年MM月dd日 HH:mm", zennArticle.isoDate)}
-                  </p>
+                  <ExternalLink className="mt-1 shrink-0" />
                 </div>
+                <p className="text-foreground-secondary text-sm">
+                  {dateFormat("yyyy年MM月dd日 HH:mm", zennArticle.isoDate)}
+                </p>
+              </div>
 
-                <div className="flex gap-2">
-                  <Tag variant="zenn">Zenn</Tag>
-                  {isWithinOneMonth(zennArticle.isoDate) && (
-                    <Tag variant="withinOneMonth">1ヶ月以内に投稿</Tag>
-                  )}
-                </div>
-              </a>
-            );
-          })}
+              <div className="flex gap-2">
+                <Tag variant="zenn">Zenn</Tag>
+                {isWithinOneMonth(zennArticle.isoDate) && (
+                  <Tag variant="withinOneMonth">1ヶ月以内に投稿</Tag>
+                )}
+              </div>
+            </a>
+          ))}
         </ScrollbarHiddenIfTouchDevice>
       </section>
     </Container>
