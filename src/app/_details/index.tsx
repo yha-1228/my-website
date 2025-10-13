@@ -114,8 +114,13 @@ export async function Detail() {
             <TabList
               className={cn(
                 "flex gap-4",
-                "*:text-foreground-secondary *:text-lg",
+                "*:text-foreground-secondary *:text-lg *:transition-[color]",
+                "*:border-b-2",
+                "*:data-[selected=false]:border-b-transparent",
+                "*:data-[selected=false]:hover:text-foreground-primary",
+                "*:data-[selected=false]:active:text-foreground-primary",
                 "*:data-[selected=true]:text-foreground-primary",
+                "*:data-[selected=true]:border-b-foreground-primary",
               )}
             >
               <Tab>開発</Tab>
