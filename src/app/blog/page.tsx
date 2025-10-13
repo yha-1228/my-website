@@ -1,19 +1,39 @@
-import { ExternalLink } from "lucide-react";
 import { type Metadata } from "next";
 
 import { getZennArticles } from "@/api/endpoints/blog";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { SITE_TITLE } from "@/constants";
-import { dateFormat, isWithinOneMonth } from "@/features/blog/date";
-import { Tag } from "@/features/blog/tag";
 import { ContactLinkBanner } from "@/features/contact-link-banner";
 import { routes } from "@/routes";
-import { cn } from "@/utils/styling";
+
+import { PageClient } from "./page.client";
+
+/**
+ * @example
+ * ```ts
+ * pick({foo:1, bar,2, buz: 3}, ["foo", "buz"])
+ * // {foo:1, buz: 3}
+ * ```
+ */
+function pick<T extends object, K extends keyof T>(
+  o: T,
+  keys: K[],
+): Pick<T, K> {
+  const result = {} as Pick<T, K>;
+  for (const key of keys) {
+    if (key in o) {
+      result[key] = o[key];
+    }
+  }
+  return result;
+}
 
 export const metadata: Metadata = {
   title: `${routes.blog.label} | ${SITE_TITLE}`,
 };
+
+export const dynamic = "force-static";
 
 export default async function Page() {
   const zennArticles = await getZennArticles();
@@ -27,50 +47,13 @@ export default async function Page() {
               <Heading1>{routes.blog.label}</Heading1>
             </div>
 
-            <ul className="flex flex-col gap-10">
-              {zennArticles.map((zennArticle) => {
-                if (!zennArticle.isoDate) return null;
-
-                return (
-                  <li
-                    className="flex flex-col gap-4 border-b border-b-stone-300 pb-6"
-                    key={zennArticle.guid}
-                  >
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={zennArticle.link}
-                      className="group"
-                    >
-                      <p className="text-foreground-secondary text-sm">
-                        {dateFormat(
-                          "yyyy年MM月dd日 HH:mm",
-                          zennArticle.isoDate,
-                        )}
-                      </p>
-                      <div
-                        className={cn(
-                          "flex items-start gap-x-2",
-                          "group-hover:text-brand-base group-active:text-brand-base",
-                        )}
-                      >
-                        <div className="text-xl font-bold">
-                          {zennArticle.title}
-                        </div>
-                        <ExternalLink className="mt-1 shrink-0" />
-                      </div>
-                    </a>
-
-                    <div className="flex gap-2">
-                      <Tag variant="zenn">Zenn</Tag>
-                      {isWithinOneMonth(zennArticle.isoDate) && (
-                        <Tag variant="withinOneMonth">1ヶ月以内に投稿</Tag>
-                      )}
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+            <PageClient
+              // そのまま渡すとServerComponentで解析できないpropsが含まれるので、絞り込む
+              zennArticles={zennArticles.map((a) =>
+                pick(a, ["isoDate", "guid", "link", "title"]),
+              )}
+              limit={8}
+            />
           </section>
         </Container>
       </div>

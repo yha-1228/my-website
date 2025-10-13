@@ -7,3 +7,5 @@ export async function getZennArticles() {
   const feed = await parser.parseURL(url);
   return feed.items;
 }
+
+export type ZennArticle = Awaited<ReturnType<typeof getZennArticles>>[number];
