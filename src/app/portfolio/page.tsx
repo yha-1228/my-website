@@ -29,7 +29,7 @@ export default function Page() {
 
   useInterval(1000, () => {
     if (countdown === 0) {
-      router.replace("/");
+      router.replace(`${routes.index.href}#対応領域`);
     } else {
       setCountdown((prev) => prev - 1);
     }
