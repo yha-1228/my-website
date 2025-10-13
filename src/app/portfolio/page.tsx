@@ -39,10 +39,10 @@ export default function Page() {
     <Container className="pt-14">
       <p>
         このページの内容は
-        <TextLink href={routes.index.href} withUnderline>
-          トップページ
+        <TextLink href={`${routes.index.href}#対応領域`} withUnderline>
+          トップページの「対応領域」セクション
         </TextLink>
-        に移動しました。
+        以降に移動しました。
       </p>
 
       <p>{countdown}秒後にリダイレクトします...</p>

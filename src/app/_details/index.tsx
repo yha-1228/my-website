@@ -5,11 +5,13 @@ import { type JSX, type ReactNode, Suspense } from "react";
 import { getPortfolioIntroduction } from "@/api/endpoints/portfolio-introduction";
 import { getProjects } from "@/api/endpoints/project";
 import { type Project } from "@/api/models/project";
+import { AnchorLinkOffset } from "@/components/ui/styled/anchor-link-offset";
 import { Button } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { Panel, PanelList, Tab, TabList } from "@/components/ui/unstyled/tabs";
 import { TabsQueryProvider } from "@/components/ui/unstyled/tabs-query";
+import { AnchorLink } from "@/features/anchor-link";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
 import { isDesign, isDev } from "@/features/project";
 import { routes } from "@/routes";
@@ -93,9 +95,15 @@ export async function Detail() {
   ]);
 
   return (
-    <Container>
+    <AnchorLinkOffset as={Container} id="詳細">
       <section className="flex flex-col gap-10 border-t pt-8">
-        <Heading1>詳細</Heading1>
+        <div className="group flex items-center gap-0.5">
+          <Heading1>詳細</Heading1>
+          <AnchorLink
+            href="#詳細"
+            className="sm:invisible sm:group-hover:visible"
+          />
+        </div>
 
         <Suspense>
           <TabsQueryProvider
@@ -145,6 +153,6 @@ export async function Detail() {
           </TabsQueryProvider>
         </Suspense>
       </section>
-    </Container>
+    </AnchorLinkOffset>
   );
 }

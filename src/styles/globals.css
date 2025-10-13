@@ -105,13 +105,6 @@ body {
   }
 }
 
-html {
-  --spacing-for-scroll-padding-top: 1rem;
-  scroll-padding-top: calc(
-    var(--height-header) + var(--spacing-for-scroll-padding-top)
-  );
-}
-
 @utility palt {
   font-feature-settings: "palt" 1;
 }

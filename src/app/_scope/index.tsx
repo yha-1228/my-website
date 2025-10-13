@@ -1,14 +1,22 @@
+import { AnchorLinkOffset } from "@/components/ui/styled/anchor-link-offset";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
+import { AnchorLink } from "@/features/anchor-link";
 import { cn } from "@/utils/styling";
 
 import { skillDetails } from "./data";
 
 export function Scope() {
   return (
-    <Container>
+    <AnchorLinkOffset as={Container} id="対応領域">
       <section className="flex flex-col gap-10 border-t pt-8">
-        <Heading1>対応領域</Heading1>
+        <div className="group flex items-center gap-0.5">
+          <Heading1>対応領域</Heading1>
+          <AnchorLink
+            href="#対応領域"
+            className="sm:invisible sm:group-hover:visible"
+          />
+        </div>
         <div
           className={cn(
             "flex flex-col gap-6",
@@ -53,6 +61,6 @@ export function Scope() {
           ))}
         </div>
       </section>
-    </Container>
+    </AnchorLinkOffset>
   );
 }
