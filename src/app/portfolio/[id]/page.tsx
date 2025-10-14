@@ -7,8 +7,7 @@ import { Heading1 } from "@/components/ui/styled/heading1";
 import { SITE_TITLE } from "@/constants";
 import { LogoutBanner } from "@/features/basic-auth/logout-banner";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
-import { groupTags } from "@/features/blog/misc";
-import { Tag } from "@/features/portfolio/tag";
+import { cn } from "@/utils/styling";
 
 import { BackButton } from "./_back-button";
 
@@ -38,9 +37,6 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
-  const { methodTags, projectTags, uxLayerTags, assignTags, jobTypeTags } =
-    groupTags(project.tags);
-
   return (
     <>
       <LogoutBanner />
@@ -56,40 +52,31 @@ export default async function Page({ params }: Props) {
               </p>
             </header>
             <div className="mt-8 flex flex-col gap-10 border-t border-solid border-t-stone-300 pt-5">
-              <div className="flex flex-wrap items-center gap-1.5">
-                <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-                  手法: {methodTags.map((tag) => tag.label).join(" / ")}
-                </Tag>
-                <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-                  案件: {projectTags.map((tag) => tag.label).join(" / ")}
-                </Tag>
-                <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-                  UX階層: {uxLayerTags.map((tag) => tag.label).join(" / ")}
-                </Tag>
-                <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-                  参画: {assignTags.map((tag) => tag.label).join(" / ")}
-                </Tag>
-                <Tag className="border border-transparent group-hover:border-stone-300 group-active:border-stone-300">
-                  稼働: {jobTypeTags.map((tag) => tag.label).join(" / ")}
-                </Tag>
-              </div>
-
-              <div className="border-foreground-primary flex flex-col gap-2 rounded-sm border px-6 py-5 text-sm">
+              <div
+                className={cn(
+                  "border-foreground-primary flex flex-col gap-2 rounded-sm border px-6 py-5 text-sm",
+                  "[&>dl>dt]:font-bold",
+                )}
+              >
                 <dl>
                   <dt className="font-bold">体制</dt>
-                  <dd>{project.structureAndRole}</dd>
+                  <dd>{project.structureAndRole?.replace(/,/g, " / ")}</dd>
                 </dl>
                 <dl>
                   <dt className="font-bold">役割</dt>
-                  <dd>{project.roles.join(", ")}</dd>
+                  <dd>{project.roles.join(" / ")}</dd>
+                </dl>
+                <dl>
+                  <dt className="font-bold">UX階層</dt>
+                  <dd>{project.uxLayers.join(" / ")}</dd>
                 </dl>
                 <dl>
                   <dt className="font-bold">デザインツール</dt>
-                  <dd>{project.tools}</dd>
+                  <dd>{project.tools?.replace(/,/g, " / ")}</dd>
                 </dl>
                 <dl>
                   <dt className="font-bold">言語/FWなど</dt>
-                  <dd>{project.langAndFws}</dd>
+                  <dd>{project.langAndFws?.replace(/,/g, " / ")}</dd>
                 </dl>
               </div>
 
