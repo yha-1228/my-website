@@ -28,7 +28,6 @@ function ToggleGroupItem(props: ToggleGroupItemProps) {
   return (
     <button
       type="button"
-      data-checked={checked}
       aria-checked={checked}
       role="radio"
       className={cn(
@@ -41,9 +40,9 @@ function ToggleGroupItem(props: ToggleGroupItemProps) {
         ),
         "hover:bg-stone-100 active:bg-stone-100",
         cn(
-          "data-[checked=true]:bg-foreground-primary",
-          "data-[checked=true]:border-foreground-primary data-[checked=true]:border-l-foreground-primary [[data-checked='true']+*]:border-l-foreground-primary",
-          "data-[checked=true]:text-white",
+          "aria-checked:bg-foreground-primary",
+          "aria-checked:border-foreground-primary aria-checked:border-l-foreground-primary [[aria-checked='true']+*]:border-l-foreground-primary",
+          "aria-checked:text-white",
         ),
         className,
       )}
