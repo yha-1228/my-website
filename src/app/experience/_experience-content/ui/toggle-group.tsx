@@ -27,17 +27,22 @@ function ToggleGroup(props: ToggleGroupProps) {
         "flex items-center gap-4 sm:flex-col sm:items-stretch sm:gap-1.5",
         className,
       )}
-      role="radiogroup"
-      aria-labelledby={id}
       {...rest}
     >
       <label
-        className={cn("font-bold whitespace-nowrap", labelClassName)}
+        className={cn(
+          "hidden font-bold whitespace-nowrap sm:inline",
+          labelClassName,
+        )}
         id={id}
       >
         {labelText}
       </label>
-      <div role="group" className={cn("flex w-full sm:w-auto", groupClassName)}>
+      <div
+        role="radiogroup"
+        className={cn("flex w-full sm:w-auto", groupClassName)}
+        aria-labelledby={id}
+      >
         {children}
       </div>
     </div>
