@@ -1,14 +1,46 @@
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentPropsWithRef, type ReactNode, useId } from "react";
 
 import { cn } from "@/utils/styling";
 
-type ToggleGroupProps = Omit<ComponentPropsWithRef<"div">, "role">;
+interface ToggleGroupProps
+  extends Omit<ComponentPropsWithRef<"div">, "aria-labelledby"> {
+  labelText: ReactNode;
+  labelClassName?: string;
+  groupClassName?: string;
+}
 
 function ToggleGroup(props: ToggleGroupProps) {
-  const { className, ...restProps } = props;
+  const id = useId();
+
+  const {
+    labelText,
+    labelClassName,
+    groupClassName,
+    className,
+    children,
+    ...rest
+  } = props;
 
   return (
-    <div role="radiogroup" className={cn("flex", className)} {...restProps} />
+    <div
+      className={cn(
+        "flex items-center gap-4 sm:flex-col sm:items-stretch sm:gap-1.5",
+        className,
+      )}
+      role="radiogroup"
+      aria-labelledby={id}
+      {...rest}
+    >
+      <label
+        className={cn("font-bold whitespace-nowrap", labelClassName)}
+        id={id}
+      >
+        {labelText}
+      </label>
+      <div role="group" className={cn("flex w-full sm:w-auto", groupClassName)}>
+        {children}
+      </div>
+    </div>
   );
 }
 
@@ -31,7 +63,7 @@ function ToggleGroupItem(props: ToggleGroupItemProps) {
       aria-checked={checked}
       role="radio"
       className={cn(
-        "text-foreground-primary first:rounded-l-touchable last:rounded-r-touchable inline-flex h-9 flex-1 items-center justify-center bg-white px-3 text-sm transition-colors sm:h-10 sm:text-base",
+        "text-foreground-primary first:rounded-l-touchable last:rounded-r-touchable inline-flex h-8 flex-1 items-center justify-center bg-white px-3 text-sm whitespace-nowrap transition-colors sm:h-10 sm:text-base",
         cn(
           "border-y border-y-stone-300",
           "first:border-l first:border-l-stone-300",

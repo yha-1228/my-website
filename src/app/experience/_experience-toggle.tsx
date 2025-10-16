@@ -29,6 +29,8 @@ const roleLabelMap = {
   design: "デザイン",
 } as const satisfies Record<Role, string>;
 
+// ----------------------------------------
+
 export function ExperienceToggle({ className }: { className?: string }) {
   const searchParams = useSearchParams();
   const parsedSearchParams = parseSearchParamsClient(searchParams);
@@ -44,66 +46,53 @@ export function ExperienceToggle({ className }: { className?: string }) {
     <div
       className={cn(
         "flex flex-col gap-2",
-        "md:grid md:grid-cols-2 md:gap-4",
+        "sm:grid sm:grid-cols-2 sm:gap-4",
         "rounded-md p-4",
         "border border-stone-300 bg-white shadow-lg",
         className,
       )}
     >
-      <div className="flex flex-col gap-1.5">
-        {/* TODO: ベタ書きのID管理を改善する */}
-        <div className="sr-only font-bold md:not-sr-only" id="1">
-          参画
-        </div>
-        <ToggleGroup aria-labelledby="1">
-          {entriesOf(jobCategoryLabelMap).map(([value, label]) => (
-            <ToggleGroupItem
-              key={value}
-              checked={parsedSearchParams.jobCategory === value}
-              onClick={() => {
-                updateSearchParams("jobCategory", value);
+      <ToggleGroup labelText="参画">
+        {entriesOf(jobCategoryLabelMap).map(([value, label]) => (
+          <ToggleGroupItem
+            key={value}
+            checked={parsedSearchParams.jobCategory === value}
+            onClick={() => {
+              updateSearchParams("jobCategory", value);
 
-                if (window.scrollY > scrollYOnToggleClick) {
-                  window.scrollTo({
-                    top: scrollYOnToggleClick,
-                    behavior: "smooth",
-                  });
-                }
-              }}
-              className="whitespace-nowrap"
-            >
-              {label}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
-      </div>
-      <div className="flex flex-col gap-1.5">
-        {/* TODO: ベタ書きのID管理を改善する */}
-        <div className="sr-only font-bold md:not-sr-only" id="2">
-          役割
-        </div>
-        <ToggleGroup aria-labelledby="2">
-          {entriesOf(roleLabelMap).map(([value, label]) => (
-            <ToggleGroupItem
-              key={value}
-              checked={parsedSearchParams.role === value}
-              onClick={() => {
-                updateSearchParams("role", value);
+              if (window.scrollY > scrollYOnToggleClick) {
+                window.scrollTo({
+                  top: scrollYOnToggleClick,
+                  behavior: "smooth",
+                });
+              }
+            }}
+          >
+            {label}
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
 
-                if (window.scrollY > scrollYOnToggleClick) {
-                  window.scrollTo({
-                    top: scrollYOnToggleClick,
-                    behavior: "smooth",
-                  });
-                }
-              }}
-              className="whitespace-nowrap"
-            >
-              {label}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
-      </div>
+      <ToggleGroup labelText="役割">
+        {entriesOf(roleLabelMap).map(([value, label]) => (
+          <ToggleGroupItem
+            key={value}
+            checked={parsedSearchParams.role === value}
+            onClick={() => {
+              updateSearchParams("role", value);
+
+              if (window.scrollY > scrollYOnToggleClick) {
+                window.scrollTo({
+                  top: scrollYOnToggleClick,
+                  behavior: "smooth",
+                });
+              }
+            }}
+          >
+            {label}
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
     </div>
   );
 }
