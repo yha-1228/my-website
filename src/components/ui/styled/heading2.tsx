@@ -1,8 +1,8 @@
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentProps } from "react";
 
 import { cn } from "@/utils/styling";
 
-function Heading2(props: ComponentPropsWithRef<"h2">) {
+function Heading2(props: ComponentProps<"h2">) {
   const { className, ...restProps } = props;
 
   return (

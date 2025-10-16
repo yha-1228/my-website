@@ -1,9 +1,9 @@
-import { type ComponentPropsWithRef, type ReactNode, useId } from "react";
+import { type ComponentProps, type ReactNode, useId } from "react";
 
 import { cn } from "@/utils/styling";
 
 interface ToggleGroupProps
-  extends Omit<ComponentPropsWithRef<"div">, "aria-labelledby"> {
+  extends Omit<ComponentProps<"div">, "aria-labelledby"> {
   labelText: ReactNode;
   labelClassName?: string;
   groupClassName?: string;
@@ -52,10 +52,7 @@ function ToggleGroup(props: ToggleGroupProps) {
 // ----------------------------------------
 
 interface ToggleGroupItemProps
-  extends Omit<
-    ComponentPropsWithRef<"button">,
-    "type" | "aria-checked" | "role"
-  > {
+  extends Omit<ComponentProps<"button">, "type" | "aria-checked" | "role"> {
   checked?: boolean;
 }
 

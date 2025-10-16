@@ -2,8 +2,8 @@
 
 import {
   Children,
+  type ComponentProps,
   type ComponentPropsWithoutRef,
-  type ComponentPropsWithRef,
   type KeyboardEvent,
   type ReactNode,
   useId,
@@ -112,7 +112,7 @@ type UseTabsReturn = ReturnType<typeof useTabs>;
 
 // ----------------------------------------
 
-interface TabsProps extends UseTabsProps, ComponentPropsWithRef<"div"> {}
+interface TabsProps extends UseTabsProps, ComponentProps<"div"> {}
 
 const [useTabsContext, TabsContext] = getContextAndHook<UseTabsReturn>(
   "useTabsContext",
@@ -163,10 +163,7 @@ const [useTabContext, TabContext] = getContextAndHook<TabContextValue>(
   "TabList",
 );
 
-type TabListProps = Omit<
-  ComponentPropsWithRef<"div">,
-  "role" | "aria-orientation"
->;
+type TabListProps = Omit<ComponentProps<"div">, "role" | "aria-orientation">;
 
 function TabList(props: TabListProps) {
   const { children, ...rest } = props;
@@ -283,7 +280,7 @@ function PanelList({ children }: PanelListProps) {
 // ----------------------------------------
 
 type PanelProps = Omit<
-  ComponentPropsWithRef<"div">,
+  ComponentProps<"div">,
   "role" | "aria-labelledby" | "id"
 >;
 

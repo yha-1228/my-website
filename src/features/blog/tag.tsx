@@ -1,4 +1,4 @@
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentProps } from "react";
 
 import { cn } from "@/utils/styling";
 
@@ -10,7 +10,7 @@ const variantClassNames = {
     "*:data-[slot=dot]:bg-amber-400 border border-stone-300 bg-white",
 } as const satisfies Record<Variant, string>;
 
-interface TagProps extends ComponentPropsWithRef<"div"> {
+interface TagProps extends ComponentProps<"div"> {
   variant: Variant;
 }
 

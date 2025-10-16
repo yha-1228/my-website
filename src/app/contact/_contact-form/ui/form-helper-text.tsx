@@ -1,8 +1,8 @@
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentProps } from "react";
 
 import { cn } from "@/utils/styling";
 
-function FormHelperText(props: ComponentPropsWithRef<"p">) {
+function FormHelperText(props: ComponentProps<"p">) {
   const { className, ...restProps } = props;
 
   return (

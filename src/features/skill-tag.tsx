@@ -1,11 +1,8 @@
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentProps } from "react";
 
 import { cn } from "@/utils/styling";
 
-export function SkillTag({
-  className,
-  ...props
-}: ComponentPropsWithRef<"span">) {
+export function SkillTag({ className, ...props }: ComponentProps<"span">) {
   return (
     <span
       className={cn(

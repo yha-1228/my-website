@@ -1,8 +1,8 @@
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentProps } from "react";
 
 import { cn } from "@/utils/styling";
 
-function Tag(props: ComponentPropsWithRef<"div">) {
+function Tag(props: ComponentProps<"div">) {
   const { className, ...restProps } = props;
 
   return (

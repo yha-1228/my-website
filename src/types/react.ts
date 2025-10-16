@@ -1,6 +1,6 @@
 import {
+  type ComponentProps,
   type ComponentPropsWithoutRef,
-  type ComponentPropsWithRef,
   type DetailedHTMLProps,
   type ElementType,
   type HTMLAttributes,
@@ -30,7 +30,7 @@ export type PropsWithAs<
 > = {
   as?: TAs;
 } & DistributiveOmit<
-  ComponentPropsWithRef<ElementType extends TAs ? TDefaultAs : TAs>,
+  ComponentProps<ElementType extends TAs ? TDefaultAs : TAs>,
   "as"
 >;
 

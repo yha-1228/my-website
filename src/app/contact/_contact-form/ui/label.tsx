@@ -1,8 +1,8 @@
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentProps } from "react";
 
 import { cn } from "@/utils/styling";
 
-interface LabelProps extends ComponentPropsWithRef<"label"> {
+interface LabelProps extends ComponentProps<"label"> {
   /**
    * @default false
    */

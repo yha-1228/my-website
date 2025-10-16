@@ -1,4 +1,4 @@
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentProps } from "react";
 
 import { cn, cx } from "@/utils/styling";
 
@@ -14,7 +14,7 @@ const baseClassName = cx(
 
 // ----------------------------------------
 
-function Input(props: ComponentPropsWithRef<"input">) {
+function Input(props: ComponentProps<"input">) {
   const { className, ...restProps } = props;
 
   return (
@@ -24,7 +24,7 @@ function Input(props: ComponentPropsWithRef<"input">) {
 
 // ----------------------------------------
 
-function Textarea(props: ComponentPropsWithRef<"textarea">) {
+function Textarea(props: ComponentProps<"textarea">) {
   const { className, ...restProps } = props;
 
   return (
@@ -38,7 +38,7 @@ function Textarea(props: ComponentPropsWithRef<"textarea">) {
 // ----------------------------------------
 
 interface InputLengthCounterProps
-  extends Omit<ComponentPropsWithRef<"span">, "children"> {
+  extends Omit<ComponentProps<"span">, "children"> {
   currentLength: number;
   maxLength: number;
 }

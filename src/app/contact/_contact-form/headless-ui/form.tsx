@@ -1,6 +1,6 @@
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentProps } from "react";
 
-interface FormProps extends ComponentPropsWithRef<"form"> {
+interface FormProps extends ComponentProps<"form"> {
   allDisabled?: boolean;
 }
 

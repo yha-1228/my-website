@@ -1,11 +1,11 @@
-import { type ComponentPropsWithRef, type ReactNode } from "react";
+import { type ComponentProps, type ReactNode } from "react";
 
 import { TextLink } from "@/components/ui/styled/text-link";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
 interface FormErrorSummaryListProps
-  extends Omit<ComponentPropsWithRef<"div">, "role"> {
+  extends Omit<ComponentProps<"div">, "role"> {
   heading: ReactNode;
 }
 
@@ -29,7 +29,7 @@ function FormErrorSummaryList(props: FormErrorSummaryListProps) {
   );
 }
 
-interface FormErrorSummaryItemProps extends ComponentPropsWithRef<"li"> {
+interface FormErrorSummaryItemProps extends ComponentProps<"li"> {
   label: ReactNode;
   onClick?: () => void;
 }

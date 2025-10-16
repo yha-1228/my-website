@@ -1,6 +1,6 @@
 "use client";
 
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentProps } from "react";
 
 import { useIsTouchDevice } from "@/hooks/use-is-touch-device";
 import { cn } from "@/utils/styling";
@@ -8,7 +8,7 @@ import { cn } from "@/utils/styling";
 export function ScrollbarHiddenIfTouchDevice({
   className,
   ...props
-}: ComponentPropsWithRef<"div">) {
+}: ComponentProps<"div">) {
   const isTouchDevice = useIsTouchDevice();
 
   return (

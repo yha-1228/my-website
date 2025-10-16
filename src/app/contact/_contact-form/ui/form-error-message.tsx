@@ -1,9 +1,9 @@
 import { CircleAlert } from "lucide-react";
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentProps } from "react";
 
 import { cn } from "@/utils/styling";
 
-function FormErrorMessage(props: ComponentPropsWithRef<"p">) {
+function FormErrorMessage(props: ComponentProps<"p">) {
   const { className, children, ...restProps } = props;
 
   return (
