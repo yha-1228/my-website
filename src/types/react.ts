@@ -5,7 +5,6 @@ import {
   type ElementType,
   type HTMLAttributes,
   type JSX,
-  type ReactNode,
 } from "react";
 
 import { type DistributiveOmit } from "./utils";
@@ -33,5 +32,3 @@ export type PropsWithAs<
   ComponentProps<ElementType extends TAs ? TDefaultAs : TAs>,
   "as"
 >;
-
-export type ChildAsFunction<P> = ReactNode | ((props: P) => ReactNode);
