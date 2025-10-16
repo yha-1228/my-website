@@ -1,7 +1,6 @@
 import {
   type ComponentProps,
   type ElementType,
-  type ReactNode,
   useEffect,
   useId,
   useState,
@@ -66,21 +65,25 @@ type UseFieldReturn = ReturnType<typeof useField>;
 
 const [useFieldContext, FieldContext] = getContextAndHook<UseFieldReturn>(
   "useFieldContext",
-  "FieldProvider",
+  "FieldRoot",
 );
 
 // ---
 
-interface FieldProviderProps extends UseFieldProps {
-  children: ReactNode;
+type FieldRootProps<TAs extends ElementType> = UseFieldProps &
+  PropsWithAs<TAs, "div">;
+
+function FieldRoot<TAs extends ElementType>(props: FieldRootProps<TAs>) {
+  const { isError, as: Comp = "div", ...rest } = props;
+  const value = useField({ isError });
+
+  return (
+    <FieldContext value={value}>
+      <Comp {...rest} />
+    </FieldContext>
+  );
 }
 
-function FieldProvider(props: FieldProviderProps) {
-  const { children, ...restProps } = props;
-  const value = useField(restProps);
-
-  return <FieldContext value={value}>{children}</FieldContext>;
-}
 // ---
 
 type FieldLabelProps<TAs extends ElementTypeOf<"label">> = Omit<
@@ -148,9 +151,9 @@ function FieldError<TAs extends ElementTypeOf<"p">>(
 // exports
 // ----------------------------------------
 
-export { FieldProvider, FieldLabel, Field, FieldDescription, FieldError };
+export { FieldRoot, FieldLabel, Field, FieldDescription, FieldError };
 export type {
-  FieldProviderProps,
+  FieldRootProps,
   FieldLabelProps,
   FieldProps,
   FieldDescriptionProps,
