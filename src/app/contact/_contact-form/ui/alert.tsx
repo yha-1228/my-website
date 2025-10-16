@@ -14,14 +14,8 @@ import { cn } from "@/utils/styling";
 type Variant = "success" | "error";
 
 const variantClassNames = {
-  success: {
-    root: cn("border border-brand-base"),
-    heading: cn("text-brand-dark"),
-  },
-  error: {
-    root: cn("border border-danger-base"),
-    heading: cn("text-danger-dark"),
-  },
+  success: "border border-brand-base **:data-[slot=heading]:text-brand-dark",
+  error: "border border-danger-base **:data-[slot=heading]:text-danger-dark",
 } as const satisfies Record<Variant, unknown>;
 
 const variantIconMap = {
@@ -49,7 +43,7 @@ function Alert(props: AlertProps) {
       role="alert"
       className={cn(
         "block rounded-lg px-5 pt-4 pb-5 sm:flex",
-        variantClassNames[variant].root,
+        variantClassNames[variant],
         className,
       )}
       ref={ref}
@@ -57,12 +51,7 @@ function Alert(props: AlertProps) {
     >
       <div className="hidden sm:block">{variantIconMap[variant]}</div>
       <div className="sm:ml-3">
-        <div
-          className={cn(
-            "text-lg font-bold",
-            variantClassNames[variant].heading,
-          )}
-        >
+        <div className="text-lg font-bold" data-slot="heading">
           {heading}
         </div>
         <div className="mt-1.5">{children}</div>

@@ -5,8 +5,9 @@ import { cn } from "@/utils/styling";
 type Variant = "zenn" | "withinOneMonth";
 
 const variantClassNames = {
-  zenn: "[&>span]:hidden border text-[#3ea8ff] bg-white",
-  withinOneMonth: "[&>span]:bg-amber-400 border border-stone-300 bg-white",
+  zenn: "*:data-[slot=dot]:hidden border text-[#3ea8ff] bg-white",
+  withinOneMonth:
+    "*:data-[slot=dot]:bg-amber-400 border border-stone-300 bg-white",
 } as const satisfies Record<Variant, string>;
 
 interface TagProps extends ComponentPropsWithRef<"div"> {
@@ -25,7 +26,11 @@ function Tag(props: TagProps) {
       )}
       {...restProps}
     >
-      <span className="size-2 rounded-full" aria-hidden="true" />
+      <span
+        className="size-2 rounded-full"
+        aria-hidden="true"
+        data-slot="dot"
+      />
       {children}
     </div>
   );
