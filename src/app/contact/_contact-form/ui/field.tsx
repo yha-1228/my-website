@@ -9,7 +9,7 @@ const baseClassName = cn(
   "w-full appearance-none rounded-touchable px-3 transition-[background-color] duration-200 ease-out border border-stone-400",
   "disabled:bg-stone-100 disabled:text-foreground-primary/70 disabled:placeholder:text-foreground-placeholder disabled:cursor-not-allowed",
   "placeholder:text-foreground-placeholder",
-  "data-[invalid=true]:border-danger-base/40 data-[invalid=true]:bg-danger-background/50",
+  "aria-invalid:border-danger-base/40 aria-invalid:bg-danger-background/50",
 );
 
 // ----------------------------------------

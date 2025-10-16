@@ -17,10 +17,13 @@ import { getContextAndHook } from "@/utils/react";
 // ----------------------------------------
 
 interface UseFieldProps {
-  isError?: boolean;
+  /**
+   * @default false
+   */
+  invalid?: boolean;
 }
 
-function useField({ isError }: UseFieldProps) {
+function useField({ invalid = false }: UseFieldProps) {
   const fieldId = useId();
   const descriptionId = `${fieldId}-description`;
   const errorId = `${fieldId}-error`;
@@ -36,19 +39,14 @@ function useField({ isError }: UseFieldProps) {
     htmlFor: fieldId,
   } as const satisfies ComponentProps<"label">;
 
-  const baseFieldProps = {
+  const fieldProps = {
     id: fieldId,
-    "aria-invalid": isError || undefined,
+    "aria-invalid": invalid,
     "aria-describedby":
-      [hasDescription && descriptionId, isError && errorId]
+      [hasDescription && descriptionId, invalid && errorId]
         .filter(Boolean)
         .join(" ") || undefined,
   } as const satisfies CommonHTMLProps;
-
-  const fieldProps = {
-    ...baseFieldProps,
-    "data-invalid": isError || undefined,
-  } as const;
 
   const descriptionProps = {
     id: descriptionId,
@@ -58,7 +56,13 @@ function useField({ isError }: UseFieldProps) {
     id: errorId,
   } as const satisfies CommonHTMLProps;
 
-  return { isError, labelProps, fieldProps, descriptionProps, errorProps };
+  return {
+    invalid,
+    labelProps,
+    fieldProps,
+    descriptionProps,
+    errorProps,
+  };
 }
 
 type UseFieldReturn = ReturnType<typeof useField>;
@@ -74,8 +78,8 @@ type FieldRootProps<TAs extends ElementType> = UseFieldProps &
   PropsWithAs<TAs, "div">;
 
 function FieldRoot<TAs extends ElementType>(props: FieldRootProps<TAs>) {
-  const { isError, as: Comp = "div", ...rest } = props;
-  const value = useField({ isError });
+  const { invalid, as: Comp = "div", ...rest } = props;
+  const value = useField({ invalid });
 
   return (
     <FieldContext value={value}>
@@ -104,7 +108,7 @@ function FieldLabel<TAs extends ElementTypeOf<"label">>(
 
 type FieldProps<TAs extends ElementType> = Omit<
   PropsWithAs<TAs, "input">,
-  "id"
+  "id" | "aria-invalid" | "aria-describedby"
 >;
 
 function Field<TAs extends ElementType>(props: FieldProps<TAs>) {
@@ -141,9 +145,9 @@ function FieldError<TAs extends ElementTypeOf<"p">>(
   props: FieldErrorProps<TAs>,
 ) {
   const { as: Comp = "p", ...restProps } = props;
-  const { isError, errorProps } = useFieldContext();
+  const { invalid, errorProps } = useFieldContext();
 
-  if (!isError) return null;
+  if (!invalid) return null;
 
   return <Comp {...errorProps} {...restProps} />;
 }

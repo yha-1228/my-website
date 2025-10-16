@@ -174,7 +174,7 @@ export function ContactForm() {
       >
         <div className="flex flex-col gap-y-6 md:grid md:grid-cols-3 md:gap-x-4 md:gap-y-0">
           <FieldRoot
-            isError={showError("name", formState)}
+            invalid={showError("name", formState)}
             className="flex flex-col gap-2"
           >
             <FieldLabel as={Label} data-key="name" required>
@@ -193,7 +193,7 @@ export function ContactForm() {
           </FieldRoot>
 
           <FieldRoot
-            isError={showError("email", formState)}
+            invalid={showError("email", formState)}
             className="flex flex-col gap-2 md:col-span-2"
           >
             <FieldLabel as={Label} data-key="email" required>
@@ -213,7 +213,7 @@ export function ContactForm() {
         </div>
 
         <FieldRoot
-          isError={showError("companyName", formState)}
+          invalid={showError("companyName", formState)}
           className="flex flex-col gap-2"
         >
           <FieldLabel as={Label} data-key="companyName">
@@ -232,7 +232,7 @@ export function ContactForm() {
         </FieldRoot>
 
         <FieldRoot
-          isError={showError("message", formState)}
+          invalid={showError("message", formState)}
           className="flex flex-col gap-2"
         >
           <FieldLabel as={Label} data-key="message" required>
