@@ -9,8 +9,8 @@ import { AnchorLinkOffset } from "@/components/ui/styled/anchor-link-offset";
 import { Button } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
+import { QueryTabs } from "@/components/ui/unstyled/query-tabs";
 import { Panel, PanelList, Tab, TabList } from "@/components/ui/unstyled/tabs";
-import { TabsQueryProvider } from "@/components/ui/unstyled/tabs-query";
 import { AnchorLink } from "@/features/anchor-link";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
 import { isDesign, isDev } from "@/features/project";
@@ -106,7 +106,7 @@ export async function Detail() {
         </div>
 
         <Suspense>
-          <TabsQueryProvider
+          <QueryTabs
             name="detailSectionTab"
             values={["dev", "design"]}
             className="flex flex-col gap-8"
@@ -155,7 +155,7 @@ export async function Detail() {
                 </div>
               </Panel>
             </PanelList>
-          </TabsQueryProvider>
+          </QueryTabs>
         </Suspense>
       </section>
     </AnchorLinkOffset>

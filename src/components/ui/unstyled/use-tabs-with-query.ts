@@ -5,7 +5,7 @@ import { z } from "zod";
 
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
-import { type TabsProviderProps } from "./tabs";
+import { type UseTabsProps } from "./tabs";
 
 export interface UseTabsWithQueryProps<T extends string> {
   name: string;
@@ -36,7 +36,7 @@ export function useTabsWithQuery<T extends string>({
     onTabChange: (selectedIndex: number) => {
       updateSearchParams(name, values[selectedIndex]);
     },
-  } as const satisfies Partial<TabsProviderProps>;
+  } as const satisfies UseTabsProps;
 
   return { tabsProps };
 }

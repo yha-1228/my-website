@@ -112,10 +112,7 @@ type UseTabsReturn = ReturnType<typeof useTabs>;
 
 // ----------------------------------------
 
-interface TabsProviderProps extends UseTabsProps {
-  children: ReactNode;
-  className?: string;
-}
+interface TabsProps extends UseTabsProps, ComponentPropsWithRef<"div"> {}
 
 const [useTabsContext, TabsContext] = getContextAndHook<UseTabsReturn>(
   "useTabsContext",
@@ -143,13 +140,13 @@ const [useTabsContext, TabsContext] = getContextAndHook<UseTabsReturn>(
  * }
  * ```
  */
-function TabsProvider(props: TabsProviderProps) {
-  const { children, className, ...useTabsProps } = props;
-  const value = useTabs(useTabsProps);
+function Tabs(props: TabsProps) {
+  const { defaultIndex, onTabChange, ...rest } = props;
+  const value = useTabs({ defaultIndex, onTabChange });
 
   return (
     <TabsContext value={value}>
-      <div className={className}>{children}</div>
+      <div {...rest} />
     </TabsContext>
   );
 }
@@ -167,7 +164,7 @@ const [useTabContext, TabContext] = getContextAndHook<TabContextValue>(
 );
 
 type TabListProps = Omit<
-  ComponentPropsWithoutRef<"div">,
+  ComponentPropsWithRef<"div">,
   "role" | "aria-orientation"
 >;
 
@@ -313,8 +310,9 @@ function Panel(props: PanelProps) {
 // ----------------------------------------
 
 export {
-  TabsProvider,
-  type TabsProviderProps,
+  type UseTabsProps,
+  Tabs,
+  type TabsProps,
   TabList,
   type TabListProps,
   Tab,
