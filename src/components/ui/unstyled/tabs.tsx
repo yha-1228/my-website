@@ -6,7 +6,6 @@ import {
   type ComponentPropsWithRef,
   type KeyboardEvent,
   type ReactNode,
-  useCallback,
   useId,
   useRef,
   useState,
@@ -16,24 +15,76 @@ import { getContextAndHook } from "@/utils/react";
 
 // ----------------------------------------
 
-function useNode<T extends HTMLElement>() {
-  const [node, setNode] = useState<T | null>(null);
-
-  const ref = useCallback((node: T) => {
-    if (node !== null) {
-      setNode(node);
-    }
-  }, []);
-
-  return [ref, node] as const;
-}
-
 function getTabId(index: number, id: string) {
   return `${id}-tab-${index}`;
 }
 
 function getPanelId(index: number, id: string) {
   return `${id}-panel-${index}`;
+}
+
+interface FocusRovingAction {
+  onCurrent?: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
+  onFirst?: () => void;
+  onLast?: () => void;
+}
+
+function focusRoving(
+  event: KeyboardEvent<HTMLButtonElement>,
+  element: HTMLButtonElement,
+  action: FocusRovingAction,
+) {
+  const { onCurrent, onPrev, onNext, onFirst, onLast } = action;
+
+  const prev = element.previousElementSibling;
+  const next = element.nextElementSibling;
+
+  const first = element.parentElement?.firstElementChild;
+  const last = element.parentElement?.lastElementChild;
+
+  if (event.key === "ArrowRight") {
+    if (next instanceof HTMLButtonElement) {
+      onNext?.();
+      next.focus();
+    } else {
+      if (first instanceof HTMLButtonElement) {
+        onFirst?.();
+        first.focus();
+      }
+    }
+  }
+
+  if (event.key === "ArrowLeft") {
+    if (prev instanceof HTMLButtonElement) {
+      onPrev?.();
+      prev.focus();
+    } else {
+      if (last instanceof HTMLButtonElement) {
+        onLast?.();
+        last.focus();
+      }
+    }
+  }
+
+  if (event.key === "Home") {
+    if (first instanceof HTMLButtonElement) {
+      onFirst?.();
+      first?.focus();
+    }
+  }
+
+  if (event.key === "End") {
+    if (last instanceof HTMLButtonElement) {
+      onLast?.();
+      last.focus();
+    }
+  }
+
+  if (event.key === "Enter") {
+    onCurrent?.();
+  }
 }
 
 // TabsRoot
@@ -77,7 +128,7 @@ const [useTabsContext, TabsContext] = getContextAndHook<UseTabsReturn>(
  * function Example() {
  *   return (
  *     <Tabs>
- *       <TabList className="*:data-[selected=true]:font-bold">
+ *       <TabList className="*:aria-selected:font-bold">
  *         <Tab>Apple</Tab>
  *         <Tab>Banana</Tab>
  *         <Tab>Melon</Tab>
@@ -108,8 +159,6 @@ function TabsProvider(props: TabsProviderProps) {
 interface TabContextValue {
   index: number;
   lastIndex: number;
-  firstTabElement: HTMLButtonElement;
-  lastTabElement: HTMLButtonElement;
 }
 
 const [useTabContext, TabContext] = getContextAndHook<TabContextValue>(
@@ -125,20 +174,15 @@ type TabListProps = Omit<
 function TabList(props: TabListProps) {
   const { children, ...rest } = props;
   const lastTabElementIndex = Children.count(children) - 1;
-  const [ref, tabElement] = useNode<HTMLDivElement>();
-  const firstTabElement = tabElement?.firstElementChild;
-  const lastTabElement = tabElement?.lastElementChild;
 
   return (
-    <div role="tablist" aria-orientation="horizontal" {...rest} ref={ref}>
+    <div role="tablist" aria-orientation="horizontal" {...rest}>
       {Children.map(children, (children, index) => (
         <TabContext
           key={index}
           value={{
             index,
             lastIndex: lastTabElementIndex,
-            firstTabElement: firstTabElement as HTMLButtonElement,
-            lastTabElement: lastTabElement as HTMLButtonElement,
           }}
         >
           {children}
@@ -165,7 +209,7 @@ type TabProps = Omit<
 
 function Tab(props: TabProps) {
   const { activeIndex, setActiveIndex, id, onTabChange } = useTabsContext();
-  const { index, lastIndex, firstTabElement, lastTabElement } = useTabContext();
+  const { index, lastIndex } = useTabContext();
 
   const actionTabChange = (selectedIndex: number) => {
     if (selectedIndex !== activeIndex) {
@@ -181,43 +225,15 @@ function Tab(props: TabProps) {
   const ref = useRef<HTMLButtonElement>(null);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === "ArrowRight") {
-      const nextTabElement = ref.current?.nextElementSibling;
+    if (!ref.current) return;
 
-      if (nextTabElement instanceof HTMLButtonElement) {
-        actionTabChange(index + 1);
-        nextTabElement.focus();
-      } else {
-        actionTabChange(0);
-        firstTabElement.focus();
-      }
-    }
-
-    if (event.key === "ArrowLeft") {
-      const prevTabElement = ref.current?.previousElementSibling;
-
-      if (prevTabElement instanceof HTMLButtonElement) {
-        actionTabChange(index - 1);
-        prevTabElement.focus();
-      } else {
-        actionTabChange(lastIndex);
-        lastTabElement.focus();
-      }
-    }
-
-    if (event.key === "Home") {
-      actionTabChange(0);
-      firstTabElement.focus();
-    }
-
-    if (event.key === "End") {
-      actionTabChange(lastIndex);
-      lastTabElement.focus();
-    }
-
-    if (event.key === "Enter") {
-      actionTabChange(index);
-    }
+    focusRoving(event, ref.current, {
+      onCurrent: () => actionTabChange(index),
+      onPrev: () => actionTabChange(index - 1),
+      onNext: () => actionTabChange(index + 1),
+      onFirst: () => actionTabChange(0),
+      onLast: () => actionTabChange(lastIndex),
+    });
   };
 
   const selected = index === activeIndex;
@@ -230,7 +246,6 @@ function Tab(props: TabProps) {
       onKeyDown={handleKeyDown}
       aria-selected={selected}
       aria-controls={getPanelId(index, id)}
-      data-selected={selected}
       id={getTabId(index, id)}
       type="button"
       role="tab"

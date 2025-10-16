@@ -116,11 +116,11 @@ export async function Detail() {
                 "flex gap-4",
                 "*:text-foreground-secondary *:text-lg *:transition-[color]",
                 "*:border-b-2",
-                "*:data-[selected=false]:border-b-transparent",
-                "*:data-[selected=false]:hover:text-foreground-primary",
-                "*:data-[selected=false]:active:text-foreground-primary",
-                "*:data-[selected=true]:text-foreground-primary",
-                "*:data-[selected=true]:border-b-foreground-primary",
+                "*:border-b-transparent",
+                "*:hover:text-foreground-primary",
+                "*:active:text-foreground-primary",
+                "*:aria-selected:text-foreground-primary",
+                "*:aria-selected:border-b-foreground-primary",
               )}
             >
               <Tab>開発</Tab>
