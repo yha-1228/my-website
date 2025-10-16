@@ -25,8 +25,8 @@ interface UseFieldProps {
 
 function useField({ invalid = false }: UseFieldProps) {
   const fieldId = useId();
-  const descriptionId = `${fieldId}-description`;
-  const errorId = `${fieldId}-error`;
+  const descriptionId = `${fieldId}-description` as const;
+  const errorId = `${fieldId}-error` as const;
 
   const [hasDescription, setHasDescription] = useState(false);
 

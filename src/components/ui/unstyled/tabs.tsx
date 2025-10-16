@@ -16,11 +16,11 @@ import { getContextAndHook } from "@/utils/react";
 // ----------------------------------------
 
 function getTabId(index: number, id: string) {
-  return `${id}-tab-${index}`;
+  return `${id}-tab-${index}` as const;
 }
 
 function getPanelId(index: number, id: string) {
-  return `${id}-panel-${index}`;
+  return `${id}-panel-${index}` as const;
 }
 
 interface FocusRovingAction {
