@@ -15,7 +15,7 @@ import { AnchorLink } from "@/features/anchor-link";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
 import { isDesign, isDev } from "@/features/project";
 import { routes } from "@/routes";
-import { cn } from "@/utils/styling";
+import { cx } from "@/utils/styling";
 
 function IntroductionDl({
   header,
@@ -26,7 +26,7 @@ function IntroductionDl({
 }) {
   return (
     <dl
-      className={cn(
+      className={cx(
         "flex flex-col gap-4 lg:flex-row lg:gap-0",
         "border-b border-b-stone-300 py-8",
         "first:border-t first:border-t-stone-300",
@@ -69,7 +69,7 @@ function ExperienceLinkButton({
       as={Link}
       size="lg"
       href={`${routes.experience.href}?role=${role}`}
-      className={cn(
+      className={cx(
         "flex items-center",
         "group lg:inline-flex lg:items-center lg:px-6 lg:text-lg",
         "w-full lg:w-1/2",
@@ -77,7 +77,7 @@ function ExperienceLinkButton({
     >
       {labels[role]}
       <span
-        className={cn(
+        className={cx(
           "ml-1 inline-block lg:ml-1.5",
           "lg:transition-transform lg:duration-300 lg:group-hover:translate-x-1 lg:motion-reduce:transform-none",
         )}
@@ -112,7 +112,7 @@ export async function Detail() {
             className="flex flex-col gap-8"
           >
             <TabList
-              className={cn(
+              className={cx(
                 "flex gap-4",
                 "*:text-foreground-secondary *:text-lg *:transition-[color]",
                 "*:border-b-2",

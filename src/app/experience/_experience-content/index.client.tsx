@@ -11,7 +11,7 @@ import { parseSearchParamsClient } from "@/features/experience/query";
 import { isDesign, isDev } from "@/features/project";
 import { SkillTag } from "@/features/skill-tag";
 import { routes } from "@/routes";
-import { cn } from "@/utils/styling";
+import { cn, cx } from "@/utils/styling";
 
 import { typeNameMap } from "./models";
 import { Timeline } from "./ui/timeline";
@@ -129,7 +129,7 @@ export function Client({ projects }: { projects: Project[] }) {
                         <DialogTrigger
                           as={Button}
                           variant="outline"
-                          className={cn(
+                          className={cx(
                             "flex w-full items-center gap-2 sm:w-auto",
                             "lg:inline-flex lg:items-center",
                           )}

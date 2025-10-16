@@ -4,6 +4,18 @@ export function cn(...inputs: Array<string | boolean | undefined>) {
   return twMerge(inputs.filter(Boolean).join(" "));
 }
 
+type CxReturn<T extends string[]> = T extends []
+  ? ""
+  : T extends [infer Head extends string]
+    ? Head
+    : T extends [infer Head extends string, ...infer Tail extends string[]]
+      ? `${Head} ${CxReturn<Tail>}`
+      : string;
+
+export function cx<T extends string[]>(...inputs: T) {
+  return inputs.join(" ") as CxReturn<T>;
+}
+
 export function getCSSVar(property: `--${string}`): string {
   const styles = getComputedStyle(document.documentElement);
   return styles.getPropertyValue(property);

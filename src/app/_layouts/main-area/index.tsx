@@ -12,7 +12,7 @@ import {
 import { SafetyPortal } from "@/components/ui/headless/safety-portal";
 import { Button } from "@/components/ui/styled/button";
 import { sleep } from "@/utils/misc";
-import { cn, getCSSVar, remToPx } from "@/utils/styling";
+import { cx, getCSSVar, remToPx } from "@/utils/styling";
 
 import { clientOnly } from "./client-only";
 import { useIntersectionObserver } from "./use-intersection-observer";
@@ -81,7 +81,7 @@ export function MainArea({ children }: { children: ReactNode }) {
           aria-label="トップに戻る"
           data-hidden={scrollToTopButton.visible ? undefined : "true"}
           fullRounded
-          className={cn(
+          className={cx(
             "fixed right-6 bottom-5 size-14! p-0 text-3xl shadow-lg md:bottom-9",
             "[transition:opacity_200ms,background-color_200ms,scale_200ms]",
             "data-[hidden='true']:pointer-events-none data-[hidden='true']:opacity-0",

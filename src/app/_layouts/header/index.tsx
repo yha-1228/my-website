@@ -8,7 +8,7 @@ import { Container } from "@/components/ui/styled/container";
 import { useKeydown } from "@/hooks/use-keydown";
 import { routes } from "@/routes";
 import { loopFocus } from "@/utils/loop-focus";
-import { cn } from "@/utils/styling";
+import { cx } from "@/utils/styling";
 
 import { ActiveLink } from "./active-link";
 import { useMediaQuery } from "./use-media-query";
@@ -62,7 +62,7 @@ export function Header() {
           "--header-border-bottom-width": headerBorderBottomWidth,
         } as CSSProperties
       }
-      className={cn(
+      className={cx(
         "z-header sticky top-0",
         "h-(--height-header) border-b-[length:var(--header-border-bottom-width)] border-solid border-b-stone-300 bg-white",
       )}
@@ -80,7 +80,7 @@ export function Header() {
           {/* mobile only */}
           <button
             {...mobileMenu.triggerProps}
-            className={cn(
+            className={cx(
               "flex size-12 items-center justify-center rounded-full bg-white active:bg-stone-100 md:hidden",
               "absolute top-1/2 -right-[0.8rem] -translate-y-1/2",
             )}
@@ -101,7 +101,7 @@ export function Header() {
                   <ActiveLink
                     as={Link}
                     href={route.href}
-                    className={cn(
+                    className={cx(
                       "relative inline-flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center px-4 transition-colors duration-200 ease-out",
                       "hover:bg-stone-100 active:bg-stone-200",
                       "data-active:before:bg-brand-base data-active:before:absolute data-active:before:bottom-0 data-active:before:left-0 data-active:before:h-[2px] data-active:before:w-full data-active:before:content-['']",
@@ -120,7 +120,7 @@ export function Header() {
       <nav className="md:hidden" {...mobileMenu.contentProps}>
         <ul
           data-is-open={mobileMenu.open ? "true" : undefined}
-          className={cn(
+          className={cx(
             // height, visibilityを同時にtransitionで切り替えることで
             // 高さのアニメーションを適用しつつ、閉じているときにフォーカスも無効にする
             "absolute top-(--height-header) left-0 w-full overflow-y-hidden bg-white transition-[height,visibility] duration-200 ease-out",
@@ -132,7 +132,7 @@ export function Header() {
               <ActiveLink
                 as={Link}
                 href={route.href}
-                className={cn(
+                className={cx(
                   "flex items-center justify-between py-3",
                   "active:bg-stone-100",
                   "data-active:relative",

@@ -1,11 +1,11 @@
 import { type ComponentPropsWithRef } from "react";
 
-import { cn } from "@/utils/styling";
+import { cn, cx } from "@/utils/styling";
 
 // common
 // ----------------------------------------
 
-const baseClassName = cn(
+const baseClassName = cx(
   "w-full appearance-none rounded-touchable px-3 transition-[background-color] duration-200 ease-out border border-stone-400",
   "disabled:bg-stone-100 disabled:text-foreground-primary/70 disabled:placeholder:text-foreground-placeholder disabled:cursor-not-allowed",
   "placeholder:text-foreground-placeholder",

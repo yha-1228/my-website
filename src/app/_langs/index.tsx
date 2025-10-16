@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
-import { cn } from "@/utils/styling";
+import { cn, cx } from "@/utils/styling";
 
 import { skillWords } from "./data";
 
@@ -14,7 +14,7 @@ interface IntroductionSectionProps {
 function IntroductionSection({ heading, children }: IntroductionSectionProps) {
   return (
     <section
-      className={cn(
+      className={cx(
         "border-t pt-8",
         "flex flex-col gap-10 lg:flex-row lg:gap-0",
       )}
@@ -23,7 +23,7 @@ function IntroductionSection({ heading, children }: IntroductionSectionProps) {
         {heading}
       </Heading1>
       <div
-        className={cn(
+        className={cx(
           "grid gap-x-4 gap-y-1.5 sm:gap-x-9",
           "grid-cols-2 md:grid-cols-3",
           "w-full leading-[1.6]",
@@ -35,7 +35,7 @@ function IntroductionSection({ heading, children }: IntroductionSectionProps) {
   );
 }
 
-const baseItemClassName = cn(
+const baseItemClassName = cx(
   "inline-flex items-end justify-between gap-2 pb-1",
   "border-b border-b-stone-300",
 );

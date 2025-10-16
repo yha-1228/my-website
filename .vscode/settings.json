@@ -19,5 +19,5 @@
       "\\s?[\\w].*:\\s*?[\"'`]([^\"'`]*).*?,?\\s?"
     ]
   ],
-  "tailwindCSS.classFunctions": ["cn"]
+  "tailwindCSS.classFunctions": ["cn", "cx"]
 }

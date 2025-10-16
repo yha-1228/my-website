@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/styled/button";
 import { TextLink } from "@/components/ui/styled/text-link";
 import { routes } from "@/routes";
 import { entriesOf } from "@/utils/object";
-import { cn, getCSSVar, remToPx } from "@/utils/styling";
+import { cx, getCSSVar, remToPx } from "@/utils/styling";
 
 import {
   Field,
@@ -162,7 +162,7 @@ export function ContactForm() {
 
   return (
     <div
-      className={cn(
+      className={cx(
         "lg:shadow-wide lg:rounded-xl lg:border lg:border-solid lg:border-gray-200 lg:bg-white lg:px-10 lg:pt-8 lg:pb-11",
       )}
     >

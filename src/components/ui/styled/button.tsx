@@ -2,16 +2,21 @@ import { LoaderCircle } from "lucide-react";
 import { type ElementType, type ReactNode } from "react";
 
 import { type PropsWithAs } from "@/types/react";
-import { cn } from "@/utils/styling";
+import { cn, cx } from "@/utils/styling";
 
 type Variant = "fill" | "outline";
 
 type Size = "md" | "lg";
 
 const variantClassNames = {
-  fill: "bg-foreground-primary text-white hover:not-disabled:opacity-80 active:not-disabled:opacity-70",
-  outline:
-    "border border-current text-foreground-primary bg-white hover:not-disabled:bg-stone-100 active:not-disabled:bg-stone-200",
+  fill: cx(
+    "bg-foreground-primary text-white",
+    "hover:not-disabled:opacity-80 active:not-disabled:opacity-70",
+  ),
+  outline: cx(
+    "border border-current text-foreground-primary bg-white",
+    "hover:not-disabled:bg-stone-100 active:not-disabled:bg-stone-200",
+  ),
 } as const satisfies Record<Variant, string>;
 
 const sizeClassNames = {

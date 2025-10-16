@@ -9,7 +9,7 @@ import { TextLink } from "@/components/ui/styled/text-link";
 import { dateFormat, isWithinOneMonth } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
 import { routes } from "@/routes";
-import { cn } from "@/utils/styling";
+import { cx } from "@/utils/styling";
 
 const LIMIT = 3;
 
@@ -33,7 +33,7 @@ export async function Blog() {
           </TextLink>
         </div>
         <ScrollbarHiddenIfTouchDevice
-          className={cn(
+          className={cx(
             "flex gap-4 overflow-x-auto",
             "-mx-(--screen-margin) px-(--screen-margin) sm:mx-0 sm:px-0",
             "lg:grid lg:grid-cols-3",
@@ -45,7 +45,7 @@ export async function Blog() {
               target="_blank"
               rel="noopener noreferrer"
               href={zennArticle.link}
-              className={cn(
+              className={cx(
                 "rounded-sm border border-stone-300 bg-white px-5 py-4 transition-colors ease-out",
                 "flex flex-col justify-between gap-6 lg:gap-10",
                 "w-64 shrink-0 lg:w-auto",

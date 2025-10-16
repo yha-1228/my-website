@@ -2,7 +2,7 @@ import { AnchorLinkOffset } from "@/components/ui/styled/anchor-link-offset";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { AnchorLink } from "@/features/anchor-link";
-import { cn } from "@/utils/styling";
+import { cx } from "@/utils/styling";
 
 import { skillDetails } from "./data";
 
@@ -18,7 +18,7 @@ export function Scope() {
           />
         </div>
         <div
-          className={cn(
+          className={cx(
             "flex flex-col gap-6",
             "lg:grid lg:grid-cols-2 lg:gap-4",
           )}
@@ -26,7 +26,7 @@ export function Scope() {
           {skillDetails.map((skillDetail) => (
             <div
               key={skillDetail.category}
-              className={cn(
+              className={cx(
                 "flex flex-col gap-4",
                 "w-full",
                 "px-7 py-6",
@@ -43,7 +43,7 @@ export function Scope() {
                 {skillDetail.items.map((item) => (
                   <li
                     key={item}
-                    className={cn(
+                    className={cx(
                       "bg-[0_0.12rem]",
                       "bg-[url('/assets/check-circle-fill-color-foreground.svg')]",
                       "bg-[length:18px_18px]",

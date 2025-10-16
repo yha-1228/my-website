@@ -7,7 +7,7 @@ import { Heading1 } from "@/components/ui/styled/heading1";
 import { SITE_TITLE } from "@/constants";
 import { LogoutBanner } from "@/features/basic-auth/logout-banner";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
-import { cn } from "@/utils/styling";
+import { cx } from "@/utils/styling";
 
 import { BackButton } from "./_back-button";
 
@@ -53,7 +53,7 @@ export default async function Page({ params }: Props) {
             </header>
             <div className="mt-8 flex flex-col gap-10 border-t border-solid border-t-stone-300 pt-5">
               <div
-                className={cn(
+                className={cx(
                   "border-foreground-primary flex flex-col gap-2 rounded-sm border px-6 py-5 text-sm",
                   "[&>dl>dt]:font-bold",
                 )}

@@ -11,7 +11,7 @@ import {
 import { dateFormat, isWithinOneMonth } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
 import { routes } from "@/routes";
-import { cn } from "@/utils/styling";
+import { cx } from "@/utils/styling";
 
 function paginate<T>(
   array: T[],
@@ -67,7 +67,7 @@ export function PageClient({
                 {dateFormat("yyyy年MM月dd日 HH:mm", zennArticle.isoDate)}
               </p>
               <div
-                className={cn(
+                className={cx(
                   "flex items-start gap-x-2",
                   "group-hover:text-brand-base group-active:text-brand-base",
                 )}

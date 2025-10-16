@@ -1,4 +1,4 @@
-import { cn } from "@/utils/styling";
+import { cx } from "@/utils/styling";
 
 type SkillWord =
   | { label: string; kikan: string; category: "langOrFw" }
@@ -18,11 +18,11 @@ export const skillWords: SkillWord[] = [
   { category: "langOrFw", label: "Express", kikan: "約1年半強" },
   { category: "langOrFw", label: "SQL", kikan: "約2年" },
 
-  { category: "tools", label: "VS Code", extraClassName: cn("sm:hidden") },
+  { category: "tools", label: "VS Code", extraClassName: cx("sm:hidden") },
   {
     category: "tools",
     label: "Visual Studio Code",
-    extraClassName: cn("hidden sm:inline"),
+    extraClassName: cx("hidden sm:inline"),
   },
   { category: "tools", label: "Cursor" },
   { category: "tools", label: "Figma" },
