@@ -2,9 +2,9 @@
 
 import { LogOut } from "lucide-react";
 
+import { DialogTrigger } from "@/components/ui/headless/dialog";
 import { Button } from "@/components/ui/styled/button";
 import { Dialog } from "@/components/ui/styled/dialog";
-import { DialogTrigger } from "@/components/ui/unstyled/dialog";
 
 import { generateLogoutUrl } from "./auth";
 

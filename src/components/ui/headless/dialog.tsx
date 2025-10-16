@@ -17,7 +17,7 @@ import { loopFocus } from "@/utils/loop-focus";
 import { sleep } from "@/utils/misc";
 import { getContextAndHook } from "@/utils/react";
 
-import { SafetyPortal } from "../headless/safety-portal";
+import { SafetyPortal } from "./safety-portal";
 
 // helpers
 // ----------------------------------------

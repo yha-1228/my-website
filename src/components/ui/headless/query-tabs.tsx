@@ -5,9 +5,10 @@ import { z } from "zod";
 
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
+import { Tabs, type TabsProps } from "./tabs";
 import { type UseTabsProps } from "./tabs";
 
-export interface UseTabsWithQueryProps<T extends string> {
+interface UseTabsWithQueryProps<T extends string> {
   name: string;
   values: [T, ...T[]];
   /**
@@ -16,7 +17,7 @@ export interface UseTabsWithQueryProps<T extends string> {
   fallbackValue?: T;
 }
 
-export function useTabsWithQuery<T extends string>({
+function useTabsWithQuery<T extends string>({
   name,
   values,
   fallbackValue = values[0],
@@ -39,4 +40,17 @@ export function useTabsWithQuery<T extends string>({
   } as const satisfies UseTabsProps;
 
   return { tabsProps };
+}
+
+// ----------------------------------------
+
+export interface QueryTabsProps<T extends string>
+  extends UseTabsWithQueryProps<T>,
+    Omit<TabsProps, "defaultIndex" | "onTabChange"> {}
+
+export function QueryTabs<T extends string>(props: QueryTabsProps<T>) {
+  const { name, values, fallbackValue, ...rest } = props;
+  const { tabsProps } = useTabsWithQuery({ name, values, fallbackValue });
+
+  return <Tabs {...tabsProps} {...rest} />;
 }

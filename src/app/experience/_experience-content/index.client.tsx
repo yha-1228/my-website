@@ -4,9 +4,9 @@ import { LockIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
 import { type Project } from "@/api/models/project";
+import { DialogTrigger } from "@/components/ui/headless/dialog";
 import { Button } from "@/components/ui/styled/button";
 import { Dialog } from "@/components/ui/styled/dialog";
-import { DialogTrigger } from "@/components/ui/unstyled/dialog";
 import { parseSearchParamsClient } from "@/features/experience/query";
 import { isDesign, isDev } from "@/features/project";
 import { SkillTag } from "@/features/skill-tag";

@@ -1,7 +1,6 @@
 import { X } from "lucide-react";
 import { type JSX, type ReactNode } from "react";
 
-import { Button, type ButtonVariant } from "@/components/ui/styled/button";
 import {
   DialogClose,
   DialogContent,
@@ -9,7 +8,8 @@ import {
   DialogPortal,
   DialogProvider,
   DialogTitle,
-} from "@/components/ui/unstyled/dialog";
+} from "@/components/ui/headless/dialog";
+import { Button, type ButtonVariant } from "@/components/ui/styled/button";
 import { cn } from "@/utils/styling";
 
 interface DialogButton {
