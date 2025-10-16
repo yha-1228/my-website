@@ -119,10 +119,12 @@ export function ContactForm() {
   };
 
   const handleErrorListItemClick = (key: keyof ContactFormValues) => {
-    const labelElem = document.querySelector(`label[data-key="${key}"]`);
+    const fieldElem = document.querySelector(`[name="${key}"]`);
+    const fieldId = fieldElem?.getAttribute("id");
+
+    const labelElem = document.querySelector(`label[for="${fieldId}"]`);
     if (!(labelElem instanceof HTMLElement)) return;
     const labelY = labelElem.getBoundingClientRect().top;
-    if (!labelY) return;
 
     const bufferMargin = remToPx(getCSSVar("--spacing")) * 4;
 
@@ -177,7 +179,7 @@ export function ContactForm() {
             invalid={showError("name", formState)}
             className="flex flex-col gap-2"
           >
-            <FieldLabel as={Label} data-key="name" required>
+            <FieldLabel as={Label} required>
               {keyLabelMap.name}
             </FieldLabel>
             <Field
@@ -196,7 +198,7 @@ export function ContactForm() {
             invalid={showError("email", formState)}
             className="flex flex-col gap-2 md:col-span-2"
           >
-            <FieldLabel as={Label} data-key="email" required>
+            <FieldLabel as={Label} required>
               {keyLabelMap.email}
             </FieldLabel>
             <Field
@@ -216,9 +218,7 @@ export function ContactForm() {
           invalid={showError("companyName", formState)}
           className="flex flex-col gap-2"
         >
-          <FieldLabel as={Label} data-key="companyName">
-            {keyLabelMap.companyName}
-          </FieldLabel>
+          <FieldLabel as={Label}>{keyLabelMap.companyName}</FieldLabel>
           <Field
             as={Input}
             type="text"
@@ -235,7 +235,7 @@ export function ContactForm() {
           invalid={showError("message", formState)}
           className="flex flex-col gap-2"
         >
-          <FieldLabel as={Label} data-key="message" required>
+          <FieldLabel as={Label} required>
             {keyLabelMap.message}
           </FieldLabel>
           <Field
