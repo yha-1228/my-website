@@ -5,12 +5,12 @@ import { useSearchParams } from "next/navigation";
 
 import { type ZennArticle } from "@/api/endpoints/blog";
 import {
+  getOffsetIndex,
   Pagination,
   parsePaginationSearchParams,
 } from "@/components/ui/styled/pagination";
 import { dateFormat, isWithinOneMonth } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
-import { routes } from "@/routes";
 import { cx } from "@/utils/styling";
 
 function paginate<T>(
@@ -36,7 +36,7 @@ export function PageClient({
   const parsedSearchParams = parsePaginationSearchParams(searchParams);
 
   const paginatedZennArticles = paginate(zennArticles, {
-    offset: (parsedSearchParams.page - 1) * limit,
+    offset: getOffsetIndex(parsedSearchParams.page, limit),
     limit,
   });
 
@@ -90,7 +90,6 @@ export function PageClient({
       <Pagination
         totalCount={paginatedZennArticles.totalCount}
         perPage={limit}
-        pathname={routes.blog.href}
       />
     </>
   );

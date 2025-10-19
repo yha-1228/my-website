@@ -1,7 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { type ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
+import {
+  type ReadonlyURLSearchParams,
+  usePathname,
+  useSearchParams,
+} from "next/navigation";
 import { z } from "zod";
 
 import { Button } from "./button";
@@ -28,19 +32,23 @@ function parseSearchParams(searchParams: ReadonlyURLSearchParams) {
 
 export { parseSearchParams as parsePaginationSearchParams };
 
+export function getOffsetIndex(page: number, limit: number) {
+  return (page - 1) * limit;
+}
+
 export interface PaginationProps {
   totalCount: number;
   perPage: number;
-  rootClassName?: string;
-  pathname: string;
 }
 
-export function Pagination({ totalCount, perPage, pathname }: PaginationProps) {
+export function Pagination({ totalCount, perPage }: PaginationProps) {
+  const pathname = usePathname();
+
   const searchParams = useSearchParams();
   const parsedSearchParams = parseSearchParams(searchParams);
   const activePage = parsedSearchParams.page;
 
-  const start = (activePage - 1) * perPage + 1;
+  const start = getOffsetIndex(activePage, perPage) + 1;
   const end = Math.min(activePage * perPage, totalCount);
 
   if (totalCount === 0) {
