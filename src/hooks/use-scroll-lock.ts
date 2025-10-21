@@ -2,12 +2,14 @@ import { useEffect } from "react";
 
 export function useScrollLock({ enabled }: { enabled: boolean }) {
   useEffect(() => {
-    const defaultBodyOverflow = window.getComputedStyle(document.body).overflow;
-
-    document.body.style.overflow = enabled ? "hidden" : defaultBodyOverflow;
+    if (enabled) {
+      document.body.style.overflow = "hidden";
+    }
 
     return () => {
-      document.body.style.overflow = defaultBodyOverflow;
+      if (enabled) {
+        document.body.style.removeProperty("overflow");
+      }
     };
   }, [enabled]);
 }
