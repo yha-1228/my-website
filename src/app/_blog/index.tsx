@@ -61,7 +61,9 @@ export async function Blog() {
                   <ExternalLink className="mt-1 shrink-0" />
                 </div>
                 <p className="text-foreground-secondary text-sm">
-                  {dateFormat("yyyy年MM月dd日 HH:mm", zennArticle.isoDate)}
+                  {dateFormat("yyyy年MM月dd日 HH:mm", zennArticle.isoDate, {
+                    isServer: true,
+                  })}
                 </p>
               </div>
 

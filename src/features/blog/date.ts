@@ -8,12 +8,18 @@ import {
 
 export type DateTemplate = "yyyy年MM月dd日 HH:mm";
 
-export function dateFormat(template: DateTemplate, dateInput: string) {
+export function dateFormat(
+  template: DateTemplate,
+  dateInput: string,
+  { isServer } = { isServer: false },
+) {
   let dateObj = parseISO(dateInput);
 
   // デプロイ後だと9時間後ろにずれるので対処する
-  if (process.env.NODE_ENV === "production") {
-    dateObj = addHours(dateObj, 9);
+  if (isServer) {
+    if (process.env.NODE_ENV === "production") {
+      dateObj = addHours(dateObj, 9);
+    }
   }
 
   return format(dateObj, template);
