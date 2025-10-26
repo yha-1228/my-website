@@ -9,7 +9,7 @@ import {
   Pagination,
   parsePaginationSearchParams,
 } from "@/components/ui/styled/pagination";
-import { dateFormat, isWithinOneMonth } from "@/features/blog/date";
+import { dateFormat } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
 import { cx } from "@/utils/styling";
 
@@ -77,11 +77,8 @@ export function PageClient({
               </div>
             </a>
 
-            <div className="flex gap-2">
+            <div>
               <Tag variant="zenn">Zenn</Tag>
-              {isWithinOneMonth(zennArticle.isoDate) && (
-                <Tag variant="withinOneMonth">1ヶ月以内に投稿</Tag>
-              )}
             </div>
           </li>
         ))}

@@ -2,12 +2,11 @@ import { type ComponentProps } from "react";
 
 import { cn } from "@/utils/styling";
 
-type Variant = "zenn" | "withinOneMonth";
+type Variant = "zenn" | "note";
 
 const variantClassNames = {
-  zenn: "*:data-[slot=dot]:hidden border text-[#3ea8ff] bg-white",
-  withinOneMonth:
-    "*:data-[slot=dot]:bg-amber-400 border border-stone-300 bg-white",
+  zenn: "border text-[#3ea8ff] bg-white",
+  note: "", // TODO:
 } as const satisfies Record<Variant, string>;
 
 interface TagProps extends ComponentProps<"div"> {
@@ -15,7 +14,7 @@ interface TagProps extends ComponentProps<"div"> {
 }
 
 function Tag(props: TagProps) {
-  const { variant, className, children, ...restProps } = props;
+  const { variant, className, ...restProps } = props;
 
   return (
     <div
@@ -25,14 +24,7 @@ function Tag(props: TagProps) {
         className,
       )}
       {...restProps}
-    >
-      <span
-        className="size-2 rounded-full"
-        aria-hidden="true"
-        data-slot="dot"
-      />
-      {children}
-    </div>
+    />
   );
 }
 

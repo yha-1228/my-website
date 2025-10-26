@@ -1,10 +1,4 @@
-import {
-  addHours,
-  format,
-  isWithinInterval,
-  parseISO,
-  subMonths,
-} from "date-fns";
+import { addHours, format, parseISO } from "date-fns";
 
 export type DateTemplate = "yyyy年MM月dd日 HH:mm";
 
@@ -23,16 +17,4 @@ export function dateFormat(
   }
 
   return format(dateObj, template);
-}
-
-/**
- * `targetDateISO`が`baseDate`から一ヶ月以内かどうか判定する。
- */
-export function isWithinOneMonth(targetDateISO: string, baseDate = new Date()) {
-  const targetDate = new Date(targetDateISO);
-
-  return isWithinInterval(targetDate, {
-    start: subMonths(baseDate, 1),
-    end: baseDate,
-  });
 }

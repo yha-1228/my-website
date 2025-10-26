@@ -6,7 +6,7 @@ import { ScrollbarHiddenIfTouchDevice } from "@/components/ui/headless/scrollbar
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { TextLink } from "@/components/ui/styled/text-link";
-import { dateFormat, isWithinOneMonth } from "@/features/blog/date";
+import { dateFormat } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
 import { routes } from "@/routes";
 import { cx } from "@/utils/styling";
@@ -67,11 +67,8 @@ export async function Blog() {
                 </p>
               </div>
 
-              <div className="flex gap-2">
+              <div>
                 <Tag variant="zenn">Zenn</Tag>
-                {isWithinOneMonth(zennArticle.isoDate) && (
-                  <Tag variant="withinOneMonth">1ヶ月以内に投稿</Tag>
-                )}
               </div>
             </a>
           ))}
