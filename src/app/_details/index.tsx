@@ -109,6 +109,7 @@ export async function Detail() {
           <QueryTabs
             name="detailSectionTab"
             values={["dev", "design"]}
+            hash="詳細"
             className="flex flex-col gap-8"
           >
             <TabList

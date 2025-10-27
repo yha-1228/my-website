@@ -11,6 +11,7 @@ import { type UseTabsProps } from "./tabs";
 interface UseTabsWithQueryProps<T extends string> {
   name: string;
   values: [T, ...T[]];
+  hash?: string;
   /**
    * @default values[0]
    */
@@ -20,6 +21,7 @@ interface UseTabsWithQueryProps<T extends string> {
 function useTabsWithQuery<T extends string>({
   name,
   values,
+  hash,
   fallbackValue = values[0],
 }: UseTabsWithQueryProps<T>) {
   const searchParams = useSearchParams();
@@ -30,7 +32,7 @@ function useTabsWithQuery<T extends string>({
     ? tabParamParseResult.data
     : fallbackValue;
 
-  const updateSearchParams = useUpdateSearchParams();
+  const updateSearchParams = useUpdateSearchParams(hash);
 
   const tabsProps = {
     defaultIndex: values.indexOf(tabValue),
@@ -49,8 +51,8 @@ export interface QueryTabsProps<T extends string>
     Omit<TabsProps, "defaultIndex" | "onTabChange"> {}
 
 export function QueryTabs<T extends string>(props: QueryTabsProps<T>) {
-  const { name, values, fallbackValue, ...rest } = props;
-  const { tabsProps } = useTabsWithQuery({ name, values, fallbackValue });
+  const { name, values, hash, fallbackValue, ...rest } = props;
+  const { tabsProps } = useTabsWithQuery({ name, values, hash, fallbackValue });
 
   return <Tabs {...tabsProps} {...rest} />;
 }

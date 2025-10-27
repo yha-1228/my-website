@@ -1,6 +1,6 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export function useUpdateSearchParams() {
+export function useUpdateSearchParams(hash?: string) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -10,7 +10,7 @@ export function useUpdateSearchParams() {
     params.set(name, value);
     const queryString = params.toString();
 
-    const href = `${pathname}?${queryString}`;
+    const href = `${pathname}?${queryString}${hash ? `#${hash}` : ""}`;
 
     router.replace(href, { scroll: false });
   };
