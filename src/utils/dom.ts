@@ -11,4 +11,3 @@ export function findFocusableElements(parentElement: HTMLElement) {
     >("a, button, input, textarea"),
   );
 }
-
