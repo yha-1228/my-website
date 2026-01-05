@@ -1,7 +1,5 @@
-import Link from "next/link";
-
 import { Container } from "@/components/ui/styled/container";
-import { TextLink } from "@/components/ui/styled/text-link";
+import { TextLinkNext } from "@/components/ui/styled/text-link-next";
 import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
@@ -55,13 +53,12 @@ export function Footer({ className }: FooterProps) {
               .filter((route) => route.hierarchy === 1)
               .map((route) => (
                 <li key={route.href}>
-                  <TextLink
-                    as={Link}
+                  <TextLinkNext
                     className="inline-block py-2 leading-normal transition-colors"
                     href={route.href}
                   >
                     {route.label}
-                  </TextLink>
+                  </TextLinkNext>
                 </li>
               ))}
           </ul>

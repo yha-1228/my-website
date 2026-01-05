@@ -1,11 +1,10 @@
 import { ChevronRight, ExternalLink } from "lucide-react";
-import Link from "next/link";
 
 import { getZennArticles } from "@/api/endpoints/blog";
 import { ScrollbarHiddenIfTouchDevice } from "@/components/ui/headless/scrollbar-hidden-if-touch-device";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
-import { TextLink } from "@/components/ui/styled/text-link";
+import { TextLinkNext } from "@/components/ui/styled/text-link-next";
 import { dateFormat } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
 import { routes } from "@/routes";
@@ -23,14 +22,13 @@ export async function Blog() {
       <section className="flex flex-col gap-10 border-t pt-8">
         <div className="flex items-center justify-between">
           <Heading1>{routes.blog.label}</Heading1>
-          <TextLink
-            as={Link}
+          <TextLinkNext
             href={routes.blog.href}
             className="inline-flex items-center gap-1"
           >
             <span>もっと見る</span>
             <ChevronRight />
-          </TextLink>
+          </TextLinkNext>
         </div>
         <ScrollbarHiddenIfTouchDevice
           className={cx(
