@@ -71,12 +71,12 @@ export default async function Page({ params }: Props) {
                   <dd>{project.uxLayers.join(" / ")}</dd>
                 </dl>
                 <dl>
-                  <dt className="font-bold">デザインツール</dt>
-                  <dd>{project.tools?.replace(/,/g, " / ")}</dd>
+                  <dt className="font-bold">言語/FW</dt>
+                  <dd>{project.langAndFws?.replace(/,/g, " / ")}</dd>
                 </dl>
                 <dl>
-                  <dt className="font-bold">言語/FWなど</dt>
-                  <dd>{project.langAndFws?.replace(/,/g, " / ")}</dd>
+                  <dt className="font-bold">ツール</dt>
+                  <dd>{project.tools?.replace(/,/g, " / ")}</dd>
                 </dl>
               </div>
 
