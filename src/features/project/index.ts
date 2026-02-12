@@ -8,3 +8,8 @@ export function isDev(project: Project) {
 export function isDesign(project: Project) {
   return someIncludes(project.roles, ["UIデザイン", "グラフィックデザイン"]);
 }
+
+export function formatTitleWithNo(index: number, title: string) {
+  const no = (index + 1).toString().padStart(2, "0");
+  return `${no}. ${title}`;
+}

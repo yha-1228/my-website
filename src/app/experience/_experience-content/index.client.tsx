@@ -7,14 +7,14 @@ import { type Project } from "@/api/models/project";
 import { DialogTrigger } from "@/components/ui/headless/dialog";
 import { Button } from "@/components/ui/styled/button";
 import { Dialog } from "@/components/ui/styled/dialog";
+import { Timeline } from "@/components/ui/styled/timeline";
 import { parseSearchParamsClient } from "@/features/experience/query";
-import { isDesign, isDev } from "@/features/project";
+import { formatTitleWithNo, isDesign, isDev } from "@/features/project";
 import { SkillTag } from "@/features/skill-tag";
 import { routes } from "@/routes";
 import { cn, cx } from "@/utils/styling";
 
 import { typeNameMap } from "./models";
-import { Timeline } from "./ui/timeline";
 import { ellipsisTextByComma, splitText } from "./utils";
 
 export function Client({ projects }: { projects: Project[] }) {
@@ -52,7 +52,7 @@ export function Client({ projects }: { projects: Project[] }) {
         <span className="ml-0.5 text-sm">件</span>
       </div>
       <Timeline
-        items={filteredProjects.map((project) => {
+        items={filteredProjects.map((project, projectIndex) => {
           const langAndFwsSpitted = splitText(project.langAndFws, 3);
           const toolsSplitted = splitText(project.tools, 3);
           return {
@@ -61,7 +61,7 @@ export function Client({ projects }: { projects: Project[] }) {
               (project.blank ? ` (空白期間: ${project.blank})` : ""),
             heading: (
               <div className="flex flex-col items-start gap-x-2 gap-y-1 sm:flex-row sm:items-center">
-                <div>{project.title}</div>
+                <div>{formatTitleWithNo(projectIndex, project.title)}</div>
                 <div className="inline-block grow-0 rounded-sm border border-stone-200 bg-stone-100 px-1.5 text-xs font-normal whitespace-nowrap sm:text-sm">
                   {typeNameMap[project.type]}
                 </div>

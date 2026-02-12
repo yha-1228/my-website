@@ -31,7 +31,7 @@ function convertToDetailBlocks(html: string) {
   return html.replace(pattern, (_, summary, content) => {
     summary = summary.trim();
     return `
-    <details class="${cn("rounded-md border border-stone-300 overflow-hidden")}">
+    <details class="${cn("rounded-md border border-stone-300 overflow-hidden my-4")}">
       <summary class="${cn("px-4 py-2 bg-stone-100 hover:opacity-70 active:opacity-70 transition-opacity cursor-pointer")}">${summary}</summary>
       <div class="${cn(baseClassName, "p-4")}">${content}</div>
     </details>`;
