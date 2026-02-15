@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import { type JSX, type ReactNode } from "react";
+import { type JSX, type ReactNode, useState } from "react";
 
 import {
   DialogClose,
@@ -8,25 +8,88 @@ import {
   DialogPortal,
   DialogProvider,
   DialogTitle,
+  useDialogContext,
 } from "@/components/ui/headless/dialog";
-import { Button, type ButtonVariant } from "@/components/ui/styled/button";
+import { Button } from "@/components/ui/styled/button";
 import { cn } from "@/utils/styling";
 
-interface DialogButton {
-  content: ReactNode;
-  variant: ButtonVariant;
-  onClick?: () => void;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyAsyncFunction = (...args: any[]) => Promise<any>;
+
+interface UseAsyncFunctionProps<T extends AnyAsyncFunction> {
+  fn: T;
+  onSuccess?: (result: Awaited<ReturnType<T>>) => void;
+  onError?: (error: Error) => void;
 }
+
+function useAsyncFunction<T extends AnyAsyncFunction>(
+  props: UseAsyncFunctionProps<T>,
+) {
+  const { fn, onSuccess, onError } = props;
+
+  const [state, setState] = useState({
+    isPending: false,
+    isSuccess: false,
+    isError: false,
+  });
+
+  const handleMutate = async (...args: Parameters<T>) => {
+    setState((prev) => ({ ...prev, isPending: true }));
+
+    try {
+      const result = (await fn(...args)) as Awaited<ReturnType<T>>;
+      onSuccess?.(result);
+      setState((prev) => ({ ...prev, isSuccess: true, isError: false }));
+    } catch (error) {
+      onError?.(error as Error);
+      setState((prev) => ({ ...prev, isSuccess: false, isError: true }));
+    } finally {
+      setState((prev) => ({ ...prev, isPending: false }));
+    }
+  };
+
+  return { ...state, handleMutate };
+}
+
+// ----------------------------------------
+
+interface PrimaryButtonProps {
+  label: ReactNode;
+  onPrimaryAction?: () => void | Promise<void>;
+}
+
+function PrimaryButton(props: PrimaryButtonProps) {
+  const { label, onPrimaryAction } = props;
+  const { onCloseDialog } = useDialogContext();
+  const { handleMutate, isPending } = useAsyncFunction({
+    fn: async () => {
+      await onPrimaryAction?.();
+    },
+  });
+
+  const handleClick = async () => {
+    await handleMutate();
+    onCloseDialog();
+  };
+
+  return (
+    <Button type="button" disabled={isPending} onClick={handleClick}>
+      {label}
+    </Button>
+  );
+}
+
+// ----------------------------------------
 
 export interface DialogProps {
   trigger: JSX.Element;
   dialogTitle: ReactNode;
   dialogBody: ReactNode;
-  dialogButtons: DialogButton[];
+  primaryButtonProps: PrimaryButtonProps;
 }
 
 export function Dialog(props: DialogProps) {
-  const { trigger, dialogTitle, dialogBody, dialogButtons } = props;
+  const { trigger, dialogTitle, dialogBody, primaryButtonProps } = props;
 
   return (
     <DialogProvider>
@@ -67,16 +130,10 @@ export function Dialog(props: DialogProps) {
           </div>
           <div className="px-8">{dialogBody}</div>
           <div className="flex flex-col-reverse gap-2 border-t border-t-stone-300 bg-stone-50 px-8 py-5 sm:flex-row sm:justify-end">
-            {dialogButtons.map((button, i) => (
-              <DialogClose
-                as={Button}
-                key={i}
-                variant={button.variant}
-                onClick={button.onClick}
-              >
-                {button.content}
-              </DialogClose>
-            ))}
+            <DialogClose as={Button} variant="outline">
+              キャンセル
+            </DialogClose>
+            <PrimaryButton {...primaryButtonProps} />
           </div>
         </DialogContent>
       </DialogPortal>

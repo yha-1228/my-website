@@ -149,21 +149,14 @@ export function Client({ projects }: { projects: Project[] }) {
                           </p>
                         </>
                       }
-                      dialogButtons={[
-                        {
-                          content: "キャンセル",
-                          variant: "outline",
+                      primaryButtonProps={{
+                        label: "閲覧に進む",
+                        onPrimaryAction: () => {
+                          window.location.href = routes["portfolio/[id]"].href(
+                            project.id,
+                          );
                         },
-                        {
-                          content: "閲覧に進む",
-                          variant: "fill",
-                          onClick: () => {
-                            window.location.href = routes[
-                              "portfolio/[id]"
-                            ].href(project.id);
-                          },
-                        },
-                      ]}
+                      }}
                     />
                   </div>
                 )}

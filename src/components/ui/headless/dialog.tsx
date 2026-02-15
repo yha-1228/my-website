@@ -313,6 +313,7 @@ function DialogContent(props: DialogContentProps) {
 // ----------------------------------------
 
 export {
+  useDialogContext,
   DialogProvider,
   DialogTrigger,
   DialogPortal,

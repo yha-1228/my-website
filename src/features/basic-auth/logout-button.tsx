@@ -35,27 +35,19 @@ export function LogoutButton({
           <p>新規ウィンドウが開きますが、自動で閉じるまでお待ちください。</p>
         </>
       }
-      dialogButtons={[
-        {
-          content: "キャンセル",
-          variant: "outline",
-        },
-        {
-          content: "ログアウトする",
-          variant: "fill",
-          onClick: async () => {
-            onOkClick?.();
+      primaryButtonProps={{
+        label: "ログアウトする",
+        onPrimaryAction: () => {
+          onOkClick?.();
 
-            const newWindow = window.open(generateLogoutUrl(), "_blank");
-
-            setTimeout(() => {
-              newWindow?.close();
-              window.location.href = window.location.origin;
-              // 暫く待たないとログアウトされずに遷移される
-            }, 1000);
-          },
+          const newWindow = window.open(generateLogoutUrl(), "_blank");
+          setTimeout(() => {
+            newWindow?.close();
+            window.location.href = window.location.origin;
+            // 暫く待たないとログアウトされずに遷移される
+          }, 1000);
         },
-      ]}
+      }}
     />
   );
 }
