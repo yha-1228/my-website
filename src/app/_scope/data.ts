@@ -19,7 +19,7 @@ export const skillDetails = [
   },
   {
     category: "デザイン",
-    kikan: "約1.8年",
+    kikan: "約2年強",
     items: [
       "UIデザイン",
       "デザインシステム構築",
