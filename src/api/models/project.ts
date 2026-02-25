@@ -33,6 +33,7 @@ export const projectSchema = z.object({
   processes: z
     .array(z.object({ title: z.string(), listItems: z.string().optional() }))
     .nullish(),
+  newOrRenewal: z.enum(["N", "R"]).optional(),
 });
 
 export type Project = z.infer<typeof projectSchema>;

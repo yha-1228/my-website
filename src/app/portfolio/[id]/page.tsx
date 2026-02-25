@@ -1,5 +1,6 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
+import { match } from "ts-pattern";
 
 import { getProject, getProjects } from "@/api/endpoints/project";
 import { Container } from "@/components/ui/styled/container";
@@ -55,8 +56,14 @@ export default async function Page({ params }: Props) {
           <BackButton />
 
           <article>
-            <header>
+            <header className="flex items-center gap-4">
               <Heading1>{formatTitleWithNo(index, project.title)}</Heading1>
+              <div className="bg-foreground-primary rounded-x px-2 py-0.5 text-white">
+                {match(project.newOrRenewal)
+                  .with("N", () => "新規")
+                  .with("R", () => "リニューアル")
+                  .otherwise(() => "新規/リニューアルを入力してください")}
+              </div>
             </header>
             <div className="mt-8 border-t border-solid border-t-stone-300 pt-5 *:[h2]:first:sr-only">
               <h2 className={h2ClassName}>案件概要</h2>
