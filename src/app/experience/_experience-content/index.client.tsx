@@ -2,6 +2,7 @@
 
 import { LockIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { match } from "ts-pattern";
 
 import { type Project } from "@/api/models/project";
 import { DialogTrigger } from "@/components/ui/headless/dialog";
@@ -60,10 +61,24 @@ export function Client({ projects }: { projects: Project[] }) {
               `${project.start} - ${project.end}` +
               (project.blank ? ` (空白期間: ${project.blank})` : ""),
             heading: (
-              <div className="flex flex-col items-start gap-x-2 gap-y-1 sm:flex-row sm:items-center">
+              <div className="flex flex-col items-start gap-x-3 gap-y-1 sm:flex-row sm:items-center">
                 <div>{formatTitleWithNo(projectIndex, project.title)}</div>
-                <div className="inline-block grow-0 rounded-sm border border-stone-200 bg-stone-100 px-1.5 text-xs font-normal whitespace-nowrap sm:text-sm">
-                  {typeNameMap[project.type]}
+                <div className="flex items-center gap-1.5">
+                  {match(project.newOrRenewal)
+                    .with("N", () => (
+                      <div className="bg-foreground-primary inline-block grow-0 rounded-sm px-1.5 text-xs font-normal whitespace-nowrap text-white sm:text-sm">
+                        新規
+                      </div>
+                    ))
+                    .with("R", () => (
+                      <div className="bg-foreground-primary inline-block grow-0 rounded-sm px-1.5 text-xs font-normal whitespace-nowrap text-white sm:text-sm">
+                        リニューアル
+                      </div>
+                    ))
+                    .otherwise(() => null)}
+                  <div className="inline-block grow-0 rounded-sm border border-stone-200 bg-stone-100 px-1.5 text-xs font-normal whitespace-nowrap sm:text-sm">
+                    {typeNameMap[project.type]}
+                  </div>
                 </div>
               </div>
             ),

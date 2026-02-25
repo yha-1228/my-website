@@ -58,7 +58,7 @@ export default async function Page({ params }: Props) {
           <article>
             <header className="flex items-center gap-4">
               <Heading1>{formatTitleWithNo(index, project.title)}</Heading1>
-              <div className="bg-foreground-primary rounded-x px-2 py-0.5 text-white">
+              <div className="bg-foreground-primary inline-block grow-0 rounded-sm px-1.5 text-xs font-normal whitespace-nowrap text-white sm:text-sm">
                 {match(project.newOrRenewal)
                   .with("N", () => "新規")
                   .with("R", () => "リニューアル")
