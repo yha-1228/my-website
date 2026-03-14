@@ -16,10 +16,6 @@ const myExternalLinks = [
     label: "GitHub",
   },
   {
-    href: "https://zenn.dev/yhase_rqp",
-    label: "Zenn",
-  },
-  {
     href: "https://codepen.io/yh10050846",
     label: "Codepen",
   },

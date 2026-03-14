@@ -3,7 +3,7 @@
 import { ExternalLink } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
-import { type ZennArticle } from "@/api/endpoints/blog";
+import { type Article } from "@/api/endpoints/blog";
 import {
   getOffsetIndex,
   Pagination,
@@ -26,25 +26,25 @@ function paginate<T>(
 }
 
 export function PageClient({
-  zennArticles,
+  articles,
   limit,
 }: {
-  zennArticles: ZennArticle[];
+  articles: Article[];
   limit: number;
 }) {
   const searchParams = useSearchParams();
   const parsedSearchParams = parsePaginationSearchParams(searchParams);
 
-  const paginatedZennArticles = paginate(zennArticles, {
+  const paginatedArticles = paginate(articles, {
     offset: getOffsetIndex(parsedSearchParams.page, limit),
     limit,
   });
 
-  if (paginatedZennArticles.totalCount === 0) {
+  if (paginatedArticles.totalCount === 0) {
     return null;
   }
 
-  if (paginatedZennArticles.items.length === 0) {
+  if (paginatedArticles.items.length === 0) {
     // TODO: add empty view
     return null;
   }
@@ -52,19 +52,19 @@ export function PageClient({
   return (
     <>
       <ul className="flex flex-col gap-10">
-        {paginatedZennArticles.items.map((zennArticle) => (
+        {paginatedArticles.items.map((article) => (
           <li
             className="flex flex-col gap-4 border-b border-b-stone-300 pb-6"
-            key={zennArticle.guid}
+            key={article.guid}
           >
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href={zennArticle.link}
+              href={article.link}
               className="group"
             >
               <p className="text-foreground-secondary text-sm">
-                {dateFormat("yyyy年MM月dd日 HH:mm", zennArticle.isoDate)}
+                {dateFormat("yyyy年MM月dd日 HH:mm", article.isoDate)}
               </p>
               <div
                 className={cx(
@@ -72,22 +72,19 @@ export function PageClient({
                   "group-hover:text-brand-base group-active:text-brand-base",
                 )}
               >
-                <div className="text-xl font-bold">{zennArticle.title}</div>
+                <div className="text-xl font-bold">{article.title}</div>
                 <ExternalLink className="mt-1 shrink-0" />
               </div>
             </a>
 
             <div>
-              <Tag variant="zenn">Zenn</Tag>
+              <Tag variant={article.type} />
             </div>
           </li>
         ))}
       </ul>
 
-      <Pagination
-        totalCount={paginatedZennArticles.totalCount}
-        perPage={limit}
-      />
+      <Pagination totalCount={paginatedArticles.totalCount} perPage={limit} />
     </>
   );
 }

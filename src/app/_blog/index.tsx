@@ -1,6 +1,6 @@
 import { ChevronRight, ExternalLink } from "lucide-react";
 
-import { getZennArticles } from "@/api/endpoints/blog";
+import { getArticles } from "@/api/endpoints/blog";
 import { ScrollbarHiddenIfTouchDevice } from "@/components/ui/headless/scrollbar-hidden-if-touch-device";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
@@ -13,9 +13,7 @@ import { cx } from "@/utils/styling";
 const LIMIT = 3;
 
 export async function Blog() {
-  const zennArticles = (await getZennArticles()).filter(
-    (_, i) => i <= LIMIT - 1,
-  );
+  const articles = (await getArticles()).filter((_, i) => i <= LIMIT - 1);
 
   return (
     <Container>
@@ -37,12 +35,12 @@ export async function Blog() {
             "lg:grid lg:grid-cols-3",
           )}
         >
-          {zennArticles.map((zennArticle) => (
+          {articles.map((article) => (
             <a
-              key={zennArticle.guid}
+              key={article.guid}
               target="_blank"
               rel="noopener noreferrer"
-              href={zennArticle.link}
+              href={article.link}
               className={cx(
                 "rounded-sm border border-stone-300 bg-white px-5 py-4 transition-colors ease-out",
                 "flex flex-col justify-between gap-6 lg:gap-10",
@@ -54,19 +52,19 @@ export async function Blog() {
               <div className="flex flex-col gap-2">
                 <div className="flex items-start gap-x-1.5">
                   <div className="text-lg leading-[1.5] font-bold">
-                    {zennArticle.title}
+                    {article.title}
                   </div>
                   <ExternalLink className="mt-1 shrink-0" />
                 </div>
                 <p className="text-foreground-secondary text-sm">
-                  {dateFormat("yyyy年MM月dd日 HH:mm", zennArticle.isoDate, {
+                  {dateFormat("yyyy年MM月dd日 HH:mm", article.isoDate, {
                     isServer: true,
                   })}
                 </p>
               </div>
 
               <div>
-                <Tag variant="zenn">Zenn</Tag>
+                <Tag variant={article.type} />
               </div>
             </a>
           ))}

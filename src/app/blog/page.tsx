@@ -1,6 +1,6 @@
 import { type Metadata } from "next";
 
-import { getZennArticles } from "@/api/endpoints/blog";
+import { getArticles } from "@/api/endpoints/blog";
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { SITE_TITLE } from "@/constants";
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-static";
 
 export default async function Page() {
-  const zennArticles = await getZennArticles();
+  const articles = await getArticles();
 
   return (
     <div className="flex flex-col gap-20 pb-28">
@@ -27,7 +27,7 @@ export default async function Page() {
               <Heading1>{routes.blog.label}</Heading1>
             </div>
 
-            <PageClient zennArticles={zennArticles} limit={8} />
+            <PageClient articles={articles} limit={8} />
           </section>
         </Container>
       </div>
