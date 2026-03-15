@@ -13,11 +13,7 @@ export const skillWords: SkillWord[] = [
   { category: "langOrFw", label: "Tailwind CSS", kikan: "約1年強" },
   { category: "langOrFw", label: "JavaScript", kikan: "約6年" },
   { category: "langOrFw", label: "jQuery", kikan: "約1年" },
-  { category: "langOrFw", label: "Node.js", kikan: "約1年半強" },
-  { category: "langOrFw", label: "PHP", kikan: "約2年" },
   { category: "langOrFw", label: "Express", kikan: "約1年半強" },
-  { category: "langOrFw", label: "SQL", kikan: "約2年" },
-
   { category: "tools", label: "VS Code", extraClassName: cx("sm:hidden") },
   {
     category: "tools",
@@ -26,13 +22,10 @@ export const skillWords: SkillWord[] = [
   },
   { category: "tools", label: "Cursor" },
   { category: "tools", label: "Figma" },
-  { category: "tools", label: "draw.io" },
   { category: "tools", label: "FigJam" },
   { category: "tools", label: "Miro" },
+  { category: "tools", label: "Confluence" },
   { category: "tools", label: "Notion" },
   { category: "tools", label: "Jira" },
-  { category: "tools", label: "Asana" },
-  { category: "tools", label: "Redmine" },
   { category: "tools", label: "GitHub" },
-  { category: "tools", label: "Bitbucket" },
 ];
