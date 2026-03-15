@@ -57,24 +57,20 @@ export function PageClient({
             className="flex flex-col gap-4 border-b border-b-stone-300 pb-6"
             key={article.guid}
           >
+            <p className="text-foreground-secondary text-sm">
+              {dateFormat("yyyy年MM月dd日 HH:mm", article.isoDate)}
+            </p>
             <a
               target="_blank"
               rel="noopener noreferrer"
               href={article.link}
-              className="group"
+              className={cx(
+                "flex items-start gap-x-2",
+                "hover:text-brand-base active:text-brand-base",
+              )}
             >
-              <p className="text-foreground-secondary text-sm">
-                {dateFormat("yyyy年MM月dd日 HH:mm", article.isoDate)}
-              </p>
-              <div
-                className={cx(
-                  "flex items-start gap-x-2",
-                  "group-hover:text-brand-base group-active:text-brand-base",
-                )}
-              >
-                <div className="text-xl font-bold">{article.title}</div>
-                <ExternalLink className="mt-1 shrink-0" />
-              </div>
+              <div className="text-xl font-bold">{article.title}</div>
+              <ExternalLink className="mt-1 shrink-0" />
             </a>
 
             <div>
