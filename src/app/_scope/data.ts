@@ -7,7 +7,7 @@ interface SkillDetail {
 export const skillDetails = [
   {
     category: "フロントエンド開発",
-    kikan: "約6年",
+    kikan: "約6年半",
     items: [
       "マークアップ",
       "コンポーネントライブラリの構築",
