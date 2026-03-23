@@ -6,7 +6,7 @@ const baseClassName = cx(
   "[&>p]:my-4 [&>p]:first:mt-0",
   "[&_ul]:pl-5 [&_ul>li]:list-disc",
   "[&>hr]:my-6 [&>hr]:border-y-2 [&>hr]:text-stone-200",
-  "[&_a]:decoration-brand-base [&_a]:text-brand-base [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:hover:decoration-2 [&_a]:active:decoration-2",
+  "[&_a]:underline-offset-4 [&_a]:decoration-1 [&_a]:underline [&_a]:hover:decoration-2 [&_a]:active:decoration-2 [&_a]:decoration-brand-base [&_a]:text-foreground-primary",
 
   cx(
     "[&>figure]:my-4",
@@ -32,7 +32,7 @@ function convertToDetailBlocks(html: string) {
     summary = summary.trim();
     return `
     <details class="${cn("rounded-md border border-stone-300 overflow-hidden my-4")}">
-      <summary class="${cn("px-4 py-2 bg-stone-100 hover:opacity-70 active:opacity-70 transition-opacity cursor-pointer")}">${summary}</summary>
+      <summary class="${cn("px-4 py-2 decoration-1 underline-offset-4 hover:underline hover:bg-stone-100 active:bg-stone-200 transition-colors cursor-pointer")}">${summary}</summary>
       <div class="${cn(baseClassName, "p-4")}">${content}</div>
     </details>`;
   });
