@@ -24,7 +24,7 @@ const html = `<!doctype html>
   <main>
     <h1>ログインが中断されました</h1>
     <p>パスワードが間違えているか、変更されている可能性があります。</p>
-    <a href="${routes.experience.href}">職務経歴一覧に戻る</a><br />
+    <a href="${routes.index.href}">ホームに戻る</a><br />
   </main>
 </body>
 </html>` as const;

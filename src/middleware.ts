@@ -23,6 +23,9 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  // /portfolio/{anyText} にマッチする
-  matcher: ["/portfolio/:path+"],
+  matcher: [
+    "/experience",
+    // /portfolio/{anyText} にマッチする
+    "/portfolio/:path+",
+  ],
 };
