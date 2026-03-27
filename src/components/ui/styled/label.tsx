@@ -15,8 +15,8 @@ function Label(props: LabelProps) {
   return (
     <label
       className={cn(
-        "block font-bold",
-        required && "flex items-center",
+        "inline-block font-bold",
+        required && "inline-flex items-center",
         className,
       )}
       {...restProps}

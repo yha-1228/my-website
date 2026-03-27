@@ -14,7 +14,6 @@ import { Heading1 } from "@/components/ui/styled/heading1";
 import { AnchorLink } from "@/features/anchor-link";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
 import { isDesign, isDev } from "@/features/project";
-import { routes } from "@/routes";
 import { cx } from "@/utils/styling";
 
 function IntroductionDl({
@@ -68,7 +67,7 @@ function ExperienceLinkButton({
     <Button
       as={Link}
       size="lg"
-      href={`${routes.experience.href}?role=${role}`}
+      href={`/experience?role=${role}`}
       className={cx(
         "flex items-center",
         "group lg:inline-flex lg:items-center lg:px-6 lg:text-lg",

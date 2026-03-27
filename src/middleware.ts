@@ -1,28 +1,32 @@
-// https://github.com/vercel/examples/blob/main/edge-middleware/basic-auth-password/middleware.ts
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
-import { type NextRequest, NextResponse } from "next/server";
+function isProtectedPage(pathname: string) {
+  return (
+    pathname.startsWith("/experience") || pathname.startsWith("/portfolio")
+  );
+}
 
-export default function middleware(req: NextRequest) {
-  const url = req.nextUrl;
+function isLoginPage(pathname: string) {
+  return pathname === "/login";
+}
 
-  const basicAuth = req.headers.get("authorization");
+export function middleware(request: NextRequest) {
+  const authencated = request.cookies.get("auth")?.value === "true";
 
-  if (basicAuth) {
-    const authValue = basicAuth.split(" ")[1];
-    const [user, pwd] = atob(authValue).split(":");
-
-    if (
-      user === process.env.BASIC_AUTH_USER &&
-      pwd === process.env.BASIC_AUTH_PASSWORD
-    ) {
-      return NextResponse.next();
-    }
+  if (!authencated && isProtectedPage(request.nextUrl.pathname)) {
+    const loginUrl = new URL('/login', request.url)
+    loginUrl.searchParams.set('redirectUrl', request.nextUrl.pathname + request.nextUrl.search)
+    return NextResponse.redirect(loginUrl)
   }
-  url.pathname = "/api/auth";
-  return NextResponse.rewrite(url);
+
+  if (authencated && isLoginPage(request.nextUrl.pathname)) {
+    return NextResponse.redirect(new URL("/experience", request.url));
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  // /portfolio/{anyText} にマッチする
-  matcher: ["/portfolio/:path+"],
+  matcher: ["/login", "/experience", "/portfolio/:path*"],
 };

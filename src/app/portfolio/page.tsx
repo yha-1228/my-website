@@ -5,8 +5,6 @@ import { useEffect, useRef, useState } from "react";
 
 import { Container } from "@/components/ui/styled/container";
 import { TextLink } from "@/components/ui/styled/text-link";
-import { routes } from "@/routes";
-
 function useInterval(delay: number, callback: () => void) {
   const savedCallback = useRef<() => void | undefined>(undefined);
 
@@ -29,7 +27,7 @@ export default function Page() {
 
   useInterval(1000, () => {
     if (countdown === 0) {
-      router.replace(`${routes.index.href}#対応領域`);
+      router.replace("/#対応領域");
     } else {
       setCountdown((prev) => prev - 1);
     }
@@ -39,7 +37,7 @@ export default function Page() {
     <Container className="pt-14">
       <p>
         このページの内容は
-        <TextLink href={`${routes.index.href}#対応領域`} withUnderline>
+        <TextLink href="/#対応領域" withUnderline>
           トップページの「対応領域」セクション
         </TextLink>
         以降に移動しました。

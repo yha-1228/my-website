@@ -19,5 +19,8 @@
       "\\s?[\\w].*:\\s*?[\"'`]([^\"'`]*).*?,?\\s?"
     ]
   ],
-  "tailwindCSS.classFunctions": ["cn", "cx"]
+  "tailwindCSS.classFunctions": ["cn", "cx"],
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }

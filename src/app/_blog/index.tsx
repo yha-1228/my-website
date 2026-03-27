@@ -7,7 +7,6 @@ import { Heading1 } from "@/components/ui/styled/heading1";
 import { TextLinkNext } from "@/components/ui/styled/text-link-next";
 import { dateFormat } from "@/features/blog/date";
 import { Tag } from "@/features/blog/tag";
-import { routes } from "@/routes";
 import { cx } from "@/utils/styling";
 
 const LIMIT = 3;
@@ -19,9 +18,9 @@ export async function Blog() {
     <Container>
       <section className="flex flex-col gap-10 border-t pt-8">
         <div className="flex items-center justify-between">
-          <Heading1>{routes.blog.label}</Heading1>
+          <Heading1>ブログ</Heading1>
           <TextLinkNext
-            href={routes.blog.href}
+            href="/blog"
             className="inline-flex items-center gap-1"
           >
             <span>もっと見る</span>

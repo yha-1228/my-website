@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/styled/button";
 import { Container } from "@/components/ui/styled/container";
-import { routes } from "@/routes";
 import { cx } from "@/utils/styling";
 
 const eyeCatchClassName =
@@ -42,7 +41,7 @@ export function HeroHeader() {
         <Button
           as={Link}
           size="lg"
-          href={routes.experience.href}
+          href="/experience"
           className={cx(
             "flex items-center",
             "group lg:inline-flex lg:items-center lg:px-6 lg:text-lg",

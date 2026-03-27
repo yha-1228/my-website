@@ -2,14 +2,13 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/styled/container";
-import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
 export function ContactLinkBanner() {
   return (
     <Container>
       <Link
-        href={routes.contact.href}
+        href="/contact"
         className="bg-brand-base group hover:not-disabled:bg-brand-hover active:not-disabled:bg-brand-active block rounded-xl p-6 text-center text-white transition-colors sm:flex sm:items-center sm:justify-between sm:px-10 sm:py-8 sm:text-left"
       >
         <div>

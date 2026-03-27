@@ -6,7 +6,6 @@ import { type CSSProperties, type MouseEvent, useRef } from "react";
 
 import { Container } from "@/components/ui/styled/container";
 import { useKeydown } from "@/hooks/use-keydown";
-import { routes } from "@/routes";
 import { loopFocus } from "@/utils/loop-focus";
 import { cx } from "@/utils/styling";
 
@@ -15,9 +14,11 @@ import { useMediaQuery } from "./use-media-query";
 import { useMobileMenu } from "./use-mobile-menu";
 import { useOnRouteChange } from "./use-on-route-change";
 
-const routesWithoutHome = Object.values(routes)
-  .filter((route) => route.href !== "/")
-  .filter((route) => route.hierarchy === 1);
+const navRoutes = [
+  { href: "/experience", label: "職務経歴" },
+  { href: "/contact", label: "お問い合わせ" },
+  { href: "/blog", label: "ブログ" },
+] as const;
 
 const headerBorderBottomWidth = "1px";
 
@@ -70,7 +71,7 @@ export function Header() {
       <Container>
         <div className="relative flex h-[calc(var(--height-header)-var(--header-border-bottom-width))] items-center justify-between">
           <Link
-            href={routes.index.href}
+            href="/"
             className="hover:text-foreground-secondary text-2xl font-bold transition-colors duration-200 ease-out"
             onClick={handleHomeLinkClick}
           >
@@ -96,7 +97,7 @@ export function Header() {
           {/* desktop only */}
           <nav className="hidden md:block">
             <ul className="flex">
-              {routesWithoutHome.map((route) => (
+              {navRoutes.map((route) => (
                 <li key={route.href}>
                   <ActiveLink
                     as={Link}
@@ -127,7 +128,7 @@ export function Header() {
             "invisible block h-0 data-is-open:visible data-is-open:h-[calc(100dvh-(var(--height-header)))]",
           )}
         >
-          {routesWithoutHome.map((route) => (
+          {navRoutes.map((route) => (
             <li key={route.href}>
               <ActiveLink
                 as={Link}

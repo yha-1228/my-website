@@ -1,15 +1,23 @@
-import { type ComponentProps } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import mergeRefs from "merge-refs";
+import { type ComponentProps, useRef, useState } from "react";
 
 import { cn, cx } from "@/utils/styling";
+
+import { Button } from "./button";
 
 // common
 // ----------------------------------------
 
 const baseClassName = cx(
-  "w-full appearance-none rounded-touchable px-3 transition-[background-color] duration-200 ease-out border border-stone-400",
+  "w-full appearance-none rounded-touchable px-3 transition-[background-color,border-color] duration-200 ease-out border border-stone-400",
+  // TODO: hover実装
+  // "hover:border-foreground-primary",
   "disabled:bg-stone-100 disabled:text-foreground-primary/70 disabled:placeholder:text-foreground-placeholder disabled:cursor-not-allowed",
   "placeholder:text-foreground-placeholder",
   "aria-invalid:border-danger-base/40 aria-invalid:bg-danger-background/50",
+  // TODO: hover実装
+  // "aria-invalid:hover:border-danger-base",
 );
 
 // ----------------------------------------
@@ -19,6 +27,39 @@ function Input(props: ComponentProps<"input">) {
 
   return (
     <input className={cn(baseClassName, "h-10", className)} {...restProps} />
+  );
+}
+
+// ----------------------------------------
+
+function PasswordInput(props: Omit<ComponentProps<"input">, "type">) {
+  const { ref, className, ...restProps } = props;
+  const [visible, setVisible] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const onToggleClick = () => {
+    inputRef.current?.focus();
+    setVisible((prevState) => !prevState);
+  };
+
+  return (
+    <div className={cn("flex gap-2", className)}>
+      <Input
+        ref={mergeRefs(inputRef, ref)}
+        type={visible ? "type" : "password"}
+        {...restProps}
+      />
+      <Button
+        size="iconOnlyMD"
+        variant="outline"
+        type="button"
+        onClick={onToggleClick}
+        className="shrink-0"
+        aria-label={visible ? "パスワードを隠す" : "パスワードを表示する"}
+      >
+        {visible ? <EyeOff /> : <Eye />}
+      </Button>
+    </div>
   );
 }
 
@@ -62,4 +103,10 @@ function InputLengthCounter(props: InputLengthCounterProps) {
 
 // ----------------------------------------
 
-export { Input, Textarea, InputLengthCounter, type InputLengthCounterProps };
+export {
+  Input,
+  PasswordInput,
+  Textarea,
+  InputLengthCounter,
+  type InputLengthCounterProps,
+};

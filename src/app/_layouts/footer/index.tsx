@@ -1,6 +1,5 @@
 import { Container } from "@/components/ui/styled/container";
 import { TextLinkNext } from "@/components/ui/styled/text-link-next";
-import { routes } from "@/routes";
 import { cn } from "@/utils/styling";
 
 import { ExternalTextLink } from "./external-text-link";
@@ -22,6 +21,13 @@ const myExternalLinks = [
 ] as const satisfies LinkInterface[];
 
 const COPYRIGHT_TEXT = `Yuta Hasegawa © ${new Date().getFullYear()}`;
+
+const footerNavLinks = [
+  { href: "/", label: "トップ" },
+  { href: "/experience", label: "職務経歴" },
+  { href: "/contact", label: "お問い合わせ" },
+  { href: "/blog", label: "ブログ" },
+] as const;
 
 export interface FooterProps {
   className?: string;
@@ -45,18 +51,16 @@ export function Footer({ className }: FooterProps) {
             ))}
           </ul>
           <ul className="flex w-1/2 flex-col gap-y-2.5 md:w-auto md:flex-row md:gap-x-4 md:gap-y-0">
-            {Object.values(routes)
-              .filter((route) => route.hierarchy === 1)
-              .map((route) => (
-                <li key={route.href}>
-                  <TextLinkNext
-                    className="inline-block py-2 leading-normal transition-colors"
-                    href={route.href}
-                  >
-                    {route.label}
-                  </TextLinkNext>
-                </li>
-              ))}
+            {footerNavLinks.map((route) => (
+              <li key={route.href}>
+                <TextLinkNext
+                  className="inline-block py-2 leading-normal transition-colors"
+                  href={route.href}
+                >
+                  {route.label}
+                </TextLinkNext>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="border-foreground-primary/20 mt-5 border-t border-solid">

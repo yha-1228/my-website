@@ -1,18 +1,15 @@
 "use client";
 
-import { LockIcon } from "lucide-react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { match } from "ts-pattern";
 
 import { type Project } from "@/api/models/project";
-import { DialogTrigger } from "@/components/ui/headless/dialog";
 import { Button } from "@/components/ui/styled/button";
-import { Dialog } from "@/components/ui/styled/dialog";
 import { Timeline } from "@/components/ui/styled/timeline";
 import { parseSearchParamsClient } from "@/features/experience/query";
 import { formatTitleWithNo, isDesign, isDev } from "@/features/project";
 import { SkillTag } from "@/features/skill-tag";
-import { routes } from "@/routes";
 import { cn, cx } from "@/utils/styling";
 
 import { typeNameMap } from "./models";
@@ -139,40 +136,17 @@ export function Client({ projects }: { projects: Project[] }) {
                 />
                 {project.hasDesignPortfolio && (
                   <div className="mt-3">
-                    <Dialog
-                      trigger={
-                        <DialogTrigger
-                          as={Button}
-                          variant="outline"
-                          className={cx(
-                            "flex w-full items-center gap-2 sm:w-auto",
-                            "lg:inline-flex lg:items-center",
-                          )}
-                        >
-                          <LockIcon aria-hidden="true" className="size-4" />
-                          <span>デザイン実績を見る</span>
-                        </DialogTrigger>
-                      }
-                      dialogTitle="閲覧の確認"
-                      dialogBody={
-                        <>
-                          <p>
-                            デザイン実績の閲覧にはユーザー名とパスワードが必要です。
-                          </p>
-                          <p>
-                            不明な場合は長谷川または求人担当者様にお問い合わせください。
-                          </p>
-                        </>
-                      }
-                      primaryButtonProps={{
-                        label: "閲覧に進む",
-                        onPrimaryAction: () => {
-                          window.location.href = routes["portfolio/[id]"].href(
-                            project.id,
-                          );
-                        },
-                      }}
-                    />
+                    <Button
+                      as={Link}
+                      variant="outline"
+                      className={cx(
+                        "flex w-full items-center gap-2 sm:w-auto",
+                        "lg:inline-flex lg:items-center",
+                      )}
+                      href={`/portfolio/${project.id}`}
+                    >
+                      デザイン実績を見る
+                    </Button>
                   </div>
                 )}
               </>

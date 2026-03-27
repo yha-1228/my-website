@@ -4,33 +4,36 @@ import { type ChangeEvent, type FocusEvent, useState } from "react";
 
 import { submitHubspotForm } from "@/actions/hubspot";
 import { type SubmitHubspotFormRequestBody } from "@/api/models/hubspot";
-import { Button } from "@/components/ui/styled/button";
-import { TextLink } from "@/components/ui/styled/text-link";
-import { routes } from "@/routes";
-import { entriesOf } from "@/utils/object";
-import { cx, getCSSVar, remToPx } from "@/utils/styling";
-
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldLabel,
   FieldRoot,
-} from "./headless-ui/field";
-import { Form } from "./headless-ui/form";
+} from "@/components/ui/headless/field";
+import { Form } from "@/components/ui/headless/form";
+import { Button } from "@/components/ui/styled/button";
+import {
+  Input,
+  InputLengthCounter,
+  Textarea,
+} from "@/components/ui/styled/field";
+import { FormErrorMessage } from "@/components/ui/styled/form-error-message";
+import { Label } from "@/components/ui/styled/label";
+import { TextLink } from "@/components/ui/styled/text-link";
+import { entriesOf } from "@/utils/object";
+import { cx, getCSSVar, remToPx } from "@/utils/styling";
+
 import { NoSSR } from "./no-ssr";
 import { fromEntries, keysOf, mapObject } from "./object-utils";
 import { type HTMLElementHasNameAndValue } from "./react-utils";
 import { scrollWithFocus } from "./scroll-with-focus";
 import { Alert } from "./ui/alert";
-import { Input, InputLengthCounter, Textarea } from "./ui/field";
-import { FormErrorMessage } from "./ui/form-error-message";
 import {
   FormErrorSummaryItem,
   FormErrorSummaryList,
 } from "./ui/form-error-summary";
 import { FormHelperText } from "./ui/form-helper-text";
-import { Label } from "./ui/label";
 import { useActionMutation } from "./use-action-mutation";
 import { useBeforeUnload } from "./use-beforeunload";
 import {
@@ -279,12 +282,7 @@ export function ContactForm() {
         )}
 
         <NoSSR fallback={<Button className="block w-full" disabled />}>
-          <Button
-            className="w-full"
-            loading={submitMutation.pending}
-            loadingLabel="送信中..."
-            size="lg"
-          >
+          <Button className="w-full" loading={submitMutation.pending} size="lg">
             送信する
           </Button>
         </NoSSR>
@@ -299,7 +297,7 @@ export function ContactForm() {
           <p>お返事まで今しばらくお待ちください。</p>
           <p>
             <TextLink
-              href={routes.index.href}
+              href="/"
               withUnderline
               className="font-bold"
             >

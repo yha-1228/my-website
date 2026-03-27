@@ -1,12 +1,12 @@
 import { LoaderCircle } from "lucide-react";
-import { type ElementType, type ReactNode } from "react";
+import { type ElementType } from "react";
 
 import { type PropsWithAs } from "@/types/react";
 import { cn, cx } from "@/utils/styling";
 
 type Variant = "fill" | "outline";
 
-type Size = "md" | "lg";
+type Size = "md" | "lg" | "iconOnlyMD";
 
 const variantClassNames = {
   fill: cx(
@@ -22,6 +22,7 @@ const variantClassNames = {
 const sizeClassNames = {
   md: "h-10 px-5",
   lg: "h-12 px-8",
+  iconOnlyMD: "size-10 [&>svg]:size-5",
 } as const satisfies Record<Size, string>;
 
 type ButtonProps<T extends ElementType> = PropsWithAs<T, "button"> & {
@@ -37,12 +38,6 @@ type ButtonProps<T extends ElementType> = PropsWithAs<T, "button"> & {
    * @default false
    */
   loading?: boolean;
-  /**
-   * `loading: true`のとき有効
-   *
-   * @default undefined
-   */
-  loadingLabel?: ReactNode;
   /**
    * @default false
    */
@@ -61,7 +56,6 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
     variant = "fill",
     size = "md",
     loading = false,
-    loadingLabel = undefined,
     disabled = false,
     fullRounded = false,
     className,
@@ -72,6 +66,7 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
   return (
     <Comp
       className={cn(
+        "relative",
         "inline-flex cursor-pointer items-center justify-center transition-[opacity,background-color] duration-200 ease-out",
         variantClassNames[variant],
         sizeClassNames[size],
@@ -82,13 +77,14 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
       disabled={disabled || loading}
       {...restProps}
     >
-      {loading ? (
-        <>
-          <LoaderCircle className="mr-3 size-5 animate-spin" />
-          {loadingLabel || children}
-        </>
-      ) : (
-        children
+      <span className={cn(loading && "invisible")}>{children}</span>
+      {loading && (
+        <LoaderCircle
+          className={cx(
+            "mr-3 size-5 animate-spin",
+            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+          )}
+        />
       )}
     </Comp>
   );

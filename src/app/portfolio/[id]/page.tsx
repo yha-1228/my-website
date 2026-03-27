@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 import { Timeline } from "@/components/ui/styled/timeline";
 import { SITE_TITLE } from "@/constants";
-import { LogoutBanner } from "@/features/basic-auth/logout-banner";
+import { LogoutBanner } from "@/features/auth/logout-banner";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
 import { formatTitleWithNo, isDesign } from "@/features/project";
 import { cx } from "@/utils/styling";
