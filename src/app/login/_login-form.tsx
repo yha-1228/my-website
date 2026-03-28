@@ -36,12 +36,12 @@ export function LoginForm() {
         body: JSON.stringify({ password: value }),
       });
 
-      await sleep(800);
+      await sleep(300);
 
       if (!res.ok) {
         throw new Error(`${res.status} ${res.statusText}`);
       } else {
-        router.push(redirectUrl);
+        window.location.href = redirectUrl;
       }
     },
     onError: async () => {
