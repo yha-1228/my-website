@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { Container } from "@/components/ui/styled/container";
 import { Heading1 } from "@/components/ui/styled/heading1";
 
@@ -15,7 +17,9 @@ export default function Page() {
                 職務経歴の閲覧にはログインが必要です。
               </p>
             </div>
-            <LoginForm />
+            <Suspense>
+              <LoginForm />
+            </Suspense>
           </section>
         </Container>
       </div>
