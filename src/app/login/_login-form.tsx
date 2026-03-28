@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { type ChangeEvent, useRef, useState } from "react";
 
 import {
@@ -19,7 +19,6 @@ import { sleep } from "@/utils/misc";
 import { cx } from "@/utils/styling";
 
 export function LoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get("redirectUrl") || "/experience";
 

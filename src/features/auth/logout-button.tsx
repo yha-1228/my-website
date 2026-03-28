@@ -1,19 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
 import { Button } from "@/components/ui/styled/button";
 import { useAsyncFunction } from "@/hooks/use-async-function";
 import { sleep } from "@/utils/misc";
 
 export function LogoutButton() {
-  const router = useRouter();
-
   const { handleMutate, isPending, isSuccess } = useAsyncFunction({
     fn: async () => {
-      await sleep(800);
+      await sleep(300);
       await fetch("/api/logout", { method: "POST" });
-      router.push("/");
+      window.location.href = "/";
     },
     onError: () => {
       window.alert("ログアウトに失敗しました");
