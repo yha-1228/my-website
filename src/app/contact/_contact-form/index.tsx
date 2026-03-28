@@ -296,11 +296,7 @@ export function ContactForm() {
         >
           <p>お返事まで今しばらくお待ちください。</p>
           <p>
-            <TextLink
-              href="/"
-              withUnderline
-              className="font-bold"
-            >
+            <TextLink href="/" withUnderline className="font-bold">
               ホームに戻る
             </TextLink>
           </p>

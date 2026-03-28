@@ -6,7 +6,7 @@ import { cn, cx } from "@/utils/styling";
 
 type Variant = "fill" | "outline";
 
-type Size = "md" | "lg" | "iconOnlyMD";
+type Size = "md" | "lg" | "iconOnlySM";
 
 const variantClassNames = {
   fill: cx(
@@ -20,9 +20,9 @@ const variantClassNames = {
 } as const satisfies Record<Variant, string>;
 
 const sizeClassNames = {
-  md: "h-10 px-5",
+  md: "h-10 px-4",
   lg: "h-12 px-8",
-  iconOnlyMD: "size-10 [&>svg]:size-5",
+  iconOnlySM: "size-8 [&>span>svg]:size-4",
 } as const satisfies Record<Size, string>;
 
 type ButtonProps<T extends ElementType> = PropsWithAs<T, "button"> & {
@@ -77,7 +77,14 @@ function Button<T extends ElementType>(props: ButtonProps<T>) {
       disabled={disabled || loading}
       {...restProps}
     >
-      <span className={cn(loading && "invisible")}>{children}</span>
+      <span
+        className={cn(
+          "inline-flex cursor-pointer items-center",
+          loading && "invisible",
+        )}
+      >
+        {children}
+      </span>
       {loading && (
         <LoaderCircle
           className={cx(

@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/styled/button";
 import { PasswordInput } from "@/components/ui/styled/field";
 import { FormErrorMessage } from "@/components/ui/styled/form-error-message";
 import { Label } from "@/components/ui/styled/label";
+import { LOADING_DELAY_MS } from "@/constants";
 import { useAsyncFunction } from "@/hooks/use-async-function";
 import { sleep } from "@/utils/misc";
 import { cx } from "@/utils/styling";
@@ -35,7 +36,7 @@ export function LoginForm() {
         body: JSON.stringify({ password: value }),
       });
 
-      await sleep(300);
+      await sleep(LOADING_DELAY_MS);
 
       if (!res.ok) {
         throw new Error(`${res.status} ${res.statusText}`);
@@ -61,7 +62,7 @@ export function LoginForm() {
   return (
     <div
       className={cx(
-        "lg:shadow-wide lg:max-w-[800px] lg:rounded-xl lg:border lg:border-solid lg:border-gray-200 lg:bg-white lg:px-10 lg:pt-8 lg:pb-11",
+        "lg:shadow-wide max-w-[520px] lg:rounded-xl lg:border lg:border-solid lg:border-gray-200 lg:bg-white lg:px-10 lg:pt-8 lg:pb-11",
       )}
     >
       <Form
@@ -84,13 +85,14 @@ export function LoginForm() {
             onChange={handleChange}
           />
           <FieldError as={FormErrorMessage}>
-            ログインに失敗しました。
+            入力されたパスワードは有効ではありません。
           </FieldError>
         </FieldRoot>
 
         <Button
           disabled={value.trim().length === 0}
           loading={isPending || isSuccess}
+          size="lg"
         >
           閲覧に進む
         </Button>

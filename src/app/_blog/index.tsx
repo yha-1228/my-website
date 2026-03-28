@@ -19,10 +19,7 @@ export async function Blog() {
       <section className="flex flex-col gap-10 border-t pt-8">
         <div className="flex items-center justify-between">
           <Heading1>ブログ</Heading1>
-          <TextLinkNext
-            href="/blog"
-            className="inline-flex items-center gap-1"
-          >
+          <TextLinkNext href="/blog" className="inline-flex items-center gap-1">
             <span>もっと見る</span>
             <ChevronRight />
           </TextLinkNext>

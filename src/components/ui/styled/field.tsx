@@ -43,18 +43,19 @@ function PasswordInput(props: Omit<ComponentProps<"input">, "type">) {
   };
 
   return (
-    <div className={cn("flex gap-2", className)}>
+    // <div className={cn("flex gap-2", className)}>
+    <div className={cn("relative", className)}>
       <Input
         ref={mergeRefs(inputRef, ref)}
         type={visible ? "type" : "password"}
         {...restProps}
       />
       <Button
-        size="iconOnlyMD"
+        size="iconOnlySM"
         variant="outline"
         type="button"
         onClick={onToggleClick}
-        className="shrink-0"
+        className="absolute top-[50%] right-1 shrink-0 translate-y-[-50%] border-0 bg-transparent"
         aria-label={visible ? "パスワードを隠す" : "パスワードを表示する"}
       >
         {visible ? <EyeOff /> : <Eye />}

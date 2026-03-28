@@ -8,7 +8,7 @@ import { type Project } from "@/api/models/project";
 import { Button } from "@/components/ui/styled/button";
 import { Timeline } from "@/components/ui/styled/timeline";
 import { parseSearchParamsClient } from "@/features/experience/query";
-import { formatTitleWithNo, isDesign, isDev } from "@/features/project";
+import { isDesign, isDev } from "@/features/project";
 import { SkillTag } from "@/features/skill-tag";
 import { cn, cx } from "@/utils/styling";
 
@@ -50,7 +50,7 @@ export function Client({ projects }: { projects: Project[] }) {
         <span className="ml-0.5 text-sm">件</span>
       </div>
       <Timeline
-        items={filteredProjects.map((project, projectIndex) => {
+        items={filteredProjects.map((project) => {
           const langAndFwsSpitted = splitText(project.langAndFws, 3);
           const toolsSplitted = splitText(project.tools, 3);
           return {
@@ -59,7 +59,7 @@ export function Client({ projects }: { projects: Project[] }) {
               (project.blank ? ` (空白期間: ${project.blank})` : ""),
             heading: (
               <div className="flex flex-col items-start gap-x-3 gap-y-1 sm:flex-row sm:items-center">
-                <div>{formatTitleWithNo(projectIndex, project.title)}</div>
+                <div>{project.title}</div>
                 <div className="flex items-center gap-1.5">
                   {match(project.newOrRenewal)
                     .with("N", () => (
@@ -143,7 +143,10 @@ export function Client({ projects }: { projects: Project[] }) {
                         "flex w-full items-center gap-2 sm:w-auto",
                         "lg:inline-flex lg:items-center",
                       )}
-                      href={`/portfolio/${project.id}`}
+                      href={{
+                        pathname: `/portfolio/${project.id}`,
+                        query: `from=${encodeURIComponent(JSON.stringify(parsedSearchParams))}`,
+                      }}
                     >
                       デザイン実績を見る
                     </Button>

@@ -15,9 +15,12 @@ export function middleware(request: NextRequest) {
   const authencated = request.cookies.get("auth")?.value === "true";
 
   if (!authencated && isProtectedPage(request.nextUrl.pathname)) {
-    const loginUrl = new URL('/login', request.url)
-    loginUrl.searchParams.set('redirectUrl', request.nextUrl.pathname + request.nextUrl.search)
-    return NextResponse.redirect(loginUrl)
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set(
+      "redirectUrl",
+      request.nextUrl.pathname + request.nextUrl.search,
+    );
+    return NextResponse.redirect(loginUrl);
   }
 
   if (authencated && isLoginPage(request.nextUrl.pathname)) {

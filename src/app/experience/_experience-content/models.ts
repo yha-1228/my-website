@@ -16,4 +16,3 @@ export const typeKikanMap = {
   "main-freelance": "2023年9月 - 現在",
   sub: null,
 } as const satisfies Record<Project["type"], string | null>;
-

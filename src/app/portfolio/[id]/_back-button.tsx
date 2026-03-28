@@ -1,20 +1,14 @@
-"use client";
-
 import { ChevronLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 import { TextLink } from "@/components/ui/styled/text-link";
 
-export function BackButton() {
-  const router = useRouter();
+export interface BackLinkProps {
+  href: string;
+}
+
+export function BackLink({ href }: BackLinkProps) {
   return (
-    <TextLink
-      as="button"
-      className="inline-flex items-center gap-1"
-      onClick={() => {
-        router.back();
-      }}
-    >
+    <TextLink className="inline-flex items-center gap-1" href={href}>
       <ChevronLeft />
       <span>戻る</span>
     </TextLink>

@@ -1,6 +1,7 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { match } from "ts-pattern";
+import { z } from "zod";
 
 import { getProject, getProjects } from "@/api/endpoints/project";
 import { Container } from "@/components/ui/styled/container";
@@ -9,13 +10,14 @@ import { Timeline } from "@/components/ui/styled/timeline";
 import { SITE_TITLE } from "@/constants";
 import { LogoutBanner } from "@/features/auth/logout-banner";
 import { HtmlRenderer } from "@/features/blog/html-renderer";
-import { formatTitleWithNo, isDesign } from "@/features/project";
+import { createSearchString } from "@/utils/routing";
 import { cx } from "@/utils/styling";
 
-import { BackButton } from "./_back-button";
+import { BackLink } from "./_back-button";
 
 interface Props {
   params: Promise<{ id: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -35,14 +37,19 @@ export async function generateStaticParams(): Promise<Array<{ id: string }>> {
 const h2ClassName = "mt-12 mb-6 text-2xl leading-tight font-bold first:mt-0";
 const ulClassName = "pl-5 [&>li]:list-disc";
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: Props) {
   const { id } = await params;
 
+  const awaitedSearchParams = await searchParams;
+  const searchParamsParseReturn = z
+    .object({ from: z.string() })
+    .safeParse(awaitedSearchParams);
+  const parsedSearchParams = searchParamsParseReturn.success
+    ? searchParamsParseReturn.data
+    : undefined;
+
   // indexを取得するため、単体取得APIは使わない
-  const { contents: projects } = await getProjects();
-  const designProjects = projects.filter(isDesign);
-  const project = designProjects.find((project) => project.id === id);
-  const index = designProjects.findIndex((project) => project.id === id);
+  const project = await getProject(id);
 
   if (!project) {
     notFound();
@@ -53,11 +60,13 @@ export default async function Page({ params }: Props) {
       <LogoutBanner />
       <div className="py-14">
         <Container className="flex flex-col items-start gap-8 md:max-w-(--breakpoint-md)">
-          <BackButton />
+          <BackLink
+            href={`/experience${createSearchString(JSON.parse(parsedSearchParams?.from ?? "{}"))}`}
+          />
 
           <article>
             <header className="flex items-center gap-4">
-              <Heading1>{formatTitleWithNo(index, project.title)}</Heading1>
+              <Heading1>{project.title}</Heading1>
               <div className="bg-foreground-primary inline-block grow-0 rounded-sm px-1.5 text-xs font-normal whitespace-nowrap text-white sm:text-sm">
                 {match(project.newOrRenewal)
                   .with("N", () => "新規")
@@ -130,7 +139,7 @@ export default async function Page({ params }: Props) {
             </div>
           </article>
 
-          <BackButton />
+          <BackLink href="/experience" />
         </Container>
       </div>
     </>
