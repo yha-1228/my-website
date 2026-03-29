@@ -15,7 +15,7 @@ import { useMobileMenu } from "./use-mobile-menu";
 import { useOnRouteChange } from "./use-on-route-change";
 
 const navRoutes = [
-  { href: "/experience", label: "職務経歴" },
+  { href: "/careers", label: "職務経歴" },
   { href: "/contact", label: "お問い合わせ" },
   { href: "/blog", label: "ブログ" },
 ] as const;

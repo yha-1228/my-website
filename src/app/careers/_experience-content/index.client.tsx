@@ -144,7 +144,7 @@ export function Client({ projects }: { projects: Project[] }) {
                         "lg:inline-flex lg:items-center",
                       )}
                       href={{
-                        pathname: `/portfolio/${project.id}`,
+                        pathname: `/careers/${project.id}`,
                         query: `from=${encodeURIComponent(JSON.stringify(parsedSearchParams))}`,
                       }}
                     >

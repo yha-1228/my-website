@@ -21,7 +21,7 @@ import { cx } from "@/utils/styling";
 
 export function LoginForm() {
   const searchParams = useSearchParams();
-  const redirectUrl = searchParams.get("redirectUrl") || "/experience";
+  const redirectUrl = searchParams.get("redirectUrl") || "/careers";
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 

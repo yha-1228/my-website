@@ -61,7 +61,7 @@ export default async function Page({ params, searchParams }: Props) {
       <div className="py-14">
         <Container className="flex flex-col items-start gap-8 md:max-w-(--breakpoint-md)">
           <BackLink
-            href={`/experience${createSearchString(JSON.parse(parsedSearchParams?.from ?? "{}"))}`}
+            href={`/careers${createSearchString(JSON.parse(parsedSearchParams?.from ?? "{}"))}`}
           />
 
           <article>
@@ -139,7 +139,9 @@ export default async function Page({ params, searchParams }: Props) {
             </div>
           </article>
 
-          <BackLink href="/experience" />
+          <BackLink
+            href={`/careers${createSearchString(JSON.parse(parsedSearchParams?.from ?? "{}"))}`}
+          />
         </Container>
       </div>
     </>

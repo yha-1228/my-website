@@ -2,9 +2,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 function isProtectedPage(pathname: string) {
-  return (
-    pathname.startsWith("/experience") || pathname.startsWith("/portfolio")
-  );
+  return pathname.startsWith("/careers");
 }
 
 function isLoginPage(pathname: string) {
@@ -24,12 +22,12 @@ export function middleware(request: NextRequest) {
   }
 
   if (authencated && isLoginPage(request.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL("/experience", request.url));
+    return NextResponse.redirect(new URL("/careers", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/login", "/experience", "/portfolio/:path*"],
+  matcher: ["/login", "/careers", "/careers/:path*"],
 };

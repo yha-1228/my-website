@@ -24,7 +24,7 @@ const COPYRIGHT_TEXT = `Yuta Hasegawa © ${new Date().getFullYear()}`;
 
 const footerNavLinks = [
   { href: "/", label: "トップ" },
-  { href: "/experience", label: "職務経歴" },
+  { href: "/careers", label: "職務経歴" },
   { href: "/contact", label: "お問い合わせ" },
   { href: "/blog", label: "ブログ" },
 ] as const;

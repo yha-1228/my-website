@@ -41,7 +41,7 @@ export function HeroHeader() {
         <Button
           as={Link}
           size="lg"
-          href="/experience"
+          href="/careers"
           className={cx(
             "flex items-center",
             "group lg:inline-flex lg:items-center lg:px-6 lg:text-lg",
