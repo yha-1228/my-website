@@ -2,9 +2,9 @@ import { type Metadata } from "next";
 
 import { getArticles } from "@/api/endpoints/blog";
 import { Container } from "@/components/ui/styled/container";
-import { Heading1 } from "@/components/ui/styled/heading1";
 import { SITE_TITLE } from "@/constants";
-import { ContactLinkBanner } from "@/features/contact-link-banner";
+import { BaseTemplate } from "@/features/template/base-template";
+import { SectionTemplate } from "@/features/template/section-template";
 
 import { PageClient } from "./page.client";
 
@@ -18,19 +18,12 @@ export default async function Page() {
   const articles = await getArticles();
 
   return (
-    <div className="flex flex-col gap-20 pb-28">
-      <div className="py-14">
-        <Container className="md:max-w-(--breakpoint-md)">
-          <section className="flex flex-col gap-10">
-            <div className="text-center">
-              <Heading1>ブログ</Heading1>
-            </div>
-
-            <PageClient articles={articles} limit={8} />
-          </section>
-        </Container>
-      </div>
-      <ContactLinkBanner />
-    </div>
+    <BaseTemplate hasContactBanner>
+      <Container className="md:max-w-(--breakpoint-md)">
+        <SectionTemplate title="ブログ">
+          <PageClient articles={articles} limit={8} />
+        </SectionTemplate>
+      </Container>
+    </BaseTemplate>
   );
 }

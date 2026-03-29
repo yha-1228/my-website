@@ -1,8 +1,9 @@
 import { type Metadata } from "next";
 
 import { Container } from "@/components/ui/styled/container";
-import { Heading1 } from "@/components/ui/styled/heading1";
 import { SITE_TITLE } from "@/constants";
+import { BaseTemplate } from "@/features/template/base-template";
+import { SectionTemplate } from "@/features/template/section-template";
 
 import { ContactForm } from "./_contact-form";
 
@@ -12,17 +13,12 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="pb-28">
-      <div className="py-14">
-        <Container>
-          <section className="flex flex-col gap-10">
-            <div className="text-center">
-              <Heading1>お問い合わせ</Heading1>
-            </div>
-            <ContactForm />
-          </section>
-        </Container>
-      </div>
-    </div>
+    <BaseTemplate>
+      <Container>
+        <SectionTemplate title="お問い合わせ">
+          <ContactForm />
+        </SectionTemplate>
+      </Container>
+    </BaseTemplate>
   );
 }

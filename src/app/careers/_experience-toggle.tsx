@@ -11,7 +11,7 @@ import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { entriesOf } from "@/utils/object";
 import { cn } from "@/utils/styling";
 
-import { useMediaQuery } from "../_layouts/header/use-media-query";
+import { useMediaQuery } from "../../features/template/header/use-media-query";
 import {
   ToggleGroup,
   ToggleGroupItem,

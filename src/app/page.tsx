@@ -1,4 +1,4 @@
-import { ContactLinkBanner } from "@/features/contact-link-banner";
+import { BaseTemplate } from "@/features/template/base-template";
 
 import { Blog } from "./_blog";
 import { Detail } from "./_details";
@@ -8,13 +8,12 @@ import { Scope } from "./_scope";
 
 export default function Page() {
   return (
-    <div className="flex flex-col gap-20 pb-28">
+    <BaseTemplate hasContactBanner contentWrapperClassName="pt-0">
       <HeroHeader />
       <Blog />
       <Scope />
       <Langs />
       <Detail />
-      <ContactLinkBanner />
-    </div>
+    </BaseTemplate>
   );
 }

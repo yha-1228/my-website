@@ -50,7 +50,7 @@ export function PageClient({
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-10">
       <ul className="flex flex-col gap-10">
         {paginatedArticles.items.map((article) => (
           <li
@@ -81,6 +81,6 @@ export function PageClient({
       </ul>
 
       <Pagination totalCount={paginatedArticles.totalCount} perPage={limit} />
-    </>
+    </div>
   );
 }
